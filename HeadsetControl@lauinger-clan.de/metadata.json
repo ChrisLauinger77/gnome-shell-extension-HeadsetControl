@@ -1,0 +1,13 @@
+{
+  "name": "HeadsetControl",
+  "original-author": "ChrisLauinger77",
+  "gettext-domain": "HeadsetControl",
+  "description": "Gnome Shell Extension to visiualze headset status from HeadsetControl",
+  "uuid": "HeadsetControl@lauinger-clan.de",
+  "shell-version": [
+    "42", "43", "44"
+  ],
+  "url": "https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl",
+  "version": 1,
+  "settings-schema": "org.gnome.shell.extensions.HeadsetControl"
+}

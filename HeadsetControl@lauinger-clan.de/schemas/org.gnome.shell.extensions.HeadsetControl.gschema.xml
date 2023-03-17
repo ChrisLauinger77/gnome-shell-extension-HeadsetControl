@@ -1,0 +1,45 @@
+<schemalist>
+  <schema id="org.gnome.shell.extensions.HeadsetControl"
+      path="/org/gnome/shell/extensions/HeadsetControl/">
+    <key name="headsetcontrol-executable" type="s">
+      <default>'/usr/local/bin/headsetcontrol'</default>
+      <summary>path to executable</summary>
+      <description>file and path of headsetcontrol executable</description>
+    </key>
+    <key name="option-capabilities" type="s">
+      <default>'-?'</default>
+      <summary>parameter to ask for capabilities</summary>
+      <description>passed to headsetcontrol to ask for capabilities</description>
+    </key>
+    <key name="option-battery" type="s">
+      <default>'-b'</default>
+      <summary>parameter to ask for battery</summary>
+      <description>passed to headsetcontrol to get battery</description>
+    </key>
+    <key name="option-silent" type="s">
+      <default>'-c'</default>
+      <summary>parameter to set headsetcontrol silent</summary>
+      <description>passed to headsetcontrol to set silent</description>
+    </key>
+    <key name="option-chatmix" type="s">
+      <default>'-m'</default>
+      <summary>parameter to ask for chatmix</summary>
+      <description>passed to headsetcontrol to get chatmix</description>
+    </key>
+    <key name="option-sidetone" type="s">
+      <default>'-s'</default>
+      <summary>parameter to ask for sidetone</summary>
+      <description>passed to headsetcontrol to set sidetone</description>
+    </key>
+    <key name="option-led" type="s">
+      <default>'-l'</default>
+      <summary>parameter to ask for led</summary>
+      <description>passed to headsetcontrol to set led</description>
+    </key>
+    <key name="option-inactive-time" type="s">
+      <default>'-i'</default>
+      <summary>parameter to ask for inactive time</summary>
+      <description>passed to headsetcontrol to set inactive time</description>
+    </key>
+  </schema>
+</schemalist>
