@@ -14,4 +14,4 @@ You can test the helper application manually via headsetcontrol -b -c, this shou
 
 ### 1 click install from E.G.O:
 
-https://extensions.gnome.org/extension/
+https://extensions.gnome.org/extension/5823/headsetcontrol/

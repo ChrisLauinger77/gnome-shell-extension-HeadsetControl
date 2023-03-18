@@ -32,8 +32,6 @@ const colorR = "#ff0000";
 const colorY = "#ffff00";
 const colorG = "#00ff00";
 
-let settings;
-
 const HeadsetControlIndicator = GObject.registerClass(
   class HeadsetControlIndicator extends PanelMenu.Button {
     _init() {
@@ -275,12 +273,12 @@ const HeadsetControlIndicator = GObject.registerClass(
 );
 
 class HeadsetControl {
-  constructor(uuid, schema) {
+  constructor(uuid) {
     this._uuid = uuid;
-    this._settings = ExtensionUtils.getSettings(schema);
   }
 
   enable() {
+    this._settings = ExtensionUtils.getSettings(g_schema);
     this._HeadsetControlIndicator = new HeadsetControlIndicator();
     Main.panel.addToStatusArea(this._uuid, this._HeadsetControlIndicator);
     this._HeadsetControlIndicator.initCmd(this._settings);
@@ -288,6 +286,7 @@ class HeadsetControl {
   }
 
   disable() {
+    this._settings = null;
     this._HeadsetControlIndicator.destroy();
     this._HeadsetControlIndicator = null;
   }
