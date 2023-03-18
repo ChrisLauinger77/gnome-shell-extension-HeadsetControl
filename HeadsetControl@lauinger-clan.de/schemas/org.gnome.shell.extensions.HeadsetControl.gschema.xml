@@ -16,11 +16,6 @@
       <summary>parameter to ask for battery</summary>
       <description>passed to headsetcontrol to get battery</description>
     </key>
-    <key name="option-silent" type="s">
-      <default>'-c'</default>
-      <summary>parameter to set headsetcontrol silent</summary>
-      <description>passed to headsetcontrol to set silent</description>
-    </key>
     <key name="option-chatmix" type="s">
       <default>'-m'</default>
       <summary>parameter to ask for chatmix</summary>

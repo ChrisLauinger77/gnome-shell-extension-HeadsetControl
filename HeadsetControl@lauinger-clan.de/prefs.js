@@ -67,7 +67,6 @@ class AdwPrefs {
     valueExecutable,
     opt_capa,
     opt_bat,
-    opt_sil,
     opt_chm,
     opt_sto,
     opt_led,
@@ -76,7 +75,6 @@ class AdwPrefs {
     this.changeOption("headsetcontrol-executable", valueExecutable);
     this.changeOption("option-capabilities", opt_capa);
     this.changeOption("option-battery", opt_bat);
-    this.changeOption("option-silent", opt_sil);
     this.changeOption("option-chatmix", opt_chm);
     this.changeOption("option-sidetone", opt_sto);
     this.changeOption("option-led", opt_led);
@@ -149,12 +147,6 @@ class AdwPrefs {
       _("parameter to ask for battery"),
       "option-battery"
     );
-    let opt_sil = this.addOptionRow(
-      group2,
-      _("Silent"),
-      _("parameter to set headsetcontrol silent"),
-      "option-silent"
-    );
     let opt_chm = this.addOptionRow(
       group2,
       _("Chatmix"),
@@ -193,7 +185,6 @@ class AdwPrefs {
         valueExecutable,
         opt_capa,
         opt_bat,
-        opt_sil,
         opt_chm,
         opt_sto,
         opt_led,
