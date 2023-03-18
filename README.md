@@ -2,6 +2,8 @@
 
 Gnome Shell Extension to visiualze headset status from HeadsetControl (https://github.com/Sapd/HeadsetControl) command line tool
 
+![Screenshot](https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl/blob/main/screenshot_4x.png)
+
 Inspired by https://github.com/centic9/headset-charge-indicator/
 
 # Building HeadsetControl
