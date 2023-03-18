@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-18 19:46+0100\n"
+"POT-Creation-Date: 2023-03-18 20:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,84 +17,84 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:40
+#: HeadsetControl@lauinger-clan.de/extension.js:38
 #: HeadsetControl@lauinger-clan.de/prefs.js:87
 msgid "HeadsetControl"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:47
+#: HeadsetControl@lauinger-clan.de/extension.js:45
 msgid "Refresh"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:52
-#: HeadsetControl@lauinger-clan.de/extension.js:252
+#: HeadsetControl@lauinger-clan.de/extension.js:50
+#: HeadsetControl@lauinger-clan.de/extension.js:250
 msgid "Charge"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:55
-#: HeadsetControl@lauinger-clan.de/extension.js:263
+#: HeadsetControl@lauinger-clan.de/extension.js:53
+#: HeadsetControl@lauinger-clan.de/extension.js:261
 msgid "Chat-Mix"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:63
+#: HeadsetControl@lauinger-clan.de/extension.js:61
 msgid "Settings"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:81
-#: HeadsetControl@lauinger-clan.de/extension.js:109
-#: HeadsetControl@lauinger-clan.de/extension.js:127
+#: HeadsetControl@lauinger-clan.de/extension.js:79
+#: HeadsetControl@lauinger-clan.de/extension.js:107
+#: HeadsetControl@lauinger-clan.de/extension.js:125
 msgid "off"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:85
+#: HeadsetControl@lauinger-clan.de/extension.js:83
 msgid "low"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:89
+#: HeadsetControl@lauinger-clan.de/extension.js:87
 msgid "medium"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:93
+#: HeadsetControl@lauinger-clan.de/extension.js:91
 msgid "high"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:97
+#: HeadsetControl@lauinger-clan.de/extension.js:95
 msgid "max"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:113
+#: HeadsetControl@lauinger-clan.de/extension.js:111
 msgid "on"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:134
+#: HeadsetControl@lauinger-clan.de/extension.js:132
 msgid "5 min"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:141
+#: HeadsetControl@lauinger-clan.de/extension.js:139
 msgid "15 min"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:148
+#: HeadsetControl@lauinger-clan.de/extension.js:146
 msgid "30 min"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:155
+#: HeadsetControl@lauinger-clan.de/extension.js:153
 msgid "45 min"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:162
+#: HeadsetControl@lauinger-clan.de/extension.js:160
 msgid "60 min"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:169
+#: HeadsetControl@lauinger-clan.de/extension.js:167
 msgid "90 min"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:201
+#: HeadsetControl@lauinger-clan.de/extension.js:199
 msgid "HeadsetControl command: "
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:269
+#: HeadsetControl@lauinger-clan.de/extension.js:267
 msgid "Refreshing..."
 msgstr ""
 
