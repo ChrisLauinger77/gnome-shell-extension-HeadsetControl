@@ -69,7 +69,7 @@ const HeadsetControlIndicator = GObject.registerClass(
 
     _notify(strText) {
       Main.notify(_("HeadsetControl"), strText);
-      log(strText);
+      log(_("HeadsetControl") + " " + strText);
     }
 
     _addSidetoneMenu() {
