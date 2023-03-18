@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-18 20:31+0100\n"
-"PO-Revision-Date: 2023-03-18 19:49+0100\n"
+"POT-Creation-Date: 2023-03-18 20:50+0100\n"
+"PO-Revision-Date: 2023-03-18 20:51+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -19,6 +19,7 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:38
+#: HeadsetControl@lauinger-clan.de/extension.js:71
 #: HeadsetControl@lauinger-clan.de/prefs.js:87
 msgid "HeadsetControl"
 msgstr "Headset-Steuerung"
@@ -92,8 +93,8 @@ msgid "90 min"
 msgstr "90 Min"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:199
-msgid "HeadsetControl command: "
-msgstr "Headset-Steuerung Kommando:"
+msgid "Command: "
+msgstr "Kommando: "
 
 #: HeadsetControl@lauinger-clan.de/extension.js:267
 msgid "Refreshing..."
@@ -216,6 +217,9 @@ msgstr "Übergabe an headsetcontrol zum Setzen des LED"
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:37
 msgid "passed to headsetcontrol to set inactive time"
 msgstr "Übergabe an headsetcontrol zum Setzen der Inaktivitätszeit"
+
+#~ msgid "HeadsetControl command: "
+#~ msgstr "Headset-Steuerung Kommando:"
 
 #~ msgid "ChatMix"
 #~ msgstr "Chatmix"

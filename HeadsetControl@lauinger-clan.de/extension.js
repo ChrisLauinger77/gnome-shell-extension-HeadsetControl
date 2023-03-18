@@ -68,7 +68,7 @@ const HeadsetControlIndicator = GObject.registerClass(
     }
 
     _notify(strText) {
-      Main.notify(_(strText));
+      Main.notify(_("HeadsetControl"), strText);
       log(strText);
     }
 
@@ -196,7 +196,7 @@ const HeadsetControlIndicator = GObject.registerClass(
         .replace("<LED>", this._cmdLED)
         .replace("<InactiveTime>", this._cmdInacitetime);
 
-      this._notify(_("HeadsetControl command: ") + cmd);
+      this._notify(_("Command: ") + cmd);
       try {
         let output = GLib.spawn_command_line_sync(cmd)[1];
         let strOutput = imports.byteArray
