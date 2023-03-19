@@ -15,3 +15,21 @@ You can test the helper application manually via headsetcontrol -b -c, this shou
 ### 1 click install from E.G.O:
 
 https://extensions.gnome.org/extension/5823/headsetcontrol/
+
+### Download latest release
+
+1. Download the zip file from the [release page](https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl/releases)
+2. The md5 and sig files can be used to verify the integrity of the zip file
+3. Unzip and run install.sh from the zip
+
+### Install from source
+
+Use the `master` branch.
+
+```bash
+git clone https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl.git
+cd gnome-shell-extension-HeadsetControl.git
+./install.sh
+```
+
+Now restart gnome-shell.
