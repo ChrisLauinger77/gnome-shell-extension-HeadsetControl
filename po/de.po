@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-19 08:49+0100\n"
-"PO-Revision-Date: 2023-03-19 08:49+0100\n"
+"POT-Creation-Date: 2023-03-19 09:17+0100\n"
+"PO-Revision-Date: 2023-03-19 09:35+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -19,8 +19,8 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:38
-#: HeadsetControl@lauinger-clan.de/extension.js:75
-#: HeadsetControl@lauinger-clan.de/extension.js:76
+#: HeadsetControl@lauinger-clan.de/extension.js:77
+#: HeadsetControl@lauinger-clan.de/extension.js:78
 #: HeadsetControl@lauinger-clan.de/prefs.js:87
 msgid "HeadsetControl"
 msgstr "Headset-Steuerung"
@@ -30,78 +30,93 @@ msgid "Refresh"
 msgstr "Aktualisieren"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:50
-#: HeadsetControl@lauinger-clan.de/extension.js:217
+#: HeadsetControl@lauinger-clan.de/extension.js:219
 msgid "Charge"
 msgstr "Ladung"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:53
-#: HeadsetControl@lauinger-clan.de/extension.js:228
+#: HeadsetControl@lauinger-clan.de/extension.js:230
 msgid "Chat-Mix"
 msgstr "Chat-Mix"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:65
+#: HeadsetControl@lauinger-clan.de/extension.js:57
+#: HeadsetControl@lauinger-clan.de/prefs.js:158
+msgid "Sidetone"
+msgstr "Mithörton"
+
+#: HeadsetControl@lauinger-clan.de/extension.js:59
+#: HeadsetControl@lauinger-clan.de/prefs.js:164
+msgid "LED"
+msgstr "LED"
+
+#: HeadsetControl@lauinger-clan.de/extension.js:62
+#: HeadsetControl@lauinger-clan.de/prefs.js:170
+msgid "Inactive time"
+msgstr "Inaktivitätszeit"
+
+#: HeadsetControl@lauinger-clan.de/extension.js:67
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:87
-#: HeadsetControl@lauinger-clan.de/extension.js:97
-#: HeadsetControl@lauinger-clan.de/extension.js:105
+#: HeadsetControl@lauinger-clan.de/extension.js:89
+#: HeadsetControl@lauinger-clan.de/extension.js:99
+#: HeadsetControl@lauinger-clan.de/extension.js:107
 msgid "Off"
 msgstr "Aus"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:88
+#: HeadsetControl@lauinger-clan.de/extension.js:90
 msgid "low"
 msgstr "leise"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:89
+#: HeadsetControl@lauinger-clan.de/extension.js:91
 msgid "medium"
 msgstr "mittel"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:90
+#: HeadsetControl@lauinger-clan.de/extension.js:92
 msgid "high"
 msgstr "hoch"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:91
+#: HeadsetControl@lauinger-clan.de/extension.js:93
 msgid "max"
 msgstr "max"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:98
+#: HeadsetControl@lauinger-clan.de/extension.js:100
 msgid "On"
 msgstr "An"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:108
+#: HeadsetControl@lauinger-clan.de/extension.js:110
 msgid "05 min"
 msgstr "05 Min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:113
+#: HeadsetControl@lauinger-clan.de/extension.js:115
 msgid "15 min"
 msgstr "15 Min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:118
+#: HeadsetControl@lauinger-clan.de/extension.js:120
 msgid "30 min"
 msgstr "30 Min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:123
+#: HeadsetControl@lauinger-clan.de/extension.js:125
 msgid "45 min"
 msgstr "45 Min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:128
+#: HeadsetControl@lauinger-clan.de/extension.js:130
 msgid "60 min"
 msgstr "60 Min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:133
+#: HeadsetControl@lauinger-clan.de/extension.js:135
 msgid "75 min"
-msgstr "05 Min"
+msgstr "75 Min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:138
+#: HeadsetControl@lauinger-clan.de/extension.js:140
 msgid "90 min"
 msgstr "90 Min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:166
+#: HeadsetControl@lauinger-clan.de/extension.js:168
 msgid "Command:"
 msgstr "Befehl:"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:234
+#: HeadsetControl@lauinger-clan.de/extension.js:236
 msgid "Refreshing..."
 msgstr "Aktualisiere..."
 
@@ -157,26 +172,14 @@ msgstr "Chatmix"
 msgid "parameter to ask for chatmix"
 msgstr "Parameter zum Abfragen des Chatmix"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:158
-msgid "Sidetone"
-msgstr "Sidetone"
-
 #: HeadsetControl@lauinger-clan.de/prefs.js:159
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:26
 msgid "parameter to ask for sidetone"
 msgstr "Parameter zum Abfragen des Sidetone"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:164
-msgid "LED"
-msgstr "LED"
-
 #: HeadsetControl@lauinger-clan.de/prefs.js:165
 msgid "passed to headsetcontrol to set for led"
 msgstr "Parameter zum Setzen des LED"
-
-#: HeadsetControl@lauinger-clan.de/prefs.js:170
-msgid "Inactive time"
-msgstr "Inaktivitätszeit"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:171
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:36

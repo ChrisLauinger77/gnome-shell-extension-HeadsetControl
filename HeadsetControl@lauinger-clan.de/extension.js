@@ -54,11 +54,13 @@ const HeadsetControlIndicator = GObject.registerClass(
       this.menu.addMenuItem(this._entryChatMix);
       // sidetone LED inactive time
       let popupMenuExpander;
-      popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem("Sidetone");
+      popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem(_("Sidetone"));
       this._addSidetoneMenu(popupMenuExpander);
-      popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem("LED");
+      popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem(_("LED"));
       this._addLEDMenu(popupMenuExpander);
-      popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem("Inactive time");
+      popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem(
+        _("Inactive time")
+      );
       this._addInactivetimeMenu(popupMenuExpander);
       // Add an entry-point for more settings
       this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
