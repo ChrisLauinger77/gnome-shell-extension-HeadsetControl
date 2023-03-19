@@ -201,7 +201,7 @@ class AdwPrefs {
     this._page2 = Adw.PreferencesPage.new();
     this._page2.set_title(_("Customization"));
     this._page2.set_name("headsetcontrol_page1");
-    this._page2.set_icon_name("emblem-photos-symbolic");
+    this._page2.set_icon_name("audio-headset");
 
     // group1
     let groupC1 = Adw.PreferencesGroup.new();
