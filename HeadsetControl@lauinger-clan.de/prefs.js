@@ -86,7 +86,7 @@ class AdwPrefs {
     let adwrow;
     this._page1 = Adw.PreferencesPage.new();
     this._page1.set_title(_("HeadsetControl"));
-    this._page1.set_name("headsetcontrol_page");
+    this._page1.set_name("headsetcontrol_page1");
     this._page1.set_icon_name("preferences-system-symbolic");
 
     // group1
@@ -197,5 +197,30 @@ class AdwPrefs {
 
     this._window.set_default_size(675, 630);
     this._window.add(this._page1);
+    //page2
+    this._page2 = Adw.PreferencesPage.new();
+    this._page2.set_title(_("Customization"));
+    this._page2.set_name("headsetcontrol_page1");
+    this._page2.set_icon_name("emblem-photos-symbolic");
+
+    // group1
+    let groupC1 = Adw.PreferencesGroup.new();
+    groupC1.set_title(_("Options"));
+    groupC1.set_name("headsetcontrol_options");
+    this._page2.add(groupC1);
+    adwrow = new Adw.ActionRow({ title: _("Use notifications") });
+    groupC1.add(adwrow);
+    let toggleusenotifications = new Gtk.Switch({
+      active: this._settings.get_boolean("use-notifications"),
+      valign: Gtk.Align.CENTER,
+    });
+    this._settings.bind(
+      "use-notifications",
+      toggleusenotifications,
+      "active",
+      Gio.SettingsBindFlags.DEFAULT
+    );
+    adwrow.add_suffix(toggleusenotifications);
+    this._window.add(this._page2);
   }
 }

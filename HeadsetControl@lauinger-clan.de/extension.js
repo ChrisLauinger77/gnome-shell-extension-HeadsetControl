@@ -70,7 +70,9 @@ const HeadsetControlIndicator = GObject.registerClass(
     }
 
     _notify(strText) {
-      Main.notify(_("HeadsetControl"), strText);
+      if (this._usenotifications) {
+        Main.notify(_("HeadsetControl"), strText);
+      }
       log(_("HeadsetControl") + " " + strText);
     }
 
@@ -153,6 +155,7 @@ const HeadsetControlIndicator = GObject.registerClass(
       this._cmdLED = cmdExecutable + " " + settings.get_string("option-led");
       this._cmdInacitetime =
         cmdExecutable + " " + settings.get_string("option-inactive-time");
+      this._usenotifications = settings.get_boolean("use-notifications");
     }
 
     _invokecmd(cmd) {
@@ -244,6 +247,7 @@ class HeadsetControl {
 
   enable() {
     this._settings = ExtensionUtils.getSettings(g_schema);
+
     this._HeadsetControlIndicator = new HeadsetControlIndicator();
     Main.panel.addToStatusArea(this._uuid, this._HeadsetControlIndicator);
     this._HeadsetControlIndicator.initCmd(this._settings);
