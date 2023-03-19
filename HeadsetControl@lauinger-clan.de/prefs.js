@@ -48,6 +48,7 @@ class AdwPrefs {
     let fileURI = native.get_file().get_uri().replace("file://", "");
 
     this.filechoosertarget.text = fileURI;
+    this.changeOption("headsetcontrol-executable", fileURI);
   }
 
   addOptionRow(group, title, tooltip, option) {

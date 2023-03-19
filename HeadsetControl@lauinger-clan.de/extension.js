@@ -42,10 +42,6 @@ const HeadsetControlIndicator = GObject.registerClass(
       });
       this.add_child(icon);
 
-      let item = new PopupMenu.PopupMenuItem(_("Refresh"));
-      item.connect("activate", this.refresh.bind(this));
-      this.menu.addMenuItem(item);
-      this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       //entry for charge
       this._entryCharge = new PopupMenu.PopupMenuItem(_("Charge") + ": ???");
       this.menu.addMenuItem(this._entryCharge);
@@ -251,7 +247,10 @@ class HeadsetControl {
     this._HeadsetControlIndicator = new HeadsetControlIndicator();
     Main.panel.addToStatusArea(this._uuid, this._HeadsetControlIndicator);
     this._HeadsetControlIndicator.initCmd(this._settings);
-    this._HeadsetControlIndicator.refresh();
+    this._HeadsetControlIndicator.connect(
+      "button-press-event",
+      this._HeadsetControlIndicator.refresh.bind(this._HeadsetControlIndicator)
+    );
   }
 
   disable() {
