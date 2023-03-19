@@ -150,8 +150,8 @@ class AdwPrefs {
     );
     let opt_chm = this.addOptionRow(
       group2,
-      _("Chatmix"),
-      _("parameter to ask for chatmix"),
+      _("Chat-Mix"),
+      _("parameter to ask for chat-mix"),
       "option-chatmix"
     );
     let opt_sto = this.addOptionRow(

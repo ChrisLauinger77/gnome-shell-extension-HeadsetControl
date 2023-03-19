@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-19 17:08+0100\n"
-"PO-Revision-Date: 2023-03-19 17:11+0100\n"
+"POT-Creation-Date: 2023-03-19 18:26+0100\n"
+"PO-Revision-Date: 2023-03-19 18:26+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -32,6 +32,7 @@ msgstr "Ladung"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:49
 #: HeadsetControl@lauinger-clan.de/extension.js:229
+#: HeadsetControl@lauinger-clan.de/prefs.js:153
 msgid "Chat-Mix"
 msgstr "Chat-Mix"
 
@@ -159,14 +160,9 @@ msgstr "Batterie"
 msgid "parameter to ask for battery"
 msgstr "Parameter zum Abfragen der Batterie"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:153
-msgid "Chatmix"
-msgstr "Chatmix"
-
 #: HeadsetControl@lauinger-clan.de/prefs.js:154
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:21
-msgid "parameter to ask for chatmix"
-msgstr "Parameter zum Abfragen des Chatmix"
+msgid "parameter to ask for chat-mix"
+msgstr "Parameter zum Abfragen des Chat-Mix"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:160
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:26
@@ -214,6 +210,10 @@ msgstr "Übergabe an headsetcontrol zur Abfrage der Fähigkeiten"
 msgid "passed to headsetcontrol to get battery"
 msgstr "Übergabe an headsetcontrol zur Abfrage der Batterie"
 
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:21
+msgid "parameter to ask for chatmix"
+msgstr "Parameter zum Abfragen des Chatmix"
+
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:22
 msgid "passed to headsetcontrol to get chatmix"
 msgstr "Übergabe an headsetcontrol zur Abfrage des Chatmix"
@@ -241,6 +241,9 @@ msgstr "Parameter zum Erlauben von Benachrichtigungen"
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:42
 msgid "enable / disable notifications"
 msgstr "Erlaube / verbiete Benachrichtigungen"
+
+#~ msgid "Chatmix"
+#~ msgstr "Chatmix"
 
 #~ msgid "Refresh"
 #~ msgstr "Aktualisieren"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-19 17:08+0100\n"
+"POT-Creation-Date: 2023-03-19 18:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,6 +31,7 @@ msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/extension.js:49
 #: HeadsetControl@lauinger-clan.de/extension.js:229
+#: HeadsetControl@lauinger-clan.de/prefs.js:153
 msgid "Chat-Mix"
 msgstr ""
 
@@ -158,13 +159,8 @@ msgstr ""
 msgid "parameter to ask for battery"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:153
-msgid "Chatmix"
-msgstr ""
-
 #: HeadsetControl@lauinger-clan.de/prefs.js:154
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:21
-msgid "parameter to ask for chatmix"
+msgid "parameter to ask for chat-mix"
 msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:160
@@ -211,6 +207,10 @@ msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:17
 msgid "passed to headsetcontrol to get battery"
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:21
+msgid "parameter to ask for chatmix"
 msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:22
