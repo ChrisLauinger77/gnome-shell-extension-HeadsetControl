@@ -87,7 +87,7 @@ class AdwPrefs {
     this._page1 = Adw.PreferencesPage.new();
     this._page1.set_title(_("HeadsetControl"));
     this._page1.set_name("headsetcontrol_page1");
-    this._page1.set_icon_name("preferences-system-symbolic");
+    this._page1.set_icon_name("audio-headset");
 
     // group1
     let group1 = Adw.PreferencesGroup.new();
@@ -201,7 +201,7 @@ class AdwPrefs {
     this._page2 = Adw.PreferencesPage.new();
     this._page2.set_title(_("Customization"));
     this._page2.set_name("headsetcontrol_page1");
-    this._page2.set_icon_name("audio-headset");
+    this._page2.set_icon_name("preferences-system-symbolic");
 
     // group1
     let groupC1 = Adw.PreferencesGroup.new();

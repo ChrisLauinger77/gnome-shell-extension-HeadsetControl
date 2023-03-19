@@ -37,7 +37,7 @@
       <description>passed to headsetcontrol to set inactive time</description>
     </key>
     <key name="use-notifications" type="b">
-      <default>true</default>
+      <default>false</default>
       <summary>parameter to enable notifiactions</summary>
       <description>enable / disable notifications</description>
     </key>
