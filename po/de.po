@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-18 20:50+0100\n"
-"PO-Revision-Date: 2023-03-18 20:51+0100\n"
+"POT-Creation-Date: 2023-03-19 08:49+0100\n"
+"PO-Revision-Date: 2023-03-19 08:49+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -19,7 +19,8 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:38
-#: HeadsetControl@lauinger-clan.de/extension.js:71
+#: HeadsetControl@lauinger-clan.de/extension.js:75
+#: HeadsetControl@lauinger-clan.de/extension.js:76
 #: HeadsetControl@lauinger-clan.de/prefs.js:87
 msgid "HeadsetControl"
 msgstr "Headset-Steuerung"
@@ -29,74 +30,78 @@ msgid "Refresh"
 msgstr "Aktualisieren"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:50
-#: HeadsetControl@lauinger-clan.de/extension.js:250
+#: HeadsetControl@lauinger-clan.de/extension.js:217
 msgid "Charge"
 msgstr "Ladung"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:53
-#: HeadsetControl@lauinger-clan.de/extension.js:261
+#: HeadsetControl@lauinger-clan.de/extension.js:228
 msgid "Chat-Mix"
 msgstr "Chat-Mix"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:61
+#: HeadsetControl@lauinger-clan.de/extension.js:65
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:79
-#: HeadsetControl@lauinger-clan.de/extension.js:107
-#: HeadsetControl@lauinger-clan.de/extension.js:125
-msgid "off"
-msgstr "aus"
+#: HeadsetControl@lauinger-clan.de/extension.js:87
+#: HeadsetControl@lauinger-clan.de/extension.js:97
+#: HeadsetControl@lauinger-clan.de/extension.js:105
+msgid "Off"
+msgstr "Aus"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:83
+#: HeadsetControl@lauinger-clan.de/extension.js:88
 msgid "low"
 msgstr "leise"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:87
+#: HeadsetControl@lauinger-clan.de/extension.js:89
 msgid "medium"
 msgstr "mittel"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:91
+#: HeadsetControl@lauinger-clan.de/extension.js:90
 msgid "high"
 msgstr "hoch"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:95
+#: HeadsetControl@lauinger-clan.de/extension.js:91
 msgid "max"
 msgstr "max"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:111
-msgid "on"
-msgstr "an"
+#: HeadsetControl@lauinger-clan.de/extension.js:98
+msgid "On"
+msgstr "An"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:132
-msgid "5 min"
+#: HeadsetControl@lauinger-clan.de/extension.js:108
+msgid "05 min"
 msgstr "05 Min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:139
+#: HeadsetControl@lauinger-clan.de/extension.js:113
 msgid "15 min"
 msgstr "15 Min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:146
+#: HeadsetControl@lauinger-clan.de/extension.js:118
 msgid "30 min"
 msgstr "30 Min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:153
+#: HeadsetControl@lauinger-clan.de/extension.js:123
 msgid "45 min"
 msgstr "45 Min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:160
+#: HeadsetControl@lauinger-clan.de/extension.js:128
 msgid "60 min"
 msgstr "60 Min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:167
+#: HeadsetControl@lauinger-clan.de/extension.js:133
+msgid "75 min"
+msgstr "05 Min"
+
+#: HeadsetControl@lauinger-clan.de/extension.js:138
 msgid "90 min"
 msgstr "90 Min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:199
-msgid "Command: "
-msgstr "Kommando: "
+#: HeadsetControl@lauinger-clan.de/extension.js:166
+msgid "Command:"
+msgstr "Befehl:"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:267
+#: HeadsetControl@lauinger-clan.de/extension.js:234
 msgid "Refreshing..."
 msgstr "Aktualisiere..."
 
@@ -217,6 +222,9 @@ msgstr "Übergabe an headsetcontrol zum Setzen des LED"
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:37
 msgid "passed to headsetcontrol to set inactive time"
 msgstr "Übergabe an headsetcontrol zum Setzen der Inaktivitätszeit"
+
+#~ msgid "on"
+#~ msgstr "an"
 
 #~ msgid "HeadsetControl command: "
 #~ msgstr "Headset-Steuerung Kommando:"

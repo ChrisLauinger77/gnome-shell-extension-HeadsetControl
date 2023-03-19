@@ -1,7 +1,7 @@
 {
   "name": "HeadsetControl",
   "gettext-domain": "HeadsetControl",
-  "description": "Gnome Shell Extension to visiualze headset status from HeadsetControl",
+  "description": "Gnome Shell Extension to visualze headset status from HeadsetControl (https://github.com/Sapd/HeadsetControl) command line tool",
   "uuid": "HeadsetControl@lauinger-clan.de",
   "shell-version": [
     "42", "43", "44"

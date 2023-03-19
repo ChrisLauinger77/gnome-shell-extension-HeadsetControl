@@ -53,9 +53,13 @@ const HeadsetControlIndicator = GObject.registerClass(
       this._entryChatMix = new PopupMenu.PopupMenuItem(_("Chat-Mix") + ": ???");
       this.menu.addMenuItem(this._entryChatMix);
       // sidetone LED inactive time
-      this._addSidetoneMenu();
-      this._addLEDMenu();
-      this._addInactivetimeMenu();
+      let popupMenuExpander;
+      popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem("Sidetone");
+      this._addSidetoneMenu(popupMenuExpander);
+      popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem("LED");
+      this._addLEDMenu(popupMenuExpander);
+      popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem("Inactive time");
+      this._addInactivetimeMenu(popupMenuExpander);
       // Add an entry-point for more settings
       this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       const settingsItem = this.menu.addAction(_("Settings"), () =>
@@ -72,105 +76,68 @@ const HeadsetControlIndicator = GObject.registerClass(
       log(_("HeadsetControl") + " " + strText);
     }
 
-    _addSidetoneMenu() {
-      let popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem("Sidetone");
+    _addPopupMenuItem(popupMenuExpander, strLabel, strValue) {
       let submenu;
-      //off
-      submenu = new PopupMenu.PopupMenuItem(_("off"));
-      submenu.connect("activate", this._invokecmd.bind(this, "<Sidetone> 0"));
+      submenu = new PopupMenu.PopupMenuItem(_(strLabel));
+      submenu.connect("activate", this._invokecmd.bind(this, strValue));
       popupMenuExpander.menu.addMenuItem(submenu);
-      //low
-      submenu = new PopupMenu.PopupMenuItem(_("low"));
-      submenu.connect("activate", this._invokecmd.bind(this, "<Sidetone> 32"));
-      popupMenuExpander.menu.addMenuItem(submenu);
-      //low
-      submenu = new PopupMenu.PopupMenuItem(_("medium"));
-      submenu.connect("activate", this._invokecmd.bind(this, "<Sidetone> 64"));
-      popupMenuExpander.menu.addMenuItem(submenu);
-      //low
-      submenu = new PopupMenu.PopupMenuItem(_("high"));
-      submenu.connect("activate", this._invokecmd.bind(this, "<Sidetone> 96"));
-      popupMenuExpander.menu.addMenuItem(submenu);
-      //max
-      submenu = new PopupMenu.PopupMenuItem(_("max"));
-      submenu.connect("activate", this._invokecmd.bind(this, "<Sidetone> 128"));
-
-      popupMenuExpander.menu.addMenuItem(submenu);
-      popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
-      this.menu.addMenuItem(popupMenuExpander);
     }
 
-    _addLEDMenu() {
-      let popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem("LED");
-      let submenu;
-      //off
-      submenu = new PopupMenu.PopupMenuItem(_("off"));
-      submenu.connect("activate", this._invokecmd.bind(this, "<LED> 0"));
-      popupMenuExpander.menu.addMenuItem(submenu);
-      //on
-      submenu = new PopupMenu.PopupMenuItem(_("on"));
-      submenu.connect("activate", this._invokecmd.bind(this, "<LED> 1"));
-      popupMenuExpander.menu.addMenuItem(submenu);
+    _addSidetoneMenu(popupMenuExpander) {
+      this._addPopupMenuItem(popupMenuExpander, _("Off"), "<Sidetone> 0");
+      this._addPopupMenuItem(popupMenuExpander, _("low"), "<Sidetone> 32");
+      this._addPopupMenuItem(popupMenuExpander, _("medium"), "<Sidetone> 64");
+      this._addPopupMenuItem(popupMenuExpander, _("high"), "<Sidetone> 96");
+      this._addPopupMenuItem(popupMenuExpander, _("max"), "<Sidetone> 128");
+      this.menu.addMenuItem(popupMenuExpander);
+      popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
+    }
+
+    _addLEDMenu(popupMenuExpander) {
+      this._addPopupMenuItem(popupMenuExpander, _("Off"), "<LED> 0");
+      this._addPopupMenuItem(popupMenuExpander, _("On"), "<LED> 1");
 
       popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
       this.menu.addMenuItem(popupMenuExpander);
     }
 
-    _addInactivetimeMenu() {
-      let popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem(
-        "Inactive time"
+    _addInactivetimeMenu(popupMenuExpander) {
+      this._addPopupMenuItem(popupMenuExpander, _("Off"), "<InactiveTime> 0");
+      this._addPopupMenuItem(
+        popupMenuExpander,
+        _("05 min"),
+        "<InactiveTime> 05"
       );
-      let submenu;
-      //off
-      submenu = new PopupMenu.PopupMenuItem(_("off"));
-      submenu.connect(
-        "activate",
-        this._invokecmd.bind(this, "<InactiveTime> 0")
+      this._addPopupMenuItem(
+        popupMenuExpander,
+        _("15 min"),
+        "<InactiveTime> 15"
       );
-      popupMenuExpander.menu.addMenuItem(submenu);
-      // 5min
-      submenu = new PopupMenu.PopupMenuItem(_("5 min"));
-      submenu.connect(
-        "activate",
-        this._invokecmd.bind(this, "<InactiveTime> 5")
+      this._addPopupMenuItem(
+        popupMenuExpander,
+        _("30 min"),
+        "<InactiveTime> 30"
       );
-      popupMenuExpander.menu.addMenuItem(submenu);
-      //15 min
-      submenu = new PopupMenu.PopupMenuItem(_("15 min"));
-      submenu.connect(
-        "activate",
-        this._invokecmd.bind(this, "<InactiveTime> 15")
+      this._addPopupMenuItem(
+        popupMenuExpander,
+        _("45 min"),
+        "<InactiveTime> 45"
       );
-      popupMenuExpander.menu.addMenuItem(submenu);
-      //30 min
-      submenu = new PopupMenu.PopupMenuItem(_("30 min"));
-      submenu.connect(
-        "activate",
-        this._invokecmd.bind(this, "<InactiveTime> 30")
+      this._addPopupMenuItem(
+        popupMenuExpander,
+        _("60 min"),
+        "<InactiveTime> 60"
       );
-      popupMenuExpander.menu.addMenuItem(submenu);
-      //45 min
-      submenu = new PopupMenu.PopupMenuItem(_("45 min"));
-      submenu.connect(
-        "activate",
-        this._invokecmd.bind(this, "<InactiveTime> 45")
+      this._addPopupMenuItem(
+        popupMenuExpander,
+        _("75 min"),
+        "<InactiveTime> 75"
       );
-      popupMenuExpander.menu.addMenuItem(submenu);
-      //60 min
-      submenu = new PopupMenu.PopupMenuItem(_("60 min"));
-      submenu.connect(
-        "activate",
-        this._invokecmd.bind(this, "<InactiveTime> 60")
+      this._addPopupMenuItem(
+        popupMenuExpander,
+        _("90 min"),
+        "<InactiveTime> 90"
       );
-      popupMenuExpander.menu.addMenuItem(submenu);
-      //90 min
-      submenu = new PopupMenu.PopupMenuItem(_("90 min"));
-      submenu.connect(
-        "activate",
-        this._invokecmd.bind(this, "<InactiveTime> 90")
-      );
-      popupMenuExpander.menu.addMenuItem(submenu);
-
       popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
       this.menu.addMenuItem(popupMenuExpander);
     }
@@ -196,7 +163,7 @@ const HeadsetControlIndicator = GObject.registerClass(
         .replace("<LED>", this._cmdLED)
         .replace("<InactiveTime>", this._cmdInacitetime);
 
-      this._notify(_("Command: ") + cmd);
+      this._notify(_("Command:") + " " + cmd);
       try {
         let output = GLib.spawn_command_line_sync(cmd)[1];
         let strOutput = imports.byteArray
