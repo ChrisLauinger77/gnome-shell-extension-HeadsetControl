@@ -73,7 +73,12 @@ const HeadsetControlIndicator = GObject.registerClass(
       if (this._usenotifications) {
         Main.notify(_("HeadsetControl"), strText);
       }
-      log(_("HeadsetControl") + " " + strText);
+    }
+
+    _logoutput(strText) {
+      if (this._uselogging) {
+        log(_("HeadsetControl") + " " + strText);
+      }
     }
 
     _addPopupMenuItem(popupMenuExpander, strLabel, strValue) {
@@ -156,6 +161,7 @@ const HeadsetControlIndicator = GObject.registerClass(
       this._cmdInacitetime =
         cmdExecutable + " " + settings.get_string("option-inactive-time");
       this._usenotifications = settings.get_boolean("use-notifications");
+      this._uselogging = settings.get_boolean("use-logging");
     }
 
     _invokecmd(cmd) {
@@ -165,6 +171,7 @@ const HeadsetControlIndicator = GObject.registerClass(
         .replace("<InactiveTime>", this._cmdInacitetime);
 
       this._notify(_("Command:") + " " + cmd);
+      this._logoutput(_("Command:") + " " + cmd);
       try {
         let output = GLib.spawn_command_line_sync(cmd)[1];
         let strOutput = imports.byteArray
@@ -172,6 +179,7 @@ const HeadsetControlIndicator = GObject.registerClass(
           .replace("\n", "###")
           .replace("Success!", "###");
         strOutput = strOutput.split("###")[1];
+        this._logoutput(strOutput);
         return strOutput;
       } catch (err) {
         // could not execute the command
@@ -233,6 +241,7 @@ const HeadsetControlIndicator = GObject.registerClass(
 
     refresh() {
       this._notify(_("Refreshing..."));
+      this._logoutput(_("Refreshing..."));
       this._refreshBatteryStatus();
       this._refreshChatMixStatus();
       return true;
@@ -255,9 +264,43 @@ class HeadsetControl {
       "button-press-event",
       this._HeadsetControlIndicator.refresh.bind(this._HeadsetControlIndicator)
     );
+
+    this._settingSignals = new Array();
+    this._settingSignals.push(
+      this._settings.connect(
+        "changed::headsetcontrol-executable",
+        this._HeadsetControlIndicator.initCmd.bind(
+          this._HeadsetControlIndicator,
+          this._settings
+        )
+      )
+    );
+    this._settingSignals.push(
+      this._settings.connect(
+        "changed::use-notifications",
+        this._HeadsetControlIndicator.initCmd.bind(
+          this._HeadsetControlIndicator,
+          this._settings
+        )
+      )
+    );
+    this._settingSignals.push(
+      this._settings.connect(
+        "changed::use-logging",
+        this._HeadsetControlIndicator.initCmd.bind(
+          this._HeadsetControlIndicator,
+          this._settings
+        )
+      )
+    );
   }
 
   disable() {
+    //Remove setting Signals
+    this._settingSignals.forEach(function (signal) {
+      this._settings.disconnect(signal);
+    }, this);
+    this._settingSignals = null;
     this._settings = null;
     this._HeadsetControlIndicator.destroy();
     this._HeadsetControlIndicator = null;

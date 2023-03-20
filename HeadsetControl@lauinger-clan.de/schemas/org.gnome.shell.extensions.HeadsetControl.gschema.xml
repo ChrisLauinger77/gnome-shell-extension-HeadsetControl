@@ -41,5 +41,10 @@
       <summary>parameter to enable notifiactions</summary>
       <description>enable / disable notifications</description>
     </key>
+    <key name="use-logging" type="b">
+      <default>false</default>
+      <summary>parameter to enable log outputs</summary>
+      <description>enable / disable log outputs</description>
+    </key>
   </schema>
 </schemalist>

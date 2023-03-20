@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-19 18:26+0100\n"
+"POT-Creation-Date: 2023-03-20 18:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,34 +19,34 @@ msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/extension.js:38
 #: HeadsetControl@lauinger-clan.de/extension.js:74
-#: HeadsetControl@lauinger-clan.de/extension.js:76
+#: HeadsetControl@lauinger-clan.de/extension.js:80
 #: HeadsetControl@lauinger-clan.de/prefs.js:88
 msgid "HeadsetControl"
 msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/extension.js:46
-#: HeadsetControl@lauinger-clan.de/extension.js:218
+#: HeadsetControl@lauinger-clan.de/extension.js:226
 msgid "Charge"
 msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/extension.js:49
-#: HeadsetControl@lauinger-clan.de/extension.js:229
-#: HeadsetControl@lauinger-clan.de/prefs.js:153
+#: HeadsetControl@lauinger-clan.de/extension.js:237
+#: HeadsetControl@lauinger-clan.de/prefs.js:154
 msgid "Chat-Mix"
 msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/extension.js:53
-#: HeadsetControl@lauinger-clan.de/prefs.js:159
+#: HeadsetControl@lauinger-clan.de/prefs.js:160
 msgid "Sidetone"
 msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/extension.js:55
-#: HeadsetControl@lauinger-clan.de/prefs.js:165
+#: HeadsetControl@lauinger-clan.de/prefs.js:166
 msgid "LED"
 msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/extension.js:58
-#: HeadsetControl@lauinger-clan.de/prefs.js:171
+#: HeadsetControl@lauinger-clan.de/prefs.js:172
 msgid "Inactive time"
 msgstr ""
 
@@ -54,70 +54,73 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:87
-#: HeadsetControl@lauinger-clan.de/extension.js:97
-#: HeadsetControl@lauinger-clan.de/extension.js:105
+#: HeadsetControl@lauinger-clan.de/extension.js:92
+#: HeadsetControl@lauinger-clan.de/extension.js:102
+#: HeadsetControl@lauinger-clan.de/extension.js:110
 msgid "Off"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:88
+#: HeadsetControl@lauinger-clan.de/extension.js:93
 msgid "low"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:89
+#: HeadsetControl@lauinger-clan.de/extension.js:94
 msgid "medium"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:90
+#: HeadsetControl@lauinger-clan.de/extension.js:95
 msgid "high"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:91
+#: HeadsetControl@lauinger-clan.de/extension.js:96
 msgid "max"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:98
+#: HeadsetControl@lauinger-clan.de/extension.js:103
 msgid "On"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:108
+#: HeadsetControl@lauinger-clan.de/extension.js:113
 msgid "05 min"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:113
+#: HeadsetControl@lauinger-clan.de/extension.js:118
 msgid "15 min"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:118
+#: HeadsetControl@lauinger-clan.de/extension.js:123
 msgid "30 min"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:123
+#: HeadsetControl@lauinger-clan.de/extension.js:128
 msgid "45 min"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:128
+#: HeadsetControl@lauinger-clan.de/extension.js:133
 msgid "60 min"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:133
+#: HeadsetControl@lauinger-clan.de/extension.js:138
 msgid "75 min"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:138
+#: HeadsetControl@lauinger-clan.de/extension.js:143
 msgid "90 min"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:167
+#: HeadsetControl@lauinger-clan.de/extension.js:173
+#: HeadsetControl@lauinger-clan.de/extension.js:174
+#: HeadsetControl@lauinger-clan.de/prefs.js:97
 msgid "Command:"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:235
+#: HeadsetControl@lauinger-clan.de/extension.js:243
+#: HeadsetControl@lauinger-clan.de/extension.js:244
 msgid "Refreshing..."
 msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:39
-#: HeadsetControl@lauinger-clan.de/prefs.js:124
+#: HeadsetControl@lauinger-clan.de/prefs.js:125
 msgid "Select headsetcontrol executable"
 msgstr ""
 
@@ -125,80 +128,91 @@ msgstr ""
 msgid "Global"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:97
-msgid "HeadsetControl executable"
+#: HeadsetControl@lauinger-clan.de/prefs.js:98
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:7
+msgid "file and path of headsetcontrol executable"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:108
+#: HeadsetControl@lauinger-clan.de/prefs.js:109
 msgid "..."
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:112
+#: HeadsetControl@lauinger-clan.de/prefs.js:113
 msgid "Usually located in '/usr/bin' OR '/usr/local/bin'"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:135
+#: HeadsetControl@lauinger-clan.de/prefs.js:136
 msgid "HeadsetControl parameters"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:141
+#: HeadsetControl@lauinger-clan.de/prefs.js:142
 msgid "Capabilities"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:142
+#: HeadsetControl@lauinger-clan.de/prefs.js:143
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:11
 msgid "parameter to ask for capabilities"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:147
+#: HeadsetControl@lauinger-clan.de/prefs.js:148
 msgid "Battery"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:148
+#: HeadsetControl@lauinger-clan.de/prefs.js:149
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:16
 msgid "parameter to ask for battery"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:154
+#: HeadsetControl@lauinger-clan.de/prefs.js:155
 msgid "parameter to ask for chat-mix"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:160
+#: HeadsetControl@lauinger-clan.de/prefs.js:161
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:26
 msgid "parameter to ask for sidetone"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:166
+#: HeadsetControl@lauinger-clan.de/prefs.js:167
 msgid "passed to headsetcontrol to set for led"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:172
+#: HeadsetControl@lauinger-clan.de/prefs.js:173
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:36
 msgid "parameter to ask for inactive time"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:179
+#: HeadsetControl@lauinger-clan.de/prefs.js:180
 msgid "Apply"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:202
+#: HeadsetControl@lauinger-clan.de/prefs.js:203
 msgid "Customization"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:208
+#: HeadsetControl@lauinger-clan.de/prefs.js:209
 msgid "Options"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:211
+#: HeadsetControl@lauinger-clan.de/prefs.js:213
 msgid "Use notifications"
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:214
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:42
+msgid "enable / disable notifications"
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:229
+msgid "Use logging"
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:230
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:47
+msgid "enable / disable log outputs"
 msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:6
 msgid "path to executable"
-msgstr ""
-
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:7
-msgid "file and path of headsetcontrol executable"
 msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:12
@@ -237,6 +251,6 @@ msgstr ""
 msgid "parameter to enable notifiactions"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:42
-msgid "enable / disable notifications"
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:46
+msgid "parameter to enable log outputs"
 msgstr ""

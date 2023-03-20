@@ -25,7 +25,7 @@ class AdwPrefs {
   }
 
   changeOption(option, text) {
-    this._settings.set_string(option, text.text);
+    this._settings.set_string(option, text);
   }
 
   _onBtnClicked(btn) {
@@ -73,13 +73,13 @@ class AdwPrefs {
     opt_led,
     opt_iat
   ) {
-    this.changeOption("headsetcontrol-executable", valueExecutable);
-    this.changeOption("option-capabilities", opt_capa);
-    this.changeOption("option-battery", opt_bat);
-    this.changeOption("option-chatmix", opt_chm);
-    this.changeOption("option-sidetone", opt_sto);
-    this.changeOption("option-led", opt_led);
-    this.changeOption("option-inactive-time", opt_iat);
+    this.changeOption("headsetcontrol-executable", valueExecutable.text);
+    this.changeOption("option-capabilities", opt_capa.text);
+    this.changeOption("option-battery", opt_bat.text);
+    this.changeOption("option-chatmix", opt_chm.text);
+    this.changeOption("option-sidetone", opt_sto.text);
+    this.changeOption("option-led", opt_led.text);
+    this.changeOption("option-inactive-time", opt_iat.text);
   }
 
   fillPreferencesWindow() {
@@ -94,7 +94,8 @@ class AdwPrefs {
     group1.set_title(_("Global"));
     group1.set_name("headsetcontrol_global");
     this._page1.add(group1);
-    adwrow = new Adw.ActionRow({ title: _("HeadsetControl executable") });
+    adwrow = new Adw.ActionRow({ title: _("Command:") });
+    adwrow.set_tooltip_text(_("file and path of headsetcontrol executable"));
     group1.add(adwrow);
     let valueExecutable = new Gtk.Entry({
       hexpand: true,
@@ -203,12 +204,14 @@ class AdwPrefs {
     this._page2.set_name("headsetcontrol_page1");
     this._page2.set_icon_name("preferences-system-symbolic");
 
-    // group1
+    // groupC1
     let groupC1 = Adw.PreferencesGroup.new();
     groupC1.set_title(_("Options"));
     groupC1.set_name("headsetcontrol_options");
     this._page2.add(groupC1);
+    //use notifications
     adwrow = new Adw.ActionRow({ title: _("Use notifications") });
+    adwrow.set_tooltip_text(_("enable / disable notifications"));
     groupC1.add(adwrow);
     let toggleusenotifications = new Gtk.Switch({
       active: this._settings.get_boolean("use-notifications"),
@@ -221,6 +224,23 @@ class AdwPrefs {
       Gio.SettingsBindFlags.DEFAULT
     );
     adwrow.add_suffix(toggleusenotifications);
+    adwrow.activatable_widget = toggleusenotifications;
+    //use logging
+    adwrow = new Adw.ActionRow({ title: _("Use logging") });
+    adwrow.set_tooltip_text(_("enable / disable log outputs"));
+    groupC1.add(adwrow);
+    let toggleuselogging = new Gtk.Switch({
+      active: this._settings.get_boolean("use-logging"),
+      valign: Gtk.Align.CENTER,
+    });
+    this._settings.bind(
+      "use-logging",
+      toggleuselogging,
+      "active",
+      Gio.SettingsBindFlags.DEFAULT
+    );
+    adwrow.add_suffix(toggleuselogging);
+    adwrow.activatable_widget = toggleuselogging;
     this._window.add(this._page2);
   }
 }
