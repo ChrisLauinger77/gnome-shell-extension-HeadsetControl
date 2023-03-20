@@ -264,7 +264,7 @@ class HeadsetControl {
       "button-press-event",
       this._HeadsetControlIndicator.refresh.bind(this._HeadsetControlIndicator)
     );
-
+    // add setting Signals
     this._settingSignals = new Array();
     this._settingSignals.push(
       this._settings.connect(
@@ -296,7 +296,7 @@ class HeadsetControl {
   }
 
   disable() {
-    //Remove setting Signals
+    // remove setting Signals
     this._settingSignals.forEach(function (signal) {
       this._settings.disconnect(signal);
     }, this);

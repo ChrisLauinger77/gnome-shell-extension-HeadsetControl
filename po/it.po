@@ -5,16 +5,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-19 18:26+0100\n"
-"PO-Revision-Date: 2023-03-20 18:15+0100\n"
-"Last-Translator: Albano Battistella <albano_battistella@hotmail.com>\n"
+"PO-Revision-Date: 2023-03-20 19:03+0100\n"
+"Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: Italian <LL@li.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:38
 #: HeadsetControl@lauinger-clan.de/extension.js:74
@@ -159,9 +160,6 @@ msgid "parameter to ask for battery"
 msgstr "parametro per chiedere batteria"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:154
-msgid "parameter to ask for chat-mix"
-msgstr parametro per chiedere chat-mix""
-
 #: HeadsetControl@lauinger-clan.de/prefs.js:160
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:26
 msgid "parameter to ask for sidetone"
