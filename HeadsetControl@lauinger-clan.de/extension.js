@@ -66,7 +66,6 @@ const HeadsetControlIndicator = GObject.registerClass(
       // Ensure the settings are unavailable when the screen is locked
       settingsItem.visible = Main.sessionMode.allowSettings;
       this.menu._settingsActions[Me.uuid] = settingsItem;
-      this._originalStyle = this.get_style();
     }
 
     _notify(strText) {
@@ -197,20 +196,16 @@ const HeadsetControlIndicator = GObject.registerClass(
       return strValue.toString().trim();
     }
 
-    _changeIconColor(strBattery) {
+    _changeColor(strBattery) {
       if (strBattery == "N/A") {
-        this.set_style(this._originalStyle);
         return false;
       }
       let valueBattery = strBattery.replace("%", "").trim();
       if (valueBattery >= 50) {
-        this.set_style("color: " + colorG + ";");
         this._entryCharge.set_style("color: " + colorG + ";");
       } else if (valueBattery >= 25) {
-        this.set_style("color: " + colorY + ";");
         this._entryCharge.set_style("color: " + colorY + ";");
       } else {
-        this.set_style("color: " + colorR + ";");
         this._entryCharge.set_style("color: " + colorR + ";");
       }
       return true;
@@ -224,7 +219,7 @@ const HeadsetControlIndicator = GObject.registerClass(
       }
       let strBattery = this._getHeadSetControlValue(strOutput, "Battery");
       this._entryCharge.label.text = _("Charge") + ": " + strBattery;
-      this._changeIconColor(strBattery);
+      this._changeColor(strBattery);
     }
 
     _refreshChatMixStatus() {

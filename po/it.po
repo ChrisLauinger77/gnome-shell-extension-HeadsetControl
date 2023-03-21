@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-19 18:26+0100\n"
+"POT-Creation-Date: 2023-03-21 18:06+0100\n"
 "PO-Revision-Date: 2023-03-20 19:03+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: Italian <LL@li.org>\n"
@@ -18,35 +18,35 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:38
-#: HeadsetControl@lauinger-clan.de/extension.js:74
-#: HeadsetControl@lauinger-clan.de/extension.js:76
+#: HeadsetControl@lauinger-clan.de/extension.js:73
+#: HeadsetControl@lauinger-clan.de/extension.js:79
 #: HeadsetControl@lauinger-clan.de/prefs.js:88
 msgid "HeadsetControl"
 msgstr "Controllo dell'auricolare"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:46
-#: HeadsetControl@lauinger-clan.de/extension.js:218
+#: HeadsetControl@lauinger-clan.de/extension.js:221
 msgid "Charge"
 msgstr "Carica"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:49
-#: HeadsetControl@lauinger-clan.de/extension.js:229
-#: HeadsetControl@lauinger-clan.de/prefs.js:153
+#: HeadsetControl@lauinger-clan.de/extension.js:232
+#: HeadsetControl@lauinger-clan.de/prefs.js:154
 msgid "Chat-Mix"
 msgstr "Chat-Mix"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:53
-#: HeadsetControl@lauinger-clan.de/prefs.js:159
+#: HeadsetControl@lauinger-clan.de/prefs.js:160
 msgid "Sidetone"
 msgstr "Tono laterale"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:55
-#: HeadsetControl@lauinger-clan.de/prefs.js:165
+#: HeadsetControl@lauinger-clan.de/prefs.js:166
 msgid "LED"
 msgstr "LED"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:58
-#: HeadsetControl@lauinger-clan.de/prefs.js:171
+#: HeadsetControl@lauinger-clan.de/prefs.js:172
 msgid "Inactive time"
 msgstr "Periodo di inattività"
 
@@ -54,70 +54,73 @@ msgstr "Periodo di inattività"
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:87
-#: HeadsetControl@lauinger-clan.de/extension.js:97
-#: HeadsetControl@lauinger-clan.de/extension.js:105
+#: HeadsetControl@lauinger-clan.de/extension.js:91
+#: HeadsetControl@lauinger-clan.de/extension.js:101
+#: HeadsetControl@lauinger-clan.de/extension.js:109
 msgid "Off"
 msgstr "Off"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:88
+#: HeadsetControl@lauinger-clan.de/extension.js:92
 msgid "low"
 msgstr "bassa"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:89
+#: HeadsetControl@lauinger-clan.de/extension.js:93
 msgid "medium"
 msgstr "media"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:90
+#: HeadsetControl@lauinger-clan.de/extension.js:94
 msgid "high"
 msgstr "alta"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:91
+#: HeadsetControl@lauinger-clan.de/extension.js:95
 msgid "max"
 msgstr "max"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:98
+#: HeadsetControl@lauinger-clan.de/extension.js:102
 msgid "On"
 msgstr "On"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:108
+#: HeadsetControl@lauinger-clan.de/extension.js:112
 msgid "05 min"
 msgstr "05 min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:113
+#: HeadsetControl@lauinger-clan.de/extension.js:117
 msgid "15 min"
 msgstr "15 min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:118
+#: HeadsetControl@lauinger-clan.de/extension.js:122
 msgid "30 min"
 msgstr "30 min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:123
+#: HeadsetControl@lauinger-clan.de/extension.js:127
 msgid "45 min"
 msgstr "45 min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:128
+#: HeadsetControl@lauinger-clan.de/extension.js:132
 msgid "60 min"
 msgstr "60 min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:133
+#: HeadsetControl@lauinger-clan.de/extension.js:137
 msgid "75 min"
 msgstr "75 min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:138
+#: HeadsetControl@lauinger-clan.de/extension.js:142
 msgid "90 min"
 msgstr "90 min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:167
+#: HeadsetControl@lauinger-clan.de/extension.js:172
+#: HeadsetControl@lauinger-clan.de/extension.js:173
+#: HeadsetControl@lauinger-clan.de/prefs.js:97
 msgid "Command:"
 msgstr "Comando:"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:235
+#: HeadsetControl@lauinger-clan.de/extension.js:238
+#: HeadsetControl@lauinger-clan.de/extension.js:239
 msgid "Refreshing..."
 msgstr "Ricaricare..."
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:39
-#: HeadsetControl@lauinger-clan.de/prefs.js:124
+#: HeadsetControl@lauinger-clan.de/prefs.js:125
 msgid "Select headsetcontrol executable"
 msgstr "Selezionare l'eseguibile del controllo dell'auricolare"
 
@@ -125,78 +128,94 @@ msgstr "Selezionare l'eseguibile del controllo dell'auricolare"
 msgid "Global"
 msgstr "Globale"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:97
-msgid "HeadsetControl executable"
-msgstr "Eseguibile del controllo dell'auricolare"
+#: HeadsetControl@lauinger-clan.de/prefs.js:98
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:7
+msgid "file and path of headsetcontrol executable"
+msgstr "file e percorso dell'eseguibile di controllo dell'auricolare"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:108
+#: HeadsetControl@lauinger-clan.de/prefs.js:109
 msgid "..."
 msgstr "..."
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:112
+#: HeadsetControl@lauinger-clan.de/prefs.js:113
 msgid "Usually located in '/usr/bin' OR '/usr/local/bin'"
 msgstr "Di solito si trova in '/usr/bin' OR '/usr/local/bin'"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:135
+#: HeadsetControl@lauinger-clan.de/prefs.js:136
 msgid "HeadsetControl parameters"
 msgstr "Parametri di controllo dell'auricolare"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:141
+#: HeadsetControl@lauinger-clan.de/prefs.js:142
 msgid "Capabilities"
 msgstr "Capacità"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:142
+#: HeadsetControl@lauinger-clan.de/prefs.js:143
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:11
 msgid "parameter to ask for capabilities"
 msgstr "parametro per chiedere le capacità"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:147
+#: HeadsetControl@lauinger-clan.de/prefs.js:148
 msgid "Battery"
 msgstr "Batteria"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:148
+#: HeadsetControl@lauinger-clan.de/prefs.js:149
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:16
 msgid "parameter to ask for battery"
 msgstr "parametro per chiedere batteria"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:154
-#: HeadsetControl@lauinger-clan.de/prefs.js:160
+#: HeadsetControl@lauinger-clan.de/prefs.js:155
+#, fuzzy
+msgid "parameter to ask for chat-mix"
+msgstr "parametro per chiedere il chatmix"
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:161
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:26
 msgid "parameter to ask for sidetone"
 msgstr "parametro per chiedere il tono laterale"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:166
+#: HeadsetControl@lauinger-clan.de/prefs.js:167
 msgid "passed to headsetcontrol to set for led"
 msgstr "passato al controllo dell'auricolare per impostare il led"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:172
+#: HeadsetControl@lauinger-clan.de/prefs.js:173
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:36
 msgid "parameter to ask for inactive time"
 msgstr "parametro per chiedere il tempo di inattività"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:179
+#: HeadsetControl@lauinger-clan.de/prefs.js:180
 msgid "Apply"
 msgstr "Applica"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:202
+#: HeadsetControl@lauinger-clan.de/prefs.js:203
 msgid "Customization"
 msgstr "Personalizzazione"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:208
+#: HeadsetControl@lauinger-clan.de/prefs.js:209
 msgid "Options"
 msgstr "Opzioni"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:211
+#: HeadsetControl@lauinger-clan.de/prefs.js:213
 msgid "Use notifications"
 msgstr "Usa le notifiche"
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:214
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:42
+msgid "enable / disable notifications"
+msgstr "abilita / disabilita notifiche"
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:229
+msgid "Use logging"
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:230
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:47
+#, fuzzy
+msgid "enable / disable log outputs"
+msgstr "abilita / disabilita notifiche"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:6
 msgid "path to executable"
 msgstr "percorso dell'eseguibile"
-
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:7
-msgid "file and path of headsetcontrol executable"
-msgstr "file e percorso dell'eseguibile di controllo dell'auricolare"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:12
 msgid "passed to headsetcontrol to ask for capabilities"
@@ -228,12 +247,17 @@ msgstr "passato al controllo dell'auricolare per impostare il led"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:37
 msgid "passed to headsetcontrol to set inactive time"
-msgstr "passato al controllo dell'auricolare per impostare il tempo di inattività"
+msgstr ""
+"passato al controllo dell'auricolare per impostare il tempo di inattività"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:41
 msgid "parameter to enable notifiactions"
 msgstr "parametro per abilitare le notifiche"
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:42
-msgid "enable / disable notifications"
-msgstr "abilita / disabilita notifiche"
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:46
+#, fuzzy
+msgid "parameter to enable log outputs"
+msgstr "parametro per abilitare le notifiche"
+
+#~ msgid "HeadsetControl executable"
+#~ msgstr "Eseguibile del controllo dell'auricolare"
