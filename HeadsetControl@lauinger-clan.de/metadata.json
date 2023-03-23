@@ -4,9 +4,9 @@
   "description": "Gnome Shell Extension to visualze headset status from HeadsetControl (https://github.com/Sapd/HeadsetControl) command line tool",
   "uuid": "HeadsetControl@lauinger-clan.de",
   "shell-version": [
-    "42", "43", "44"
+    "43", "44"
   ],
   "url": "https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl",
-  "version": 6,
+  "version": 7,
   "settings-schema": "org.gnome.shell.extensions.HeadsetControl"
 }

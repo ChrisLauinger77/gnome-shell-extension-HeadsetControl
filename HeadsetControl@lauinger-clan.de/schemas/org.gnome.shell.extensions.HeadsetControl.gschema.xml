@@ -46,5 +46,10 @@
       <summary>parameter to enable log outputs</summary>
       <description>enable / disable log outputs</description>
     </key>
+    <key name="show-systemindicator" type="b">
+      <default>true</default>
+      <summary>Toggle to show systemindicator</summary>
+      <description>Makes the systemindicator show/hide</description>
+    </key>
   </schema>
 </schemalist>

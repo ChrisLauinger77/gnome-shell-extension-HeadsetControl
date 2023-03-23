@@ -209,6 +209,22 @@ class AdwPrefs {
     groupC1.set_title(_("Options"));
     groupC1.set_name("headsetcontrol_options");
     this._page2.add(groupC1);
+    //show systemindicator
+    adwrow = new Adw.ActionRow({ title: _("Show SystemIndicator") });
+    adwrow.set_tooltip_text(_("Toggle to show systemindicator"));
+    groupC1.add(adwrow);
+    let togglesystemindicator = new Gtk.Switch({
+      active: this._settings.get_boolean("show-systemindicator"),
+      valign: Gtk.Align.CENTER,
+    });
+    this._settings.bind(
+      "show-systemindicator",
+      togglesystemindicator,
+      "active",
+      Gio.SettingsBindFlags.DEFAULT
+    );
+    adwrow.add_suffix(togglesystemindicator);
+    adwrow.activatable_widget = togglesystemindicator;
     //use notifications
     adwrow = new Adw.ActionRow({ title: _("Use notifications") });
     adwrow.set_tooltip_text(_("enable / disable notifications"));

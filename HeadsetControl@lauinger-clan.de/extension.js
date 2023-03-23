@@ -18,10 +18,12 @@
 
 /* exported init */
 
-const { GObject, St, GLib, Clutter } = imports.gi;
+const { Gio, GObject, St, GLib, Clutter } = imports.gi;
+const Config = imports.misc.config;
 const Main = imports.ui.main;
-const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
+const QuickSettings = imports.ui.quickSettings;
+const QuickSettingsMenu = imports.ui.main.panel.statusArea.quickSettings;
 const Util = imports.misc.util;
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
@@ -81,26 +83,46 @@ function _invokecmd(cmd) {
   }
 }
 
-const HeadsetControlIndicator = GObject.registerClass(
-  class HeadsetControlIndicator extends PanelMenu.Button {
-    _init() {
-      super._init(0.0, _("HeadsetControl"));
-      let icon = new St.Icon({
-        icon_name: "audio-headset",
-        style_class: "system-status-icon",
-      });
-      this.add_child(icon);
+const HeadsetControlMenuToggle = GObject.registerClass(
+  class HeadsetControlMenuToggle extends QuickSettings.QuickMenuToggle {
+    _init(settings) {
+      this._valueBattery = "";
+      this._valueChatMix = "";
+      let current_version = Config.PACKAGE_VERSION.split(".");
+      if (current_version[0] >= 44) {
+        //GNOME 44 and newer
+        super._init({
+          title: _("HeadsetControl"),
+          iconName: "audio-headset",
+          toggleMode: true,
+        });
+      } else {
+        //GNOME 43
+        super._init({
+          label: _("HeadsetControl"),
+          iconName: "audio-headset",
+          toggleMode: true,
+        });
+      }
+
+      // This function is unique to this class. It adds a nice header with an
+      // icon, title and optional subtitle. It's recommended you do so for
+      // consistency with other menus.
+      this.menu.setHeader("audio-headset", _("HeadsetControl"), "");
+
+      settings.bind(
+        "show-systemindicator",
+        this,
+        "checked",
+        Gio.SettingsBindFlags.DEFAULT
+      );
       //entry for charge
       if (capabilities.battery) {
-        this._entryCharge = new PopupMenu.PopupMenuItem(_("Charge") + ": ???");
-        this.menu.addMenuItem(this._entryCharge);
+        this._valueBattery = _("Charge") + ": ???";
       }
       //entry for chat mix
       if (capabilities.chatmix) {
-        this._entryChatMix = new PopupMenu.PopupMenuItem(
-          _("Chat-Mix") + ": ???"
-        );
-        this.menu.addMenuItem(this._entryChatMix);
+        this._valueChatMix = _("Chat-Mix") + ": ???";
       }
       let popupMenuExpander;
       // sidetone LED inactive time
@@ -123,9 +145,67 @@ const HeadsetControlIndicator = GObject.registerClass(
       const settingsItem = this.menu.addAction(_("Settings"), () =>
         ExtensionUtils.openPrefs()
       );
+
       // Ensure the settings are unavailable when the screen is locked
       settingsItem.visible = Main.sessionMode.allowSettings;
       this.menu._settingsActions[Me.uuid] = settingsItem;
+    }
+
+    _setValueBattery(strBattery) {
+      this._valueBattery = strBattery;
+    }
+
+    _setValueChatMix(strChatMix) {
+      this._valueChatMix = strChatMix;
+    }
+
+    _setMenuTitle() {
+      let current_version = Config.PACKAGE_VERSION.split(".");
+      if (current_version[0] >= 44) {
+        if (capabilities.battery && capabilities.chatmix) {
+          this.set({
+            title: this._valueBattery,
+          });
+          this.set({
+            subtitle: this._valueChatMix,
+          });
+        } else if (capabilities.battery) {
+          this.set({
+            title: this._valueBattery,
+          });
+        } else if (capabilities.chatmix) {
+          this.set({
+            title: this._valueChatMix,
+          });
+        }
+      } else {
+        if (capabilities.battery) {
+          this.set({ label: this._valueBattery });
+        } else if (capabilities.chatmix) {
+          this.set({ label: this._valueChatMix });
+        }
+      }
+    }
+
+    _setMenuSetHeader() {
+      if (capabilities.battery && capabilities.chatmix) {
+        this.menu.setHeader(
+          "audio-headset",
+          this._valueBattery,
+          this._valueChatMix
+        );
+        _logoutput(
+          "_setMenuSetHeader:" + this._strBattery + " / " + this._strChatmix
+        );
+      } else if (capabilities.battery) {
+        this.menu.setHeader("audio-headset", this._valueBattery, "");
+        _logoutput("_setMenuSetHeader:" + this._valueBattery);
+      } else if (capabilities.chatmix) {
+        this.menu.setHeader("audio-headset", this._valueChatMix, "");
+        _logoutput("_setMenuSetHeader:" + this._valueChatMix);
+      } else {
+        this.menu.setHeader("audio-headset", _("HeadsetControl"), "");
+      }
     }
 
     _invokecmd(cmd) {
@@ -232,6 +312,32 @@ const HeadsetControlIndicator = GObject.registerClass(
   }
 );
 
+const HeadsetControlIndicator = GObject.registerClass(
+  class HeadsetControlIndicator extends QuickSettings.SystemIndicator {
+    _init(settings) {
+      super._init();
+      if (settings.get_boolean("show-systemindicator")) {
+        // Create the icon for the indicator
+        this._indicator = this._addIndicator();
+        this._indicator.icon_name = "audio-headset";
+      }
+
+      // Create the toggle menu and associate it with the indicator, being
+      // sure to destroy it along with the indicator
+      this._HeadSetControlMenuToggle = new HeadsetControlMenuToggle(settings);
+      this.quickSettingsItems.push(this._HeadSetControlMenuToggle);
+
+      this.connect("destroy", () => {
+        this.quickSettingsItems.forEach((item) => item.destroy());
+      });
+
+      // Add the indicator to the panel and the toggle to the menu
+      QuickSettingsMenu._indicators.add_child(this);
+      QuickSettingsMenu._addItems(this.quickSettingsItems);
+    }
+  }
+);
+
 class HeadsetControl {
   _needCapabilitiesRefresh = true;
 
@@ -325,9 +431,10 @@ class HeadsetControl {
       return false;
     }
     let strBattery = this._getHeadSetControlValue(strOutput, "Battery");
-    this._HeadsetControlIndicator._entryCharge.label.text =
-      _("Charge") + ": " + strBattery;
-    this._changeColor(this._HeadsetControlIndicator, strBattery);
+    this._HeadsetControlIndicator._HeadSetControlMenuToggle._setValueBattery(
+      _("Charge") + ": " + strBattery
+    );
+    return true;
   }
 
   _refreshChatMixStatus() {
@@ -336,10 +443,11 @@ class HeadsetControl {
     if (!strOutput) {
       return false;
     }
-    this._HeadsetControlIndicator._entryChatMix.label.text =
-      _("Chat-Mix") +
-      ": " +
-      this._getHeadSetControlValue(strOutput, "Chat-Mix");
+    let strChatMix = this._getHeadSetControlValue(strOutput, "Chat-Mix");
+    this._HeadsetControlIndicator._HeadSetControlMenuToggle._setValueChatMix(
+      _("Chat-Mix") + ": " + strChatMix
+    );
+    return true;
   }
 
   _refresh() {
@@ -354,7 +462,14 @@ class HeadsetControl {
     if (capabilities.chatmix) {
       this._refreshChatMixStatus();
     }
+    this._HeadsetControlIndicator._HeadSetControlMenuToggle._setMenuSetHeader();
+    this._HeadsetControlIndicator._HeadSetControlMenuToggle._setMenuTitle();
     return true;
+  }
+
+  onParamChanged() {
+    this.disable();
+    this.enable();
   }
 
   enable() {
@@ -363,12 +478,10 @@ class HeadsetControl {
     uselogging = this._settings.get_boolean("use-logging");
     this._initCmd();
     this._refreshCapabilities();
-    this._HeadsetControlIndicator = new HeadsetControlIndicator();
-    Main.panel.addToStatusArea(this._uuid, this._HeadsetControlIndicator);
-    this._HeadsetControlIndicator.connect(
-      "button-press-event",
-      this._refresh.bind(this)
-    );
+
+    this._HeadsetControlIndicator = new HeadsetControlIndicator(this._settings);
+
+    QuickSettingsMenu.connect("button-press-event", this._refresh.bind(this));
     // add setting Signals
     this._settingSignals = new Array();
     this._settingSignals.push(
@@ -385,6 +498,12 @@ class HeadsetControl {
     );
     this._settingSignals.push(
       this._settings.connect("changed::use-logging", this._initCmd.bind(this))
+    );
+    this._settingSignals.push(
+      this._settings.connect(
+        "changed::show-systemindicator",
+        this.onParamChanged.bind(this)
+      )
     );
   }
 
