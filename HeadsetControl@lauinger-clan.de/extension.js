@@ -31,6 +31,55 @@ const g_schema = "org.gnome.shell.extensions.HeadsetControl";
 const colorR = "#ff0000";
 const colorY = "#ffff00";
 const colorG = "#00ff00";
+const capabilities = {
+  battery: false,
+  chatmix: false,
+  sidetone: false,
+  led: false,
+  inactivetime: false,
+};
+const headsetcontrolCommands = {
+  cmdCapabilities: "",
+  cmdBattery: "",
+  cmdChatMix: "",
+  cmdSidetone: "",
+  cmdLED: "",
+  cmdInacitetime: "",
+};
+
+let usenotifications;
+let uselogging;
+
+function _notify(strText) {
+  if (usenotifications) {
+    Main.notify(_("HeadsetControl"), strText);
+  }
+}
+
+function _logoutput(strText) {
+  if (uselogging) {
+    log(_("HeadsetControl") + " " + strText);
+  }
+}
+
+function _invokecmd(cmd) {
+  _notify(_("Command:") + " " + cmd);
+  _logoutput(_("Command:") + " " + cmd);
+  try {
+    let output = GLib.spawn_command_line_sync(cmd)[1];
+    let strOutput = imports.byteArray
+      .toString(output)
+      .replace("\n", "###")
+      .replace("Success!", "###");
+    strOutput = strOutput.split("###")[1];
+    _logoutput(strOutput);
+    return strOutput;
+  } catch (err) {
+    // could not execute the command
+    logError(err, "HeadsetControl");
+    return "N/A";
+  }
+}
 
 const HeadsetControlIndicator = GObject.registerClass(
   class HeadsetControlIndicator extends PanelMenu.Button {
@@ -41,23 +90,34 @@ const HeadsetControlIndicator = GObject.registerClass(
         style_class: "system-status-icon",
       });
       this.add_child(icon);
-
       //entry for charge
-      this._entryCharge = new PopupMenu.PopupMenuItem(_("Charge") + ": ???");
-      this.menu.addMenuItem(this._entryCharge);
+      if (capabilities.battery) {
+        this._entryCharge = new PopupMenu.PopupMenuItem(_("Charge") + ": ???");
+        this.menu.addMenuItem(this._entryCharge);
+      }
       //entry for chat mix
-      this._entryChatMix = new PopupMenu.PopupMenuItem(_("Chat-Mix") + ": ???");
-      this.menu.addMenuItem(this._entryChatMix);
-      // sidetone LED inactive time
+      if (capabilities.chatmix) {
+        this._entryChatMix = new PopupMenu.PopupMenuItem(
+          _("Chat-Mix") + ": ???"
+        );
+        this.menu.addMenuItem(this._entryChatMix);
+      }
       let popupMenuExpander;
-      popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem(_("Sidetone"));
-      this._addSidetoneMenu(popupMenuExpander);
-      popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem(_("LED"));
-      this._addLEDMenu(popupMenuExpander);
-      popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem(
-        _("Inactive time")
-      );
-      this._addInactivetimeMenu(popupMenuExpander);
+      // sidetone LED inactive time
+      if (capabilities.sidetone) {
+        popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem(_("Sidetone"));
+        this._addSidetoneMenu(popupMenuExpander);
+      }
+      if (capabilities.led) {
+        popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem(_("LED"));
+        this._addLEDMenu(popupMenuExpander);
+      }
+      if (capabilities.inactivetime) {
+        popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem(
+          _("Inactive time")
+        );
+        this._addInactivetimeMenu(popupMenuExpander);
+      }
       // Add an entry-point for more settings
       this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       const settingsItem = this.menu.addAction(_("Settings"), () =>
@@ -68,16 +128,8 @@ const HeadsetControlIndicator = GObject.registerClass(
       this.menu._settingsActions[Me.uuid] = settingsItem;
     }
 
-    _notify(strText) {
-      if (this._usenotifications) {
-        Main.notify(_("HeadsetControl"), strText);
-      }
-    }
-
-    _logoutput(strText) {
-      if (this._uselogging) {
-        log(_("HeadsetControl") + " " + strText);
-      }
+    _invokecmd(cmd) {
+      return _invokecmd(cmd);
     }
 
     _addPopupMenuItem(popupMenuExpander, strLabel, strValue) {
@@ -88,205 +140,251 @@ const HeadsetControlIndicator = GObject.registerClass(
     }
 
     _addSidetoneMenu(popupMenuExpander) {
-      this._addPopupMenuItem(popupMenuExpander, _("Off"), "<Sidetone> 0");
-      this._addPopupMenuItem(popupMenuExpander, _("low"), "<Sidetone> 32");
-      this._addPopupMenuItem(popupMenuExpander, _("medium"), "<Sidetone> 64");
-      this._addPopupMenuItem(popupMenuExpander, _("high"), "<Sidetone> 96");
-      this._addPopupMenuItem(popupMenuExpander, _("max"), "<Sidetone> 128");
+      this._addPopupMenuItem(
+        popupMenuExpander,
+        _("Off"),
+        headsetcontrolCommands.cmdSidetone + " 0"
+      );
+      this._addPopupMenuItem(
+        popupMenuExpander,
+        _("low"),
+        headsetcontrolCommands.cmdSidetone + " 32"
+      );
+      this._addPopupMenuItem(
+        popupMenuExpander,
+        _("medium"),
+        headsetcontrolCommands.cmdSidetone + " 64"
+      );
+      this._addPopupMenuItem(
+        popupMenuExpander,
+        _("high"),
+        headsetcontrolCommands.cmdSidetone + " 96"
+      );
+      this._addPopupMenuItem(
+        popupMenuExpander,
+        _("max"),
+        headsetcontrolCommands.cmdSidetone + " 128"
+      );
       this.menu.addMenuItem(popupMenuExpander);
       popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
     }
 
     _addLEDMenu(popupMenuExpander) {
-      this._addPopupMenuItem(popupMenuExpander, _("Off"), "<LED> 0");
-      this._addPopupMenuItem(popupMenuExpander, _("On"), "<LED> 1");
+      this._addPopupMenuItem(
+        popupMenuExpander,
+        _("Off"),
+        headsetcontrolCommands.cmdLED + " " + "0"
+      );
+      this._addPopupMenuItem(
+        popupMenuExpander,
+        _("On"),
+        headsetcontrolCommands.cmdLED + " " + "1"
+      );
 
       popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
       this.menu.addMenuItem(popupMenuExpander);
     }
 
     _addInactivetimeMenu(popupMenuExpander) {
-      this._addPopupMenuItem(popupMenuExpander, _("Off"), "<InactiveTime> 0");
+      this._addPopupMenuItem(
+        popupMenuExpander,
+        _("Off"),
+        headsetcontrolCommands.cmdInacitetime + " 0"
+      );
       this._addPopupMenuItem(
         popupMenuExpander,
         _("05 min"),
-        "<InactiveTime> 05"
+        headsetcontrolCommands.cmdInacitetime + " 05"
       );
       this._addPopupMenuItem(
         popupMenuExpander,
         _("15 min"),
-        "<InactiveTime> 15"
+        headsetcontrolCommands.cmdInacitetime + " 15"
       );
       this._addPopupMenuItem(
         popupMenuExpander,
         _("30 min"),
-        "<InactiveTime> 30"
+        headsetcontrolCommands.cmdInacitetime + " 30"
       );
       this._addPopupMenuItem(
         popupMenuExpander,
         _("45 min"),
-        "<InactiveTime> 45"
+        headsetcontrolCommands.cmdInacitetime + " 45"
       );
       this._addPopupMenuItem(
         popupMenuExpander,
         _("60 min"),
-        "<InactiveTime> 60"
+        headsetcontrolCommands.cmdInacitetime + " 60"
       );
       this._addPopupMenuItem(
         popupMenuExpander,
         _("75 min"),
-        "<InactiveTime> 75"
+        headsetcontrolCommands.cmdInacitetime + " 75"
       );
       this._addPopupMenuItem(
         popupMenuExpander,
         _("90 min"),
-        "<InactiveTime> 90"
+        headsetcontrolCommands.cmdInacitetime + " 90"
       );
       popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
       this.menu.addMenuItem(popupMenuExpander);
-    }
-
-    initCmd(settings) {
-      let cmdExecutable = settings.get_string("headsetcontrol-executable");
-      this._cmdCapabilities =
-        cmdExecutable + " " + settings.get_string("option-capabilities");
-      this._cmdBattery =
-        cmdExecutable + " " + settings.get_string("option-battery");
-      this._cmdChatMix =
-        cmdExecutable + " " + settings.get_string("option-chatmix");
-      this._cmdSidetone =
-        cmdExecutable + " " + settings.get_string("option-sidetone");
-      this._cmdLED = cmdExecutable + " " + settings.get_string("option-led");
-      this._cmdInacitetime =
-        cmdExecutable + " " + settings.get_string("option-inactive-time");
-      this._usenotifications = settings.get_boolean("use-notifications");
-      this._uselogging = settings.get_boolean("use-logging");
-    }
-
-    _invokecmd(cmd) {
-      cmd = cmd
-        .replace("<Sidetone>", this._cmdSidetone)
-        .replace("<LED>", this._cmdLED)
-        .replace("<InactiveTime>", this._cmdInacitetime);
-
-      this._notify(_("Command:") + " " + cmd);
-      this._logoutput(_("Command:") + " " + cmd);
-      try {
-        let output = GLib.spawn_command_line_sync(cmd)[1];
-        let strOutput = imports.byteArray
-          .toString(output)
-          .replace("\n", "###")
-          .replace("Success!", "###");
-        strOutput = strOutput.split("###")[1];
-        this._logoutput(strOutput);
-        return strOutput;
-      } catch (err) {
-        // could not execute the command
-        logError(err, "HeadsetControl");
-        return "N/A";
-      }
-    }
-
-    _getHeadSetControlValue(stroutput, valuetosearch) {
-      let strValue = "N/A";
-
-      if (stroutput.includes(valuetosearch)) {
-        strValue = stroutput.split(":")[1].toString().trim();
-      }
-      return strValue.toString().trim();
-    }
-
-    _changeColor(strBattery) {
-      if (strBattery == "N/A") {
-        return false;
-      }
-      let valueBattery = strBattery.replace("%", "").trim();
-      if (valueBattery >= 50) {
-        this._entryCharge.set_style("color: " + colorG + ";");
-      } else if (valueBattery >= 25) {
-        this._entryCharge.set_style("color: " + colorY + ";");
-      } else {
-        this._entryCharge.set_style("color: " + colorR + ";");
-      }
-      return true;
-    }
-
-    _refreshBatteryStatus() {
-      let strOutput = this._invokecmd(this._cmdBattery);
-
-      if (!strOutput) {
-        return false;
-      }
-      let strBattery = this._getHeadSetControlValue(strOutput, "Battery");
-      this._entryCharge.label.text = _("Charge") + ": " + strBattery;
-      this._changeColor(strBattery);
-    }
-
-    _refreshChatMixStatus() {
-      let strOutput = this._invokecmd(this._cmdChatMix);
-
-      if (!strOutput) {
-        return false;
-      }
-      this._entryChatMix.label.text =
-        _("Chat-Mix") +
-        ": " +
-        this._getHeadSetControlValue(strOutput, "Chat-Mix");
-    }
-
-    refresh() {
-      this._notify(_("Refreshing..."));
-      this._logoutput(_("Refreshing..."));
-      this._refreshBatteryStatus();
-      this._refreshChatMixStatus();
-      return true;
     }
   }
 );
 
 class HeadsetControl {
+  _needCapabilitiesRefresh = true;
+
   constructor(uuid) {
     this._uuid = uuid;
   }
 
+  _invokecmd(cmd) {
+    return _invokecmd(cmd);
+  }
+
+  _initCmd() {
+    let cmdExecutable = this._settings.get_string("headsetcontrol-executable");
+    headsetcontrolCommands.cmdCapabilities =
+      cmdExecutable + " " + this._settings.get_string("option-capabilities");
+    headsetcontrolCommands.cmdBattery =
+      cmdExecutable + " " + this._settings.get_string("option-battery");
+    headsetcontrolCommands.cmdChatMix =
+      cmdExecutable + " " + this._settings.get_string("option-chatmix");
+    headsetcontrolCommands.cmdSidetone =
+      cmdExecutable + " " + this._settings.get_string("option-sidetone");
+    headsetcontrolCommands.cmdLED =
+      cmdExecutable + " " + this._settings.get_string("option-led");
+    headsetcontrolCommands.cmdInacitetime =
+      cmdExecutable + " " + this._settings.get_string("option-inactive-time");
+  }
+
+  _getHeadSetControlValue(stroutput, valuetosearch) {
+    let strValue = "N/A";
+
+    if (stroutput.includes(valuetosearch)) {
+      strValue = stroutput.split(":")[1].toString().trim();
+    }
+    return strValue.toString().trim();
+  }
+
+  _changeColor(target, strBattery) {
+    if (strBattery == "N/A") {
+      return false;
+    }
+    let valueBattery = strBattery.replace("%", "").trim();
+    if (valueBattery >= 50) {
+      target._entryCharge.set_style("color: " + colorG + ";");
+    } else if (valueBattery >= 25) {
+      target._entryCharge.set_style("color: " + colorY + ";");
+    } else {
+      target._entryCharge.set_style("color: " + colorR + ";");
+    }
+    return true;
+  }
+
+  _refreshCapabilities() {
+    let strOutput = this._invokecmd(headsetcontrolCommands.cmdCapabilities);
+
+    // if we cannot get the capabilities, set all to true
+    if (!strOutput || strOutput.includes("No supported headset found")) {
+      capabilities.sidetone = true;
+      capabilities.battery = true;
+      capabilities.led = true;
+      capabilities.inactivetime = true;
+      capabilities.chatmix = true;
+      return false;
+    }
+    if (strOutput.includes("* sidetone")) {
+      capabilities.sidetone = true;
+    }
+    _logoutput("capabilities.sidetone: " + capabilities.sidetone);
+    if (strOutput.includes("* battery status")) {
+      capabilities.battery = true;
+    }
+    _logoutput("capabilities.battery: " + capabilities.battery);
+    if (strOutput.includes("* lights")) {
+      capabilities.led = true;
+    }
+    _logoutput("capabilities.led: " + capabilities.led);
+    if (strOutput.includes("* inactive time")) {
+      capabilities.inactivetime = true;
+    }
+    _logoutput("capabilities.inactivetime: " + capabilities.inactivetime);
+    if (strOutput.includes("* chatmix")) {
+      capabilities.chatmix = true;
+    }
+    _logoutput("capabilities.chatmix: " + capabilities.chatmix);
+    this._needCapabilitiesRefresh = false; // when headset was connected
+  }
+
+  _refreshBatteryStatus() {
+    let strOutput = this._invokecmd(headsetcontrolCommands.cmdBattery);
+
+    if (!strOutput) {
+      return false;
+    }
+    let strBattery = this._getHeadSetControlValue(strOutput, "Battery");
+    this._HeadsetControlIndicator._entryCharge.label.text =
+      _("Charge") + ": " + strBattery;
+    this._changeColor(this._HeadsetControlIndicator, strBattery);
+  }
+
+  _refreshChatMixStatus() {
+    let strOutput = this._invokecmd(headsetcontrolCommands.cmdChatMix);
+
+    if (!strOutput) {
+      return false;
+    }
+    this._HeadsetControlIndicator._entryChatMix.label.text =
+      _("Chat-Mix") +
+      ": " +
+      this._getHeadSetControlValue(strOutput, "Chat-Mix");
+  }
+
+  _refresh() {
+    _notify(_("Refreshing..."));
+    _logoutput(_("Refreshing..."));
+    if (this._needCapabilitiesRefresh) {
+      this._refreshCapabilities();
+    }
+    if (capabilities.battery) {
+      this._refreshBatteryStatus();
+    }
+    if (capabilities.chatmix) {
+      this._refreshChatMixStatus();
+    }
+    return true;
+  }
+
   enable() {
     this._settings = ExtensionUtils.getSettings(g_schema);
-
+    usenotifications = this._settings.get_boolean("use-notifications");
+    uselogging = this._settings.get_boolean("use-logging");
+    this._initCmd();
+    this._refreshCapabilities();
     this._HeadsetControlIndicator = new HeadsetControlIndicator();
     Main.panel.addToStatusArea(this._uuid, this._HeadsetControlIndicator);
-    this._HeadsetControlIndicator.initCmd(this._settings);
     this._HeadsetControlIndicator.connect(
       "button-press-event",
-      this._HeadsetControlIndicator.refresh.bind(this._HeadsetControlIndicator)
+      this._refresh.bind(this)
     );
     // add setting Signals
     this._settingSignals = new Array();
     this._settingSignals.push(
       this._settings.connect(
         "changed::headsetcontrol-executable",
-        this._HeadsetControlIndicator.initCmd.bind(
-          this._HeadsetControlIndicator,
-          this._settings
-        )
+        this._initCmd.bind(this)
       )
     );
     this._settingSignals.push(
       this._settings.connect(
         "changed::use-notifications",
-        this._HeadsetControlIndicator.initCmd.bind(
-          this._HeadsetControlIndicator,
-          this._settings
-        )
+        this._initCmd.bind(this)
       )
     );
     this._settingSignals.push(
-      this._settings.connect(
-        "changed::use-logging",
-        this._HeadsetControlIndicator.initCmd.bind(
-          this._HeadsetControlIndicator,
-          this._settings
-        )
-      )
+      this._settings.connect("changed::use-logging", this._initCmd.bind(this))
     );
   }
 
@@ -299,6 +397,8 @@ class HeadsetControl {
     this._settings = null;
     this._HeadsetControlIndicator.destroy();
     this._HeadsetControlIndicator = null;
+    usenotifications = null;
+    uselogging = null;
   }
 }
 
