@@ -167,9 +167,8 @@ msgid "parameter to ask for battery"
 msgstr "parametro per chiedere batteria"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:155
-#, fuzzy
 msgid "parameter to ask for chat-mix"
-msgstr "parametro per chiedere il chatmix"
+msgstr "parametro per chiedere il chat-mix"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:161
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:26
@@ -199,12 +198,12 @@ msgstr "Opzioni"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:213
 msgid "Show SystemIndicator"
-msgstr ""
+msgstr "Mostra indicatore di sistema"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:214
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:51
 msgid "Toggle to show systemindicator"
-msgstr ""
+msgstr "Attiva/disattiva per mostrare l'indicatore di sistema"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:229
 msgid "Use notifications"
@@ -217,13 +216,12 @@ msgstr "abilita / disabilita notifiche"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:245
 msgid "Use logging"
-msgstr ""
+msgstr "Usa log"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:246
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:47
-#, fuzzy
 msgid "enable / disable log outputs"
-msgstr "abilita / disabilita notifiche"
+msgstr "abilita / disabilita log output"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:6
 msgid "path to executable"
@@ -267,13 +265,12 @@ msgid "parameter to enable notifiactions"
 msgstr "parametro per abilitare le notifiche"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:46
-#, fuzzy
 msgid "parameter to enable log outputs"
-msgstr "parametro per abilitare le notifiche"
+msgstr "parametro per abilitare output log"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:52
 msgid "Makes the systemindicator show/hide"
-msgstr ""
+msgstr "Mostra/nascondi l'indicatore di sistema"
 
 #~ msgid "HeadsetControl executable"
 #~ msgstr "Eseguibile del controllo dell'auricolare"
