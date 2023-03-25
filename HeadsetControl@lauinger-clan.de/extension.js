@@ -30,9 +30,6 @@ const Me = ExtensionUtils.getCurrentExtension();
 const _ = ExtensionUtils.gettext;
 
 const g_schema = "org.gnome.shell.extensions.HeadsetControl";
-const colorR = "#ff0000";
-const colorY = "#ffff00";
-const colorG = "#00ff00";
 const capabilities = {
   battery: false,
   chatmix: false,
@@ -87,6 +84,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
   class HeadsetControlMenuToggle extends QuickSettings.QuickMenuToggle {
     _init(settings) {
       this._valueBattery = "";
+      this._valueBattery_num = 0;
       this._valueChatMix = "";
       let current_version = Config.PACKAGE_VERSION.split(".");
       if (current_version[0] >= 44) {
@@ -151,8 +149,9 @@ const HeadsetControlMenuToggle = GObject.registerClass(
       this.menu._settingsActions[Me.uuid] = settingsItem;
     }
 
-    _setValueBattery(strBattery) {
+    _setValueBattery(strBattery, lngBattery) {
       this._valueBattery = strBattery;
+      this._valueBattery_num = lngBattery;
     }
 
     _setValueChatMix(strChatMix) {
@@ -195,7 +194,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
           this._valueChatMix
         );
         _logoutput(
-          "_setMenuSetHeader:" + this._strBattery + " / " + this._strChatmix
+          "_setMenuSetHeader:" + this._valueBattery + " / " + this._valueChatMix
         );
       } else if (capabilities.battery) {
         this.menu.setHeader("audio-headset", this._valueBattery, "");
@@ -206,6 +205,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
       } else {
         this.menu.setHeader("audio-headset", _("HeadsetControl"), "");
       }
+      this._changeColor(this._valueBattery, this._valueBattery_num);
     }
 
     _invokecmd(cmd) {
@@ -309,6 +309,27 @@ const HeadsetControlMenuToggle = GObject.registerClass(
       popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
       this.menu.addMenuItem(popupMenuExpander);
     }
+
+    _changeColor(strvalueBattery, valueBattery_num) {
+      const colorR = "#ff0000";
+      const colorY = "#ffff00";
+      const colorG = "#00ff00";
+      if (strvalueBattery == "N/A") {
+        return false;
+      }
+      _logoutput("_changeColor: " + valueBattery_num);
+      if (valueBattery_num >= 50) {
+        this.set_style("color: " + colorG + ";");
+        _logoutput("_changeColor: " + colorG);
+      } else if (valueBattery_num >= 25) {
+        this.set_style("color: " + colorY + ";");
+        _logoutput("_changeColor: " + colorY);
+      } else {
+        this.set_style("color: " + colorR + ";");
+        _logoutput("_changeColor: " + colorR);
+      }
+      return true;
+    }
   }
 );
 
@@ -350,6 +371,8 @@ class HeadsetControl {
   }
 
   _initCmd() {
+    usenotifications = this._settings.get_boolean("use-notifications");
+    uselogging = this._settings.get_boolean("use-logging");
     let cmdExecutable = this._settings.get_string("headsetcontrol-executable");
     headsetcontrolCommands.cmdCapabilities =
       cmdExecutable + " " + this._settings.get_string("option-capabilities");
@@ -372,21 +395,6 @@ class HeadsetControl {
       strValue = stroutput.split(":")[1].toString().trim();
     }
     return strValue.toString().trim();
-  }
-
-  _changeColor(target, strBattery) {
-    if (strBattery == "N/A") {
-      return false;
-    }
-    let valueBattery = strBattery.replace("%", "").trim();
-    if (valueBattery >= 50) {
-      target._entryCharge.set_style("color: " + colorG + ";");
-    } else if (valueBattery >= 25) {
-      target._entryCharge.set_style("color: " + colorY + ";");
-    } else {
-      target._entryCharge.set_style("color: " + colorR + ";");
-    }
-    return true;
   }
 
   _refreshCapabilities() {
@@ -432,7 +440,8 @@ class HeadsetControl {
     }
     let strBattery = this._getHeadSetControlValue(strOutput, "Battery");
     this._HeadsetControlIndicator._HeadSetControlMenuToggle._setValueBattery(
-      _("Charge") + ": " + strBattery
+      _("Charge") + ": " + strBattery,
+      strBattery.replace("%", "")
     );
     return true;
   }
@@ -474,8 +483,6 @@ class HeadsetControl {
 
   enable() {
     this._settings = ExtensionUtils.getSettings(g_schema);
-    usenotifications = this._settings.get_boolean("use-notifications");
-    uselogging = this._settings.get_boolean("use-logging");
     this._initCmd();
     this._refreshCapabilities();
 
