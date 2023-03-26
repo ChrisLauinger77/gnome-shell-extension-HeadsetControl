@@ -16,9 +16,11 @@ Inspired by https://github.com/centic9/headset-charge-indicator/
 
 Follow the instructions at https://github.com/Sapd/HeadsetControl/ for building the binary and note down the path to it.
 
-You can test the helper application manually via headsetcontrol -b -c, this should print the current battery level to the console if your headset is supported.
+You can test the helper application manually via headsetcontrol -b, this should print the current battery level to the console if your headset is supported.
 
-### 1 click install from E.G.O:
+Make sure you have gnome-icon-theme package installed.
+
+# 1 click install from E.G.O:
 
 https://extensions.gnome.org/extension/5823/headsetcontrol/
 
