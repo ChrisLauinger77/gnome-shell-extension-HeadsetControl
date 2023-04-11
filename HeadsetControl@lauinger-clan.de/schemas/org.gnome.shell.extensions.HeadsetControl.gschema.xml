@@ -56,5 +56,20 @@
       <summary>parameter to enable battery percentage text color</summary>
       <description>Makes battery percentage text colored/non-colored</description>
     </key>
+    <key name="color-batteryhigh" type="s">
+      <default>'rgb(0,255,0)'</default>
+      <summary>Color battery charge high</summary>
+      <description>The text color for battery charge 100% to 50%</description>
+    </key>
+    <key name="color-batterymedium" type="s">
+      <default>'rgb(255,255,0)'</default>
+      <summary>Color battery charge medium</summary>
+      <description>The text color for battery charge 49% to 25%</description>
+    </key>
+    <key name="color-batterylow" type="s">
+      <default>'rgb(255,0,0)'</default>
+      <summary>Color battery charge low</summary>
+      <description>The text color for battery charge 24% to 0%</description>
+    </key>
   </schema>
 </schemalist>

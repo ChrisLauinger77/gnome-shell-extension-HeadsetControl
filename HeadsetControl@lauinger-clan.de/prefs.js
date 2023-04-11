@@ -1,4 +1,4 @@
-const { Gio, Adw, Gtk } = imports.gi;
+const { Gio, Adw, Gtk, Gdk } = imports.gi;
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
 const Gettext = imports.gettext.domain("HeadsetControl");
@@ -80,6 +80,13 @@ class AdwPrefs {
     this.changeOption("option-sidetone", opt_sto.text);
     this.changeOption("option-led", opt_led.text);
     this.changeOption("option-inactive-time", opt_iat.text);
+  }
+
+  _onColorChanged(color_setting_button, strSetting) {
+    this._settings.set_string(
+      strSetting,
+      color_setting_button.get_rgba().to_string()
+    );
   }
 
   fillPreferencesWindow() {
@@ -257,7 +264,6 @@ class AdwPrefs {
     );
     adwrow.add_suffix(toggleuselogging);
     adwrow.activatable_widget = toggleuselogging;
-
     //use colors
     adwrow = new Adw.ActionRow({ title: _("Use colors") });
     adwrow.set_tooltip_text(_("enable / disable text colors"));
@@ -274,7 +280,66 @@ class AdwPrefs {
     );
     adwrow.add_suffix(toggleusecolors);
     adwrow.activatable_widget = toggleusecolors;
+    // groupC2
+    let groupC2 = Adw.PreferencesGroup.new();
+    groupC2.set_title(_("Colors"));
+    groupC2.set_name("headsetcontrol_colors");
+    this._page2.add(groupC2);
+    // color high charge
+    let mycolor = new Gdk.RGBA();
+    adwrow = new Adw.ActionRow({
+      title: _("Color battery charge high"),
+    });
+    adwrow.set_tooltip_text(_("The text color for battery charge 100% to 50%"));
+    groupC2.add(adwrow);
+    let colorbatteryhigh = new Gtk.ColorButton({
+      valign: Gtk.Align.CENTER,
+    });
 
+    mycolor.parse(this._settings.get_string("color-batteryhigh"));
+    colorbatteryhigh.set_rgba(mycolor);
+    colorbatteryhigh.connect(
+      "color-set",
+      this._onColorChanged.bind(this, colorbatteryhigh, "color-batteryhigh")
+    );
+    adwrow.add_suffix(colorbatteryhigh);
+    adwrow.activatable_widget = colorbatteryhigh;
+    // color medium charge
+    adwrow = new Adw.ActionRow({
+      title: _("Color battery charge medium"),
+    });
+    adwrow.set_tooltip_text(_("The text color for battery charge 49% to 25%"));
+    groupC2.add(adwrow);
+    let colorbatterymedium = new Gtk.ColorButton({
+      valign: Gtk.Align.CENTER,
+    });
+
+    mycolor.parse(this._settings.get_string("color-batterymedium"));
+    colorbatterymedium.set_rgba(mycolor);
+    colorbatterymedium.connect(
+      "color-set",
+      this._onColorChanged.bind(this, colorbatterymedium, "color-batterymedium")
+    );
+    adwrow.add_suffix(colorbatterymedium);
+    adwrow.activatable_widget = colorbatterymedium;
+    // color low charge
+    adwrow = new Adw.ActionRow({
+      title: _("Color battery charge low"),
+    });
+    adwrow.set_tooltip_text(_("The text color for battery charge 24% to 0%"));
+    groupC2.add(adwrow);
+    let colorbatterylow = new Gtk.ColorButton({
+      valign: Gtk.Align.CENTER,
+    });
+
+    mycolor.parse(this._settings.get_string("color-batterylow"));
+    colorbatterylow.set_rgba(mycolor);
+    colorbatterylow.connect(
+      "color-set",
+      this._onColorChanged.bind(this, colorbatterylow, "color-batterylow")
+    );
+    adwrow.add_suffix(colorbatterylow);
+    adwrow.activatable_widget = colorbatterylow;
     this._window.add(this._page2);
   }
 }

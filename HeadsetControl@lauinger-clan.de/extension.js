@@ -46,6 +46,9 @@ const headsetcontrolCommands = {
   cmdInacitetime: "",
 };
 
+const _rgbToHex = (r, g, b) =>
+  "#" + [r, g, b].map((x) => x.toString(16).padStart(2, "0")).join("");
+
 let usenotifications;
 let uselogging;
 let usecolors;
@@ -84,6 +87,7 @@ function _invokecmd(cmd) {
 const HeadsetControlMenuToggle = GObject.registerClass(
   class HeadsetControlMenuToggle extends QuickSettings.QuickMenuToggle {
     _init(settings) {
+      this._settings = settings;
       this._valueBattery = "";
       this._valueBattery_num = 0;
       this._valueChatMix = "";
@@ -313,10 +317,23 @@ const HeadsetControlMenuToggle = GObject.registerClass(
       this.menu.addMenuItem(popupMenuExpander);
     }
 
+    _getColorHEXValue(strSettingsColor) {
+      let strcolor = this._settings.get_string(strSettingsColor);
+      _logoutput("_getColorHEXValue-strSettingsColor: " + strSettingsColor);
+      _logoutput("_getColorHEXValue-strcolor: " + strcolor);
+      let arrColor = strcolor.replace("rgb(", "").replace(")", "").split(",");
+      let color = _rgbToHex(
+        parseInt(arrColor[0]),
+        parseInt(arrColor[1]),
+        parseInt(arrColor[2])
+      );
+      return color;
+    }
+
     _changeColor(strvalueBattery, valueBattery_num) {
-      const colorR = "#ff0000";
-      const colorY = "#ffff00";
-      const colorG = "#00ff00";
+      let colorR = this._getColorHEXValue("color-batterylow");
+      let colorY = this._getColorHEXValue("color-batterymedium");
+      let colorG = this._getColorHEXValue("color-batteryhigh");
 
       if (!usecolors || strvalueBattery == "N/A") {
         this.set_style(this._originalStyle);
