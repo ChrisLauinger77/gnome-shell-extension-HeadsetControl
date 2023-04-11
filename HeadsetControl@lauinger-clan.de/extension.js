@@ -148,6 +148,8 @@ const HeadsetControlMenuToggle = GObject.registerClass(
       // Ensure the settings are unavailable when the screen is locked
       settingsItem.visible = Main.sessionMode.allowSettings;
       this.menu._settingsActions[Me.uuid] = settingsItem;
+      //remember style
+      this._originalStyle = this.get_style();
     }
 
     _setValueBattery(strBattery, lngBattery) {
@@ -317,6 +319,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
       const colorG = "#00ff00";
 
       if (!usecolors || strvalueBattery == "N/A") {
+        this.set_style(this._originalStyle);
         return false;
       }
       _logoutput("_changeColor: " + valueBattery_num);
