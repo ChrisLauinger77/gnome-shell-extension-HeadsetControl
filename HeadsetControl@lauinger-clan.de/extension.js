@@ -48,6 +48,7 @@ const headsetcontrolCommands = {
 
 let usenotifications;
 let uselogging;
+let usecolors;
 
 function _notify(strText) {
   if (usenotifications) {
@@ -314,6 +315,9 @@ const HeadsetControlMenuToggle = GObject.registerClass(
       const colorR = "#ff0000";
       const colorY = "#ffff00";
       const colorG = "#00ff00";
+      if (!usecolors) {
+        return false;
+      }
       if (strvalueBattery == "N/A") {
         return false;
       }
@@ -373,6 +377,7 @@ class HeadsetControl {
   _initCmd() {
     usenotifications = this._settings.get_boolean("use-notifications");
     uselogging = this._settings.get_boolean("use-logging");
+    usecolors = this._settings.get_boolean("use-colors");
     let cmdExecutable = this._settings.get_string("headsetcontrol-executable");
     headsetcontrolCommands.cmdCapabilities =
       cmdExecutable + " " + this._settings.get_string("option-capabilities");
@@ -511,6 +516,9 @@ class HeadsetControl {
         "changed::show-systemindicator",
         this.onParamChanged.bind(this)
       )
+    );
+    this._settingSignals.push(
+      this._settings.connect("changed::use-colors", this._initCmd.bind(this))
     );
   }
 

@@ -257,6 +257,24 @@ class AdwPrefs {
     );
     adwrow.add_suffix(toggleuselogging);
     adwrow.activatable_widget = toggleuselogging;
+
+    //use colors
+    adwrow = new Adw.ActionRow({ title: _("Use colors") });
+    adwrow.set_tooltip_text(_("enable / disable text colors"));
+    groupC1.add(adwrow);
+    let toggleusecolors = new Gtk.Switch({
+      active: this._settings.get_boolean("use-colors"),
+      valign: Gtk.Align.CENTER,
+    });
+    this._settings.bind(
+      "use-colors",
+      toggleusecolors,
+      "active",
+      Gio.SettingsBindFlags.DEFAULT
+    );
+    adwrow.add_suffix(toggleusecolors);
+    adwrow.activatable_widget = toggleusecolors;
+
     this._window.add(this._page2);
   }
 }

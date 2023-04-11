@@ -51,5 +51,10 @@
       <summary>Toggle to show systemindicator</summary>
       <description>Makes the systemindicator show/hide</description>
     </key>
+    <key name="use-colors" type="b">
+      <default>true</default>
+      <summary>parameter to enable battery percentage text color</summary>
+      <description>Makes battery percentage text colored/non-colored</description>
+    </key>
   </schema>
 </schemalist>
