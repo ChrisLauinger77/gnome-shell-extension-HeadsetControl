@@ -315,10 +315,8 @@ const HeadsetControlMenuToggle = GObject.registerClass(
       const colorR = "#ff0000";
       const colorY = "#ffff00";
       const colorG = "#00ff00";
-      if (!usecolors) {
-        return false;
-      }
-      if (strvalueBattery == "N/A") {
+
+      if (!usecolors || strvalueBattery == "N/A") {
         return false;
       }
       _logoutput("_changeColor: " + valueBattery_num);
@@ -533,6 +531,7 @@ class HeadsetControl {
     this._HeadsetControlIndicator = null;
     usenotifications = null;
     uselogging = null;
+    usecolors = null;
   }
 }
 
