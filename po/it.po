@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-11 20:26+0200\n"
-"PO-Revision-Date: 2023-03-20 19:03+0100\n"
+"PO-Revision-Date: 2023-04-13 10:03+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: Italian <LL@li.org>\n"
 "Language: it\n"
@@ -225,46 +225,45 @@ msgstr "abilita / disabilita log output"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:268
 msgid "Use colors"
-msgstr ""
+msgstr "Usa colori"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:269
-#, fuzzy
 msgid "enable / disable text colors"
-msgstr "abilita / disabilita notifiche"
+msgstr "abilita / disabilita i colori del testo"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:285
 msgid "Colors"
-msgstr ""
+msgstr "Colori"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:291
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:61
 msgid "Color battery charge high"
-msgstr ""
+msgstr "COlore batteria carica alta"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:293
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:62
 msgid "The text color for battery charge 100% to 50%"
-msgstr ""
+msgstr "Il colore del testo per la carica della batteria dal 100% al 50%"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:309
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:66
 msgid "Color battery charge medium"
-msgstr ""
+msgstr "Colore carica batteria media"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:311
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:67
 msgid "The text color for battery charge 49% to 25%"
-msgstr ""
+msgstr "Il colore del testo per la carica della batteria dal 49% al 25%"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:327
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:71
 msgid "Color battery charge low"
-msgstr ""
+msgstr "Colore carica batteria bassa"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:329
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:72
 msgid "The text color for battery charge 24% to 0%"
-msgstr ""
+msgstr "Il colore del testo per la carica della batteria dal 24% allo 0%"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:6
 msgid "path to executable"
@@ -316,13 +315,12 @@ msgid "Makes the systemindicator show/hide"
 msgstr "Mostra/nascondi l'indicatore di sistema"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:56
-#, fuzzy
 msgid "parameter to enable battery percentage text color"
-msgstr "parametro per abilitare le notifiche"
+msgstr "parametro per abilitare il colore del testo della percentuale della batteria"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:57
 msgid "Makes battery percentage text colored/non-colored"
-msgstr ""
+msgstr "Rende il testo della percentuale della batteria colorato/non colorato"
 
 #~ msgid "HeadsetControl executable"
 #~ msgstr "Eseguibile del controllo dell'auricolare"
