@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-11 20:26+0200\n"
-"PO-Revision-Date: 2023-04-13 10:03+0100\n"
+"PO-Revision-Date: 2023-04-13 16:15+0200\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: Italian <LL@li.org>\n"
 "Language: it\n"
@@ -238,7 +238,7 @@ msgstr "Colori"
 #: HeadsetControl@lauinger-clan.de/prefs.js:291
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:61
 msgid "Color battery charge high"
-msgstr "COlore batteria carica alta"
+msgstr "Colore batteria carica alta"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:293
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:62
@@ -299,8 +299,7 @@ msgstr "passato al controllo dell'auricolare per impostare il led"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:37
 msgid "passed to headsetcontrol to set inactive time"
-msgstr ""
-"passato al controllo dell'auricolare per impostare il tempo di inattività"
+msgstr "passato al controllo dell'auricolare per impostare il tempo di inattività"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:41
 msgid "parameter to enable notifiactions"
