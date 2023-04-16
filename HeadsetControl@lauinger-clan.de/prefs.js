@@ -221,7 +221,7 @@ class AdwPrefs {
     adwrow.add_suffix(buttonApply);
     adwrow.activatable_widget = buttonApply;
 
-    this._window.set_default_size(675, 630);
+    this._window.set_default_size(675, 700);
     this._window.add(this._page1);
     //page2
     this._page2 = Adw.PreferencesPage.new();
