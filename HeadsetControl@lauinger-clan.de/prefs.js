@@ -94,7 +94,7 @@ class AdwPrefs {
     this._page1 = Adw.PreferencesPage.new();
     this._page1.set_title(_("HeadsetControl"));
     this._page1.set_name("headsetcontrol_page1");
-    this._page1.set_icon_name("audio-headset");
+    this._page1.set_icon_name("audio-headset-symbolic");
 
     // group1
     let group1 = Adw.PreferencesGroup.new();

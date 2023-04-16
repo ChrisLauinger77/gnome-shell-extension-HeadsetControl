@@ -96,14 +96,14 @@ const HeadsetControlMenuToggle = GObject.registerClass(
         //GNOME 44 and newer
         super._init({
           title: _("HeadsetControl"),
-          iconName: "audio-headset",
+          iconName: "audio-headset-symbolic",
           toggleMode: true,
         });
       } else {
         //GNOME 43
         super._init({
           label: _("HeadsetControl"),
-          iconName: "audio-headset",
+          iconName: "audio-headset-symbolic",
           toggleMode: true,
         });
       }
@@ -111,7 +111,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
       // This function is unique to this class. It adds a nice header with an
       // icon, title and optional subtitle. It's recommended you do so for
       // consistency with other menus.
-      this.menu.setHeader("audio-headset", _("HeadsetControl"), "");
+      this.menu.setHeader("audio-headset-symbolic", _("HeadsetControl"), "");
 
       settings.bind(
         "show-systemindicator",
@@ -196,7 +196,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
     _setMenuSetHeader() {
       if (capabilities.battery && capabilities.chatmix) {
         this.menu.setHeader(
-          "audio-headset",
+          "audio-headset-symbolic",
           this._valueBattery,
           this._valueChatMix
         );
@@ -204,13 +204,13 @@ const HeadsetControlMenuToggle = GObject.registerClass(
           "_setMenuSetHeader:" + this._valueBattery + " / " + this._valueChatMix
         );
       } else if (capabilities.battery) {
-        this.menu.setHeader("audio-headset", this._valueBattery, "");
+        this.menu.setHeader("audio-headset-symbolic", this._valueBattery, "");
         _logoutput("_setMenuSetHeader:" + this._valueBattery);
       } else if (capabilities.chatmix) {
-        this.menu.setHeader("audio-headset", this._valueChatMix, "");
+        this.menu.setHeader("audio-headset-symbolic", this._valueChatMix, "");
         _logoutput("_setMenuSetHeader:" + this._valueChatMix);
       } else {
-        this.menu.setHeader("audio-headset", _("HeadsetControl"), "");
+        this.menu.setHeader("audio-headset-symbolic", _("HeadsetControl"), "");
       }
       this._changeColor(this._valueBattery, this._valueBattery_num);
     }
@@ -362,7 +362,7 @@ const HeadsetControlIndicator = GObject.registerClass(
       if (settings.get_boolean("show-systemindicator")) {
         // Create the icon for the indicator
         this._indicator = this._addIndicator();
-        this._indicator.icon_name = "audio-headset";
+        this._indicator.icon_name = "audio-headset-symbolic";
       }
 
       // Create the toggle menu and associate it with the indicator, being
