@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-16 14:10+0100\n"
-"PO-Revision-Date: 2023-04-11 19:51+0200\n"
+"PO-Revision-Date: 2023-04-16 18:28+0200\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -63,12 +63,12 @@ msgstr "Inaktivitätszeit"
 #: HeadsetControl@lauinger-clan.de/extension.js:151
 #: HeadsetControl@lauinger-clan.de/prefs.js:189
 msgid "Voice Prompts"
-msgstr ""
+msgstr "Sprachausgabe"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:155
 #: HeadsetControl@lauinger-clan.de/prefs.js:195
 msgid "Rotate to Mute"
-msgstr ""
+msgstr "Stummschaltung durch Drehen"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:160
 msgid "Settings"
@@ -200,14 +200,12 @@ msgid "parameter to ask for inactive time"
 msgstr "Parameter zum Setzen der Inaktivitätszeit"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:190
-#, fuzzy
 msgid "passed to headsetcontrol to set for voice prompts"
-msgstr "Parameter zum Setzen des LED"
+msgstr "Parameter zum Setzen der Sprachausgabe"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:196
-#, fuzzy
 msgid "passed to headsetcontrol to set for rotate to mute"
-msgstr "Parameter zum Setzen des LED"
+msgstr "Parameter zum Setzen von Stummschaltung durch Drehen"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:203
 msgid "Apply"
@@ -327,24 +325,20 @@ msgid "passed to headsetcontrol to set inactive time"
 msgstr "Übergabe an headsetcontrol zum Setzen der Inaktivitätszeit"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:41
-#, fuzzy
 msgid "parameter to ask for voice prompts"
-msgstr "Parameter zum Setzen der Inaktivitätszeit"
+msgstr "Parameter zum Setzen der Sprachausgabe"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:42
-#, fuzzy
 msgid "passed to headsetcontrol to set voice prompts"
-msgstr "Übergabe an headsetcontrol zum Setzen des Silent-Mode"
+msgstr "Übergabe an headsetcontrol zum Setzen der Sprachausgabe"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:46
-#, fuzzy
 msgid "parameter to ask for rotate to mute"
-msgstr "Parameter zum Setzen der Inaktivitätszeit"
+msgstr "Parameter zum Setzen von Stummschaltung durch Drehen"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:47
-#, fuzzy
 msgid "passed to headsetcontrol to set rotate to mute"
-msgstr "Übergabe an headsetcontrol zum Setzen der Inaktivitätszeit"
+msgstr "Übergabe an headsetcontrol zum Setzen von Stummschaltung durch Drehen"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:51
 msgid "parameter to enable notifiactions"
