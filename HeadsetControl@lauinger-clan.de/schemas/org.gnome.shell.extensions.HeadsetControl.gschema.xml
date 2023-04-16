@@ -36,6 +36,16 @@
       <summary>parameter to ask for inactive time</summary>
       <description>passed to headsetcontrol to set inactive time</description>
     </key>
+    <key name="option-voice" type="s">
+      <default>'-v'</default>
+      <summary>parameter to ask for voice prompts</summary>
+      <description>passed to headsetcontrol to set voice prompts</description>
+    </key>
+    <key name="option-rotate-mute" type="s">
+      <default>'-r'</default>
+      <summary>parameter to ask for rotate to mute</summary>
+      <description>passed to headsetcontrol to set rotate to mute</description>
+    </key>
     <key name="use-notifications" type="b">
       <default>false</default>
       <summary>parameter to enable notifiactions</summary>
