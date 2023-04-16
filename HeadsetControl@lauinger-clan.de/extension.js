@@ -147,12 +147,17 @@ const HeadsetControlMenuToggle = GObject.registerClass(
         );
         this._addInactivetimeMenu(popupMenuExpander);
       }
+      // voice prompts rotate-to-mute
       if (capabilities.voice) {
-        popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem(_("Voice Prompts"));
+        popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem(
+          _("Voice Prompts")
+        );
         this._addVoiceMenu(popupMenuExpander);
       }
       if (capabilities.rotatemute) {
-        popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem(_("Rotate to Mute"));
+        popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem(
+          _("Rotate to Mute")
+        );
         this._addRotateMuteMenu(popupMenuExpander);
       }
       // Add an entry-point for more settings
@@ -283,7 +288,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
       popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
       this.menu.addMenuItem(popupMenuExpander);
     }
-    
+
     _addVoiceMenu(popupMenuExpander) {
       this._addPopupMenuItem(
         popupMenuExpander,
