@@ -36,6 +36,8 @@ const capabilities = {
   sidetone: false,
   led: false,
   inactivetime: false,
+  voice: false,
+  rotatemute: false,
 };
 const headsetcontrolCommands = {
   cmdCapabilities: "",
@@ -44,6 +46,8 @@ const headsetcontrolCommands = {
   cmdSidetone: "",
   cmdLED: "",
   cmdInacitetime: "",
+  cmdVoice: "",
+  cmdRotateMute: "",
 };
 
 const _rgbToHex = (r, g, b) =>
@@ -142,6 +146,14 @@ const HeadsetControlMenuToggle = GObject.registerClass(
           _("Inactive time")
         );
         this._addInactivetimeMenu(popupMenuExpander);
+      }
+      if (capabilities.voice) {
+        popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem(_("Voice Prompts"));
+        this._addVoiceMenu(popupMenuExpander);
+      }
+      if (capabilities.rotatemute) {
+        popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem(_("Rotate to Mute"));
+        this._addRotateMuteMenu(popupMenuExpander);
       }
       // Add an entry-point for more settings
       this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -266,6 +278,38 @@ const HeadsetControlMenuToggle = GObject.registerClass(
         popupMenuExpander,
         _("On"),
         headsetcontrolCommands.cmdLED + " " + "1"
+      );
+
+      popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
+      this.menu.addMenuItem(popupMenuExpander);
+    }
+    
+    _addVoiceMenu(popupMenuExpander) {
+      this._addPopupMenuItem(
+        popupMenuExpander,
+        _("Off"),
+        headsetcontrolCommands.cmdVoice + " " + "0"
+      );
+      this._addPopupMenuItem(
+        popupMenuExpander,
+        _("On"),
+        headsetcontrolCommands.cmdVoice + " " + "1"
+      );
+
+      popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
+      this.menu.addMenuItem(popupMenuExpander);
+    }
+
+    _addRotateMuteMenu(popupMenuExpander) {
+      this._addPopupMenuItem(
+        popupMenuExpander,
+        _("Off"),
+        headsetcontrolCommands.cmdRotateMute + " " + "0"
+      );
+      this._addPopupMenuItem(
+        popupMenuExpander,
+        _("On"),
+        headsetcontrolCommands.cmdRotateMute + " " + "1"
       );
 
       popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
@@ -407,6 +451,10 @@ class HeadsetControl {
       cmdExecutable + " " + this._settings.get_string("option-sidetone");
     headsetcontrolCommands.cmdLED =
       cmdExecutable + " " + this._settings.get_string("option-led");
+    headsetcontrolCommands.cmdVoice =
+      cmdExecutable + " " + this._settings.get_string("option-voice");
+    headsetcontrolCommands.cmdRotateMute =
+      cmdExecutable + " " + this._settings.get_string("option-rotate-mute");
     headsetcontrolCommands.cmdInacitetime =
       cmdExecutable + " " + this._settings.get_string("option-inactive-time");
   }
@@ -430,6 +478,8 @@ class HeadsetControl {
       capabilities.led = true;
       capabilities.inactivetime = true;
       capabilities.chatmix = true;
+      capabilities.voice = true;
+      capabilities.rotatemute = true;
       return false;
     }
     if (strOutput.includes("* sidetone")) {
@@ -452,6 +502,14 @@ class HeadsetControl {
       capabilities.chatmix = true;
     }
     _logoutput("capabilities.chatmix: " + capabilities.chatmix);
+    if (strOutput.includes("* voice prompts")) {
+      capabilities.voice = true;
+    }
+    _logoutput("capabilities.voice: " + capabilities.voice);
+    if (strOutput.includes("* rotate to mute")) {
+      capabilities.rotatemute = true;
+    }
+    _logoutput("capabilities.rotatemute: " + capabilities.rotatemute);
     this._needCapabilitiesRefresh = false; // when headset was connected
   }
 

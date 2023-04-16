@@ -71,7 +71,9 @@ class AdwPrefs {
     opt_chm,
     opt_sto,
     opt_led,
-    opt_iat
+    opt_iat,
+    opt_voice,
+    opt_rot
   ) {
     this.changeOption("headsetcontrol-executable", valueExecutable.text);
     this.changeOption("option-capabilities", opt_capa.text);
@@ -80,6 +82,8 @@ class AdwPrefs {
     this.changeOption("option-sidetone", opt_sto.text);
     this.changeOption("option-led", opt_led.text);
     this.changeOption("option-inactive-time", opt_iat.text);
+    this.changeOption("option-voice", opt_voice.text);
+    this.changeOption("option-rotate-mute", opt_rot.text);
   }
 
   _onColorChanged(color_setting_button, strSetting) {
@@ -180,6 +184,18 @@ class AdwPrefs {
       _("parameter to ask for inactive time"),
       "option-inactive-time"
     );
+    let opt_voice = this.addOptionRow(
+      group2,
+      _("Voice Prompts"),
+      _("passed to headsetcontrol to set for voice prompts"),
+      "option-voice"
+    );
+    let opt_rot = this.addOptionRow(
+      group2,
+      _("Rotate to Mute"),
+      _("passed to headsetcontrol to set for rotate to mute"),
+      "option-rotate-mute"
+    );
 
     adwrow = new Adw.ActionRow({ title: "" });
     group2.add(adwrow);
@@ -197,7 +213,9 @@ class AdwPrefs {
         opt_chm,
         opt_sto,
         opt_led,
-        opt_iat
+        opt_iat,
+        opt_voice,
+        opt_rot
       )
     );
     adwrow.add_suffix(buttonApply);
