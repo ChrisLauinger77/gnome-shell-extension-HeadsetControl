@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-16 14:10+0100\n"
-"PO-Revision-Date: 2023-04-13 16:15+0200\n"
+"PO-Revision-Date: 2023-05-01 16:15+0200\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: Italian <LL@li.org>\n"
 "Language: it\n"
@@ -62,12 +62,12 @@ msgstr "Periodo di inattività"
 #: HeadsetControl@lauinger-clan.de/extension.js:151
 #: HeadsetControl@lauinger-clan.de/prefs.js:189
 msgid "Voice Prompts"
-msgstr ""
+msgstr "Messaggi vocali"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:155
 #: HeadsetControl@lauinger-clan.de/prefs.js:195
 msgid "Rotate to Mute"
-msgstr ""
+msgstr "Ruota su Muto"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:160
 msgid "Settings"
@@ -199,14 +199,12 @@ msgid "parameter to ask for inactive time"
 msgstr "parametro per chiedere il tempo di inattività"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:190
-#, fuzzy
 msgid "passed to headsetcontrol to set for voice prompts"
-msgstr "passato al controllo dell'auricolare per impostare il led"
+msgstr "passato al controllo dell'auricolare per impostare i messaggi vocali"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:196
-#, fuzzy
 msgid "passed to headsetcontrol to set for rotate to mute"
-msgstr "passato al controllo dell'auricolare per impostare il led"
+msgstr "passato al controllo dell'auricolare per impostare la rotazione su mute"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:203
 msgid "Apply"
@@ -327,25 +325,20 @@ msgstr ""
 "passato al controllo dell'auricolare per impostare il tempo di inattività"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:41
-#, fuzzy
 msgid "parameter to ask for voice prompts"
-msgstr "parametro per chiedere il tempo di inattività"
+msgstr "parametro per richiedere messaggi vocali"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:42
-#, fuzzy
 msgid "passed to headsetcontrol to set voice prompts"
-msgstr "passato al controllo dell'auricolare per impostare il led"
+msgstr "passato al controllo dell'auricolare per impostare i messaggi vocali"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:46
-#, fuzzy
 msgid "parameter to ask for rotate to mute"
-msgstr "parametro per chiedere il tempo di inattività"
+msgstr "parametro per richiedere la rotazione per disattivare l'audio"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:47
-#, fuzzy
 msgid "passed to headsetcontrol to set rotate to mute"
-msgstr ""
-"passato al controllo dell'auricolare per impostare il tempo di inattività"
+msgstr "passato al controllo dell'auricolare per impostare la rotazione su muto"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:51
 msgid "parameter to enable notifiactions"
