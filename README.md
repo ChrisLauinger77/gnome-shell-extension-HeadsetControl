@@ -49,3 +49,17 @@ Pull requests are welcome.
 To update the translation files run
 `./update-translation-po-files.sh` in the extensions directory after your code changes are finished. This will update the files in po folder.
 Then poedit (https://poedit.net/download) can be used to translate the strings. poedit can also be used to create new localization files.
+
+# Debugging
+
+Logging can be enabled in settings.
+Afterwards open a console and type:
+
+journalctl -f -o cat
+
+You will see now the output in the console when you try to show the quicksettings.
+
+Fedora has a package for "headsetcontrol" which seems to be outdated.
+(see [#14](https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl/issues/14))
+
+Using the github version until Fedora updates the package is recommended.
