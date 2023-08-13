@@ -8,25 +8,27 @@ import {
 } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 
 export default class AdwPrefs extends ExtensionPreferences {
-  _settings = null;
-  _filechooser = null;
-  _filechoosertarget = null;
-
   changeOption(option, text) {
-    this._settings.set_string(option, text);
+    this.getSettings().set_string(option, text);
   }
 
-  _onBtnClicked(btn) {
+  _onBtnClicked(btn, filechooser) {
     let parent = btn.get_root();
-    this._filechooser.set_transient_for(parent);
+    filechooser.set_transient_for(parent);
 
     let allFileFilter = new Gtk.FileFilter();
-    this._filechooser.set_filter(allFileFilter);
+    filechooser.set_filter(allFileFilter);
     allFileFilter.add_pattern("*");
 
-    this._filechooser.title = _("Select headsetcontrol executable");
+    filechooser.title = _("Select headsetcontrol executable");
 
-    this._filechooser.show();
+    filechooser.show();
+  }
+
+  _updateExecutable(valueExecutable) {
+    valueExecutable.set_text(
+      this.getSettings().get_string("headsetcontrol-executable")
+    );
   }
 
   _onFileChooserResponse(native, response) {
@@ -35,7 +37,6 @@ export default class AdwPrefs extends ExtensionPreferences {
     }
     let fileURI = native.get_file().get_uri().replace("file://", "");
 
-    this._filechoosertarget.text = fileURI;
     this.changeOption("headsetcontrol-executable", fileURI);
   }
 
@@ -47,7 +48,7 @@ export default class AdwPrefs extends ExtensionPreferences {
       hexpand: true,
       valign: Gtk.Align.CENTER,
     });
-    valueOption.set_text(_(this._settings.get_string(option)));
+    valueOption.set_text(_(this.getSettings().get_string(option)));
     adwrow.add_suffix(valueOption);
     return valueOption;
   }
@@ -75,14 +76,14 @@ export default class AdwPrefs extends ExtensionPreferences {
   }
 
   _onColorChanged(color_setting_button, strSetting) {
-    this._settings.set_string(
+    this.getSettings().set_string(
       strSetting,
       color_setting_button.get_rgba().to_string()
     );
   }
 
   fillPreferencesWindow(window) {
-    this._settings = this.getSettings();
+    window._settings = this.getSettings();
     let adwrow;
     const page1 = Adw.PreferencesPage.new();
     page1.set_title(_("HeadsetControl"));
@@ -103,7 +104,11 @@ export default class AdwPrefs extends ExtensionPreferences {
     });
 
     valueExecutable.set_text(
-      _(this._settings.get_string("headsetcontrol-executable"))
+      window._settings.get_string("headsetcontrol-executable")
+    );
+    window._settings.connect(
+      "changed::headsetcontrol-executable",
+      this._updateExecutable.bind(this, valueExecutable)
     );
     let buttonExecutable = new Gtk.Button({
       label: _("..."),
@@ -112,24 +117,20 @@ export default class AdwPrefs extends ExtensionPreferences {
     buttonExecutable.set_tooltip_text(
       _("Usually located in '/usr/bin' OR '/usr/local/bin'")
     );
-    buttonExecutable.connect(
-      "clicked",
-      this._onBtnClicked.bind(this, buttonExecutable)
-    );
-    this._filechoosertarget = valueExecutable;
     adwrow.add_suffix(valueExecutable);
     adwrow.add_suffix(buttonExecutable);
     adwrow.activatable_widget = buttonExecutable;
 
-    this._filechooser = new Gtk.FileChooserNative({
+    let _filechooser = new Gtk.FileChooserNative({
       title: _("Select headsetcontrol executable"),
       modal: true,
       action: Gtk.FileChooserAction.OPEN,
     });
-    this._filechooser.connect(
-      "response",
-      this._onFileChooserResponse.bind(this)
+    buttonExecutable.connect(
+      "clicked",
+      this._onBtnClicked.bind(this, buttonExecutable, _filechooser)
     );
+    _filechooser.connect("response", this._onFileChooserResponse.bind(this));
 
     // group2
     let group2 = Adw.PreferencesGroup.new();
@@ -228,10 +229,10 @@ export default class AdwPrefs extends ExtensionPreferences {
     adwrow.set_tooltip_text(_("Toggle to show systemindicator"));
     groupC1.add(adwrow);
     let togglesystemindicator = new Gtk.Switch({
-      active: this._settings.get_boolean("show-systemindicator"),
+      active: window._settings.get_boolean("show-systemindicator"),
       valign: Gtk.Align.CENTER,
     });
-    this._settings.bind(
+    window._settings.bind(
       "show-systemindicator",
       togglesystemindicator,
       "active",
@@ -244,10 +245,10 @@ export default class AdwPrefs extends ExtensionPreferences {
     adwrow.set_tooltip_text(_("enable / disable notifications"));
     groupC1.add(adwrow);
     let toggleusenotifications = new Gtk.Switch({
-      active: this._settings.get_boolean("use-notifications"),
+      active: window._settings.get_boolean("use-notifications"),
       valign: Gtk.Align.CENTER,
     });
-    this._settings.bind(
+    window._settings.bind(
       "use-notifications",
       toggleusenotifications,
       "active",
@@ -260,10 +261,10 @@ export default class AdwPrefs extends ExtensionPreferences {
     adwrow.set_tooltip_text(_("enable / disable log outputs"));
     groupC1.add(adwrow);
     let toggleuselogging = new Gtk.Switch({
-      active: this._settings.get_boolean("use-logging"),
+      active: window._settings.get_boolean("use-logging"),
       valign: Gtk.Align.CENTER,
     });
-    this._settings.bind(
+    window._settings.bind(
       "use-logging",
       toggleuselogging,
       "active",
@@ -276,10 +277,10 @@ export default class AdwPrefs extends ExtensionPreferences {
     adwrow.set_tooltip_text(_("enable / disable text colors"));
     groupC1.add(adwrow);
     let toggleusecolors = new Gtk.Switch({
-      active: this._settings.get_boolean("use-colors"),
+      active: window._settings.get_boolean("use-colors"),
       valign: Gtk.Align.CENTER,
     });
-    this._settings.bind(
+    window._settings.bind(
       "use-colors",
       toggleusecolors,
       "active",
@@ -303,7 +304,7 @@ export default class AdwPrefs extends ExtensionPreferences {
       valign: Gtk.Align.CENTER,
     });
 
-    mycolor.parse(this._settings.get_string("color-batteryhigh"));
+    mycolor.parse(window._settings.get_string("color-batteryhigh"));
     colorbatteryhigh.set_rgba(mycolor);
     colorbatteryhigh.connect(
       "color-set",
@@ -321,7 +322,7 @@ export default class AdwPrefs extends ExtensionPreferences {
       valign: Gtk.Align.CENTER,
     });
 
-    mycolor.parse(this._settings.get_string("color-batterymedium"));
+    mycolor.parse(window._settings.get_string("color-batterymedium"));
     colorbatterymedium.set_rgba(mycolor);
     colorbatterymedium.connect(
       "color-set",
@@ -339,7 +340,7 @@ export default class AdwPrefs extends ExtensionPreferences {
       valign: Gtk.Align.CENTER,
     });
 
-    mycolor.parse(this._settings.get_string("color-batterylow"));
+    mycolor.parse(window._settings.get_string("color-batterylow"));
     colorbatterylow.set_rgba(mycolor);
     colorbatterylow.connect(
       "color-set",
