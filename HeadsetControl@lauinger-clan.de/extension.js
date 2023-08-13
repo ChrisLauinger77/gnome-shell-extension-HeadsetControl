@@ -18,18 +18,19 @@
 
 /* exported init */
 
-const { Gio, GObject, St, GLib, Clutter } = imports.gi;
-const Config = imports.misc.config;
-const Main = imports.ui.main;
-const PopupMenu = imports.ui.popupMenu;
-const QuickSettings = imports.ui.quickSettings;
-const QuickSettingsMenu = imports.ui.main.panel.statusArea.quickSettings;
-const Util = imports.misc.util;
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
-const _ = ExtensionUtils.gettext;
+import GLib from "gi://GLib";
+import Gio from "gi://Gio";
+import GObject from "gi://GObject";
 
-const g_schema = "org.gnome.shell.extensions.HeadsetControl";
+import * as Main from "resource:///org/gnome/shell/ui/main.js";
+import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
+import * as QuickSettings from "resource:///org/gnome/shell/ui/quickSettings.js";
+import {
+  Extension,
+  gettext as _,
+} from "resource:///org/gnome/shell/extensions/extension.js";
+
+const QuickSettingsMenu = Main.panel.statusArea.quickSettings;
 const capabilities = {
   battery: false,
   chatmix: false,
@@ -90,27 +91,16 @@ function _invokecmd(cmd) {
 
 const HeadsetControlMenuToggle = GObject.registerClass(
   class HeadsetControlMenuToggle extends QuickSettings.QuickMenuToggle {
-    _init(settings) {
+    _init(settings, Me) {
       this._settings = settings;
       this._valueBattery = "";
       this._valueBattery_num = 0;
       this._valueChatMix = "";
-      let current_version = Config.PACKAGE_VERSION.split(".");
-      if (current_version[0] >= 44) {
-        //GNOME 44 and newer
-        super._init({
-          title: _("HeadsetControl"),
-          iconName: "audio-headset-symbolic",
-          toggleMode: true,
-        });
-      } else {
-        //GNOME 43
-        super._init({
-          label: _("HeadsetControl"),
-          iconName: "audio-headset-symbolic",
-          toggleMode: true,
-        });
-      }
+      super._init({
+        title: _("HeadsetControl"),
+        iconName: "audio-headset-symbolic",
+        toggleMode: true,
+      });
 
       // This function is unique to this class. It adds a nice header with an
       // icon, title and optional subtitle. It's recommended you do so for
@@ -163,7 +153,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
       // Add an entry-point for more settings
       this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       const settingsItem = this.menu.addAction(_("Settings"), () =>
-        ExtensionUtils.openPrefs()
+        Me._openPreferences()
       );
 
       // Ensure the settings are unavailable when the screen is locked
@@ -183,30 +173,21 @@ const HeadsetControlMenuToggle = GObject.registerClass(
     }
 
     _setMenuTitle() {
-      let current_version = Config.PACKAGE_VERSION.split(".");
-      if (current_version[0] >= 44) {
-        if (capabilities.battery && capabilities.chatmix) {
-          this.set({
-            title: this._valueBattery,
-          });
-          this.set({
-            subtitle: this._valueChatMix,
-          });
-        } else if (capabilities.battery) {
-          this.set({
-            title: this._valueBattery,
-          });
-        } else if (capabilities.chatmix) {
-          this.set({
-            title: this._valueChatMix,
-          });
-        }
-      } else {
-        if (capabilities.battery) {
-          this.set({ label: this._valueBattery });
-        } else if (capabilities.chatmix) {
-          this.set({ label: this._valueChatMix });
-        }
+      if (capabilities.battery && capabilities.chatmix) {
+        this.set({
+          title: this._valueBattery,
+        });
+        this.set({
+          subtitle: this._valueChatMix,
+        });
+      } else if (capabilities.battery) {
+        this.set({
+          title: this._valueBattery,
+        });
+      } else if (capabilities.chatmix) {
+        this.set({
+          title: this._valueChatMix,
+        });
       }
     }
 
@@ -406,7 +387,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
 
 const HeadsetControlIndicator = GObject.registerClass(
   class HeadsetControlIndicator extends QuickSettings.SystemIndicator {
-    _init(settings) {
+    _init(settings, Me) {
       super._init();
       if (settings.get_boolean("show-systemindicator")) {
         // Create the icon for the indicator
@@ -416,7 +397,10 @@ const HeadsetControlIndicator = GObject.registerClass(
 
       // Create the toggle menu and associate it with the indicator, being
       // sure to destroy it along with the indicator
-      this._HeadSetControlMenuToggle = new HeadsetControlMenuToggle(settings);
+      this._HeadSetControlMenuToggle = new HeadsetControlMenuToggle(
+        settings,
+        Me
+      );
       this.quickSettingsItems.push(this._HeadSetControlMenuToggle);
 
       this.connect("destroy", () => {
@@ -430,12 +414,8 @@ const HeadsetControlIndicator = GObject.registerClass(
   }
 );
 
-class HeadsetControl {
+export default class HeadsetControl extends Extension {
   _needCapabilitiesRefresh = true;
-
-  constructor(uuid) {
-    this._uuid = uuid;
-  }
 
   _invokecmd(cmd) {
     return _invokecmd(cmd);
@@ -567,12 +547,19 @@ class HeadsetControl {
     this.enable();
   }
 
+  _openPreferences() {
+    this.openPreferences();
+  }
+
   enable() {
-    this._settings = ExtensionUtils.getSettings(g_schema);
+    this._settings = this.getSettings();
     this._initCmd();
     this._refreshCapabilities();
 
-    this._HeadsetControlIndicator = new HeadsetControlIndicator(this._settings);
+    this._HeadsetControlIndicator = new HeadsetControlIndicator(
+      this._settings,
+      this
+    );
 
     QuickSettingsMenu.connect("button-press-event", this._refresh.bind(this));
     // add setting Signals
@@ -618,7 +605,6 @@ class HeadsetControl {
   }
 }
 
-function init(meta) {
-  ExtensionUtils.initTranslations("HeadsetControl");
-  return new HeadsetControl(meta.uuid, g_schema);
+function init(metadata) {
+  return new HeadsetControl(metadata);
 }

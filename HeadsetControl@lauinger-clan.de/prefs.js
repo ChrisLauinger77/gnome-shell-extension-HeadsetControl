@@ -1,29 +1,13 @@
-const { Gio, Adw, Gtk, Gdk } = imports.gi;
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
-const Gettext = imports.gettext.domain("HeadsetControl");
-const _ = Gettext.gettext;
-const g_schema = "org.gnome.shell.extensions.HeadsetControl";
+import Gdk from "gi://Gdk";
+import Gtk from "gi://Gtk";
+import Gio from "gi://Gio";
+import Adw from "gi://Adw";
+import {
+  ExtensionPreferences,
+  gettext as _,
+} from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 
-function init() {
-  ExtensionUtils.initTranslations("HeadsetControl");
-}
-
-// used starting with GNOME 42
-
-function fillPreferencesWindow(window) {
-  let adwprefs = new AdwPrefs(g_schema, window);
-
-  return adwprefs.fillPreferencesWindow();
-}
-
-class AdwPrefs {
-  constructor(schema, window) {
-    this._settings = ExtensionUtils.getSettings(schema);
-    this._window = window;
-    this.filechoosertarget = null;
-  }
-
+export default class AdwPrefs extends ExtensionPreferences {
   changeOption(option, text) {
     this._settings.set_string(option, text);
   }
@@ -93,7 +77,9 @@ class AdwPrefs {
     );
   }
 
-  fillPreferencesWindow() {
+  fillPreferencesWindow(window) {
+    this._settings = this.getSettings();
+    this.filechoosertarget = null;
     let adwrow;
     this._page1 = Adw.PreferencesPage.new();
     this._page1.set_title(_("HeadsetControl"));
@@ -221,8 +207,8 @@ class AdwPrefs {
     adwrow.add_suffix(buttonApply);
     adwrow.activatable_widget = buttonApply;
 
-    this._window.set_default_size(675, 735);
-    this._window.add(this._page1);
+    window.set_default_size(675, 735);
+    window.add(this._page1);
     //page2
     this._page2 = Adw.PreferencesPage.new();
     this._page2.set_title(_("Customization"));
@@ -358,6 +344,6 @@ class AdwPrefs {
     );
     adwrow.add_suffix(colorbatterylow);
     adwrow.activatable_widget = colorbatterylow;
-    this._window.add(this._page2);
+    window.add(this._page2);
   }
 }
