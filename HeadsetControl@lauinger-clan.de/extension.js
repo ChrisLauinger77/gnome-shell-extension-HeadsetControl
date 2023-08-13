@@ -604,7 +604,3 @@ export default class HeadsetControl extends Extension {
     usecolors = null;
   }
 }
-
-function init(metadata) {
-  return new HeadsetControl(metadata);
-}

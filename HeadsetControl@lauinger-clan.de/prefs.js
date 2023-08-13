@@ -8,6 +8,10 @@ import {
 } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 
 export default class AdwPrefs extends ExtensionPreferences {
+  _settings = null;
+  _filechooser = null;
+  _filechoosertarget = null;
+
   changeOption(option, text) {
     this._settings.set_string(option, text);
   }
@@ -31,7 +35,7 @@ export default class AdwPrefs extends ExtensionPreferences {
     }
     let fileURI = native.get_file().get_uri().replace("file://", "");
 
-    this.filechoosertarget.text = fileURI;
+    this._filechoosertarget.text = fileURI;
     this.changeOption("headsetcontrol-executable", fileURI);
   }
 
@@ -79,18 +83,17 @@ export default class AdwPrefs extends ExtensionPreferences {
 
   fillPreferencesWindow(window) {
     this._settings = this.getSettings();
-    this.filechoosertarget = null;
     let adwrow;
-    this._page1 = Adw.PreferencesPage.new();
-    this._page1.set_title(_("HeadsetControl"));
-    this._page1.set_name("headsetcontrol_page1");
-    this._page1.set_icon_name("audio-headset-symbolic");
+    const page1 = Adw.PreferencesPage.new();
+    page1.set_title(_("HeadsetControl"));
+    page1.set_name("headsetcontrol_page1");
+    page1.set_icon_name("audio-headset-symbolic");
 
     // group1
     let group1 = Adw.PreferencesGroup.new();
     group1.set_title(_("Global"));
     group1.set_name("headsetcontrol_global");
-    this._page1.add(group1);
+    page1.add(group1);
     adwrow = new Adw.ActionRow({ title: _("Command:") });
     adwrow.set_tooltip_text(_("file and path of headsetcontrol executable"));
     group1.add(adwrow);
@@ -113,7 +116,7 @@ export default class AdwPrefs extends ExtensionPreferences {
       "clicked",
       this._onBtnClicked.bind(this, buttonExecutable)
     );
-    this.filechoosertarget = valueExecutable;
+    this._filechoosertarget = valueExecutable;
     adwrow.add_suffix(valueExecutable);
     adwrow.add_suffix(buttonExecutable);
     adwrow.activatable_widget = buttonExecutable;
@@ -132,7 +135,7 @@ export default class AdwPrefs extends ExtensionPreferences {
     let group2 = Adw.PreferencesGroup.new();
     group2.set_title(_("HeadsetControl parameters"));
     group2.set_name("headsetcontrol_parameters");
-    this._page1.add(group2);
+    page1.add(group2);
 
     let opt_capa = this.addOptionRow(
       group2,
@@ -208,18 +211,18 @@ export default class AdwPrefs extends ExtensionPreferences {
     adwrow.activatable_widget = buttonApply;
 
     window.set_default_size(675, 735);
-    window.add(this._page1);
+    window.add(page1);
     //page2
-    this._page2 = Adw.PreferencesPage.new();
-    this._page2.set_title(_("Customization"));
-    this._page2.set_name("headsetcontrol_page1");
-    this._page2.set_icon_name("preferences-system-symbolic");
+    const page2 = Adw.PreferencesPage.new();
+    page2.set_title(_("Customization"));
+    page2.set_name("headsetcontrol_page1");
+    page2.set_icon_name("preferences-system-symbolic");
 
     // groupC1
     let groupC1 = Adw.PreferencesGroup.new();
     groupC1.set_title(_("Options"));
     groupC1.set_name("headsetcontrol_options");
-    this._page2.add(groupC1);
+    page2.add(groupC1);
     //show systemindicator
     adwrow = new Adw.ActionRow({ title: _("Show SystemIndicator") });
     adwrow.set_tooltip_text(_("Toggle to show systemindicator"));
@@ -288,7 +291,7 @@ export default class AdwPrefs extends ExtensionPreferences {
     let groupC2 = Adw.PreferencesGroup.new();
     groupC2.set_title(_("Colors"));
     groupC2.set_name("headsetcontrol_colors");
-    this._page2.add(groupC2);
+    page2.add(groupC2);
     // color high charge
     let mycolor = new Gdk.RGBA();
     adwrow = new Adw.ActionRow({
@@ -344,6 +347,6 @@ export default class AdwPrefs extends ExtensionPreferences {
     );
     adwrow.add_suffix(colorbatterylow);
     adwrow.activatable_widget = colorbatterylow;
-    window.add(this._page2);
+    window.add(page2);
   }
 }
