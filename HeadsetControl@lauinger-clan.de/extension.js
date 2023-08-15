@@ -225,123 +225,89 @@ const HeadsetControlMenuToggle = GObject.registerClass(
     }
 
     _addSidetoneMenu(popupMenuExpander) {
-      this._addPopupMenuItem(
-        popupMenuExpander,
-        _("Off"),
-        headsetcontrolCommands.cmdSidetone + " 0"
-      );
-      this._addPopupMenuItem(
-        popupMenuExpander,
-        _("low"),
-        headsetcontrolCommands.cmdSidetone + " 32"
-      );
-      this._addPopupMenuItem(
-        popupMenuExpander,
-        _("medium"),
-        headsetcontrolCommands.cmdSidetone + " 64"
-      );
-      this._addPopupMenuItem(
-        popupMenuExpander,
-        _("high"),
-        headsetcontrolCommands.cmdSidetone + " 96"
-      );
-      this._addPopupMenuItem(
-        popupMenuExpander,
-        _("max"),
-        headsetcontrolCommands.cmdSidetone + " 128"
+      const sidetoneValues = [
+        [_("Off"), "0"],
+        [_("low"), "32"],
+        [_("medium"), "64"],
+        [_("high"), "96"],
+        [_("max"), "128"],
+      ];
+      sidetoneValues.forEach((item) =>
+        this._addPopupMenuItem(
+          popupMenuExpander,
+          item[0],
+          headsetcontrolCommands.cmdSidetone + " " + item[1]
+        )
       );
       this.menu.addMenuItem(popupMenuExpander);
       popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
     }
 
     _addLEDMenu(popupMenuExpander) {
-      this._addPopupMenuItem(
-        popupMenuExpander,
-        _("Off"),
-        headsetcontrolCommands.cmdLED + " " + "0"
+      const LEDvalues = [
+        [_("Off"), "0"],
+        [_("On"), "1"],
+      ];
+      LEDvalues.forEach((item) =>
+        this._addPopupMenuItem(
+          popupMenuExpander,
+          item[0],
+          headsetcontrolCommands.cmdLED + " " + item[1]
+        )
       );
-      this._addPopupMenuItem(
-        popupMenuExpander,
-        _("On"),
-        headsetcontrolCommands.cmdLED + " " + "1"
-      );
-
       popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
       this.menu.addMenuItem(popupMenuExpander);
     }
 
     _addVoiceMenu(popupMenuExpander) {
-      this._addPopupMenuItem(
-        popupMenuExpander,
-        _("Off"),
-        headsetcontrolCommands.cmdVoice + " " + "0"
+      const voiceValues = [
+        [_("Off"), "0"],
+        [_("On"), "1"],
+      ];
+      voiceValues.forEach((item) =>
+        this._addPopupMenuItem(
+          popupMenuExpander,
+          item[0],
+          headsetcontrolCommands.cmdVoice + " " + item[1]
+        )
       );
-      this._addPopupMenuItem(
-        popupMenuExpander,
-        _("On"),
-        headsetcontrolCommands.cmdVoice + " " + "1"
-      );
-
       popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
       this.menu.addMenuItem(popupMenuExpander);
     }
 
     _addRotateMuteMenu(popupMenuExpander) {
-      this._addPopupMenuItem(
-        popupMenuExpander,
-        _("Off"),
-        headsetcontrolCommands.cmdRotateMute + " " + "0"
+      const rotateMuteValues = [
+        [_("Off"), "0"],
+        [_("On"), "1"],
+      ];
+      rotateMuteValues.forEach((item) =>
+        this._addPopupMenuItem(
+          popupMenuExpander,
+          item[0],
+          headsetcontrolCommands.cmdRotateMute + " " + item[1]
+        )
       );
-      this._addPopupMenuItem(
-        popupMenuExpander,
-        _("On"),
-        headsetcontrolCommands.cmdRotateMute + " " + "1"
-      );
-
       popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
       this.menu.addMenuItem(popupMenuExpander);
     }
 
     _addInactivetimeMenu(popupMenuExpander) {
-      this._addPopupMenuItem(
-        popupMenuExpander,
-        _("Off"),
-        headsetcontrolCommands.cmdInacitetime + " 0"
-      );
-      this._addPopupMenuItem(
-        popupMenuExpander,
-        _("05 min"),
-        headsetcontrolCommands.cmdInacitetime + " 05"
-      );
-      this._addPopupMenuItem(
-        popupMenuExpander,
-        _("15 min"),
-        headsetcontrolCommands.cmdInacitetime + " 15"
-      );
-      this._addPopupMenuItem(
-        popupMenuExpander,
-        _("30 min"),
-        headsetcontrolCommands.cmdInacitetime + " 30"
-      );
-      this._addPopupMenuItem(
-        popupMenuExpander,
-        _("45 min"),
-        headsetcontrolCommands.cmdInacitetime + " 45"
-      );
-      this._addPopupMenuItem(
-        popupMenuExpander,
-        _("60 min"),
-        headsetcontrolCommands.cmdInacitetime + " 60"
-      );
-      this._addPopupMenuItem(
-        popupMenuExpander,
-        _("75 min"),
-        headsetcontrolCommands.cmdInacitetime + " 75"
-      );
-      this._addPopupMenuItem(
-        popupMenuExpander,
-        _("90 min"),
-        headsetcontrolCommands.cmdInacitetime + " 90"
+      const inacitetimeValues = [
+        [_("Off"), "0"],
+        [_("05 min"), "05"],
+        [_("15 min"), "15"],
+        [_("30 min"), "30"],
+        [_("45 min"), "45"],
+        [_("60 min"), "60"],
+        [_("75 min"), "75"],
+        [_("90 min"), "90"],
+      ];
+      inacitetimeValues.forEach((item) =>
+        this._addPopupMenuItem(
+          popupMenuExpander,
+          item[0],
+          headsetcontrolCommands.cmdInacitetime + " " + item[1]
+        )
       );
       popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
       this.menu.addMenuItem(popupMenuExpander);
