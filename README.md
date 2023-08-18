@@ -63,3 +63,7 @@ Fedora has a package for "headsetcontrol" which seems to be outdated.
 (see [#14](https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl/issues/14))
 
 Using the github version until Fedora updates the package is recommended.
+
+# ✨️ Contributors
+
+[![Contributors](https://contrib.rocks/image?repo=ChrisLauinger77/gnome-shell-extension-HeadsetControl)](https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl/graphs/contributors)
