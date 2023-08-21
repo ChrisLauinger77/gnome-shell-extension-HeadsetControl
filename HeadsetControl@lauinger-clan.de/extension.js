@@ -375,7 +375,7 @@ const HeadsetControlIndicator = GObject.registerClass(
 
       // Add the indicator to the panel and the toggle to the menu
       QuickSettingsMenu._indicators.add_child(this);
-      QuickSettingsMenu._addItems(this.quickSettingsItems);
+      QuickSettingsMenu.addExternalIndicator(this);
     }
   }
 );
