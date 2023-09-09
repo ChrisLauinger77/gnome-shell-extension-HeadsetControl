@@ -332,18 +332,18 @@ const HeadsetControlMenuToggle = GObject.registerClass(
       let colorG = this._getColorHEXValue("color-batteryhigh");
 
       if (!usecolors || strvalueBattery == "N/A") {
-        this.set_style(this._originalStyle);
+        this._menuButton.set_style(this._originalStyle);
         return false;
       }
       _logoutput("_changeColor: " + valueBattery_num);
       if (valueBattery_num >= 50) {
-        this.set_style("color: " + colorG + ";");
+        this._menuButton.set_style("color: " + colorG + ";");
         _logoutput("_changeColor: " + colorG);
       } else if (valueBattery_num >= 25) {
-        this.set_style("color: " + colorY + ";");
+        this._menuButton.set_style("color: " + colorY + ";");
         _logoutput("_changeColor: " + colorY);
       } else {
-        this.set_style("color: " + colorR + ";");
+        this._menuButton.set_style("color: " + colorR + ";");
         _logoutput("_changeColor: " + colorR);
       }
       return true;
