@@ -1,6 +1,5 @@
 <schemalist>
-  <schema id="org.gnome.shell.extensions.HeadsetControl"
-      path="/org/gnome/shell/extensions/HeadsetControl/">
+  <schema id="org.gnome.shell.extensions.HeadsetControl" path="/org/gnome/shell/extensions/HeadsetControl/">
     <key name="headsetcontrol-executable" type="s">
       <default>'/usr/local/bin/headsetcontrol'</default>
       <summary>path to executable</summary>
@@ -48,7 +47,7 @@
     </key>
     <key name="use-notifications" type="b">
       <default>false</default>
-      <summary>parameter to enable notifiactions</summary>
+      <summary>parameter to enable notifications</summary>
       <description>enable / disable notifications</description>
     </key>
     <key name="use-logging" type="b">

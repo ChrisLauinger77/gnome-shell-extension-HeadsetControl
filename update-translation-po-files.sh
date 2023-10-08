@@ -8,7 +8,7 @@ cd po
 
 for pofile in *.po
 	do
-		echo "Updateing: $pofile"
+		echo "Updating: $pofile"
 		msgmerge -U "$pofile" "$reffile"
 	done
 
