@@ -7,5 +7,6 @@
   "url": "https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl",
   "settings-schema": "org.gnome.shell.extensions.HeadsetControl",
   "donations": { "github": "ChrisLauinger77", "paypal": "ChrisLauinger" },
-  "version": 19
+  "version": 19,
+  "version-name": "45.0"
 }
