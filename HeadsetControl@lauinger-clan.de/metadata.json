@@ -3,10 +3,9 @@
   "gettext-domain": "HeadsetControl",
   "description": "Gnome Shell Extension to visualize headset status from HeadsetControl (https://github.com/Sapd/HeadsetControl) command line tool",
   "uuid": "HeadsetControl@lauinger-clan.de",
-  "shell-version": [ "45" ],
+  "shell-version": [ "45", "46" ],
   "url": "https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl",
   "settings-schema": "org.gnome.shell.extensions.HeadsetControl",
   "donations": { "github": "ChrisLauinger77", "paypal": "ChrisLauinger" },
-  "version": 19,
-  "version-name": "45.0"
+  "version-name": "46.0"
 }
