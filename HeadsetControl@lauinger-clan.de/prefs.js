@@ -55,6 +55,7 @@ export default class AdwPrefs extends ExtensionPreferences {
 
   applyChanges(
     valueExecutable,
+    opt_oformat,
     opt_capa,
     opt_bat,
     opt_chm,
@@ -65,6 +66,7 @@ export default class AdwPrefs extends ExtensionPreferences {
     opt_rot
   ) {
     this.changeOption("headsetcontrol-executable", valueExecutable.text);
+    this.changeOption("option-output-format", opt_oformat.text);
     this.changeOption("option-capabilities", opt_capa.text);
     this.changeOption("option-battery", opt_bat.text);
     this.changeOption("option-chatmix", opt_chm.text);
@@ -138,6 +140,12 @@ export default class AdwPrefs extends ExtensionPreferences {
     group2.set_name("headsetcontrol_parameters");
     page1.add(group2);
 
+    let opt_oformat = this.addOptionRow(
+      group2,
+      _("Output format"),
+      _("parameter to ask for all data in new output format"),
+      "option-output-format"
+    );
     let opt_capa = this.addOptionRow(
       group2,
       _("Capabilities"),
@@ -198,6 +206,7 @@ export default class AdwPrefs extends ExtensionPreferences {
       this.applyChanges.bind(
         this,
         valueExecutable,
+        opt_oformat,
         opt_capa,
         opt_bat,
         opt_chm,

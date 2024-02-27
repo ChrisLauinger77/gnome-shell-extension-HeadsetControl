@@ -49,6 +49,7 @@ const headsetcontrolCommands = {
   cmdInacitetime: "",
   cmdVoice: "",
   cmdRotateMute: "",
+  cmdOutputFormat: "",
 };
 
 const _rgbToHex = (r, g, b) =>
@@ -80,6 +81,9 @@ function _invokecmd(cmd) {
       .replace("\n", "###")
       .replace("Success!", "###");
     strOutput = strOutput.split("###")[1];
+    if (cmd.includes("-o json")) {
+      strOutput = output;
+    }
     _logoutput(strOutput);
     return strOutput;
   } catch (err) {
@@ -382,6 +386,7 @@ const HeadsetControlIndicator = GObject.registerClass(
 
 export default class HeadsetControl extends Extension {
   _needCapabilitiesRefresh = true;
+  _JSONoutputSupported = true;
 
   _invokecmd(cmd) {
     return _invokecmd(cmd);
@@ -408,6 +413,8 @@ export default class HeadsetControl extends Extension {
       cmdExecutable + " " + this._settings.get_string("option-rotate-mute");
     headsetcontrolCommands.cmdInacitetime =
       cmdExecutable + " " + this._settings.get_string("option-inactive-time");
+    headsetcontrolCommands.cmdOutputFormat =
+      cmdExecutable + " " + this._settings.get_string("option-output-format");
   }
 
   _getHeadSetControlValue(stroutput, valuetosearch) {
@@ -419,18 +426,89 @@ export default class HeadsetControl extends Extension {
     return strValue.toString().trim();
   }
 
+  _readJSONOutputFormat() {
+    let strOutput = this._invokecmd(headsetcontrolCommands.cmdOutputFormat);
+    try {
+      let output = JSON.parse(strOutput);
+      return output;
+    } catch (err) {
+      // could not parse JSON
+      logError(err, "HeadsetControl");
+      return "";
+    }
+  }
+
+  _setAllCapabilities(value) {
+    capabilities.sidetone = value;
+    capabilities.battery = value;
+    capabilities.led = value;
+    capabilities.inactivetime = value;
+    capabilities.chatmix = value;
+    capabilities.voice = value;
+    capabilities.rotatemute = value;
+  }
+
+  _refreshJSONall(updateIndicator) {
+    this._JSONoutputSupported = false;
+    let output = this._readJSONOutputFormat();
+    if (output != "") {
+      this._JSONoutputSupported = true;
+      _logoutput(_("device_count:") + " " + output.device_count);
+      _logoutput(_("devices(0).status:") + " " + output.devices[0].status);
+      _logoutput(
+        _("device(0).capabilities:") + " " + output.devices[0].capabilities
+      );
+      _logoutput(
+        _("device(0).battery_status:") + " " + output.devices[0].battery.status
+      );
+      _logoutput(
+        _("device(0).battery_level:") + " " + output.devices[0].battery.level
+      );
+      _logoutput(_("device(0).chatmix:") + " " + output.devices[0].chatmix);
+      // if we cannot get the capabilities, set all to true
+      if (!output.devices[0].status.includes("success")) {
+        this._setAllCapabilities(true);
+        return false;
+      }
+      capabilities.sidetone =
+        output.devices[0].capabilities.includes("CAP_SIDETONE");
+      _logoutput("capabilities.sidetone: " + capabilities.sidetone);
+      capabilities.battery =
+        output.devices[0].capabilities.includes("CAP_BATTERY_STATUS");
+      _logoutput("capabilities.battery: " + capabilities.battery);
+      capabilities.led = output.devices[0].capabilities.includes("CAP_LIGHTS");
+      _logoutput("capabilities.led: " + capabilities.led);
+      capabilities.inactivetime =
+        output.devices[0].capabilities.includes("CAP_INACTIVE_TIME");
+      _logoutput("capabilities.inactivetime: " + capabilities.inactivetime);
+      capabilities.chatmix =
+        output.devices[0].capabilities.includes("CAP_CHATMIX_STATUS");
+      _logoutput("capabilities.chatmix: " + capabilities.chatmix);
+      capabilities.voice =
+        output.devices[0].capabilities.includes("CAP_VOICE_PROMPTS");
+      _logoutput("capabilities.voice: " + capabilities.voice);
+      capabilities.rotatemute =
+        output.devices[0].capabilities.includes("CAP_ROTATE_TO_MUTE");
+      _logoutput("capabilities.rotatemute: " + capabilities.rotatemute);
+      if (updateIndicator) {
+        this._HeadsetControlIndicator._HeadSetControlMenuToggle._setValueBattery(
+          _("Charge") + ": " + output.devices[0].battery.level + "%",
+          output.devices[0].battery.level
+        );
+        this._HeadsetControlIndicator._HeadSetControlMenuToggle._setValueChatMix(
+          _("Chat-Mix") + ": " + output.devices[0].chatmix
+        );
+      }
+      return true;
+    }
+  }
+
   _refreshCapabilities() {
     let strOutput = this._invokecmd(headsetcontrolCommands.cmdCapabilities);
 
     // if we cannot get the capabilities, set all to true
     if (!strOutput || strOutput.includes("No supported headset found")) {
-      capabilities.sidetone = true;
-      capabilities.battery = true;
-      capabilities.led = true;
-      capabilities.inactivetime = true;
-      capabilities.chatmix = true;
-      capabilities.voice = true;
-      capabilities.rotatemute = true;
+      this._setAllCapabilities(true);
       return false;
     }
     if (strOutput.includes("* sidetone")) {
@@ -494,6 +572,14 @@ export default class HeadsetControl extends Extension {
   _refresh() {
     _notify(_("Refreshing..."));
     _logoutput(_("Refreshing..."));
+
+    if (this._JSONoutputSupported) {
+      if (this._refreshJSONall(true)) {
+        this._HeadsetControlIndicator._HeadSetControlMenuToggle._setMenuSetHeader();
+        this._HeadsetControlIndicator._HeadSetControlMenuToggle._setMenuTitle();
+        return;
+      }
+    }
     if (this._needCapabilitiesRefresh) {
       this._refreshCapabilities();
     }
@@ -505,7 +591,6 @@ export default class HeadsetControl extends Extension {
     }
     this._HeadsetControlIndicator._HeadSetControlMenuToggle._setMenuSetHeader();
     this._HeadsetControlIndicator._HeadSetControlMenuToggle._setMenuTitle();
-    return true;
   }
 
   onParamChanged() {
@@ -520,7 +605,10 @@ export default class HeadsetControl extends Extension {
   enable() {
     this._settings = this.getSettings();
     this._initCmd();
-    this._refreshCapabilities();
+
+    if (!this._refreshJSONall(false)) {
+      this._refreshCapabilities();
+    }
 
     this._HeadsetControlIndicator = new HeadsetControlIndicator(
       this._settings,

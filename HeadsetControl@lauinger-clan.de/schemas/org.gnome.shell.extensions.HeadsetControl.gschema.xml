@@ -45,6 +45,11 @@
       <summary>parameter to ask for rotate to mute</summary>
       <description>passed to headsetcontrol to set rotate to mute</description>
     </key>
+    <key name="option-output-format" type="s">
+      <default>'-o json'</default>
+      <summary>parameter to ask for all data in new output format</summary>
+      <description>passed to headsetcontrol to get all data - needs a newer version of headsetcontrol</description>
+    </key>
     <key name="use-notifications" type="b">
       <default>false</default>
       <summary>parameter to enable notifications</summary>
