@@ -429,7 +429,7 @@ export default class HeadsetControl extends Extension {
   _readJSONOutputFormat() {
     let strOutput = this._invokecmd(headsetcontrolCommands.cmdOutputFormat);
     try {
-      let output = JSON.parse(strOutput);
+      let output = JSON.parse(new TextDecoder().decode(strOutput));
       return output;
     } catch (err) {
       // could not parse JSON
