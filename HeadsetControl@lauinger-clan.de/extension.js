@@ -453,43 +453,47 @@ export default class HeadsetControl extends Extension {
     let output = this._readJSONOutputFormat();
     if (output != "") {
       this._JSONoutputSupported = true;
-      _logoutput(_("device_count:") + " " + output.device_count);
-      _logoutput(_("devices(0).status:") + " " + output.devices[0].status);
+      _logoutput("device_count:" + " " + output.device_count);
+      _logoutput("devices(0).status:" + " " + output.devices[0].status);
       _logoutput(
-        _("device(0).capabilities:") + " " + output.devices[0].capabilities
+        "device(0).capabilities:" + " " + output.devices[0].capabilities
       );
       _logoutput(
-        _("device(0).battery_status:") + " " + output.devices[0].battery.status
+        "device(0).battery_status:" + " " + output.devices[0].battery.status
       );
       _logoutput(
-        _("device(0).battery_level:") + " " + output.devices[0].battery.level
+        "device(0).battery_level:" + " " + output.devices[0].battery.level
       );
-      _logoutput(_("device(0).chatmix:") + " " + output.devices[0].chatmix);
+      _logoutput("device(0).chatmix:" + " " + output.devices[0].chatmix);
       // if we cannot get the capabilities, set all to true
       if (!output.devices[0].status.includes("success")) {
         this._setAllCapabilities(true);
         return false;
       }
-      capabilities.sidetone =
-        output.devices[0].capabilities.includes("CAP_SIDETONE");
-      _logoutput("capabilities.sidetone: " + capabilities.sidetone);
-      capabilities.battery =
-        output.devices[0].capabilities.includes("CAP_BATTERY_STATUS");
-      _logoutput("capabilities.battery: " + capabilities.battery);
-      capabilities.led = output.devices[0].capabilities.includes("CAP_LIGHTS");
-      _logoutput("capabilities.led: " + capabilities.led);
-      capabilities.inactivetime =
-        output.devices[0].capabilities.includes("CAP_INACTIVE_TIME");
-      _logoutput("capabilities.inactivetime: " + capabilities.inactivetime);
-      capabilities.chatmix =
-        output.devices[0].capabilities.includes("CAP_CHATMIX_STATUS");
-      _logoutput("capabilities.chatmix: " + capabilities.chatmix);
-      capabilities.voice =
-        output.devices[0].capabilities.includes("CAP_VOICE_PROMPTS");
-      _logoutput("capabilities.voice: " + capabilities.voice);
-      capabilities.rotatemute =
-        output.devices[0].capabilities.includes("CAP_ROTATE_TO_MUTE");
-      _logoutput("capabilities.rotatemute: " + capabilities.rotatemute);
+      if (this._needCapabilitiesRefresh) {
+        capabilities.sidetone =
+          output.devices[0].capabilities.includes("CAP_SIDETONE");
+        _logoutput("capabilities.sidetone: " + capabilities.sidetone);
+        capabilities.battery =
+          output.devices[0].capabilities.includes("CAP_BATTERY_STATUS");
+        _logoutput("capabilities.battery: " + capabilities.battery);
+        capabilities.led =
+          output.devices[0].capabilities.includes("CAP_LIGHTS");
+        _logoutput("capabilities.led: " + capabilities.led);
+        capabilities.inactivetime =
+          output.devices[0].capabilities.includes("CAP_INACTIVE_TIME");
+        _logoutput("capabilities.inactivetime: " + capabilities.inactivetime);
+        capabilities.chatmix =
+          output.devices[0].capabilities.includes("CAP_CHATMIX_STATUS");
+        _logoutput("capabilities.chatmix: " + capabilities.chatmix);
+        capabilities.voice =
+          output.devices[0].capabilities.includes("CAP_VOICE_PROMPTS");
+        _logoutput("capabilities.voice: " + capabilities.voice);
+        capabilities.rotatemute =
+          output.devices[0].capabilities.includes("CAP_ROTATE_TO_MUTE");
+        _logoutput("capabilities.rotatemute: " + capabilities.rotatemute);
+      }
+      this._needCapabilitiesRefresh = false;
       if (updateIndicator) {
         this._HeadsetControlIndicator._HeadSetControlMenuToggle._setValueBattery(
           _("Charge") + ": " + output.devices[0].battery.level + "%",

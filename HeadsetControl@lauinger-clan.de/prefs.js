@@ -40,10 +40,10 @@ export default class AdwPrefs extends ExtensionPreferences {
     this.changeOption("headsetcontrol-executable", fileURI);
   }
 
-  addOptionRow(group, title, tooltip, option) {
+  addOptionRow(exprow, title, tooltip, option) {
     let adwrow = new Adw.ActionRow({ title: _(title) });
     adwrow.set_tooltip_text(_(tooltip));
-    group.add(adwrow);
+    exprow.add_row(adwrow);
     let valueOption = new Gtk.Entry({
       hexpand: true,
       valign: Gtk.Align.CENTER,
@@ -139,57 +139,68 @@ export default class AdwPrefs extends ExtensionPreferences {
     group2.set_title(_("HeadsetControl parameters"));
     group2.set_name("headsetcontrol_parameters");
     page1.add(group2);
-
+    let expRow1 = Adw.ExpanderRow.new();
+    expRow1.set_title(_("HeadsetControl Version Option output format"));
+    expRow1.set_subtitle(
+      _("used starting with HeadsetControl tool version newer then 2.7.0")
+    );
+    expRow1.set_expanded(true);
+    group2.add(expRow1);
     let opt_oformat = this.addOptionRow(
-      group2,
+      expRow1,
       _("Output format"),
       _("parameter to ask for all data in new output format"),
       "option-output-format"
     );
+    let expRow2 = Adw.ExpanderRow.new();
+    expRow2.set_title(_("HeadsetControl Version Legacy"));
+    expRow2.set_subtitle(_("used until HeadsetControl tool version 2.7.0"));
+    expRow2.set_expanded(false);
+    group2.add(expRow2);
     let opt_capa = this.addOptionRow(
-      group2,
+      expRow2,
       _("Capabilities"),
       _("parameter to ask for capabilities"),
       "option-capabilities"
     );
     let opt_bat = this.addOptionRow(
-      group2,
+      expRow2,
       _("Battery"),
       _("parameter to ask for battery"),
       "option-battery"
     );
     let opt_chm = this.addOptionRow(
-      group2,
+      expRow2,
       _("Chat-Mix"),
       _("parameter to ask for chat-mix"),
       "option-chatmix"
     );
     let opt_sto = this.addOptionRow(
-      group2,
+      expRow2,
       _("Sidetone"),
       _("parameter to ask for sidetone"),
       "option-sidetone"
     );
     let opt_led = this.addOptionRow(
-      group2,
+      expRow2,
       _("LED"),
       _("passed to headsetcontrol to set for led"),
       "option-led"
     );
     let opt_iat = this.addOptionRow(
-      group2,
+      expRow2,
       _("Inactive time"),
       _("parameter to ask for inactive time"),
       "option-inactive-time"
     );
     let opt_voice = this.addOptionRow(
-      group2,
+      expRow2,
       _("Voice Prompts"),
       _("passed to headsetcontrol to set for voice prompts"),
       "option-voice"
     );
     let opt_rot = this.addOptionRow(
-      group2,
+      expRow2,
       _("Rotate to Mute"),
       _("passed to headsetcontrol to set for rotate to mute"),
       "option-rotate-mute"
