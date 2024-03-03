@@ -455,16 +455,6 @@ export default class HeadsetControl extends Extension {
       this._JSONoutputSupported = true;
       _logoutput("device_count:" + " " + output.device_count);
       _logoutput("devices(0).status:" + " " + output.devices[0].status);
-      _logoutput(
-        "device(0).capabilities:" + " " + output.devices[0].capabilities
-      );
-      _logoutput(
-        "device(0).battery_status:" + " " + output.devices[0].battery.status
-      );
-      _logoutput(
-        "device(0).battery_level:" + " " + output.devices[0].battery.level
-      );
-      _logoutput("device(0).chatmix:" + " " + output.devices[0].chatmix);
       // if we cannot get the capabilities, set all to true
       if (!output.devices[0].status.includes("success")) {
         this._setAllCapabilities(true);
