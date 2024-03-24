@@ -210,6 +210,7 @@ export default class AdwPrefs extends ExtensionPreferences {
     group2.add(adwrow);
     let buttonApply = new Gtk.Button({
       label: _("Apply"),
+      css_classes: ["suggested-action"],
       valign: Gtk.Align.CENTER,
     });
     buttonApply.connect(
