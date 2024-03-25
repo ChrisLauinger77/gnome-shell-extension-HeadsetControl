@@ -2,6 +2,7 @@ import Gdk from "gi://Gdk";
 import Gtk from "gi://Gtk";
 import Gio from "gi://Gio";
 import Adw from "gi://Adw";
+import GObject from "gi://GObject";
 import {
   ExtensionPreferences,
   gettext as _,
@@ -293,10 +294,15 @@ export default class AdwPrefs extends ExtensionPreferences {
     );
     adwrow.add_suffix(toggleuselogging);
     adwrow.activatable_widget = toggleuselogging;
+    // groupC2
+    let groupC2 = Adw.PreferencesGroup.new();
+    groupC2.set_title(_("Colors"));
+    groupC2.set_name("headsetcontrol_colors");
+    page2.add(groupC2);
     //use colors
-    adwrow = new Adw.ActionRow({ title: _("Use colors") });
-    adwrow.set_tooltip_text(_("enable / disable text colors"));
-    groupC1.add(adwrow);
+    let adwexprow = new Adw.ExpanderRow({ title: _("Use colors") });
+    adwexprow.set_tooltip_text(_("enable / disable text colors"));
+    groupC2.add(adwexprow);
     let toggleusecolors = new Gtk.Switch({
       active: window._settings.get_boolean("use-colors"),
       valign: Gtk.Align.CENTER,
@@ -307,20 +313,22 @@ export default class AdwPrefs extends ExtensionPreferences {
       "active",
       Gio.SettingsBindFlags.DEFAULT
     );
-    adwrow.add_suffix(toggleusecolors);
-    adwrow.activatable_widget = toggleusecolors;
-    // groupC2
-    let groupC2 = Adw.PreferencesGroup.new();
-    groupC2.set_title(_("Colors"));
-    groupC2.set_name("headsetcontrol_colors");
-    page2.add(groupC2);
+    adwexprow.add_suffix(toggleusecolors);
+    adwexprow.set_expanded(toggleusecolors.get_active());
+    adwexprow.activatable_widget = toggleusecolors;
+    toggleusecolors.bind_property(
+      "active",
+      adwexprow,
+      "expanded",
+      GObject.BindingFlags.DEFAULT
+    );
     // color high charge
     let mycolor = new Gdk.RGBA();
     adwrow = new Adw.ActionRow({
       title: _("Color battery charge high"),
     });
     adwrow.set_tooltip_text(_("The text color for battery charge 100% to 50%"));
-    groupC2.add(adwrow);
+    adwexprow.add_row(adwrow);
     let colorbatteryhigh = new Gtk.ColorButton({
       valign: Gtk.Align.CENTER,
     });
@@ -338,7 +346,7 @@ export default class AdwPrefs extends ExtensionPreferences {
       title: _("Color battery charge medium"),
     });
     adwrow.set_tooltip_text(_("The text color for battery charge 49% to 25%"));
-    groupC2.add(adwrow);
+    adwexprow.add_row(adwrow);
     let colorbatterymedium = new Gtk.ColorButton({
       valign: Gtk.Align.CENTER,
     });
@@ -356,7 +364,7 @@ export default class AdwPrefs extends ExtensionPreferences {
       title: _("Color battery charge low"),
     });
     adwrow.set_tooltip_text(_("The text color for battery charge 24% to 0%"));
-    groupC2.add(adwrow);
+    adwexprow.add_row(adwrow);
     let colorbatterylow = new Gtk.ColorButton({
       valign: Gtk.Align.CENTER,
     });
