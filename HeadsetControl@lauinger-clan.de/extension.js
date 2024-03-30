@@ -609,7 +609,10 @@ export default class HeadsetControl extends Extension {
       this
     );
 
-    QuickSettingsMenu.connect("button-press-event", this._refresh.bind(this));
+    QuickSettingsMenu.menu.connect(
+      "open-state-changed",
+      this._refresh.bind(this)
+    );
     // add setting Signals
     this._settingSignals = new Array();
     this._settingSignals.push(
