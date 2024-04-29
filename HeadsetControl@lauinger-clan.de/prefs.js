@@ -14,10 +14,10 @@ export default class AdwPrefs extends ExtensionPreferences {
   }
 
   _onBtnClicked(btn, filechooser) {
-    let parent = btn.get_root();
+    const parent = btn.get_root();
     filechooser.set_transient_for(parent);
 
-    let allFileFilter = new Gtk.FileFilter();
+    const allFileFilter = new Gtk.FileFilter();
     filechooser.set_filter(allFileFilter);
     allFileFilter.add_pattern("*");
 
@@ -36,16 +36,16 @@ export default class AdwPrefs extends ExtensionPreferences {
     if (response !== Gtk.ResponseType.ACCEPT) {
       return;
     }
-    let fileURI = native.get_file().get_uri().replace("file://", "");
+    const fileURI = native.get_file().get_uri().replace("file://", "");
 
     this.changeOption("headsetcontrol-executable", fileURI);
   }
 
   addOptionRow(exprow, title, tooltip, option) {
-    let adwrow = new Adw.ActionRow({ title: _(title) });
+    const adwrow = new Adw.ActionRow({ title: _(title) });
     adwrow.set_tooltip_text(_(tooltip));
     exprow.add_row(adwrow);
-    let valueOption = new Gtk.Entry({
+    const valueOption = new Gtk.Entry({
       hexpand: true,
       valign: Gtk.Align.CENTER,
     });
@@ -94,14 +94,14 @@ export default class AdwPrefs extends ExtensionPreferences {
     page1.set_icon_name("audio-headset-symbolic");
 
     // group1
-    let group1 = Adw.PreferencesGroup.new();
+    const group1 = Adw.PreferencesGroup.new();
     group1.set_title(_("Global"));
     group1.set_name("headsetcontrol_global");
     page1.add(group1);
     adwrow = new Adw.ActionRow({ title: _("Command:") });
     adwrow.set_tooltip_text(_("file and path of headsetcontrol executable"));
     group1.add(adwrow);
-    let valueExecutable = new Gtk.Entry({
+    const valueExecutable = new Gtk.Entry({
       hexpand: true,
       valign: Gtk.Align.CENTER,
     });
@@ -113,7 +113,7 @@ export default class AdwPrefs extends ExtensionPreferences {
       "changed::headsetcontrol-executable",
       this._updateExecutable.bind(this, valueExecutable)
     );
-    let buttonExecutable = new Gtk.Button({
+    const buttonExecutable = new Gtk.Button({
       label: _("..."),
       valign: Gtk.Align.CENTER,
     });
@@ -124,7 +124,7 @@ export default class AdwPrefs extends ExtensionPreferences {
     adwrow.add_suffix(buttonExecutable);
     adwrow.activatable_widget = buttonExecutable;
 
-    let _filechooser = new Gtk.FileChooserNative({
+    const _filechooser = new Gtk.FileChooserNative({
       title: _("Select headsetcontrol executable"),
       modal: true,
       action: Gtk.FileChooserAction.OPEN,
@@ -136,72 +136,77 @@ export default class AdwPrefs extends ExtensionPreferences {
     _filechooser.connect("response", this._onFileChooserResponse.bind(this));
 
     // group2
-    let group2 = Adw.PreferencesGroup.new();
+    const group2 = Adw.PreferencesGroup.new();
     group2.set_title(_("HeadsetControl parameters"));
     group2.set_name("headsetcontrol_parameters");
     page1.add(group2);
-    let expRow1 = Adw.ExpanderRow.new();
+    const expRow1 = Adw.ExpanderRow.new();
     expRow1.set_title(_("HeadsetControl Version Option output format"));
     expRow1.set_subtitle(
       _("used starting with HeadsetControl tool version newer then 2.7.0")
     );
     expRow1.set_expanded(true);
     group2.add(expRow1);
-    let opt_oformat = this.addOptionRow(
+    const opt_oformat = this.addOptionRow(
       expRow1,
       _("Output format"),
       _("parameter to ask for all data in new output format"),
       "option-output-format"
     );
-    let expRow2 = Adw.ExpanderRow.new();
+    const expRow2 = Adw.ExpanderRow.new();
     expRow2.set_title(_("HeadsetControl Version Legacy"));
     expRow2.set_subtitle(_("used until HeadsetControl tool version 2.7.0"));
     expRow2.set_expanded(false);
     group2.add(expRow2);
-    let opt_capa = this.addOptionRow(
+    const opt_capa = this.addOptionRow(
       expRow2,
       _("Capabilities"),
       _("parameter to ask for capabilities"),
       "option-capabilities"
     );
-    let opt_bat = this.addOptionRow(
+    const opt_bat = this.addOptionRow(
       expRow2,
       _("Battery"),
       _("parameter to ask for battery"),
       "option-battery"
     );
-    let opt_chm = this.addOptionRow(
+    const opt_chm = this.addOptionRow(
       expRow2,
       _("Chat-Mix"),
       _("parameter to ask for chat-mix"),
       "option-chatmix"
     );
-    let opt_sto = this.addOptionRow(
-      expRow2,
+    const expRow3 = Adw.ExpanderRow.new();
+    expRow3.set_title(_("HeadsetControl Common"));
+    expRow3.set_subtitle(_("used in all HeadsetControl tool versions"));
+    expRow3.set_expanded(true);
+    group2.add(expRow3);
+    const opt_sto = this.addOptionRow(
+      expRow3,
       _("Sidetone"),
       _("parameter to ask for sidetone"),
       "option-sidetone"
     );
-    let opt_led = this.addOptionRow(
-      expRow2,
+    const opt_led = this.addOptionRow(
+      expRow3,
       _("LED"),
       _("passed to headsetcontrol to set for led"),
       "option-led"
     );
-    let opt_iat = this.addOptionRow(
-      expRow2,
+    const opt_iat = this.addOptionRow(
+      expRow3,
       _("Inactive time"),
       _("parameter to ask for inactive time"),
       "option-inactive-time"
     );
-    let opt_voice = this.addOptionRow(
-      expRow2,
+    const opt_voice = this.addOptionRow(
+      expRow3,
       _("Voice Prompts"),
       _("passed to headsetcontrol to set for voice prompts"),
       "option-voice"
     );
-    let opt_rot = this.addOptionRow(
-      expRow2,
+    const opt_rot = this.addOptionRow(
+      expRow3,
       _("Rotate to Mute"),
       _("passed to headsetcontrol to set for rotate to mute"),
       "option-rotate-mute"
@@ -209,7 +214,7 @@ export default class AdwPrefs extends ExtensionPreferences {
 
     adwrow = new Adw.ActionRow({ title: "" });
     group2.add(adwrow);
-    let buttonApply = new Gtk.Button({
+    const buttonApply = new Gtk.Button({
       label: _("Apply"),
       css_classes: ["suggested-action"],
       valign: Gtk.Align.CENTER,
@@ -242,7 +247,7 @@ export default class AdwPrefs extends ExtensionPreferences {
     page2.set_icon_name("preferences-system-symbolic");
 
     // groupC1
-    let groupC1 = Adw.PreferencesGroup.new();
+    const groupC1 = Adw.PreferencesGroup.new();
     groupC1.set_title(_("Options"));
     groupC1.set_name("headsetcontrol_options");
     page2.add(groupC1);
@@ -250,7 +255,7 @@ export default class AdwPrefs extends ExtensionPreferences {
     adwrow = new Adw.ActionRow({ title: _("Show SystemIndicator") });
     adwrow.set_tooltip_text(_("Toggle to show systemindicator"));
     groupC1.add(adwrow);
-    let togglesystemindicator = new Gtk.Switch({
+    const togglesystemindicator = new Gtk.Switch({
       active: window._settings.get_boolean("show-systemindicator"),
       valign: Gtk.Align.CENTER,
     });
@@ -266,7 +271,7 @@ export default class AdwPrefs extends ExtensionPreferences {
     adwrow = new Adw.ActionRow({ title: _("Use notifications") });
     adwrow.set_tooltip_text(_("enable / disable notifications"));
     groupC1.add(adwrow);
-    let toggleusenotifications = new Gtk.Switch({
+    const toggleusenotifications = new Gtk.Switch({
       active: window._settings.get_boolean("use-notifications"),
       valign: Gtk.Align.CENTER,
     });
@@ -282,7 +287,7 @@ export default class AdwPrefs extends ExtensionPreferences {
     adwrow = new Adw.ActionRow({ title: _("Use logging") });
     adwrow.set_tooltip_text(_("enable / disable log outputs"));
     groupC1.add(adwrow);
-    let toggleuselogging = new Gtk.Switch({
+    const toggleuselogging = new Gtk.Switch({
       active: window._settings.get_boolean("use-logging"),
       valign: Gtk.Align.CENTER,
     });
@@ -295,15 +300,15 @@ export default class AdwPrefs extends ExtensionPreferences {
     adwrow.add_suffix(toggleuselogging);
     adwrow.activatable_widget = toggleuselogging;
     // groupC2
-    let groupC2 = Adw.PreferencesGroup.new();
+    const groupC2 = Adw.PreferencesGroup.new();
     groupC2.set_title(_("Colors"));
     groupC2.set_name("headsetcontrol_colors");
     page2.add(groupC2);
     //use colors
-    let adwexprow = new Adw.ExpanderRow({ title: _("Use colors") });
+    const adwexprow = new Adw.ExpanderRow({ title: _("Use colors") });
     adwexprow.set_tooltip_text(_("enable / disable text colors"));
     groupC2.add(adwexprow);
-    let toggleusecolors = new Gtk.Switch({
+    const toggleusecolors = new Gtk.Switch({
       active: window._settings.get_boolean("use-colors"),
       valign: Gtk.Align.CENTER,
     });
@@ -323,13 +328,13 @@ export default class AdwPrefs extends ExtensionPreferences {
       GObject.BindingFlags.DEFAULT
     );
     // color high charge
-    let mycolor = new Gdk.RGBA();
+    const mycolor = new Gdk.RGBA();
     adwrow = new Adw.ActionRow({
       title: _("Color battery charge high"),
     });
     adwrow.set_tooltip_text(_("The text color for battery charge 100% to 50%"));
     adwexprow.add_row(adwrow);
-    let colorbatteryhigh = new Gtk.ColorButton({
+    const colorbatteryhigh = new Gtk.ColorButton({
       valign: Gtk.Align.CENTER,
     });
 
@@ -347,7 +352,7 @@ export default class AdwPrefs extends ExtensionPreferences {
     });
     adwrow.set_tooltip_text(_("The text color for battery charge 49% to 25%"));
     adwexprow.add_row(adwrow);
-    let colorbatterymedium = new Gtk.ColorButton({
+    const colorbatterymedium = new Gtk.ColorButton({
       valign: Gtk.Align.CENTER,
     });
 
@@ -365,7 +370,7 @@ export default class AdwPrefs extends ExtensionPreferences {
     });
     adwrow.set_tooltip_text(_("The text color for battery charge 24% to 0%"));
     adwexprow.add_row(adwrow);
-    let colorbatterylow = new Gtk.ColorButton({
+    const colorbatterylow = new Gtk.ColorButton({
       valign: Gtk.Align.CENTER,
     });
 
