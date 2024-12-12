@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-29 19:37+0200\n"
-"PO-Revision-Date: 2024-04-29 19:39+0200\n"
+"POT-Creation-Date: 2024-12-12 15:07+0100\n"
+"PO-Revision-Date: 2024-12-12 15:08+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:64
 #: HeadsetControl@lauinger-clan.de/extension.js:70
@@ -133,8 +133,12 @@ msgstr "75 Min"
 msgid "90 min"
 msgstr "90 Min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:569
 #: HeadsetControl@lauinger-clan.de/extension.js:570
+msgid "Quicksettings not open - do nothing..."
+msgstr "Quicksettings nicht geöffnet - tue nichts..."
+
+#: HeadsetControl@lauinger-clan.de/extension.js:574
+#: HeadsetControl@lauinger-clan.de/extension.js:575
 msgid "Refreshing..."
 msgstr "Aktualisiere..."
 

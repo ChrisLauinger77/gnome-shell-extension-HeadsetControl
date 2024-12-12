@@ -387,6 +387,7 @@ const HeadsetControlIndicator = GObject.registerClass(
 export default class HeadsetControl extends Extension {
   _needCapabilitiesRefresh = true;
   _JSONoutputSupported = true;
+  _visible = false;
 
   _invokecmd(cmd) {
     return _invokecmd(cmd);
@@ -566,6 +567,11 @@ export default class HeadsetControl extends Extension {
   }
 
   _refresh() {
+    this._visible = !this._visible;
+    if (!this._visible) {
+      _logoutput(_("Quicksettings not open - do nothing..."));
+      return;
+    }
     _notify(_("Refreshing..."));
     _logoutput(_("Refreshing..."));
 

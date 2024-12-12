@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-29 19:37+0200\n"
+"POT-Creation-Date: 2024-12-12 15:07+0100\n"
 "PO-Revision-Date: 2024-04-29 19:39+0200\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
@@ -133,8 +133,12 @@ msgstr "75 Min"
 msgid "90 min"
 msgstr "90 Min"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:569
 #: HeadsetControl@lauinger-clan.de/extension.js:570
+msgid "Quicksettings not open - do nothing..."
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/extension.js:574
+#: HeadsetControl@lauinger-clan.de/extension.js:575
 msgid "Refreshing..."
 msgstr "Actualisation..."
 
