@@ -617,44 +617,46 @@ export default class HeadsetControl extends Extension {
       this
     );
 
-    QuickSettingsMenu.menu.connect(
-      "open-state-changed",
-      this._refresh.bind(this)
+    // add Signals to array
+    this._SignalsArray = new Array();
+    this._SignalsArray.push(
+      QuickSettingsMenu.menu.connect(
+        "open-state-changed",
+        this._refresh.bind(this)
+      )
     );
-    // add setting Signals
-    this._settingSignals = new Array();
-    this._settingSignals.push(
+    this._SignalsArray.push(
       this._settings.connect(
         "changed::headsetcontrol-executable",
         this._initCmd.bind(this)
       )
     );
-    this._settingSignals.push(
+    this._SignalsArray.push(
       this._settings.connect(
         "changed::use-notifications",
         this._initCmd.bind(this)
       )
     );
-    this._settingSignals.push(
+    this._SignalsArray.push(
       this._settings.connect("changed::use-logging", this._initCmd.bind(this))
     );
-    this._settingSignals.push(
+    this._SignalsArray.push(
       this._settings.connect(
         "changed::show-systemindicator",
         this.onParamChanged.bind(this)
       )
     );
-    this._settingSignals.push(
+    this._SignalsArray.push(
       this._settings.connect("changed::use-colors", this._initCmd.bind(this))
     );
   }
 
   disable() {
     // remove setting Signals
-    this._settingSignals.forEach(function (signal) {
+    this._SignalsArray.forEach(function (signal) {
       this._settings.disconnect(signal);
     }, this);
-    this._settingSignals = null;
+    this._SignalsArray = null;
     this._settings = null;
     this._HeadsetControlIndicator.destroy();
     this._HeadsetControlIndicator = null;
