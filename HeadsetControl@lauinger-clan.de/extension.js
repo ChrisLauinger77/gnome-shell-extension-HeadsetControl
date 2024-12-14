@@ -427,11 +427,13 @@ export default class HeadsetControl extends Extension {
     return strValue.toString().trim();
   }
 
-  _readJSONOutputFormat() {
-    let strOutput = this._invokecmd(headsetcontrolCommands.cmdOutputFormat);
+  _readJSONOutputFormat(strOutput) {
+    if (!strOutput) {
+      strOutput = this._invokecmd(headsetcontrolCommands.cmdOutputFormat);
+      _logoutput("_readJSONOutputFormat: calling _invokecmd");
+    }
     try {
-      let output = JSON.parse(new TextDecoder().decode(strOutput));
-      return output;
+      return JSON.parse(new TextDecoder().decode(strOutput));
     } catch (err) {
       // could not parse JSON
       logError(err, "HeadsetControl");
@@ -449,10 +451,8 @@ export default class HeadsetControl extends Extension {
     capabilities.rotatemute = value;
   }
 
-  _refreshJSONall(updateIndicator) {
-    this._JSONoutputSupported = false;
-    let output = this._readJSONOutputFormat();
-    if (output != "") {
+  _processOutput(output, updateIndicator) {
+    if (output) {
       this._JSONoutputSupported = true;
       _logoutput("device_count:" + " " + output.device_count);
       if (output.device_count > 0) {
@@ -495,9 +495,46 @@ export default class HeadsetControl extends Extension {
         this._HeadsetControlIndicator._HeadSetControlMenuToggle._setValueChatMix(
           _("Chat-Mix") + ": " + output.devices[0].chatmix
         );
+        this._HeadsetControlIndicator._HeadSetControlMenuToggle._setMenuSetHeader();
+        this._HeadsetControlIndicator._HeadSetControlMenuToggle._setMenuTitle();
       }
+
       return true;
     }
+  }
+
+  async _refreshJSON_async() {
+    try {
+      let flags = Gio.SubprocessFlags.STDOUT_PIPE;
+      const [, argv] = GLib.shell_parse_argv(
+        headsetcontrolCommands.cmdOutputFormat
+      );
+      let proc = new Gio.Subprocess({ argv, flags });
+      proc.init(null);
+
+      let stdout = await new Promise((resolve, reject) => {
+        proc.communicate_async(null, null, (proc, res) => {
+          try {
+            let [, stdout] = proc.communicate_finish(res);
+            resolve(stdout);
+          } catch (err) {
+            // could not execute the command
+            logError(err, "HeadsetControl");
+            reject(e);
+          }
+        });
+      });
+      let output = this._readJSONOutputFormat(stdout);
+      this._processOutput(output, true);
+    } catch (e) {
+      logerror(e);
+    }
+  }
+
+  _refreshJSONall(updateIndicator) {
+    this._JSONoutputSupported = false;
+    let strOutput = this._readJSONOutputFormat("");
+    return this._processOutput(strOutput, updateIndicator);
   }
 
   _refreshCapabilities() {
@@ -576,11 +613,8 @@ export default class HeadsetControl extends Extension {
     _logoutput(_("Refreshing..."));
 
     if (this._JSONoutputSupported) {
-      if (this._refreshJSONall(true)) {
-        this._HeadsetControlIndicator._HeadSetControlMenuToggle._setMenuSetHeader();
-        this._HeadsetControlIndicator._HeadSetControlMenuToggle._setMenuTitle();
-        return;
-      }
+      this._refreshJSON_async();
+      return;
     }
     if (this._needCapabilitiesRefresh) {
       this._refreshCapabilities();
