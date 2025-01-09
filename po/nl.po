@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-12 15:07+0100\n"
-"PO-Revision-Date: 2024-04-29 19:39+0200\n"
+"PO-Revision-Date: 2025-01-09 19:12+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:64
 #: HeadsetControl@lauinger-clan.de/extension.js:70
@@ -306,7 +306,7 @@ msgstr "Kleur van hoog accuniveau"
 #: HeadsetControl@lauinger-clan.de/prefs.js:335
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:76
 msgid "The text color for battery charge 100% to 50%"
-msgstr "De tekstkleur van een oplaadniveau tussen 100% en 50%"
+msgstr "De tekstkleur van een oplaadniveau tussen 100% en 51%"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:351
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:80
@@ -316,7 +316,7 @@ msgstr "Kleur van gemiddeld accuniveau"
 #: HeadsetControl@lauinger-clan.de/prefs.js:353
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:81
 msgid "The text color for battery charge 49% to 25%"
-msgstr "De tekstkleur van een oplaadniveau tussen 49% en 25%"
+msgstr "De tekstkleur van een oplaadniveau tussen 50% en 26%"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:369
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:85
@@ -326,7 +326,7 @@ msgstr "Kleur van laag accuniveau"
 #: HeadsetControl@lauinger-clan.de/prefs.js:371
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:86
 msgid "The text color for battery charge 24% to 0%"
-msgstr "De tekstkleur van een oplaadniveau tussen 24% en 0%"
+msgstr "De tekstkleur van een oplaadniveau tussen 25% en 0%"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:5
 msgid "path to executable"

@@ -340,10 +340,10 @@ const HeadsetControlMenuToggle = GObject.registerClass(
         return false;
       }
       _logoutput("_changeColor: " + valueBattery_num);
-      if (valueBattery_num >= 50) {
+      if (valueBattery_num >= 51) {
         this._menuButton.set_style("color: " + colorG + ";");
         _logoutput("_changeColor: " + colorG);
-      } else if (valueBattery_num >= 25) {
+      } else if (valueBattery_num >= 26) {
         this._menuButton.set_style("color: " + colorY + ";");
         _logoutput("_changeColor: " + colorY);
       } else {
