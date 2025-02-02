@@ -26,5 +26,5 @@
     "eslint": "^8.0.0",
     "@eslint/js": "^8.0.0"
   },
-  "sourceType": "module"
+  "type": "module"
 }
