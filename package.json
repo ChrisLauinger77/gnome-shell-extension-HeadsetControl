@@ -23,8 +23,8 @@
   },
   "homepage": "https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl#readme",
   "devDependencies": {
-    "eslint": "^8.0.0",
-    "@eslint/js": "^8.0.0"
+    "eslint": "^9.0.0",
+    "@eslint/js": "^9.0.0"
   },
   "type": "module"
 }
