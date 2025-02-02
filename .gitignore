@@ -1,3 +1,4 @@
 *.po~
+*.mo
 *.zip
 HeadsetControl\@lauinger-clan.de/schemas/gschemas.compiled
