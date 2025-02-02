@@ -1,0 +1,30 @@
+{
+  "name": "gnome-shell-extension-headsetcontrol",
+  "version": "1.0.0",
+  "description": "Gnome Shell Extension to visualize headset status from HeadsetControl",
+  "main": "HeadsetControl@lauinger-clan.de/extension.js",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl.git"
+  },
+  "keywords": [
+    "gnome-shell-extension",
+    "headset",
+    "headsetcontrol"
+  ],
+  "author": "Chris Lauinger",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl/issues"
+  },
+  "homepage": "https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl#readme",
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "@eslint/js": "^8.0.0"
+  },
+  "sourceType": "module"
+}
