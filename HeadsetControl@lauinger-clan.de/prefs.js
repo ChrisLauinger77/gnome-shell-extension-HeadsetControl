@@ -63,17 +63,17 @@ export default class AdwPrefs extends ExtensionPreferences {
     ) {
         this.changeOption(
             "headsetcontrol-executable",
-            valueExecutable.get_text
+            valueExecutable.get_text()
         );
-        this.changeOption("option-output-format", opt_oformat.get_text);
-        this.changeOption("option-capabilities", opt_capa.get_text);
-        this.changeOption("option-battery", opt_bat.get_text);
-        this.changeOption("option-chatmix", opt_chm.get_text);
-        this.changeOption("option-sidetone", opt_sto.get_text);
-        this.changeOption("option-led", opt_led.get_text);
-        this.changeOption("option-inactive-time", opt_iat.get_text);
-        this.changeOption("option-voice", opt_voice.get_text);
-        this.changeOption("option-rotate-mute", opt_rot.get_text);
+        this.changeOption("option-output-format", opt_oformat.get_text());
+        this.changeOption("option-capabilities", opt_capa.get_text());
+        this.changeOption("option-battery", opt_bat.get_text());
+        this.changeOption("option-chatmix", opt_chm.get_text());
+        this.changeOption("option-sidetone", opt_sto.get_text());
+        this.changeOption("option-led", opt_led.get_text());
+        this.changeOption("option-inactive-time", opt_iat.get_text());
+        this.changeOption("option-voice", opt_voice.get_text());
+        this.changeOption("option-rotate-mute", opt_rot.get_text());
     }
 
     _onColorChanged(color_setting_button, strSetting) {
