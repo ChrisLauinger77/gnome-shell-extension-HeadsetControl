@@ -482,6 +482,14 @@ export default class HeadsetControl extends Extension {
 
         if (stroutput.includes(valuetosearch)) {
             strValue = stroutput.split(":")[1].toString().trim();
+            if (strValue.slice(0, 6) === "Status") {
+                strValue = stroutput.split(":")[2].toString().trim();
+                if (strValue.slice(0, 17) === "BATTERY_AVAILABLE") {
+                    strValue = stroutput.split(":")[3].toString().trim();
+                } else {
+                    strValue = "N/A";
+                }
+            }
         }
         return strValue.toString().trim();
     }
@@ -650,7 +658,7 @@ export default class HeadsetControl extends Extension {
             capabilities.sidetone = true;
         }
         _logoutput("capabilities.sidetone: " + capabilities.sidetone);
-        if (strOutput.includes("* battery status")) {
+        if (strOutput.includes("* battery")) {
             capabilities.battery = true;
         }
         _logoutput("capabilities.battery: " + capabilities.battery);
@@ -697,7 +705,7 @@ export default class HeadsetControl extends Extension {
         if (!strOutput) {
             return false;
         }
-        let strChatMix = this._getHeadSetControlValue(strOutput, "Chat-Mix");
+        let strChatMix = this._getHeadSetControlValue(strOutput, "Chat"); //ChatMix or Chat-Mix
         this._HeadsetControlIndicator._HeadSetControlMenuToggle._updateChatMixStatus(
             strChatMix
         );
