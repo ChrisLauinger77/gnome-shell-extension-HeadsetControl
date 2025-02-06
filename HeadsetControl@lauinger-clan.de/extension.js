@@ -599,8 +599,10 @@ export default class HeadsetControl extends Extension {
             proc.init(null);
 
             const stdout = await new Promise((resolve, reject) => {
+                // eslint-disable-next-line no-shadow
                 proc.communicate_async(null, null, (proc, res) => {
                     try {
+                        // eslint-disable-next-line no-shadow
                         const [, stdout] = proc.communicate_finish(res);
                         resolve(stdout);
                     } catch (err) {
