@@ -85,5 +85,10 @@
       <summary>Color battery charge low</summary>
       <description>The text color for battery charge 24% to 0%</description>
     </key>
+    <key name="sidetone-values" type="as">
+      <default>['0', '32', '64', '96', '128']</default>
+      <summary>Sidetone values</summary>
+      <description>off low medium high max (-1 disable)</description>
+    </key>
   </schema>
 </schemalist>

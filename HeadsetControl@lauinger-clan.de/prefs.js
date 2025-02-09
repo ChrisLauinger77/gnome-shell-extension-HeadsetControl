@@ -49,6 +49,21 @@ export default class AdwPrefs extends ExtensionPreferences {
         return adwrow;
     }
 
+    addSpinRow(exprow, title, subtitle, tooltip, values, value) {
+        let [min, max, step, climbrate] = values;
+        const adwrow = Adw.SpinRow.new_with_range(min, max, step);
+
+        adwrow.set_title(title);
+        adwrow.set_subtitle(subtitle);
+        adwrow.set_tooltip_text(tooltip);
+        adwrow.set_value(value);
+        adwrow.set_numeric(true);
+        adwrow.set_digits(0);
+        adwrow.set_climb_rate(climbrate);
+        exprow.add_row(adwrow);
+        return adwrow;
+    }
+
     applyChanges(
         valueExecutable,
         opt_oformat,
@@ -81,6 +96,11 @@ export default class AdwPrefs extends ExtensionPreferences {
             strSetting,
             color_setting_button.get_rgba().to_string()
         );
+    }
+    _onSTvaluechanged(adwrow, index) {
+        let arraySidetone = this.getSettings().get_strv("sidetone-values");
+        arraySidetone[index] = adwrow.get_value().toString();
+        this.getSettings().set_strv("sidetone-values", arraySidetone);
     }
 
     fillPreferencesWindow(window) {
@@ -376,6 +396,42 @@ export default class AdwPrefs extends ExtensionPreferences {
         );
         adwrow.add_suffix(colorbatterylow);
         adwrow.activatable_widget = colorbatterylow;
+        // groupC3
+        const groupC3 = Adw.PreferencesGroup.new();
+        groupC3.set_title(_("Sidetone"));
+        groupC3.set_name("headsetcontrol_sidetone");
+        page2.add(groupC3);
+        //sidetone
+        const adwexprowST = new Adw.ExpanderRow({
+            title: _("Values for sidetone"),
+        });
+        adwexprowST.set_tooltip_text(_("off low medium high max (-1 disable)"));
+        let arraySidetone = window._settings.get_strv("sidetone-values");
+        groupC3.add(adwexprowST);
+        const sidetoneLabels = [
+            _("Value for off"),
+            _("Value for low"),
+            _("Value for medium"),
+            _("Value for high"),
+            _("Value for max"),
+        ];
+
+        sidetoneLabels.forEach((label, index) => {
+            if (arraySidetone[index] !== -1) {
+                let adwrow = this.addSpinRow(
+                    adwexprowST,
+                    label,
+                    _("Input for headsetcontrol sidetone command"),
+                    _("-1 to disable"),
+                    [-1, 128, 1, 1],
+                    arraySidetone[index]
+                );
+                adwrow.connect(
+                    "changed",
+                    this._onSTvaluechanged.bind(this, adwrow, index)
+                );
+            }
+        });
         window.add(page2);
     }
 }
