@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-09 10:08+0100\n"
-"PO-Revision-Date: 2025-02-09 10:09+0100\n"
+"POT-Creation-Date: 2025-02-09 13:51+0100\n"
+"PO-Revision-Date: 2025-02-09 13:53+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -68,7 +68,7 @@ msgstr "Instructions Vocales"
 #: HeadsetControl@lauinger-clan.de/extension.js:161
 #: HeadsetControl@lauinger-clan.de/prefs.js:228
 msgid "Rotate to Mute"
-msgstr "mute microphone"
+msgstr "Tourner pour mettre en sourdine"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:178
 msgid "Settings"
@@ -333,6 +333,7 @@ msgid "Values for sidetone"
 msgstr "Valeurs pour le ton côté"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:408
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:91
 msgid "off low medium high max (-1 disable)"
 msgstr "désactivé bas moyen haut max (-1 désactiver)"
 
@@ -423,7 +424,9 @@ msgstr ""
 msgid ""
 "passed to headsetcontrol to get all data - needs a newer version of "
 "headsetcontrol"
-msgstr "transmis au contrôle du casque pour obtenir toutes les données - nécessite une version plus récente de HeadsetControl"
+msgstr ""
+"transmis au contrôle du casque pour obtenir toutes les données - nécessite "
+"une version plus récente de HeadsetControl"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:55
 msgid "parameter to enable notifications"
@@ -448,5 +451,4 @@ msgstr "Colorise / Décolorise le texte de pourcentage de batterie"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:90
 msgid "Sidetone values"
-msgstr ""
-
+msgstr "Valeurs Sidetone"
