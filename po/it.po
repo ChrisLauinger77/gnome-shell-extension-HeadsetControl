@@ -221,14 +221,6 @@ msgstr "parametro per chiedere batteria"
 msgid "parameter to ask for chat-mix"
 msgstr "parametro per chiedere il chat-mix"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:198
-msgid "HeadsetControl Common"
-msgstr "Comune a HeadsetControl"
-
-#: HeadsetControl@lauinger-clan.de/prefs.js:199
-msgid "used in all HeadsetControl tool versions"
-msgstr "utilizzato in tutte le versioni dello strumento HeadsetControl"
-
 #: HeadsetControl@lauinger-clan.de/prefs.js:205
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:25
 msgid "parameter to ask for sidetone"

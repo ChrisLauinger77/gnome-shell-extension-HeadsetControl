@@ -452,8 +452,3 @@ msgstr "Voorzie het accupercentage van een kleur"
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:90
 msgid "Sidetone values"
 msgstr ""
-
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:91
-msgid "off low medium high max (-1 disable)"
-msgstr "uit laag gemiddeld hoog max (-1 uitschakelen)"
-
