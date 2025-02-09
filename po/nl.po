@@ -169,28 +169,28 @@ msgstr "HeadsetControl-opties"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:162
 msgid "HeadsetControl Version Option output format"
-msgstr ""
+msgstr "HeadsetControl versieoptie uitvoerformaat"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:164
 msgid "used starting with HeadsetControl tool version newer then 2.7.0"
-msgstr ""
+msgstr "gebruikt vanaf HeadsetControl tool versie nieuwer dan 2.7.0"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:170
 msgid "Output format"
-msgstr ""
+msgstr "Uitvoerformaat"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:171
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:50
 msgid "parameter to ask for all data in new output format"
-msgstr ""
+msgstr "parameter om alle gegevens in het nieuwe uitvoerformaat op te vragen"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:175
 msgid "HeadsetControl Version Legacy"
-msgstr ""
+msgstr "HeadsetControl versie legacy"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:176
 msgid "used until HeadsetControl tool version 2.7.0"
-msgstr ""
+msgstr "gebruikt tot HeadsetControl tool versie 2.7.0"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:181
 msgid "Capabilities"
@@ -216,11 +216,11 @@ msgstr "Optie om de chatmix op te vragen"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:198
 msgid "HeadsetControl Common"
-msgstr ""
+msgstr "HeadsetControl algemeen"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:199
 msgid "used in all HeadsetControl tool versions"
-msgstr ""
+msgstr "gebruikt in alle versies van HeadsetControl tool"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:205
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:25
@@ -329,40 +329,40 @@ msgstr "De tekstkleur van een oplaadniveau tussen 25% en 0%"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:406
 msgid "Values for sidetone"
-msgstr ""
+msgstr "Waardes voor zijtoon"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:408
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:91
 msgid "off low medium high max (-1 disable)"
-msgstr ""
+msgstr "uit laag gemiddeld hoog max (-1 uitschakelen)"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:412
 msgid "Value for off"
-msgstr ""
+msgstr "Waarde voor uit"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:413
 msgid "Value for low"
-msgstr ""
+msgstr "Waarde voor laag"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:414
 msgid "Value for medium"
-msgstr ""
+msgstr "Waarde voor gemiddeld"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:415
 msgid "Value for high"
-msgstr ""
+msgstr "Waarde voor hoog"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:416
 msgid "Value for max"
-msgstr ""
+msgstr "Waarde voor max"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:424
 msgid "Input for headsetcontrol sidetone command"
-msgstr ""
+msgstr "Invoer voor headsetcontrol zijtoon commando"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:425
 msgid "-1 to disable"
-msgstr ""
+msgstr "-1 om uit te schakelen"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:5
 msgid "path to executable"
@@ -426,10 +426,12 @@ msgid ""
 "passed to headsetcontrol to get all data - needs a newer version of "
 "headsetcontrol"
 msgstr ""
+"doorgestuurd naar headsetcontrol om alle gegevens op te halen - vereist een "
+"nieuwere versie van headsetcontrol"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:55
 msgid "parameter to enable notifications"
-msgstr ""
+msgstr "parameter om meldingen in te schakelen"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:60
 msgid "parameter to enable log outputs"
@@ -451,6 +453,7 @@ msgstr "Voorzie het accupercentage van een kleur"
 msgid "Sidetone values"
 msgstr ""
 
-#, fuzzy
-#~ msgid "device(0).capabilities:"
-#~ msgstr "Mogelijkheden"
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:91
+msgid "off low medium high max (-1 disable)"
+msgstr "uit laag gemiddeld hoog max (-1 uitschakelen)"
+
