@@ -270,13 +270,14 @@ const HeadsetControlMenuToggle = GObject.registerClass(
         }
 
         _addSidetoneMenu(popupMenuExpander) {
+            let arraySidetone = this._settings.get_strv("sidetone-values");
             const sidetoneValues = [
-                [_("Off"), "0"],
-                [_("low"), "32"],
-                [_("medium"), "64"],
-                [_("high"), "96"],
-                [_("max"), "128"],
-            ];
+                [_("Off"), arraySidetone[0]],
+                [_("low"), arraySidetone[1]],
+                [_("medium"), arraySidetone[2]],
+                [_("high"), arraySidetone[3]],
+                [_("max"), arraySidetone[4]],
+            ].filter(([, value]) => value !== "-1");
             sidetoneValues.forEach((item) =>
                 this._addPopupMenuItem(
                     popupMenuExpander,
