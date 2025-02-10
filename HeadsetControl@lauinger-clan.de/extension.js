@@ -786,7 +786,8 @@ export default class HeadsetControl extends Extension {
             { key: "headsetcontrol-executable", callback: "_initCmd" },
             { key: "use-notifications", callback: "_initCmd" },
             { key: "use-logging", callback: "_initCmd" },
-            { key: "show-systemindicator", callback: "onParamChangedST" },
+            { key: "show-systemindicator", callback: "onParamChanged" },
+            { key: "sidetone-values", callback: "onParamChangedST" },
             { key: "use-colors", callback: "_initCmd" },
         ];
 
