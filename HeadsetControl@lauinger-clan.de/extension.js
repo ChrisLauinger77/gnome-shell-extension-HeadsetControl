@@ -173,6 +173,12 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             });
         }
 
+        refreshMenu(Me) {
+            this.menu.removeAll();
+            this._buildMenu();
+            this._addSettingsAction(Me);
+        }
+
         _addSettingsAction(Me) {
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
             const settingsItem = this.menu.addAction(_("Settings"), () =>
@@ -746,6 +752,14 @@ export default class HeadsetControl extends Extension {
         this.enable();
     }
 
+    onParamChangedST() {
+        if (capabilities.sidetone) {
+            this._HeadsetControlIndicator._HeadSetControlMenuToggle.refreshMenu(
+                this
+            );
+        }
+    }
+
     _openPreferences() {
         this.openPreferences();
     }
@@ -772,7 +786,7 @@ export default class HeadsetControl extends Extension {
             { key: "headsetcontrol-executable", callback: "_initCmd" },
             { key: "use-notifications", callback: "_initCmd" },
             { key: "use-logging", callback: "_initCmd" },
-            { key: "show-systemindicator", callback: "onParamChanged" },
+            { key: "show-systemindicator", callback: "onParamChangedST" },
             { key: "use-colors", callback: "_initCmd" },
         ];
 
