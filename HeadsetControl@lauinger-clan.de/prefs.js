@@ -418,7 +418,7 @@ export default class AdwPrefs extends ExtensionPreferences {
 
         sidetoneLabels.forEach((label, index) => {
             if (arraySidetone[index] !== -1) {
-                let adwrow = this.addSpinRow(
+                let adwrowSR = this.addSpinRow(
                     adwexprowST,
                     label,
                     _("Input for headsetcontrol sidetone command"),
@@ -426,9 +426,9 @@ export default class AdwPrefs extends ExtensionPreferences {
                     [-1, 128, 1, 1],
                     arraySidetone[index]
                 );
-                adwrow.connect(
+                adwrowSR.connect(
                     "changed",
-                    this._onSTvaluechanged.bind(this, adwrow, index)
+                    this._onSTvaluechanged.bind(this, adwrowSR, index)
                 );
             }
         });
