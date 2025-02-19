@@ -104,6 +104,7 @@ export default class AdwPrefs extends ExtensionPreferences {
     }
 
     fillPreferencesWindow(window) {
+        window.search_enabled = true;
         window._settings = this.getSettings();
         let adwrow;
         const page1 = Adw.PreferencesPage.new();
