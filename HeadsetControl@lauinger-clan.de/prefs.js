@@ -64,31 +64,21 @@ export default class AdwPrefs extends ExtensionPreferences {
         return adwrow;
     }
 
-    applyChanges(
-        valueExecutable,
-        opt_oformat,
-        opt_capa,
-        opt_bat,
-        opt_chm,
-        opt_sto,
-        opt_led,
-        opt_iat,
-        opt_voice,
-        opt_rot
-    ) {
+    applyChanges(valueExecutable,options) {
         this.changeOption(
             "headsetcontrol-executable",
             valueExecutable.get_text()
         );
-        this.changeOption("option-output-format", opt_oformat.get_text());
-        this.changeOption("option-capabilities", opt_capa.get_text());
-        this.changeOption("option-battery", opt_bat.get_text());
-        this.changeOption("option-chatmix", opt_chm.get_text());
-        this.changeOption("option-sidetone", opt_sto.get_text());
-        this.changeOption("option-led", opt_led.get_text());
-        this.changeOption("option-inactive-time", opt_iat.get_text());
-        this.changeOption("option-voice", opt_voice.get_text());
-        this.changeOption("option-rotate-mute", opt_rot.get_text());
+        this.changeOption("option-output-format", options.opt_oformat.get_text());
+        this.changeOption("option-capabilities", options.opt_capa.get_text());
+        this.changeOption("option-battery", options.opt_bat.get_text());
+        this.changeOption("option-chatmix", options.opt_chm.get_text());
+        this.changeOption("option-sidetone", options.opt_sto.get_text());
+        this.changeOption("option-led", options.opt_led.get_text());
+        this.changeOption("option-inactive-time", options.opt_iat.get_text());
+        this.changeOption("option-voice", options.opt_voice.get_text());
+        this.changeOption("option-rotate-mute", options.opt_rot.get_text());
+        this.changeOption("option-equalizer-preset", options.opt_equalizer_preset.get_text());
     }
 
     _onColorChanged(color_setting_button, strSetting) {
@@ -230,6 +220,12 @@ export default class AdwPrefs extends ExtensionPreferences {
             _("passed to headsetcontrol to set for rotate to mute"),
             "option-rotate-mute"
         );
+        const opt_equalizer_preset = this.addOptionRow(
+            expRow3,
+            _("Equalizer Preset"),
+            _("passed to headsetcontrol to set the equalizer preset"),
+            "option-equalizer-preset"
+        );
 
         adwrow = new Adw.ActionRow({ title: "" });
         group2.add(adwrow);
@@ -240,9 +236,7 @@ export default class AdwPrefs extends ExtensionPreferences {
         });
         buttonApply.connect(
             "clicked",
-            this.applyChanges.bind(
-                this,
-                valueExecutable,
+            this.applyChanges.bind(this, valueExecutable,{
                 opt_oformat,
                 opt_capa,
                 opt_bat,
@@ -251,7 +245,8 @@ export default class AdwPrefs extends ExtensionPreferences {
                 opt_led,
                 opt_iat,
                 opt_voice,
-                opt_rot
+                opt_rot,
+                opt_equalizer_preset,}
             )
         );
         adwrow.add_suffix(buttonApply);

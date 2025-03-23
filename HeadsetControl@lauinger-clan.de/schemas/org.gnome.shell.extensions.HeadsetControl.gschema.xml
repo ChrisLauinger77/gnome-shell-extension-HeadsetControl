@@ -50,6 +50,11 @@
       <summary>parameter to ask for all data in new output format</summary>
       <description>passed to headsetcontrol to get all data - needs a newer version of headsetcontrol</description>
     </key>
+    <key name="option-equalizer-preset" type="s">
+      <default>'-p'</default>
+      <summary>parameter to set equalizer preset</summary>
+      <description>passed to headsetcontrol to set the equalizer preset</description>
+    </key>
     <key name="use-notifications" type="b">
       <default>false</default>
       <summary>parameter to enable notifications</summary>

@@ -29,6 +29,7 @@ import {
     Extension,
     gettext as _,
 } from "resource:///org/gnome/shell/extensions/extension.js";
+import { PopupAnimation } from "resource:///org/gnome/shell/ui/boxpointer.js";
 
 const QuickSettingsMenu = Main.panel.statusArea.quickSettings;
 const capabilities = {
@@ -39,6 +40,7 @@ const capabilities = {
     inactivetime: false,
     voice: false,
     rotatemute: false,
+    equalizerpreset: false,
 };
 const headsetcontrolCommands = {
     cmdCapabilities: "",
@@ -50,6 +52,7 @@ const headsetcontrolCommands = {
     cmdVoice: "",
     cmdRotateMute: "",
     cmdOutputFormat: "",
+    cmdEqualizerPreset: "",
 };
 
 const _rgbToHex = (r, g, b) =>
@@ -160,6 +163,11 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                     capability: "rotatemute",
                     label: _("Rotate to Mute"),
                     method: this._addRotateMuteMenu,
+                },
+                {
+                    capability: "equalizerpreset",
+                    label: _("Equalizer Preset"),
+                    method: this._addEqualizerPresetMenu,
                 },
             ];
 
@@ -369,6 +377,24 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 "PopupSubMenuMenuItemStyle";
             this.menu.addMenuItem(popupMenuExpander);
         }
+        _addEqualizerPresetMenu(popupMenuExpander) {
+            const equalizerPresetValues = [
+                [_("Default"), "0"],
+                [_("Preset 1"), "1"],
+                [_("Preset 2"), "2"],
+                [_("Preset 3"), "3"],
+            ];
+            equalizerPresetValues.forEach((item) =>
+                this._addPopupMenuItem(
+                    popupMenuExpander,
+                    item[0],
+                    headsetcontrolCommands.cmdEqualizerPreset + " " + item[1]
+                )
+            );
+            popupMenuExpander.menu.box.style_class =
+                "PopupSubMenuMenuItemStyle";
+            this.menu.addMenuItem(popupMenuExpander);
+        }
 
         _getColorHEXValue(strSettingsColor) {
             let strcolor = this._settings.get_string(strSettingsColor);
@@ -482,6 +508,10 @@ export default class HeadsetControl extends Extension {
             cmdExecutable +
             " " +
             this._settings.get_string("option-output-format");
+        headsetcontrolCommands.cmdEqualizerPreset =
+            cmdExecutable +
+            " " +
+            this._settings.get_string("option-equalizer-preset");
     }
 
     _getHeadSetControlValue(stroutput, valuetosearch) {
@@ -489,9 +519,9 @@ export default class HeadsetControl extends Extension {
 
         if (stroutput.includes(valuetosearch)) {
             strValue = stroutput.split(":")[1].toString().trim();
-            if (strValue.slice(0, 6) === "Status") {
+            if (strValue.startsWith("Status")) {
                 strValue = stroutput.split(":")[2].toString().trim();
-                if (strValue.slice(0, 17) === "BATTERY_AVAILABLE") {
+                if (strValue.startsWith("BATTERY_AVAILABLE")) {
                     strValue = stroutput.split(":")[3].toString().trim();
                 } else {
                     strValue = "N/A";
@@ -576,6 +606,14 @@ export default class HeadsetControl extends Extension {
                         );
                     _logoutput(
                         "capabilities.rotatemute: " + capabilities.rotatemute
+                    );
+                    capabilities.equalizerpreset =
+                        output.devices[0].capabilities.includes(
+                            "CAP_EQUALIZER_PRESET"
+                        );
+                    _logoutput(
+                        "capabilities.equalizerpreset: " +
+                            capabilities.equalizerpreset
                     );
                 }
                 this._needCapabilitiesRefresh = false;
@@ -691,6 +729,12 @@ export default class HeadsetControl extends Extension {
             capabilities.rotatemute = true;
         }
         _logoutput("capabilities.rotatemute: " + capabilities.rotatemute);
+        if (strOutput.includes("* equalizer preset")) {
+            capabilities.equalizerpreset = true;
+        }
+        _logoutput(
+            "capabilities.equalizerpreset: " + capabilities.equalizerpreset
+        );
         this._needCapabilitiesRefresh = false; // when headset was connected
     }
 
@@ -762,6 +806,7 @@ export default class HeadsetControl extends Extension {
 
     _openPreferences() {
         this.openPreferences();
+        QuickSettingsMenu.menu.close(PopupAnimation.FADE);
     }
 
     enable() {
