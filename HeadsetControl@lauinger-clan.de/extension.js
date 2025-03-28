@@ -378,11 +378,12 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this.menu.addMenuItem(popupMenuExpander);
         }
         _addEqualizerPresetMenu(popupMenuExpander) {
+            let arrayEualizerPreset = this._settings.get_strv("equalizer-preset-names");
             const equalizerPresetValues = [
-                [_("Default"), "0"],
-                [_("Preset 1"), "1"],
-                [_("Preset 2"), "2"],
-                [_("Preset 3"), "3"],
+                [_(arrayEualizerPreset[0]), "0"],
+                [_(arrayEualizerPreset[1]), "1"],
+                [_(arrayEualizerPreset[2]), "2"],
+                [_(arrayEualizerPreset[3]), "3"],
             ];
             equalizerPresetValues.forEach((item) =>
                 this._addPopupMenuItem(
