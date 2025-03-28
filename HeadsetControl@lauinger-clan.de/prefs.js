@@ -152,78 +152,78 @@ export default class AdwPrefs extends ExtensionPreferences {
         const expRow1 = Adw.ExpanderRow.new();
         expRow1.set_title(_("HeadsetControl Version Option output format"));
         expRow1.set_subtitle(
-            _("used starting with HeadsetControl tool version newer then 2.7.0")
+            _("Used starting with HeadsetControl tool version newer then 2.7.0")
         );
         expRow1.set_expanded(true);
         group2.add(expRow1);
         const opt_oformat = this.addOptionRow(
             expRow1,
             _("Output format"),
-            _("parameter to ask for all data in new output format"),
+            _("Parameter to ask for all data in new output format"),
             "option-output-format"
         );
         const expRow2 = Adw.ExpanderRow.new();
         expRow2.set_title(_("HeadsetControl Version Legacy"));
-        expRow2.set_subtitle(_("used until HeadsetControl tool version 2.7.0"));
+        expRow2.set_subtitle(_("Used until HeadsetControl tool version 2.7.0"));
         expRow2.set_expanded(false);
         group2.add(expRow2);
         const opt_capa = this.addOptionRow(
             expRow2,
             _("Capabilities"),
-            _("parameter to ask for capabilities"),
+            _("Parameter to ask for capabilities"),
             "option-capabilities"
         );
         const opt_bat = this.addOptionRow(
             expRow2,
             _("Battery"),
-            _("parameter to ask for battery"),
+            _("Parameter to ask for battery"),
             "option-battery"
         );
         const opt_chm = this.addOptionRow(
             expRow2,
             _("Chat-Mix"),
-            _("parameter to ask for chat-mix"),
+            _("Parameter to ask for chat-mix"),
             "option-chatmix"
         );
         const expRow3 = Adw.ExpanderRow.new();
         expRow3.set_title(_("HeadsetControl Common"));
-        expRow3.set_subtitle(_("used in all HeadsetControl tool versions"));
+        expRow3.set_subtitle(_("Used in all HeadsetControl tool versions"));
         expRow3.set_expanded(true);
         group2.add(expRow3);
         const opt_sto = this.addOptionRow(
             expRow3,
             _("Sidetone"),
-            _("parameter to ask for sidetone"),
+            _("Parameter to ask for sidetone"),
             "option-sidetone"
         );
         const opt_led = this.addOptionRow(
             expRow3,
             _("LED"),
-            _("passed to headsetcontrol to set for led"),
+            _("Passed to headsetcontrol to set for led"),
             "option-led"
         );
         const opt_iat = this.addOptionRow(
             expRow3,
             _("Inactive time"),
-            _("parameter to ask for inactive time"),
+            _("Parameter to ask for inactive time"),
             "option-inactive-time"
         );
         const opt_voice = this.addOptionRow(
             expRow3,
             _("Voice Prompts"),
-            _("passed to headsetcontrol to set for voice prompts"),
+            _("Passed to headsetcontrol to set for voice prompts"),
             "option-voice"
         );
         const opt_rot = this.addOptionRow(
             expRow3,
             _("Rotate to Mute"),
-            _("passed to headsetcontrol to set for rotate to mute"),
+            _("Parameter to ask for rotate to mute"),
             "option-rotate-mute"
         );
         const opt_equalizer_preset = this.addOptionRow(
             expRow3,
             _("Equalizer Preset"),
-            _("passed to headsetcontrol to set the equalizer preset"),
+            _("Passed to headsetcontrol to set the equalizer preset"),
             "option-equalizer-preset"
         );
 

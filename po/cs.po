@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-23 14:51+0100\n"
-"PO-Revision-Date: 2025-03-23 14:54+0100\n"
+"POT-Creation-Date: 2025-03-28 20:27+0100\n"
+"PO-Revision-Date: 2025-03-28 20:31+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: cs\n"
@@ -152,12 +152,12 @@ msgstr "Předvolba 2"
 msgid "Preset 3"
 msgstr "Předvolba 3"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:757
+#: HeadsetControl@lauinger-clan.de/extension.js:771
 msgid "Quicksettings not open - do nothing..."
 msgstr "Rychlá nastavení nejsou otevřena - nedělat nic..."
 
-#: HeadsetControl@lauinger-clan.de/extension.js:760
-#: HeadsetControl@lauinger-clan.de/extension.js:761
+#: HeadsetControl@lauinger-clan.de/extension.js:774
+#: HeadsetControl@lauinger-clan.de/extension.js:775
 msgid "Refreshing..."
 msgstr "Obnovování..."
 
@@ -171,7 +171,6 @@ msgid "Global"
 msgstr "Globální"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:112
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:6
 msgid "file and path of headsetcontrol executable"
 msgstr "soubor a cesta spustitelného souboru ovládání sluchátek"
 
@@ -192,8 +191,8 @@ msgid "HeadsetControl Version Option output format"
 msgstr "Formát výstupu verze HeadsetControl"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:155
-msgid "used starting with HeadsetControl tool version newer then 2.7.0"
-msgstr "používá se od verze nástroje HeadsetControl novější než 2.7.0"
+msgid "Used starting with HeadsetControl tool version newer then 2.7.0"
+msgstr "Používá se od verze nástroje HeadsetControl novější než 2.7.0"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:161
 msgid "Output format"
@@ -201,16 +200,16 @@ msgstr "Formát výstupu"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:162
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:50
-msgid "parameter to ask for all data in new output format"
-msgstr "parametr pro dotaz na všechna data v novém formátu výstupu"
+msgid "Parameter to ask for all data in new output format"
+msgstr "Parametr pro dotaz na všechna data v novém formátu výstupu"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:166
 msgid "HeadsetControl Version Legacy"
 msgstr "Starší verze HeadsetControl"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:167
-msgid "used until HeadsetControl tool version 2.7.0"
-msgstr "používá se do verze nástroje HeadsetControl 2.7.0"
+msgid "Used until HeadsetControl tool version 2.7.0"
+msgstr "Používá se do verze nástroje HeadsetControl 2.7.0"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:172
 msgid "Capabilities"
@@ -218,8 +217,8 @@ msgstr "Možnosti"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:173
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:10
-msgid "parameter to ask for capabilities"
-msgstr "parametr pro dotaz na možnosti"
+msgid "Parameter to ask for capabilities"
+msgstr "Parametr pro dotaz na možnosti"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:178
 msgid "Battery"
@@ -227,47 +226,48 @@ msgstr "Baterie"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:179
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:15
-msgid "parameter to ask for battery"
-msgstr "parametr pro dotaz na baterii"
+msgid "Parameter to ask for battery"
+msgstr "Parametr pro dotaz na baterii"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:185
-msgid "parameter to ask for chat-mix"
-msgstr "parametr pro dotaz na chat-mix"
+msgid "Parameter to ask for chat-mix"
+msgstr "Parametr pro dotaz na chat-mix"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:189
 msgid "HeadsetControl Common"
 msgstr "Společné HeadsetControl"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:190
-msgid "used in all HeadsetControl tool versions"
-msgstr "používá se ve všech verzích nástroje HeadsetControl"
+msgid "Used in all HeadsetControl tool versions"
+msgstr "Používá se ve všech verzích nástroje HeadsetControl"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:196
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:25
-msgid "parameter to ask for sidetone"
-msgstr "parametr pro dotaz na sidetone"
+msgid "Parameter to ask for sidetone"
+msgstr "Parametr pro dotaz na sidetone"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:202
-msgid "passed to headsetcontrol to set for led"
-msgstr "posláno do ovládání sluchátek pro nastavení LED"
+msgid "Passed to headsetcontrol to set for led"
+msgstr "Posláno do ovládání sluchátek pro nastavení LED"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:208
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:35
-msgid "parameter to ask for inactive time"
-msgstr "parametr pro dotaz na dobu nečinnosti"
+msgid "Parameter to ask for inactive time"
+msgstr "Parametr pro dotaz na dobu nečinnosti"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:214
-msgid "passed to headsetcontrol to set for voice prompts"
-msgstr "posláno do ovládání sluchátek pro nastavení hlasových pokynů"
+msgid "Passed to headsetcontrol to set for voice prompts"
+msgstr "Posláno do ovládání sluchátek pro nastavení hlasových pokynů"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:220
-msgid "passed to headsetcontrol to set for rotate to mute"
-msgstr "posláno do ovládání sluchátek pro nastavení ztlumení"
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:45
+msgid "Parameter to ask for rotate to mute"
+msgstr "Parametr pro požádání o otočení pro ztlumení"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:226
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:56
-msgid "passed to headsetcontrol to set the equalizer preset"
-msgstr "posláno do ovládání sluchátek pro nastavení přednastavení ekvalizéru"
+msgid "Passed to headsetcontrol to set the equalizer preset"
+msgstr "Posláno do ovládání sluchátek pro nastavení přednastavení ekvalizéru"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:233
 msgid "Apply"
@@ -295,7 +295,6 @@ msgid "Use notifications"
 msgstr "Použít upozornění"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:280
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:61
 msgid "enable / disable notifications"
 msgstr "povolit / zakázat upozornění"
 
@@ -304,7 +303,6 @@ msgid "Use logging"
 msgstr "Použít protokoly"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:290
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:66
 msgid "enable / disable log outputs"
 msgstr "povolit / zakázat výstupy protokolu"
 
@@ -355,7 +353,6 @@ msgid "Values for sidetone"
 msgstr "Hodnoty pro sidetone"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:404
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:96
 msgid "off low medium high max (-1 disable)"
 msgstr "vypnuto nízká střední vysoká max (-1 zakázat)"
 
@@ -388,84 +385,92 @@ msgid "-1 to disable"
 msgstr "-1 pro zakázání"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:5
-msgid "path to executable"
-msgstr "cesta ke spustitelnému souboru"
+msgid "Path to executable"
+msgstr "Cesta ke spustitelnému souboru"
+
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:6
+msgid "File and path of headsetcontrol executable"
+msgstr "Soubor a cesta spustitelného souboru ovládání sluchátek"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:11
-msgid "passed to headsetcontrol to ask for capabilities"
-msgstr "posláno do ovládání sluchátek pro nastavení možností"
+msgid "Passed to headsetcontrol to ask for capabilities"
+msgstr "Posláno do ovládání sluchátek pro nastavení možností"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:16
-msgid "passed to headsetcontrol to get battery"
-msgstr "posláno do ovládání sluchátek pro nastavení baterie"
+msgid "Passed to headsetcontrol to get battery"
+msgstr "Posláno do ovládání sluchátek pro nastavení baterie"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:20
-msgid "parameter to ask for chatmix"
-msgstr "parametr pro dotaz na chatmix"
+msgid "Parameter to ask for chatmix"
+msgstr "Parametr pro dotaz na chatmix"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:21
-msgid "passed to headsetcontrol to get chatmix"
-msgstr "posláno do ovládání sluchátek pro nastavení chatmix"
+msgid "Passed to headsetcontrol to get chatmix"
+msgstr "Posláno do ovládání sluchátek pro nastavení chatmix"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:26
-msgid "passed to headsetcontrol to set sidetone"
-msgstr "posláno do ovládání sluchátek pro nastavení sidetone"
+msgid "Passed to headsetcontrol to set sidetone"
+msgstr "Posláno do ovládání sluchátek pro nastavení sidetone"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:30
-msgid "parameter to ask for led"
-msgstr "parametr pro dotaz na led"
+msgid "Parameter to ask for led"
+msgstr "Parametr pro dotaz na led"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:31
-msgid "passed to headsetcontrol to set led"
-msgstr "posláno do ovládání sluchátek pro nastavení LED"
+msgid "Passed to headsetcontrol to set led"
+msgstr "Posláno do ovládání sluchátek pro nastavení LED"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:36
-msgid "passed to headsetcontrol to set inactive time"
-msgstr "posláno do ovládání sluchátek pro nastavení doby nečinnosti"
+msgid "Passed to headsetcontrol to set inactive time"
+msgstr "Posláno do ovládání sluchátek pro nastavení doby nečinnosti"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:40
-msgid "parameter to ask for voice prompts"
-msgstr "parametr pro dotaz na hlasové pokyny"
+msgid "Parameter to ask for voice prompts"
+msgstr "Parametr pro dotaz na hlasové pokyny"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:41
-msgid "passed to headsetcontrol to set voice prompts"
-msgstr "posláno do ovládání sluchátek pro nastavení hlasových pokynů"
-
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:45
-msgid "parameter to ask for rotate to mute"
-msgstr "parametr pro požádání o otočení pro ztlumení"
+msgid "Passed to headsetcontrol to set voice prompts"
+msgstr "Posláno do ovládání sluchátek pro nastavení hlasových pokynů"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:46
-msgid "passed to headsetcontrol to set rotate to mute"
-msgstr "posláno do ovládání sluchátek pro nastavení ztlumení"
+msgid "Passed to headsetcontrol to set rotate to mute"
+msgstr "Posláno do ovládání sluchátek pro nastavení ztlumení"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:51
 msgid ""
-"passed to headsetcontrol to get all data - needs a newer version of "
+"Passed to headsetcontrol to get all data - needs a newer version of "
 "headsetcontrol"
 msgstr ""
-"posláno do ovládání sluchátek pro získání všech dat - vyžaduje novější verzi "
+"Posláno do ovládání sluchátek pro získání všech dat - vyžaduje novější verzi "
 "ovládání sluchátek"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:55
-msgid "parameter to set equalizer preset"
-msgstr "parametr pro nastavení přednastavení ekvalizéru"
+msgid "Parameter to set equalizer preset"
+msgstr "Parametr pro nastavení přednastavení ekvalizéru"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:60
-msgid "parameter to enable notifications"
-msgstr "parametr pro povolení upozornění"
+msgid "Parameter to enable notifications"
+msgstr "Parametr pro povolení upozornění"
+
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:61
+msgid "Enable / disable notifications"
+msgstr "Povolit / zakázat upozornění"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:65
-msgid "parameter to enable log outputs"
-msgstr "parametr pro povolení výstupů protokolu"
+msgid "Parameter to enable log outputs"
+msgstr "Parametr pro povolení výstupů protokolu"
+
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:66
+msgid "Enable / disable log outputs"
+msgstr "Povolit / zakázat výstupy protokolu"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:71
 msgid "Makes the systemindicator show/hide"
 msgstr "Umožňuje zobrazit/skrýt systémový indikátor"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:75
-msgid "parameter to enable battery percentage text color"
-msgstr "parametr pro povolení barvy textu procenta baterie"
+msgid "Parameter to enable battery percentage text color"
+msgstr "Parametr pro povolení barvy textu procenta baterie"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:76
 msgid "Makes battery percentage text colored/non-colored"
@@ -474,3 +479,10 @@ msgstr "Barevný/černobílý text procenta baterie"
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:95
 msgid "Sidetone values"
 msgstr "Hodnoty sidetone"
+
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:96
+msgid "Used for sidetone values off, low, medium, high, max (-1 disable)"
+msgstr "Vypnuto nízká střední vysoká max (-1 zakázat)"
+
+#~ msgid "passed to headsetcontrol to set for rotate to mute"
+#~ msgstr "posláno do ovládání sluchátek pro nastavení ztlumení"

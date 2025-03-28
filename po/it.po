@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-23 14:51+0100\n"
-"PO-Revision-Date: 2025-03-23 14:56+0100\n"
+"POT-Creation-Date: 2025-03-28 20:27+0100\n"
+"PO-Revision-Date: 2025-03-28 20:46+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: Italian <LL@li.org>\n"
 "Language: it\n"
@@ -152,12 +152,12 @@ msgstr "Preimpostazione 2"
 msgid "Preset 3"
 msgstr "Preimpostazione 3"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:757
+#: HeadsetControl@lauinger-clan.de/extension.js:771
 msgid "Quicksettings not open - do nothing..."
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:760
-#: HeadsetControl@lauinger-clan.de/extension.js:761
+#: HeadsetControl@lauinger-clan.de/extension.js:774
+#: HeadsetControl@lauinger-clan.de/extension.js:775
 msgid "Refreshing..."
 msgstr "Ricaricare..."
 
@@ -171,7 +171,6 @@ msgid "Global"
 msgstr "Globale"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:112
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:6
 msgid "file and path of headsetcontrol executable"
 msgstr "file e percorso dell'eseguibile di controllo dell'auricolare"
 
@@ -192,9 +191,9 @@ msgid "HeadsetControl Version Option output format"
 msgstr "Formato di output dell'opzione di versione di HeadsetControl"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:155
-msgid "used starting with HeadsetControl tool version newer then 2.7.0"
+msgid "Used starting with HeadsetControl tool version newer then 2.7.0"
 msgstr ""
-"utilizzato a partire dalla versione 2.7.0 dello strumento HeadsetControl"
+"Utilizzato a partire dalla versione 2.7.0 dello strumento HeadsetControl"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:161
 msgid "Output format"
@@ -202,16 +201,16 @@ msgstr "Formato di output"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:162
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:50
-msgid "parameter to ask for all data in new output format"
-msgstr "parametro per richiedere tutti i dati nel nuovo formato di output"
+msgid "Parameter to ask for all data in new output format"
+msgstr "Parametro per richiedere tutti i dati nel nuovo formato di output"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:166
 msgid "HeadsetControl Version Legacy"
 msgstr "Versione Legacy di HeadsetControl"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:167
-msgid "used until HeadsetControl tool version 2.7.0"
-msgstr "utilizzato fino alla versione 2.7.0 dello strumento HeadsetControl"
+msgid "Used until HeadsetControl tool version 2.7.0"
+msgstr "Utilizzato fino alla versione 2.7.0 dello strumento HeadsetControl"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:172
 msgid "Capabilities"
@@ -219,8 +218,8 @@ msgstr "Capacità"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:173
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:10
-msgid "parameter to ask for capabilities"
-msgstr "parametro per chiedere le capacità"
+msgid "Parameter to ask for capabilities"
+msgstr "Parametro per chiedere le capacità"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:178
 msgid "Battery"
@@ -228,48 +227,50 @@ msgstr "Batteria"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:179
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:15
-msgid "parameter to ask for battery"
-msgstr "parametro per chiedere batteria"
+msgid "Parameter to ask for battery"
+msgstr "Parametro per chiedere batteria"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:185
-msgid "parameter to ask for chat-mix"
-msgstr "parametro per chiedere il chat-mix"
+msgid "Parameter to ask for chat-mix"
+msgstr "Parametro per chiedere il chat-mix"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:189
 msgid "HeadsetControl Common"
 msgstr "Comune a HeadsetControl"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:190
-msgid "used in all HeadsetControl tool versions"
-msgstr "utilizzato in tutte le versioni dello strumento HeadsetControl"
+msgid "Used in all HeadsetControl tool versions"
+msgstr "Utilizzato in tutte le versioni dello strumento HeadsetControl"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:196
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:25
-msgid "parameter to ask for sidetone"
-msgstr "parametro per chiedere il tono laterale"
+msgid "Parameter to ask for sidetone"
+msgstr "Parametro per chiedere il tono laterale"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:202
-msgid "passed to headsetcontrol to set for led"
-msgstr "passato al controllo dell'auricolare per impostare il led"
+msgid "Passed to headsetcontrol to set for led"
+msgstr "Passato al controllo dell'auricolare per impostare il led"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:208
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:35
-msgid "parameter to ask for inactive time"
-msgstr "parametro per chiedere il tempo di inattività"
+msgid "Parameter to ask for inactive time"
+msgstr "Parametro per chiedere il tempo di inattività"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:214
-msgid "passed to headsetcontrol to set for voice prompts"
-msgstr "passato al controllo dell'auricolare per impostare i messaggi vocali"
+msgid "Passed to headsetcontrol to set for voice prompts"
+msgstr "Passato al controllo dell'auricolare per impostare i messaggi vocali"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:220
-msgid "passed to headsetcontrol to set for rotate to mute"
-msgstr ""
-"passato al controllo dell'auricolare per impostare la rotazione su mute"
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:45
+msgid "Parameter to ask for rotate to mute"
+msgstr "Parametro per richiedere la rotazione per disattivare l'audio"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:226
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:56
-msgid "passed to headsetcontrol to set the equalizer preset"
-msgstr "passato al controllo dell'auricolare per impostare la preimpostazione dell'equalizzatore"
+msgid "Passed to headsetcontrol to set the equalizer preset"
+msgstr ""
+"Passato al controllo dell'auricolare per impostare la preimpostazione "
+"dell'equalizzatore"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:233
 msgid "Apply"
@@ -297,7 +298,6 @@ msgid "Use notifications"
 msgstr "Usa le notifiche"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:280
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:61
 msgid "enable / disable notifications"
 msgstr "abilita / disabilita notifiche"
 
@@ -306,7 +306,6 @@ msgid "Use logging"
 msgstr "Usa log"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:290
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:66
 msgid "enable / disable log outputs"
 msgstr "abilita / disabilita log output"
 
@@ -357,7 +356,6 @@ msgid "Values for sidetone"
 msgstr "Valori per il tono laterale"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:404
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:96
 msgid "off low medium high max (-1 disable)"
 msgstr "off bassa media alta max (-1 disabilita)"
 
@@ -390,87 +388,97 @@ msgid "-1 to disable"
 msgstr "-1 per disabilitare"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:5
-msgid "path to executable"
-msgstr "percorso dell'eseguibile"
+msgid "Path to executable"
+msgstr "Percorso dell'eseguibile"
+
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:6
+msgid "File and path of headsetcontrol executable"
+msgstr "File e percorso dell'eseguibile di controllo dell'auricolare"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:11
-msgid "passed to headsetcontrol to ask for capabilities"
-msgstr "passato al controllo dell'auricolare per richiedere le funzionalità"
+msgid "Passed to headsetcontrol to ask for capabilities"
+msgstr "Passato al controllo dell'auricolare per richiedere le funzionalità"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:16
-msgid "passed to headsetcontrol to get battery"
-msgstr "passato al controllo dell'auricolare per ottenere la batteria"
+msgid "Passed to headsetcontrol to get battery"
+msgstr "Passato al controllo dell'auricolare per ottenere la batteria"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:20
-msgid "parameter to ask for chatmix"
-msgstr "parametro per chiedere il chatmix"
+msgid "Parameter to ask for chatmix"
+msgstr "Parametro per chiedere il chatmix"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:21
-msgid "passed to headsetcontrol to get chatmix"
-msgstr "passato al controllo dell'auricolare per ottenere chatmix"
+msgid "Passed to headsetcontrol to get chatmix"
+msgstr "Passato al controllo dell'auricolare per ottenere chatmix"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:26
-msgid "passed to headsetcontrol to set sidetone"
-msgstr "passato al controllo dell'auricolare per impostare il tono laterale"
+msgid "Passed to headsetcontrol to set sidetone"
+msgstr "Passato al controllo dell'auricolare per impostare il tono laterale"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:30
-msgid "parameter to ask for led"
-msgstr "parametro per chiedere il led"
+msgid "Parameter to ask for led"
+msgstr "Parametro per chiedere il led"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:31
-msgid "passed to headsetcontrol to set led"
-msgstr "passato al controllo dell'auricolare per impostare il led"
+msgid "Passed to headsetcontrol to set led"
+msgstr "Passato al controllo dell'auricolare per impostare il led"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:36
-msgid "passed to headsetcontrol to set inactive time"
+msgid "Passed to headsetcontrol to set inactive time"
 msgstr ""
-"passato al controllo dell'auricolare per impostare il tempo di inattività"
+"Passato al controllo dell'auricolare per impostare il tempo di inattività"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:40
-msgid "parameter to ask for voice prompts"
-msgstr "parametro per richiedere messaggi vocali"
+msgid "Parameter to ask for voice prompts"
+msgstr "Parametro per richiedere messaggi vocali"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:41
-msgid "passed to headsetcontrol to set voice prompts"
-msgstr "passato al controllo dell'auricolare per impostare i messaggi vocali"
-
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:45
-msgid "parameter to ask for rotate to mute"
-msgstr "parametro per richiedere la rotazione per disattivare l'audio"
+msgid "Passed to headsetcontrol to set voice prompts"
+msgstr "Passato al controllo dell'auricolare per impostare i messaggi vocali"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:46
-msgid "passed to headsetcontrol to set rotate to mute"
+msgid "Passed to headsetcontrol to set rotate to mute"
 msgstr ""
-"passato al controllo dell'auricolare per impostare la rotazione su muto"
+"Passato al controllo dell'auricolare per impostare la rotazione su muto"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:51
 msgid ""
-"passed to headsetcontrol to get all data - needs a newer version of "
+"Passed to headsetcontrol to get all data - needs a newer version of "
 "headsetcontrol"
 msgstr ""
-"passato al controllo dell'auricolare per ottenere tutti i dati - richiede "
+"Passato al controllo dell'auricolare per ottenere tutti i dati - richiede "
 "una versione più recente di headsetcontrol"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:55
-msgid "parameter to set equalizer preset"
+msgid "Parameter to set equalizer preset"
 msgstr ""
+"Passato al controllo dell'auricolare per impostare la preimpostazione "
+"dell'equalizzatore"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:60
-msgid "parameter to enable notifications"
-msgstr "parametro per abilitare le notifiche"
+msgid "Parameter to enable notifications"
+msgstr "Parametro per abilitare le notifiche"
+
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:61
+msgid "Enable / disable notifications"
+msgstr "Abilita / disabilita notifiche"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:65
-msgid "parameter to enable log outputs"
-msgstr "parametro per abilitare output log"
+msgid "Parameter to enable log outputs"
+msgstr "Parametro per abilitare output log"
+
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:66
+msgid "Enable / disable log outputs"
+msgstr "Abilita / disabilita log output"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:71
 msgid "Makes the systemindicator show/hide"
 msgstr "Mostra/nascondi l'indicatore di sistema"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:75
-msgid "parameter to enable battery percentage text color"
+msgid "Parameter to enable battery percentage text color"
 msgstr ""
-"parametro per abilitare il colore del testo della percentuale della batteria"
+"Parametro per abilitare il colore del testo della percentuale della batteria"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:76
 msgid "Makes battery percentage text colored/non-colored"
@@ -478,7 +486,15 @@ msgstr "Rende il testo della percentuale della batteria colorato/non colorato"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:95
 msgid "Sidetone values"
-msgstr ""
+msgstr "Valori del tono laterale"
+
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:96
+msgid "Used for sidetone values off, low, medium, high, max (-1 disable)"
+msgstr "Off bassa media alta max (-1 disabilita)"
+
+#~ msgid "passed to headsetcontrol to set for rotate to mute"
+#~ msgstr ""
+#~ "passato al controllo dell'auricolare per impostare la rotazione su mute"
 
 #~ msgid "HeadsetControl executable"
 #~ msgstr "Eseguibile del controllo dell'auricolare"
