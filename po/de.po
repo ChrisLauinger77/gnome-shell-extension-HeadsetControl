@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-28 21:03+0100\n"
-"PO-Revision-Date: 2025-03-28 20:39+0100\n"
+"POT-Creation-Date: 2025-03-29 09:49+0100\n"
+"PO-Revision-Date: 2025-03-29 09:54+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -156,7 +156,8 @@ msgid "Global"
 msgstr "Global"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:112
-msgid "file and path of headsetcontrol executable"
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:6
+msgid "File and path of headsetcontrol executable"
 msgstr "Dateiname und Pfad der ausführbaren Datei"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:124
@@ -250,7 +251,7 @@ msgid "Parameter to ask for rotate to mute"
 msgstr "Parameter zum Setzen von Stummschaltung durch Drehen"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:226
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:61
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:66
 msgid "Passed to headsetcontrol to set the equalizer preset"
 msgstr "Übergabe an headsetcontrol zum Setzen der Equalizer-Voreinstellung"
 
@@ -271,7 +272,7 @@ msgid "Show SystemIndicator"
 msgstr "Systemindikator anzeigen"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:270
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:80
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:85
 msgid "Toggle to show systemindicator"
 msgstr "Umschalten der Anzeige des Systemindikators"
 
@@ -280,7 +281,8 @@ msgid "Use notifications"
 msgstr "Benachrichtigungen verwenden"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:280
-msgid "enable / disable notifications"
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:76
+msgid "Enable / disable notifications"
 msgstr "Erlaube / verbiete Benachrichtigungen"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:289
@@ -288,7 +290,8 @@ msgid "Use logging"
 msgstr "Protokoll verwenden"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:290
-msgid "enable / disable log outputs"
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:81
+msgid "Enable / disable log outputs"
 msgstr "Erlaube / verbiete Protokollausgaben"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:300
@@ -300,36 +303,36 @@ msgid "Use colors"
 msgstr "Farben verwenden"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:305
-msgid "enable / disable text colors"
+msgid "Enable / disable text colors"
 msgstr "Erlaube / verbiete Textfarben"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:329
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:90
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:95
 msgid "Color battery charge high"
 msgstr "Farbe hohe Batterieladung"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:332
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:91
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:96
 msgid "The text color for battery charge 100% to 50%"
 msgstr "Textfarbe für Batterieladung 100% bis 51%"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:353
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:95
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:100
 msgid "Color battery charge medium"
 msgstr "Farbe mittlere Batterieladung"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:356
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:96
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:101
 msgid "The text color for battery charge 49% to 25%"
 msgstr "Textfarbe für Batterieladung 50% bis 26%"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:377
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:100
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:105
 msgid "Color battery charge low"
 msgstr "Farbe niedrige Batterieladung"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:380
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:101
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:106
 msgid "The text color for battery charge 24% to 0%"
 msgstr "Textfarbe für Batterieladung 25% bis 0%"
 
@@ -389,10 +392,6 @@ msgstr "Voreinstellung 3"
 msgid "Path to executable"
 msgstr "Pfad zur ausfühbaren Datei"
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:6
-msgid "File and path of headsetcontrol executable"
-msgstr "Dateiname und Pfad der ausführbaren Datei"
-
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:11
 msgid "Passed to headsetcontrol to ask for capabilities"
 msgstr "Übergabe an headsetcontrol zur Abfrage der Fähigkeiten"
@@ -446,66 +445,80 @@ msgstr ""
 "version von headsetcontrol"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:55
-#, fuzzy
 msgid "Parameter to set equalizer setting"
-msgstr "Parameter zum Setzen des Equalizer-Voreinstellung"
+msgstr "Parameter zum Setzen des Equalizers"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:56
-#, fuzzy
 msgid "Passed to headsetcontrol to set the equalizer setting"
-msgstr "Übergabe an headsetcontrol zum Setzen der Equalizer-Voreinstellung"
+msgstr "Übergabe an headsetcontrol zum Setzen des Equalizers"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:60
+msgid "Equalizer options (equalizer might not be supported by your headset)"
+msgstr ""
+"Equalizeroptionen (Equalizer könnte von Ihrem Headset nicht unterstützt sein)"
+
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:61
+msgid "Passed to headsetcontrol as parameter to \"-e\" (when supported)"
+msgstr "Übergabe an headsetcontrol als Parametrer zu \"-e\" (wenn unterstützt)"
+
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:65
 msgid "Parameter to set equalizer preset"
 msgstr "Parameter zum Setzen des Equalizer-Voreinstellung"
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:65
-#, fuzzy
-msgid "Names of the equalizer presets"
-msgstr "Parameter zum Setzen des Equalizer-Voreinstellung"
-
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:66
-#, fuzzy
-msgid "Shown in equalizer preset menu"
-msgstr "Equalizer-Voreinstellung"
-
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:70
+msgid ""
+"Names of the equalizer presets (equalizer preset might not be supported by "
+"your headset)"
+msgstr ""
+"Namen der Equalizer-Voreinstellung (Equalizer-Voreinstellung könnte von "
+"Ihrem Headset nicht unterstützt sein)"
+
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:71
+msgid "Shown in equalizer preset menu (when supported)"
+msgstr "Werden im Equalizer-Voreinstellungsmenü angezeigt (wenn unterstützt)"
+
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:75
 msgid "Parameter to enable notifications"
 msgstr "Parameter zum Erlauben von Benachrichtigungen"
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:71
-msgid "Enable / disable notifications"
-msgstr "Erlaube / verbiete Benachrichtigungen"
-
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:75
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:80
 msgid "Parameter to enable log outputs"
 msgstr "Parameter zum Erlauben von Protokollausgaben"
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:76
-msgid "Enable / disable log outputs"
-msgstr "Erlaube / verbiete Protokollausgaben"
-
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:81
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:86
 msgid "Makes the systemindicator show/hide"
 msgstr "Systemindikator anzeigen/verstecken"
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:85
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:90
 msgid "Parameter to enable battery percentage text color"
 msgstr "Parameter zum Erlauben von Batterieladungs-Textfarbe"
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:86
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:91
 msgid "Makes battery percentage text colored/non-colored"
 msgstr "Farblicher Kennzeichnung der Batterieladungsanzeige umschalten"
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:105
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:110
 msgid "Sidetone values"
 msgstr "Mithörton Werte"
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:106
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:111
 msgid "Used for sidetone values off, low, medium, high, max (-1 disable)"
 msgstr ""
 "Verwndet als Mithörton-Werte aus, leise, mittel, hoch, max (-1 zum "
 "Deaktivieren)"
+
+#~ msgid "file and path of headsetcontrol executable"
+#~ msgstr "Dateiname und Pfad der ausführbaren Datei"
+
+#~ msgid "enable / disable notifications"
+#~ msgstr "Erlaube / verbiete Benachrichtigungen"
+
+#~ msgid "enable / disable log outputs"
+#~ msgstr "Erlaube / verbiete Protokollausgaben"
+
+#, fuzzy
+#~ msgid "Names of the equalizer presets"
+#~ msgstr "Parameter zum Setzen des Equalizer-Voreinstellung"
 
 #~ msgid "passed to headsetcontrol to set for rotate to mute"
 #~ msgstr "Parameter zum Setzen von Stummschaltung durch Drehen"

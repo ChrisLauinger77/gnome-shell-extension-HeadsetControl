@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-28 21:03+0100\n"
-"PO-Revision-Date: 2025-03-28 20:31+0100\n"
+"POT-Creation-Date: 2025-03-29 09:49+0100\n"
+"PO-Revision-Date: 2025-03-29 09:50+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: cs\n"
@@ -155,8 +155,9 @@ msgid "Global"
 msgstr "Globální"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:112
-msgid "file and path of headsetcontrol executable"
-msgstr "soubor a cesta spustitelného souboru ovládání sluchátek"
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:6
+msgid "File and path of headsetcontrol executable"
+msgstr "Soubor a cesta spustitelného souboru ovládání sluchátek"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:124
 msgid "..."
@@ -249,7 +250,7 @@ msgid "Parameter to ask for rotate to mute"
 msgstr "Parametr pro požádání o otočení pro ztlumení"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:226
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:61
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:66
 msgid "Passed to headsetcontrol to set the equalizer preset"
 msgstr "Posláno do ovládání sluchátek pro nastavení přednastavení ekvalizéru"
 
@@ -270,7 +271,7 @@ msgid "Show SystemIndicator"
 msgstr "Zobrazit indikátor systému"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:270
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:80
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:85
 msgid "Toggle to show systemindicator"
 msgstr "Přepnutím zobrazíte indikátor systému"
 
@@ -279,16 +280,18 @@ msgid "Use notifications"
 msgstr "Použít upozornění"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:280
-msgid "enable / disable notifications"
-msgstr "povolit / zakázat upozornění"
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:76
+msgid "Enable / disable notifications"
+msgstr "Povolit / zakázat upozornění"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:289
 msgid "Use logging"
 msgstr "Použít protokoly"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:290
-msgid "enable / disable log outputs"
-msgstr "povolit / zakázat výstupy protokolu"
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:81
+msgid "Enable / disable log outputs"
+msgstr "Povolit / zakázat výstupy protokolu"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:300
 msgid "Colors"
@@ -299,36 +302,36 @@ msgid "Use colors"
 msgstr "Použít barvy"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:305
-msgid "enable / disable text colors"
-msgstr "povolit / zakázat barvy textu"
+msgid "Enable / disable text colors"
+msgstr "Povolit / zakázat barvy textu"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:329
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:90
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:95
 msgid "Color battery charge high"
 msgstr "Barva baterie při vysokém nabití"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:332
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:91
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:96
 msgid "The text color for battery charge 100% to 50%"
 msgstr "Barva textu při nabití baterie 100% až 51%"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:353
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:95
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:100
 msgid "Color battery charge medium"
 msgstr "Barva baterie při středním nabití"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:356
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:96
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:101
 msgid "The text color for battery charge 49% to 25%"
 msgstr "Barva textu při nabití baterie 50% až 26%"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:377
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:100
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:105
 msgid "Color battery charge low"
 msgstr "Barva baterie při nízkém nabití"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:380
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:101
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:106
 msgid "The text color for battery charge 24% to 0%"
 msgstr "Barva textu při nabití baterie 25% až 0%"
 
@@ -388,10 +391,6 @@ msgstr "Předvolba 3"
 msgid "Path to executable"
 msgstr "Cesta ke spustitelnému souboru"
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:6
-msgid "File and path of headsetcontrol executable"
-msgstr "Soubor a cesta spustitelného souboru ovládání sluchátek"
-
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:11
 msgid "Passed to headsetcontrol to ask for capabilities"
 msgstr "Posláno do ovládání sluchátek pro nastavení možností"
@@ -445,64 +444,73 @@ msgstr ""
 "ovládání sluchátek"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:55
-#, fuzzy
 msgid "Parameter to set equalizer setting"
-msgstr "Parametr pro nastavení přednastavení ekvalizéru"
+msgstr "Parametr pro nastavení ekvalizéru"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:56
-#, fuzzy
 msgid "Passed to headsetcontrol to set the equalizer setting"
-msgstr "Posláno do ovládání sluchátek pro nastavení přednastavení ekvalizéru"
+msgstr "Posláno do ovládání sluchátek pro nastavení ekvalizéru"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:60
+msgid "Equalizer options (equalizer might not be supported by your headset)"
+msgstr "Možnosti ekvalizéru (ekvalizér nemusí být podporován vašimi sluchátky)"
+
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:61
+msgid "Passed to headsetcontrol as parameter to \"-e\" (when supported)"
+msgstr "Posláno do ovládání sluchátek jako parametr \"-e\" (pokud je podporováno)"
+
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:65
 msgid "Parameter to set equalizer preset"
 msgstr "Parametr pro nastavení přednastavení ekvalizéru"
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:65
-#, fuzzy
-msgid "Names of the equalizer presets"
-msgstr "Parametr pro nastavení přednastavení ekvalizéru"
-
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:66
-#, fuzzy
-msgid "Shown in equalizer preset menu"
-msgstr "Přednastavení ekvalizéru"
-
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:70
+msgid "Names of the equalizer presets (equalizer preset might not be supported by your headset)"
+msgstr "Názvy přednastavení ekvalizéru (přednastavení ekvalizéru nemusí být podporováno vašimi sluchátky)"
+
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:71
+msgid "Shown in equalizer preset menu (when supported)"
+msgstr "Zobrazeno v nabídce přednastavení ekvalizéru (pokud je podporováno)"
+
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:75
 msgid "Parameter to enable notifications"
 msgstr "Parametr pro povolení upozornění"
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:71
-msgid "Enable / disable notifications"
-msgstr "Povolit / zakázat upozornění"
-
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:75
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:80
 msgid "Parameter to enable log outputs"
 msgstr "Parametr pro povolení výstupů protokolu"
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:76
-msgid "Enable / disable log outputs"
-msgstr "Povolit / zakázat výstupy protokolu"
-
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:81
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:85
 msgid "Makes the systemindicator show/hide"
 msgstr "Umožňuje zobrazit/skrýt systémový indikátor"
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:85
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:90
 msgid "Parameter to enable battery percentage text color"
 msgstr "Parametr pro povolení barvy textu procenta baterie"
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:86
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:91
 msgid "Makes battery percentage text colored/non-colored"
 msgstr "Barevný/černobílý text procenta baterie"
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:105
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:110
 msgid "Sidetone values"
 msgstr "Hodnoty sidetone"
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:106
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:111
 msgid "Used for sidetone values off, low, medium, high, max (-1 disable)"
 msgstr "Vypnuto nízká střední vysoká max (-1 zakázat)"
+
+#~ msgid "file and path of headsetcontrol executable"
+#~ msgstr "soubor a cesta spustitelného souboru ovládání sluchátek"
+
+#~ msgid "enable / disable notifications"
+#~ msgstr "povolit / zakázat upozornění"
+
+#~ msgid "enable / disable log outputs"
+#~ msgstr "povolit / zakázat výstupy protokolu"
+
+#, fuzzy
+#~ msgid "Names of the equalizer presets"
+#~ msgstr "Parametr pro nastavení přednastavení ekvalizéru"
 
 #~ msgid "passed to headsetcontrol to set for rotate to mute"
 #~ msgstr "posláno do ovládání sluchátek pro nastavení ztlumení"
