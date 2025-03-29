@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-29 10:40+0100\n"
-"PO-Revision-Date: 2025-03-29 10:42+0100\n"
+"POT-Creation-Date: 2025-03-29 11:43+0100\n"
+"PO-Revision-Date: 2025-03-29 11:56+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: cs\n"
@@ -251,7 +251,6 @@ msgstr "Parametr pro požádání o otočení pro ztlumení"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:241
 #: HeadsetControl@lauinger-clan.de/prefs.js:420
-#: HeadsetControl@lauinger-clan.de/prefs.js:425
 msgid "Equalizer"
 msgstr "Ekvalizér"
 
@@ -346,12 +345,14 @@ msgstr "Barva baterie při nízkém nabití"
 msgid "The text color for battery charge 24% to 0%"
 msgstr "Barva textu při nabití baterie 25% až 0%"
 
+#: HeadsetControl@lauinger-clan.de/prefs.js:425
+msgid "Equalizer settings"
+msgstr "Nastavení ekvalizéru"
+
 #: HeadsetControl@lauinger-clan.de/prefs.js:427
-#: HeadsetControl@lauinger-clan.de/prefs.js:441
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:61
-msgid "Passed to headsetcontrol as parameter to '-e' (when supported)"
-msgstr ""
-"Posláno do ovládání sluchátek jako parametr '-e' (pokud je podporováno)"
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:60
+msgid "Equalizer options (equalizer might not be supported by your headset)"
+msgstr "Možnosti ekvalizéru (ekvalizér nemusí být podporován vašimi sluchátky)"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:431
 msgid "Equalizer setting 1"
@@ -368,6 +369,11 @@ msgstr "Nastavení ekvalizéru 3"
 #: HeadsetControl@lauinger-clan.de/prefs.js:434
 msgid "Equalizer setting 4"
 msgstr "Nastavení ekvalizéru 4"
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:441
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:61
+msgid "Passed to headsetcontrol as parameter to equalizer option (when supported)"
+msgstr "Předáno do ovládání sluchátek jako parametr možnosti ekvalizéru (pokud je podporováno)"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:452
 msgid "Equalizer presets"
@@ -499,10 +505,6 @@ msgstr ""
 msgid "Parameter to set equalizer setting"
 msgstr "Parametr pro nastavení ekvalizéru"
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:60
-msgid "Equalizer options (equalizer might not be supported by your headset)"
-msgstr "Možnosti ekvalizéru (ekvalizér nemusí být podporován vašimi sluchátky)"
-
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:65
 msgid "Parameter to set equalizer preset"
 msgstr "Parametr pro nastavení přednastavení ekvalizéru"
@@ -534,6 +536,10 @@ msgstr "Hodnoty sidetone"
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:111
 msgid "Used for sidetone values off, low, medium, high, max (-1 disable)"
 msgstr "Vypnuto nízká střední vysoká max (-1 zakázat)"
+
+#~ msgid "Passed to headsetcontrol as parameter to '-e' (when supported)"
+#~ msgstr ""
+#~ "Posláno do ovládání sluchátek jako parametr '-e' (pokud je podporováno)"
 
 #~ msgid "Preset 1"
 #~ msgstr "Předvolba 1"

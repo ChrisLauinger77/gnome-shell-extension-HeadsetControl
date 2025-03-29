@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-29 10:40+0100\n"
-"PO-Revision-Date: 2025-03-29 10:44+0100\n"
+"POT-Creation-Date: 2025-03-29 11:43+0100\n"
+"PO-Revision-Date: 2025-03-29 11:57+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -253,7 +253,6 @@ msgstr "Parámetro para preguntar por girar para silenciar"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:241
 #: HeadsetControl@lauinger-clan.de/prefs.js:420
-#: HeadsetControl@lauinger-clan.de/prefs.js:425
 msgid "Equalizer"
 msgstr "Ecualizador"
 
@@ -349,12 +348,16 @@ msgstr "Color de carga de batería baja"
 msgid "The text color for battery charge 24% to 0%"
 msgstr "El color del texto para la carga de batería del 24% al 0%"
 
+#: HeadsetControl@lauinger-clan.de/prefs.js:425
+msgid "Equalizer settings"
+msgstr "Configuraciones del ecualizador"
+
 #: HeadsetControl@lauinger-clan.de/prefs.js:427
-#: HeadsetControl@lauinger-clan.de/prefs.js:441
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:61
-msgid "Passed to headsetcontrol as parameter to '-e' (when supported)"
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:60
+msgid "Equalizer options (equalizer might not be supported by your headset)"
 msgstr ""
-"Pasado a headsetcontrol como parámetro para '-e' (cuando sea compatible)"
+"Opciones de ecualizador (el ecualizador podría no ser compatible con sus "
+"auriculares)"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:431
 msgid "Equalizer setting 1"
@@ -371,6 +374,11 @@ msgstr "Configuración del ecualizador 3"
 #: HeadsetControl@lauinger-clan.de/prefs.js:434
 msgid "Equalizer setting 4"
 msgstr "Configuración del ecualizador 4"
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:441
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:61
+msgid "Passed to headsetcontrol as parameter to equalizer option (when supported)"
+msgstr "Pasado a headsetcontrol como parámetro para la opción del ecualizador (cuando sea compatible)"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:452
 msgid "Equalizer presets"
@@ -503,12 +511,6 @@ msgstr ""
 msgid "Parameter to set equalizer setting"
 msgstr "Parámetro para configurar la configuración del ecualizador"
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:60
-msgid "Equalizer options (equalizer might not be supported by your headset)"
-msgstr ""
-"Opciones de ecualizador (el ecualizador podría no ser compatible con sus "
-"auriculares)"
-
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:65
 msgid "Parameter to set equalizer preset"
 msgstr "Parámetro para configurar el preajuste del ecualizador"
@@ -540,6 +542,10 @@ msgstr "Valores de sidetone"
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:111
 msgid "Used for sidetone values off, low, medium, high, max (-1 disable)"
 msgstr "Apagado bajo medio alto máximo (-1 deshabilitar)"
+
+#~ msgid "Passed to headsetcontrol as parameter to '-e' (when supported)"
+#~ msgstr ""
+#~ "Pasado a headsetcontrol como parámetro para '-e' (cuando sea compatible)"
 
 #~ msgid "Preset 1"
 #~ msgstr "Preajuste 1"

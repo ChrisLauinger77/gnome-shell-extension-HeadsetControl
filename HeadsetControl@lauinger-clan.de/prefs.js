@@ -98,8 +98,8 @@ export default class AdwPrefs extends ExtensionPreferences {
     }
 
     _onEQvaluechanged(adwrow, index, option) {
-        let arrayEQsettings = this.getSettings().get_strv("option-equalizer-settings");
-        arrayEQsettings[index] = adwrow.get_value().toString();
+        let arrayEQsettings = this.getSettings().get_strv(option);
+        arrayEQsettings[index] = adwrow.get_text();
         this.getSettings().set_strv(option, arrayEQsettings);
     }
 
@@ -422,9 +422,9 @@ export default class AdwPrefs extends ExtensionPreferences {
         page2.add(groupC3);
         //equalizer
         const adwexprowEQ = new Adw.ExpanderRow({
-            title: _("Equalizer"),
+            title: _("Equalizer settings"),
         });
-        adwexprowEQ.set_tooltip_text(_("Passed to headsetcontrol as parameter to '-e' (when supported)"));
+        adwexprowEQ.set_tooltip_text(_("Equalizer options (equalizer might not be supported by your headset)"));
         let arrayEQsettings = window._settings.get_strv("option-equalizer-settings");
         groupC3.add(adwexprowEQ);
         const equalizerLabels = [
@@ -438,7 +438,7 @@ export default class AdwPrefs extends ExtensionPreferences {
                 let adwrowEQ = this.addEqualizerRow(
                     adwexprowEQ,
                     label,
-                    _("Passed to headsetcontrol as parameter to '-e' (when supported)"),
+                    _("Passed to headsetcontrol as parameter to equalizer option (when supported)"),
                     arrayEQsettings[index]
                 );
                 adwrowEQ.connect(
@@ -452,7 +452,7 @@ export default class AdwPrefs extends ExtensionPreferences {
             title: _("Equalizer presets"),
         });
         adwexprowEQP.set_tooltip_text(_("Names of the equalizer presets (equalizer preset might not be supported by your headset)"));
-        let arrayEQPnames = window._settings.get_strv("option-equalizer-preset-names");
+        let arrayEQPnames = window._settings.get_strv("equalizer-preset-names");
         groupC3.add(adwexprowEQP);
         const equalizerPresetLabels = [
             _("Default"),
@@ -470,7 +470,7 @@ export default class AdwPrefs extends ExtensionPreferences {
                 );
                 adwrowEQP.connect(
                     "changed",
-                    this._onEQvaluechanged.bind(this, adwrowEQP, index,"oequalizer-preset-names")
+                    this._onEQvaluechanged.bind(this, adwrowEQP, index,"equalizer-preset-names")
                 );
             }
         });

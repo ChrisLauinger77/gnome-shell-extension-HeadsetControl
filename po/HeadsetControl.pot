@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-29 10:40+0100\n"
+"POT-Creation-Date: 2025-03-29 11:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -251,7 +251,6 @@ msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:241
 #: HeadsetControl@lauinger-clan.de/prefs.js:420
-#: HeadsetControl@lauinger-clan.de/prefs.js:425
 msgid "Equalizer"
 msgstr ""
 
@@ -346,10 +345,13 @@ msgstr ""
 msgid "The text color for battery charge 24% to 0%"
 msgstr ""
 
+#: HeadsetControl@lauinger-clan.de/prefs.js:425
+msgid "Equalizer settings"
+msgstr ""
+
 #: HeadsetControl@lauinger-clan.de/prefs.js:427
-#: HeadsetControl@lauinger-clan.de/prefs.js:441
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:61
-msgid "Passed to headsetcontrol as parameter to '-e' (when supported)"
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:60
+msgid "Equalizer options (equalizer might not be supported by your headset)"
 msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:431
@@ -366,6 +368,12 @@ msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:434
 msgid "Equalizer setting 4"
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:441
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:61
+msgid ""
+"Passed to headsetcontrol as parameter to equalizer option (when supported)"
 msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:452
@@ -492,10 +500,6 @@ msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:55
 msgid "Parameter to set equalizer setting"
-msgstr ""
-
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:60
-msgid "Equalizer options (equalizer might not be supported by your headset)"
 msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:65
