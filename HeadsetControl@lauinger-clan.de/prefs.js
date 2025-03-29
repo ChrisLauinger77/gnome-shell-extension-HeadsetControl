@@ -109,7 +109,7 @@ export default class AdwPrefs extends ExtensionPreferences {
         page1.add(group1);
         const valueExecutable = new Adw.EntryRow({ title: _("Command:") });
         valueExecutable.set_tooltip_text(
-            _("file and path of headsetcontrol executable")
+            _("File and path of headsetcontrol executable")
         );
         group1.add(valueExecutable);
 
@@ -277,7 +277,7 @@ export default class AdwPrefs extends ExtensionPreferences {
         );
         //use notifications
         adwrow = new Adw.SwitchRow({ title: _("Use notifications") });
-        adwrow.set_tooltip_text(_("enable / disable notifications"));
+        adwrow.set_tooltip_text(_("Enable / disable notifications"));
         groupC1.add(adwrow);
         window._settings.bind(
             "use-notifications",
@@ -287,7 +287,7 @@ export default class AdwPrefs extends ExtensionPreferences {
         );
         //use logging
         adwrow = new Adw.SwitchRow({ title: _("Use logging") });
-        adwrow.set_tooltip_text(_("enable / disable log outputs"));
+        adwrow.set_tooltip_text(_("Enable / disable log outputs"));
         groupC1.add(adwrow);
         window._settings.bind(
             "use-logging",
@@ -302,7 +302,7 @@ export default class AdwPrefs extends ExtensionPreferences {
         page2.add(groupC2);
         //use colors
         const adwexprow = new Adw.ExpanderRow({ title: _("Use colors") });
-        adwexprow.set_tooltip_text(_("enable / disable text colors"));
+        adwexprow.set_tooltip_text(_("Enable / disable text colors"));
         groupC2.add(adwexprow);
         const toggleusecolors = new Gtk.Switch({
             active: window._settings.get_boolean("use-colors"),
