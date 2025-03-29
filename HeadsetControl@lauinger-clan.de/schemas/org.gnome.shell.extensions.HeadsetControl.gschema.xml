@@ -2,68 +2,83 @@
   <schema id="org.gnome.shell.extensions.HeadsetControl" path="/org/gnome/shell/extensions/HeadsetControl/">
     <key name="headsetcontrol-executable" type="s">
       <default>'/usr/local/bin/headsetcontrol'</default>
-      <summary>path to executable</summary>
-      <description>file and path of headsetcontrol executable</description>
+      <summary>Path to executable</summary>
+      <description>File and path of headsetcontrol executable</description>
     </key>
     <key name="option-capabilities" type="s">
       <default>'-?'</default>
-      <summary>parameter to ask for capabilities</summary>
-      <description>passed to headsetcontrol to ask for capabilities</description>
+      <summary>Parameter to ask for capabilities</summary>
+      <description>Passed to headsetcontrol to ask for capabilities</description>
     </key>
     <key name="option-battery" type="s">
       <default>'-b'</default>
-      <summary>parameter to ask for battery</summary>
-      <description>passed to headsetcontrol to get battery</description>
+      <summary>Parameter to ask for battery</summary>
+      <description>Passed to headsetcontrol to get battery</description>
     </key>
     <key name="option-chatmix" type="s">
       <default>'-m'</default>
-      <summary>parameter to ask for chatmix</summary>
-      <description>passed to headsetcontrol to get chatmix</description>
+      <summary>Parameter to ask for chatmix</summary>
+      <description>Passed to headsetcontrol to get chatmix</description>
     </key>
     <key name="option-sidetone" type="s">
       <default>'-s'</default>
-      <summary>parameter to ask for sidetone</summary>
-      <description>passed to headsetcontrol to set sidetone</description>
+      <summary>Parameter to ask for sidetone</summary>
+      <description>Passed to headsetcontrol to set sidetone</description>
     </key>
     <key name="option-led" type="s">
       <default>'-l'</default>
-      <summary>parameter to ask for led</summary>
-      <description>passed to headsetcontrol to set led</description>
+      <summary>Parameter to ask for led</summary>
+      <description>Passed to headsetcontrol to set led</description>
     </key>
     <key name="option-inactive-time" type="s">
       <default>'-i'</default>
-      <summary>parameter to ask for inactive time</summary>
-      <description>passed to headsetcontrol to set inactive time</description>
+      <summary>Parameter to ask for inactive time</summary>
+      <description>Passed to headsetcontrol to set inactive time</description>
     </key>
     <key name="option-voice" type="s">
       <default>'-v'</default>
-      <summary>parameter to ask for voice prompts</summary>
-      <description>passed to headsetcontrol to set voice prompts</description>
+      <summary>Parameter to ask for voice prompts</summary>
+      <description>Passed to headsetcontrol to set voice prompts</description>
     </key>
     <key name="option-rotate-mute" type="s">
       <default>'-r'</default>
-      <summary>parameter to ask for rotate to mute</summary>
-      <description>passed to headsetcontrol to set rotate to mute</description>
+      <summary>Parameter to ask for rotate to mute</summary>
+      <description>Passed to headsetcontrol to set rotate to mute</description>
     </key>
     <key name="option-output-format" type="s">
       <default>'-o json'</default>
-      <summary>parameter to ask for all data in new output format</summary>
-      <description>passed to headsetcontrol to get all data - needs a newer version of headsetcontrol</description>
+      <summary>Parameter to ask for all data in new output format</summary>
+      <description>Passed to headsetcontrol to get all data - needs a newer version of headsetcontrol</description>
+    </key>
+    <key name="option-equalizer" type="s">
+      <default>'-e'</default>
+      <summary>Parameter to set equalizer setting</summary>
+      <description>Passed to headsetcontrol to set the equalizer setting</description>
+    </key>
+    <key name="option-equalizer-settings" type="as">
+      <default>['0,0,0,0,0,0,0,0,0,0', '1,1,1,1,1,1,1,1,1,1', '2,2,2,2,2,2,2,2,2,2', '3,3,3,3,3,3,3,3,3,3']</default>
+      <summary>Equalizer options (equalizer might not be supported by your headset)</summary>
+      <description>Passed to headsetcontrol as parameter to equalizer option (when supported)</description>
     </key>
     <key name="option-equalizer-preset" type="s">
       <default>'-p'</default>
-      <summary>parameter to set equalizer preset</summary>
-      <description>passed to headsetcontrol to set the equalizer preset</description>
+      <summary>Parameter to set equalizer preset</summary>
+      <description>Passed to headsetcontrol to set the equalizer preset</description>
+    </key>
+    <key name="equalizer-preset-names" type="as">
+      <default>['Default', 'Preset 1', 'Preset 2', 'Preset 3']</default>
+      <summary>Names of the equalizer presets (equalizer preset might not be supported by your headset)</summary>
+      <description>Shown in equalizer preset menu (when supported)</description>
     </key>
     <key name="use-notifications" type="b">
       <default>false</default>
-      <summary>parameter to enable notifications</summary>
-      <description>enable / disable notifications</description>
+      <summary>Parameter to enable notifications</summary>
+      <description>Enable / disable notifications</description>
     </key>
     <key name="use-logging" type="b">
       <default>false</default>
-      <summary>parameter to enable log outputs</summary>
-      <description>enable / disable log outputs</description>
+      <summary>Parameter to enable log outputs</summary>
+      <description>Enable / disable log outputs</description>
     </key>
     <key name="show-systemindicator" type="b">
       <default>true</default>
@@ -72,7 +87,7 @@
     </key>
     <key name="use-colors" type="b">
       <default>true</default>
-      <summary>parameter to enable battery percentage text color</summary>
+      <summary>Parameter to enable battery percentage text color</summary>
       <description>Makes battery percentage text colored/non-colored</description>
     </key>
     <key name="color-batteryhigh" type="s">
@@ -93,7 +108,7 @@
     <key name="sidetone-values" type="as">
       <default>['0', '32', '64', '96', '128']</default>
       <summary>Sidetone values</summary>
-      <description>off low medium high max (-1 disable)</description>
+      <description>Used for sidetone values off, low, medium, high, max (-1 disable)</description>
     </key>
   </schema>
 </schemalist>
