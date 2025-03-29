@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-29 09:49+0100\n"
-"PO-Revision-Date: 2025-03-29 09:55+0100\n"
+"POT-Creation-Date: 2025-03-29 10:40+0100\n"
+"PO-Revision-Date: 2025-03-29 10:44+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -23,13 +23,13 @@ msgstr ""
 #: HeadsetControl@lauinger-clan.de/extension.js:104
 #: HeadsetControl@lauinger-clan.de/extension.js:115
 #: HeadsetControl@lauinger-clan.de/extension.js:268
-#: HeadsetControl@lauinger-clan.de/prefs.js:101
+#: HeadsetControl@lauinger-clan.de/prefs.js:117
 msgid "HeadsetControl"
 msgstr "Contrôle du casque"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:78
 #: HeadsetControl@lauinger-clan.de/extension.js:79
-#: HeadsetControl@lauinger-clan.de/prefs.js:110
+#: HeadsetControl@lauinger-clan.de/prefs.js:126
 msgid "Command:"
 msgstr "Commande:"
 
@@ -40,38 +40,38 @@ msgstr "Charge"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:138
 #: HeadsetControl@lauinger-clan.de/extension.js:215
-#: HeadsetControl@lauinger-clan.de/prefs.js:184
+#: HeadsetControl@lauinger-clan.de/prefs.js:200
 msgid "Chat-Mix"
 msgstr "Chat-Mix"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:144
-#: HeadsetControl@lauinger-clan.de/prefs.js:195
-#: HeadsetControl@lauinger-clan.de/prefs.js:397
+#: HeadsetControl@lauinger-clan.de/prefs.js:211
+#: HeadsetControl@lauinger-clan.de/prefs.js:479
 msgid "Sidetone"
 msgstr "Ton Côté"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:149
-#: HeadsetControl@lauinger-clan.de/prefs.js:201
+#: HeadsetControl@lauinger-clan.de/prefs.js:217
 msgid "LED"
 msgstr "Éclairage"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:154
-#: HeadsetControl@lauinger-clan.de/prefs.js:207
+#: HeadsetControl@lauinger-clan.de/prefs.js:223
 msgid "Inactive time"
 msgstr "Temps d'inactivité"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:159
-#: HeadsetControl@lauinger-clan.de/prefs.js:213
+#: HeadsetControl@lauinger-clan.de/prefs.js:229
 msgid "Voice Prompts"
 msgstr "Instructions Vocales"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:164
-#: HeadsetControl@lauinger-clan.de/prefs.js:219
+#: HeadsetControl@lauinger-clan.de/prefs.js:235
 msgid "Rotate to Mute"
 msgstr "Tourner pour mettre en sourdine"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:169
-#: HeadsetControl@lauinger-clan.de/prefs.js:225
+#: HeadsetControl@lauinger-clan.de/prefs.js:247
 msgid "Equalizer Preset"
 msgstr "Préréglage de l'égaliseur"
 
@@ -147,249 +147,305 @@ msgid "Refreshing..."
 msgstr "Actualisation..."
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:24
-#: HeadsetControl@lauinger-clan.de/prefs.js:134
+#: HeadsetControl@lauinger-clan.de/prefs.js:150
 msgid "Select headsetcontrol executable"
 msgstr "Selectioner l'exécutable headsetcontrol"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:107
+#: HeadsetControl@lauinger-clan.de/prefs.js:123
 msgid "Global"
 msgstr "Global"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:112
+#: HeadsetControl@lauinger-clan.de/prefs.js:128
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:6
 msgid "File and path of headsetcontrol executable"
 msgstr "Location de l'exécutable headsetcontrol"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:124
+#: HeadsetControl@lauinger-clan.de/prefs.js:140
 msgid "..."
 msgstr "..."
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:128
+#: HeadsetControl@lauinger-clan.de/prefs.js:144
 msgid "Usually located in '/usr/bin' OR '/usr/local/bin'"
 msgstr "Généralement situé dans '/usr/bin' ou '/usr/local/bin'"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:149
+#: HeadsetControl@lauinger-clan.de/prefs.js:165
 msgid "HeadsetControl parameters"
 msgstr "Paramètres de contrôle du casque"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:153
+#: HeadsetControl@lauinger-clan.de/prefs.js:169
 msgid "HeadsetControl Version Option output format"
 msgstr "Format de sortie de l'option de version de HeadsetControl"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:155
+#: HeadsetControl@lauinger-clan.de/prefs.js:171
 msgid "Used starting with HeadsetControl tool version newer then 2.7.0"
 msgstr "Utilisé à partir de la version 2.7.0 de l'outil HeadsetControl"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:161
+#: HeadsetControl@lauinger-clan.de/prefs.js:177
 msgid "Output format"
 msgstr "Format de sortie"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:162
+#: HeadsetControl@lauinger-clan.de/prefs.js:178
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:50
 msgid "Parameter to ask for all data in new output format"
 msgstr ""
 "Paramètre pour demander toutes les données dans le nouveau format de sortie"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:166
+#: HeadsetControl@lauinger-clan.de/prefs.js:182
 msgid "HeadsetControl Version Legacy"
 msgstr "Version Legacy de HeadsetControl"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:167
+#: HeadsetControl@lauinger-clan.de/prefs.js:183
 msgid "Used until HeadsetControl tool version 2.7.0"
 msgstr "Utilisé jusqu'à la version 2.7.0 de l'outil HeadsetControl"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:172
+#: HeadsetControl@lauinger-clan.de/prefs.js:188
 msgid "Capabilities"
 msgstr "Capacités"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:173
+#: HeadsetControl@lauinger-clan.de/prefs.js:189
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:10
 msgid "Parameter to ask for capabilities"
 msgstr "Paramètre à demander pour les capacités"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:178
+#: HeadsetControl@lauinger-clan.de/prefs.js:194
 msgid "Battery"
 msgstr "Batterie"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:179
+#: HeadsetControl@lauinger-clan.de/prefs.js:195
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:15
 msgid "Parameter to ask for battery"
 msgstr "Paramètre à demander pour la batterie"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:185
+#: HeadsetControl@lauinger-clan.de/prefs.js:201
 msgid "Parameter to ask for chat-mix"
 msgstr "Paramètre à demander pour le Chat-Mix"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:189
+#: HeadsetControl@lauinger-clan.de/prefs.js:205
 msgid "HeadsetControl Common"
 msgstr "Commun à HeadsetControl"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:190
+#: HeadsetControl@lauinger-clan.de/prefs.js:206
 msgid "Used in all HeadsetControl tool versions"
 msgstr "Utilisé dans toutes les versions de l'outil HeadsetControl"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:196
+#: HeadsetControl@lauinger-clan.de/prefs.js:212
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:25
 msgid "Parameter to ask for sidetone"
 msgstr "Paramètre à demander pour le ton côté"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:202
+#: HeadsetControl@lauinger-clan.de/prefs.js:218
 msgid "Passed to headsetcontrol to set for led"
 msgstr "Transmis au contrôle du casque pour controller l'éclairage"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:208
+#: HeadsetControl@lauinger-clan.de/prefs.js:224
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:35
 msgid "Parameter to ask for inactive time"
 msgstr "Paramètre à demander pour le temps d'inactivité"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:214
+#: HeadsetControl@lauinger-clan.de/prefs.js:230
 msgid "Passed to headsetcontrol to set for voice prompts"
 msgstr ""
 "Transmis au contrôle du casque pour controller les instructions vocales"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:220
+#: HeadsetControl@lauinger-clan.de/prefs.js:236
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:45
 msgid "Parameter to ask for rotate to mute"
 msgstr "Paramètre à demander pour le pivotement pour couper le microphone"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:226
+#: HeadsetControl@lauinger-clan.de/prefs.js:241
+#: HeadsetControl@lauinger-clan.de/prefs.js:420
+#: HeadsetControl@lauinger-clan.de/prefs.js:425
+msgid "Equalizer"
+msgstr "L'égaliseur"
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:242
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:56
+msgid "Passed to headsetcontrol to set the equalizer setting"
+msgstr ""
+"Transmis au contrôle du casque pour définir les réglages de l'égaliseur"
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:248
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:66
 msgid "Passed to headsetcontrol to set the equalizer preset"
 msgstr ""
 "Transmis au contrôle du casque pour définir le préréglage de l'égaliseur"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:233
+#: HeadsetControl@lauinger-clan.de/prefs.js:255
 msgid "Apply"
 msgstr "Appliquer"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:259
+#: HeadsetControl@lauinger-clan.de/prefs.js:282
 msgid "Customization"
 msgstr "Personnalisation"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:265
+#: HeadsetControl@lauinger-clan.de/prefs.js:288
 msgid "Options"
 msgstr "Paramètres"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:269
+#: HeadsetControl@lauinger-clan.de/prefs.js:292
 msgid "Show SystemIndicator"
 msgstr "Afficher l'indicateur système"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:270
+#: HeadsetControl@lauinger-clan.de/prefs.js:293
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:85
 msgid "Toggle to show systemindicator"
 msgstr "Basculer pour afficher l'indicateur système"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:279
+#: HeadsetControl@lauinger-clan.de/prefs.js:302
 msgid "Use notifications"
 msgstr "Utiliser les notifications"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:280
+#: HeadsetControl@lauinger-clan.de/prefs.js:303
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:76
 msgid "Enable / disable notifications"
 msgstr "Activer / Désactiver les notifications"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:289
+#: HeadsetControl@lauinger-clan.de/prefs.js:312
 msgid "Use logging"
 msgstr "Utiliser le journal"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:290
+#: HeadsetControl@lauinger-clan.de/prefs.js:313
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:81
 msgid "Enable / disable log outputs"
 msgstr "Activer / Désactiver les sortie du journal"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:300
+#: HeadsetControl@lauinger-clan.de/prefs.js:323
 msgid "Colors"
 msgstr "Couleurs"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:304
+#: HeadsetControl@lauinger-clan.de/prefs.js:327
 msgid "Use colors"
 msgstr "Utiliser les couleurs"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:305
+#: HeadsetControl@lauinger-clan.de/prefs.js:328
 msgid "Enable / disable text colors"
 msgstr "Activer / Désactiver les couleurs de texte"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:329
+#: HeadsetControl@lauinger-clan.de/prefs.js:352
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:95
 msgid "Color battery charge high"
 msgstr "Couleur de charge élevé de la batterie"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:332
+#: HeadsetControl@lauinger-clan.de/prefs.js:355
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:96
 msgid "The text color for battery charge 100% to 50%"
 msgstr "Couleur de texte pour charge de batterie de 100% à 51%"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:353
+#: HeadsetControl@lauinger-clan.de/prefs.js:376
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:100
 msgid "Color battery charge medium"
 msgstr "Couleur de charge moyenne de la batterie"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:356
+#: HeadsetControl@lauinger-clan.de/prefs.js:379
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:101
 msgid "The text color for battery charge 49% to 25%"
 msgstr "Couleur de texte pour charge de batterie de 50% à 26%"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:377
+#: HeadsetControl@lauinger-clan.de/prefs.js:400
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:105
 msgid "Color battery charge low"
 msgstr "Couleur de charge faible de la batterie"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:380
+#: HeadsetControl@lauinger-clan.de/prefs.js:403
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:106
 msgid "The text color for battery charge 24% to 0%"
 msgstr "Couleur de texte pour charge de batterie de 25% à 0%"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:402
-msgid "Values for sidetone"
-msgstr "Valeurs pour le ton côté"
+#: HeadsetControl@lauinger-clan.de/prefs.js:427
+#: HeadsetControl@lauinger-clan.de/prefs.js:441
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:61
+msgid "Passed to headsetcontrol as parameter to '-e' (when supported)"
+msgstr ""
+"Transmis au contrôle du casque comme paramètre pour '-e' (lorsqu'il est "
+"pris en charge)"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:404
-msgid "off low medium high max (-1 disable)"
-msgstr "désactivé bas moyen haut max (-1 désactiver)"
+#: HeadsetControl@lauinger-clan.de/prefs.js:431
+msgid "Equalizer setting 1"
+msgstr "Réglage égaliseur 1"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:408
-msgid "Value for off"
-msgstr "Valeur pour désactivé"
+#: HeadsetControl@lauinger-clan.de/prefs.js:432
+msgid "Equalizer setting 2"
+msgstr "Réglage égaliseur 2"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:409
-msgid "Value for low"
-msgstr "Valeur pour bas"
+#: HeadsetControl@lauinger-clan.de/prefs.js:433
+msgid "Equalizer setting 3"
+msgstr "Réglage égaliseur 3"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:410
-msgid "Value for medium"
-msgstr "Valeur pour moyen"
+#: HeadsetControl@lauinger-clan.de/prefs.js:434
+msgid "Equalizer setting 4"
+msgstr "Réglage égaliseur 4"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:411
-msgid "Value for high"
-msgstr "Valeur pour haut"
+#: HeadsetControl@lauinger-clan.de/prefs.js:452
+msgid "Equalizer presets"
+msgstr "Préréglages égaliseur"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:412
-msgid "Value for max"
-msgstr "Valeur pour max"
+#: HeadsetControl@lauinger-clan.de/prefs.js:454
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:70
+msgid ""
+"Names of the equalizer presets (equalizer preset might not be supported by "
+"your headset)"
+msgstr ""
+"Noms des préréglages de l'égaliseur (les préréglages de l'égaliseur "
+"pourraient ne pas être pris en charge par votre casque)"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:420
-msgid "Input for headsetcontrol sidetone command"
-msgstr "Entrée pour la commande de ton côté du contrôle du casque"
-
-#: HeadsetControl@lauinger-clan.de/prefs.js:421
-msgid "-1 to disable"
-msgstr "-1 pour désactiver"
-
-#: HeadsetControl@lauinger-clan.de/translation.js:8
+#: HeadsetControl@lauinger-clan.de/prefs.js:458
 msgid "Default"
 msgstr "Par défaut"
 
-#: HeadsetControl@lauinger-clan.de/translation.js:9
-msgid "Preset 1"
-msgstr "Préréglage 1"
+#: HeadsetControl@lauinger-clan.de/prefs.js:459
+msgid "Equalizer preset 1"
+msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/translation.js:10
-msgid "Preset 2"
-msgstr "Préréglage 2"
+#: HeadsetControl@lauinger-clan.de/prefs.js:460
+msgid "Equalizer preset 2"
+msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/translation.js:11
-msgid "Preset 3"
-msgstr "Préréglage 3"
+#: HeadsetControl@lauinger-clan.de/prefs.js:461
+msgid "Equalizer preset 3"
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:468
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:71
+msgid "Shown in equalizer preset menu (when supported)"
+msgstr ""
+"Affiché dans le menu des préréglages de l'égaliseur (lorsqu'il est pris en "
+"charge)"
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:484
+msgid "Values for sidetone"
+msgstr "Valeurs pour le ton côté"
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:486
+msgid "off low medium high max (-1 disable)"
+msgstr "désactivé bas moyen haut max (-1 désactiver)"
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:490
+msgid "Value for off"
+msgstr "Valeur pour désactivé"
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:491
+msgid "Value for low"
+msgstr "Valeur pour bas"
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:492
+msgid "Value for medium"
+msgstr "Valeur pour moyen"
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:493
+msgid "Value for high"
+msgstr "Valeur pour haut"
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:494
+msgid "Value for max"
+msgstr "Valeur pour max"
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:502
+msgid "Input for headsetcontrol sidetone command"
+msgstr "Entrée pour la commande de ton côté du contrôle du casque"
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:503
+msgid "-1 to disable"
+msgstr "-1 pour désactiver"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:5
 msgid "Path to executable"
@@ -454,30 +510,16 @@ msgstr ""
 msgid "Parameter to set equalizer setting"
 msgstr "Paramètre pour définir les réglages de l'égaliseur"
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:56
-msgid "Passed to headsetcontrol to set the equalizer setting"
-msgstr "Transmis au contrôle du casque pour définir les réglages de l'égaliseur"
-
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:60
 msgid "Equalizer options (equalizer might not be supported by your headset)"
-msgstr "Options de l'égaliseur (l'égaliseur pourrait ne pas être pris en charge par votre casque)"
-
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:61
-msgid "Passed to headsetcontrol as parameter to \"-e\" (when supported)"
-msgstr "Transmis au contrôle du casque comme paramètre pour \"-e\" (lorsqu'il est pris en charge)"
+msgstr ""
+"Options de l'égaliseur (l'égaliseur pourrait ne pas être pris en charge par "
+"votre casque)"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:65
 msgid "Parameter to set equalizer preset"
 msgstr ""
 "Transmis au contrôle du casque pour définir le préréglage de l'égaliseur"
-
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:70
-msgid "Names of the equalizer presets (equalizer preset might not be supported by your headset)"
-msgstr "Noms des préréglages de l'égaliseur (les préréglages de l'égaliseur pourraient ne pas être pris en charge par votre casque)"
-
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:71
-msgid "Shown in equalizer preset menu (when supported)"
-msgstr "Affiché dans le menu des préréglages de l'égaliseur (lorsqu'il est pris en charge)"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:75
 msgid "Parameter to enable notifications"
@@ -487,7 +529,7 @@ msgstr "Paramètre pour activer les notifications"
 msgid "Parameter to enable log outputs"
 msgstr "Paramètre pour activer les sortie du journal"
 
-#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:85
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:86
 msgid "Makes the systemindicator show/hide"
 msgstr "Affiche / Cache l'indicateur système"
 
@@ -507,6 +549,15 @@ msgstr "Valeurs Sidetone"
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:111
 msgid "Used for sidetone values off, low, medium, high, max (-1 disable)"
 msgstr "Désactivé bas moyen haut max (-1 désactiver)"
+
+#~ msgid "Preset 1"
+#~ msgstr "Préréglage 1"
+
+#~ msgid "Preset 2"
+#~ msgstr "Préréglage 2"
+
+#~ msgid "Preset 3"
+#~ msgstr "Préréglage 3"
 
 #~ msgid "file and path of headsetcontrol executable"
 #~ msgstr "Location de l'exécutable headsetcontrol"
