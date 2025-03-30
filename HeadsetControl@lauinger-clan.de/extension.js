@@ -40,6 +40,7 @@ const capabilities = {
     inactivetime: false,
     voice: false,
     rotatemute: false,
+    equalizer: false,
     equalizerpreset: false,
 };
 const headsetcontrolCommands = {
@@ -52,6 +53,7 @@ const headsetcontrolCommands = {
     cmdVoice: "",
     cmdRotateMute: "",
     cmdOutputFormat: "",
+    cmdEqualizer: "",
     cmdEqualizerPreset: "",
 };
 
@@ -163,6 +165,11 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                     capability: "rotatemute",
                     label: _("Rotate to Mute"),
                     method: this._addRotateMuteMenu,
+                },
+                {
+                    capability: "equalizer",
+                    label: _("Equalizer Setting"),
+                    method: this._addEqualizerSettingMenu,
                 },
                 {
                     capability: "equalizerpreset",
@@ -287,10 +294,10 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             let arraySidetone = this._settings.get_strv("sidetone-values");
             const sidetoneValues = [
                 [_("Off"), arraySidetone[0]],
-                [_("low"), arraySidetone[1]],
-                [_("medium"), arraySidetone[2]],
-                [_("high"), arraySidetone[3]],
-                [_("max"), arraySidetone[4]],
+                [_("Low"), arraySidetone[1]],
+                [_("Medium"), arraySidetone[2]],
+                [_("High"), arraySidetone[3]],
+                [_("Maximum"), arraySidetone[4]],
             ].filter(([, value]) => value !== "-1");
             sidetoneValues.forEach((item) =>
                 this._addPopupMenuItem(
@@ -358,13 +365,13 @@ const HeadsetControlMenuToggle = GObject.registerClass(
         _addInactivetimeMenu(popupMenuExpander) {
             const inacitetimeValues = [
                 [_("Off"), "0"],
-                [_("05 min"), "05"],
-                [_("15 min"), "15"],
-                [_("30 min"), "30"],
-                [_("45 min"), "45"],
-                [_("60 min"), "60"],
-                [_("75 min"), "75"],
-                [_("90 min"), "90"],
+                [_("05 minutes"), "05"],
+                [_("15 minutes"), "15"],
+                [_("30 minutes"), "30"],
+                [_("45 minutes"), "45"],
+                [_("60 minutes"), "60"],
+                [_("75 minutes"), "75"],
+                [_("90 minutes"), "90"],
             ];
             inacitetimeValues.forEach((item) =>
                 this._addPopupMenuItem(
@@ -377,13 +384,38 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 "PopupSubMenuMenuItemStyle";
             this.menu.addMenuItem(popupMenuExpander);
         }
+
+        _addEqualizerSettingMenu(popupMenuExpander) {
+            let arrayEqualizerSetting = this._settings.get_strv(
+                "option-equalizer-settings"
+            );
+            const equalizerSettingValues = [
+                [_("Setting 1"), arrayEqualizerSetting[0]],
+                [_("Setting 2"), arrayEqualizerSetting[1]],
+                [_("Setting 3"), arrayEqualizerSetting[2]],
+                [_("Setting 4"), arrayEqualizerSetting[3]],
+            ];
+            equalizerSettingValues.forEach((item) =>
+                this._addPopupMenuItem(
+                    popupMenuExpander,
+                    item[0],
+                    headsetcontrolCommands.cmdEqualizer + " " + item[1]
+                )
+            );
+            popupMenuExpander.menu.box.style_class =
+                "PopupSubMenuMenuItemStyle";
+            this.menu.addMenuItem(popupMenuExpander);
+        }
+
         _addEqualizerPresetMenu(popupMenuExpander) {
-            let arrayEualizerPreset = this._settings.get_strv("equalizer-preset-names");
+            let arrayEqualizerPreset = this._settings.get_strv(
+                "equalizer-preset-names"
+            );
             const equalizerPresetValues = [
-                [_(arrayEualizerPreset[0]), "0"],
-                [_(arrayEualizerPreset[1]), "1"],
-                [_(arrayEualizerPreset[2]), "2"],
-                [_(arrayEualizerPreset[3]), "3"],
+                [_(arrayEqualizerPreset[0]), "0"],
+                [_(arrayEqualizerPreset[1]), "1"],
+                [_(arrayEqualizerPreset[2]), "2"],
+                [_(arrayEqualizerPreset[3]), "3"],
             ];
             equalizerPresetValues.forEach((item) =>
                 this._addPopupMenuItem(
@@ -509,6 +541,8 @@ export default class HeadsetControl extends Extension {
             cmdExecutable +
             " " +
             this._settings.get_string("option-output-format");
+        headsetcontrolCommands.cmdEqualizer =
+            cmdExecutable + " " + this._settings.get_string("option-equalizer");
         headsetcontrolCommands.cmdEqualizerPreset =
             cmdExecutable +
             " " +
@@ -554,6 +588,8 @@ export default class HeadsetControl extends Extension {
         capabilities.chatmix = value;
         capabilities.voice = value;
         capabilities.rotatemute = value;
+        capabilities.equalizer = value;
+        capabilities.equalizerpreset = value;
     }
 
     _processOutput(output, updateIndicator) {
@@ -607,6 +643,14 @@ export default class HeadsetControl extends Extension {
                         );
                     _logoutput(
                         "capabilities.rotatemute: " + capabilities.rotatemute
+                    );
+                    capabilities.equalizer =
+                        output.devices[0].capabilities.includes(
+                            "CAP_EQUALIZER"
+                        );
+                    _logoutput(
+                        "capabilities.equalizer: " +
+                            capabilities.equalizer
                     );
                     capabilities.equalizerpreset =
                         output.devices[0].capabilities.includes(
@@ -730,6 +774,12 @@ export default class HeadsetControl extends Extension {
             capabilities.rotatemute = true;
         }
         _logoutput("capabilities.rotatemute: " + capabilities.rotatemute);
+        if (strOutput.includes("* equalizer")) {
+            capabilities.equalizer = true;
+        }
+        _logoutput(
+            "capabilities.equalizer: " + capabilities.equalizer
+        );
         if (strOutput.includes("* equalizer preset")) {
             capabilities.equalizerpreset = true;
         }
@@ -797,7 +847,7 @@ export default class HeadsetControl extends Extension {
         this.enable();
     }
 
-    onParamChangedST() {
+    onParamChangedMenu() {
         if (capabilities.sidetone) {
             this._HeadsetControlIndicator._HeadSetControlMenuToggle.refreshMenu(
                 this
@@ -833,7 +883,9 @@ export default class HeadsetControl extends Extension {
             { key: "use-notifications", callback: "_initCmd" },
             { key: "use-logging", callback: "_initCmd" },
             { key: "show-systemindicator", callback: "onParamChanged" },
-            { key: "sidetone-values", callback: "onParamChangedST" },
+            { key: "sidetone-values", callback: "onParamChangedMenu" },
+            { key: "option-equalizer-settings", callback: "onParamChangedMenu" },
+            { key: "option-equalizer-preset", callback: "onParamChangedMenu" },
             { key: "use-colors", callback: "_initCmd" },
         ];
 

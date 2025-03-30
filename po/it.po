@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-29 11:43+0100\n"
-"PO-Revision-Date: 2025-03-29 11:57+0100\n"
+"POT-Creation-Date: 2025-03-31 20:26+0200\n"
+"PO-Revision-Date: 2025-03-31 20:28+0200\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: Italian <LL@li.org>\n"
 "Language: it\n"
@@ -17,131 +17,155 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.5\n"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:67
-#: HeadsetControl@lauinger-clan.de/extension.js:73
-#: HeadsetControl@lauinger-clan.de/extension.js:104
-#: HeadsetControl@lauinger-clan.de/extension.js:115
-#: HeadsetControl@lauinger-clan.de/extension.js:268
+#: HeadsetControl@lauinger-clan.de/extension.js:69
+#: HeadsetControl@lauinger-clan.de/extension.js:75
+#: HeadsetControl@lauinger-clan.de/extension.js:106
+#: HeadsetControl@lauinger-clan.de/extension.js:117
+#: HeadsetControl@lauinger-clan.de/extension.js:275
 #: HeadsetControl@lauinger-clan.de/prefs.js:117
 msgid "HeadsetControl"
 msgstr "Controllo dell'auricolare"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:78
-#: HeadsetControl@lauinger-clan.de/extension.js:79
+#: HeadsetControl@lauinger-clan.de/extension.js:80
+#: HeadsetControl@lauinger-clan.de/extension.js:81
 #: HeadsetControl@lauinger-clan.de/prefs.js:126
 msgid "Command:"
 msgstr "Comando:"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:135
-#: HeadsetControl@lauinger-clan.de/extension.js:208
+#: HeadsetControl@lauinger-clan.de/extension.js:137
+#: HeadsetControl@lauinger-clan.de/extension.js:215
 msgid "Charge"
 msgstr "Carica"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:138
-#: HeadsetControl@lauinger-clan.de/extension.js:215
+#: HeadsetControl@lauinger-clan.de/extension.js:140
+#: HeadsetControl@lauinger-clan.de/extension.js:222
 #: HeadsetControl@lauinger-clan.de/prefs.js:200
 msgid "Chat-Mix"
 msgstr "Chat-Mix"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:144
+#: HeadsetControl@lauinger-clan.de/extension.js:146
 #: HeadsetControl@lauinger-clan.de/prefs.js:211
 #: HeadsetControl@lauinger-clan.de/prefs.js:479
 msgid "Sidetone"
 msgstr "Tono laterale"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:149
+#: HeadsetControl@lauinger-clan.de/extension.js:151
 #: HeadsetControl@lauinger-clan.de/prefs.js:217
 msgid "LED"
 msgstr "LED"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:154
+#: HeadsetControl@lauinger-clan.de/extension.js:156
 #: HeadsetControl@lauinger-clan.de/prefs.js:223
 msgid "Inactive time"
 msgstr "Periodo di inattività"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:159
+#: HeadsetControl@lauinger-clan.de/extension.js:161
 #: HeadsetControl@lauinger-clan.de/prefs.js:229
 msgid "Voice Prompts"
 msgstr "Messaggi vocali"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:164
+#: HeadsetControl@lauinger-clan.de/extension.js:166
 #: HeadsetControl@lauinger-clan.de/prefs.js:235
 msgid "Rotate to Mute"
 msgstr "Ruota su Muto"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:169
+#: HeadsetControl@lauinger-clan.de/extension.js:171
+msgid "Equalizer Setting"
+msgstr "Impostazione dell'equalizzatore"
+
+#: HeadsetControl@lauinger-clan.de/extension.js:176
 #: HeadsetControl@lauinger-clan.de/prefs.js:247
 msgid "Equalizer Preset"
 msgstr "Preimpostazione dell'equalizzatore"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:192
+#: HeadsetControl@lauinger-clan.de/extension.js:199
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:289
-#: HeadsetControl@lauinger-clan.de/extension.js:309
-#: HeadsetControl@lauinger-clan.de/extension.js:326
-#: HeadsetControl@lauinger-clan.de/extension.js:343
-#: HeadsetControl@lauinger-clan.de/extension.js:360
+#: HeadsetControl@lauinger-clan.de/extension.js:296
+#: HeadsetControl@lauinger-clan.de/extension.js:316
+#: HeadsetControl@lauinger-clan.de/extension.js:333
+#: HeadsetControl@lauinger-clan.de/extension.js:350
+#: HeadsetControl@lauinger-clan.de/extension.js:367
 msgid "Off"
 msgstr "Off"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:290
-msgid "low"
-msgstr "bassa"
+#: HeadsetControl@lauinger-clan.de/extension.js:297
+msgid "Low"
+msgstr "Bassa"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:291
-msgid "medium"
-msgstr "media"
+#: HeadsetControl@lauinger-clan.de/extension.js:298
+msgid "Medium"
+msgstr "Media"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:292
-msgid "high"
-msgstr "alta"
+#: HeadsetControl@lauinger-clan.de/extension.js:299
+msgid "High"
+msgstr "Alta"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:293
-msgid "max"
-msgstr "max"
+#: HeadsetControl@lauinger-clan.de/extension.js:300
+msgid "Maximum"
+msgstr "Massimo"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:310
-#: HeadsetControl@lauinger-clan.de/extension.js:327
-#: HeadsetControl@lauinger-clan.de/extension.js:344
+#: HeadsetControl@lauinger-clan.de/extension.js:317
+#: HeadsetControl@lauinger-clan.de/extension.js:334
+#: HeadsetControl@lauinger-clan.de/extension.js:351
 msgid "On"
 msgstr "On"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:361
-msgid "05 min"
-msgstr "05 min"
+#: HeadsetControl@lauinger-clan.de/extension.js:368
+msgid "05 minutes"
+msgstr "05 minuti"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:362
-msgid "15 min"
-msgstr "15 min"
+#: HeadsetControl@lauinger-clan.de/extension.js:369
+msgid "15 minutes"
+msgstr "15 minuti"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:363
-msgid "30 min"
-msgstr "30 min"
+#: HeadsetControl@lauinger-clan.de/extension.js:370
+msgid "30 minutes"
+msgstr "30 minuti"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:364
-msgid "45 min"
-msgstr "45 min"
+#: HeadsetControl@lauinger-clan.de/extension.js:371
+msgid "45 minutes"
+msgstr "45 minuti"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:365
-msgid "60 min"
-msgstr "60 min"
+#: HeadsetControl@lauinger-clan.de/extension.js:372
+msgid "60 minutes"
+msgstr "60 minuti"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:366
-msgid "75 min"
-msgstr "75 min"
+#: HeadsetControl@lauinger-clan.de/extension.js:373
+msgid "75 minutes"
+msgstr "75 minuti"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:367
-msgid "90 min"
-msgstr "90 min"
+#: HeadsetControl@lauinger-clan.de/extension.js:374
+msgid "90 minutes"
+msgstr "90 minuti"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:772
+#: HeadsetControl@lauinger-clan.de/extension.js:393
+#: HeadsetControl@lauinger-clan.de/prefs.js:431
+msgid "Setting 1"
+msgstr "Impostazione 1"
+
+#: HeadsetControl@lauinger-clan.de/extension.js:394
+#: HeadsetControl@lauinger-clan.de/prefs.js:432
+msgid "Setting 2"
+msgstr "Impostazione 2"
+
+#: HeadsetControl@lauinger-clan.de/extension.js:395
+#: HeadsetControl@lauinger-clan.de/prefs.js:433
+msgid "Setting 3"
+msgstr "Impostazione 3"
+
+#: HeadsetControl@lauinger-clan.de/extension.js:396
+#: HeadsetControl@lauinger-clan.de/prefs.js:434
+msgid "Setting 4"
+msgstr "Impostazione 4"
+
+#: HeadsetControl@lauinger-clan.de/extension.js:822
 msgid "Quicksettings not open - do nothing..."
-msgstr ""
+msgstr "Le impostazioni rapide non si aprono - non fare nulla..."
 
-#: HeadsetControl@lauinger-clan.de/extension.js:775
-#: HeadsetControl@lauinger-clan.de/extension.js:776
+#: HeadsetControl@lauinger-clan.de/extension.js:825
+#: HeadsetControl@lauinger-clan.de/extension.js:826
 msgid "Refreshing..."
 msgstr "Ricaricare..."
 
@@ -360,26 +384,13 @@ msgid "Equalizer options (equalizer might not be supported by your headset)"
 msgstr ""
 "Opzioni dell'equalizzatore (potrebbe non essere supportato dalle tue cuffie)"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:431
-msgid "Equalizer setting 1"
-msgstr "Impostazione equalizzatore 1"
-
-#: HeadsetControl@lauinger-clan.de/prefs.js:432
-msgid "Equalizer setting 2"
-msgstr "Impostazione equalizzatore 2"
-
-#: HeadsetControl@lauinger-clan.de/prefs.js:433
-msgid "Equalizer setting 3"
-msgstr "Impostazione equalizzatore 3"
-
-#: HeadsetControl@lauinger-clan.de/prefs.js:434
-msgid "Equalizer setting 4"
-msgstr "Impostazione equalizzatore 4"
-
 #: HeadsetControl@lauinger-clan.de/prefs.js:441
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:61
-msgid "Passed to headsetcontrol as parameter to equalizer option (when supported)"
-msgstr "Passato al controllo dell'auricolare come parametro per l'opzione equalizzatore (se supportato)"
+msgid ""
+"Passed to headsetcontrol as parameter to equalizer option (when supported)"
+msgstr ""
+"Passato al controllo dell'auricolare come parametro per l'opzione "
+"equalizzatore (se supportato)"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:452
 msgid "Equalizer presets"
@@ -399,16 +410,16 @@ msgid "Default"
 msgstr "Predefinito"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:459
-msgid "Equalizer preset 1"
-msgstr ""
+msgid "Preset 1"
+msgstr "Preimpostazione 1"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:460
-msgid "Equalizer preset 2"
-msgstr ""
+msgid "Preset 2"
+msgstr "Preimpostazione 2"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:461
-msgid "Equalizer preset 3"
-msgstr ""
+msgid "Preset 3"
+msgstr "Preimpostazione 3"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:468
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:71
@@ -422,28 +433,28 @@ msgid "Values for sidetone"
 msgstr "Valori per il tono laterale"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:486
-msgid "off low medium high max (-1 disable)"
-msgstr "off bassa media alta max (-1 disabilita)"
+msgid "Off Low Medium High Maximum (-1 disable)"
+msgstr "Off Bassa Media Alta Maxssimo (-1 disabilita)"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:490
-msgid "Value for off"
-msgstr "Valore per off"
+msgid "Value for Off"
+msgstr "Valore per Off"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:491
-msgid "Value for low"
-msgstr "Valore per bassa"
+msgid "Value for Low"
+msgstr "Valore per Bassa"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:492
-msgid "Value for medium"
-msgstr "Valore per media"
+msgid "Value for Medium"
+msgstr "Valore per Media"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:493
-msgid "Value for high"
-msgstr "Valore per alta"
+msgid "Value for High"
+msgstr "Valore per Alta"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:494
-msgid "Value for max"
-msgstr "Valore per max"
+msgid "Value for Maximum"
+msgstr "Valore per Massimo"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:502
 msgid "Input for headsetcontrol sidetone command"
@@ -550,38 +561,6 @@ msgstr "Valori del tono laterale"
 msgid "Used for sidetone values off, low, medium, high, max (-1 disable)"
 msgstr "Off bassa media alta max (-1 disabilita)"
 
-#~ msgid "Passed to headsetcontrol as parameter to '-e' (when supported)"
-#~ msgstr ""
-#~ "Passato al controllo dell'auricolare come parametro per '-e' (quando "
-#~ "supportato)"
-
-#~ msgid "Preset 1"
-#~ msgstr "Preimpostazione 1"
-
-#~ msgid "Preset 2"
-#~ msgstr "Preimpostazione 2"
-
-#~ msgid "Preset 3"
-#~ msgstr "Preimpostazione 3"
-
-#~ msgid "file and path of headsetcontrol executable"
-#~ msgstr "file e percorso dell'eseguibile di controllo dell'auricolare"
-
-#~ msgid "enable / disable notifications"
-#~ msgstr "abilita / disabilita notifiche"
-
-#~ msgid "enable / disable log outputs"
-#~ msgstr "abilita / disabilita log output"
-
 #, fuzzy
-#~ msgid "Names of the equalizer presets"
-#~ msgstr ""
-#~ "Passato al controllo dell'auricolare per impostare la preimpostazione "
-#~ "dell'equalizzatore"
-
-#~ msgid "passed to headsetcontrol to set for rotate to mute"
-#~ msgstr ""
-#~ "passato al controllo dell'auricolare per impostare la rotazione su mute"
-
-#~ msgid "HeadsetControl executable"
-#~ msgstr "Eseguibile del controllo dell'auricolare"
+#~ msgid "Equalizer Presets"
+#~ msgstr "Preimpostazione dell'equalizzatore"

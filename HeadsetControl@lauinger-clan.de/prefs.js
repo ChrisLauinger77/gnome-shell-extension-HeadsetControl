@@ -53,7 +53,7 @@ export default class AdwPrefs extends ExtensionPreferences {
         const adwrow = new Adw.EntryRow({ title: _(title) });
         adwrow.set_tooltip_text(_(tooltip));
         exprow.add_row(adwrow);
-        adwrow.set_text(value);
+        adwrow.set_text(_(value));
         return adwrow;
     }
 
@@ -428,10 +428,10 @@ export default class AdwPrefs extends ExtensionPreferences {
         let arrayEQsettings = window._settings.get_strv("option-equalizer-settings");
         groupC3.add(adwexprowEQ);
         const equalizerLabels = [
-            _("Equalizer setting 1"),
-            _("Equalizer setting 2"),
-            _("Equalizer setting 3"),
-            _("Equalizer setting 4"),
+            _("Setting 1"),
+            _("Setting 2"),
+            _("Setting 3"),
+            _("Setting 4"),
         ];
         equalizerLabels.forEach((label, index) => {
             if (arrayEQsettings[index] !== -1) {
@@ -456,9 +456,9 @@ export default class AdwPrefs extends ExtensionPreferences {
         groupC3.add(adwexprowEQP);
         const equalizerPresetLabels = [
             _("Default"),
-            _("Equalizer preset 1"),
-            _("Equalizer preset 2"),
-            _("Equalizer preset 3"),
+            _("Preset 1"),
+            _("Preset 2"),
+            _("Preset 3"),
         ];
         equalizerPresetLabels.forEach((label, index) => {
             if (arrayEQPnames[index] !== -1) {
@@ -483,15 +483,15 @@ export default class AdwPrefs extends ExtensionPreferences {
         const adwexprowST = new Adw.ExpanderRow({
             title: _("Values for sidetone"),
         });
-        adwexprowST.set_tooltip_text(_("off low medium high max (-1 disable)"));
+        adwexprowST.set_tooltip_text(_("Off Low Medium High Maximum (-1 disable)"));
         let arraySidetone = window._settings.get_strv("sidetone-values");
         groupC4.add(adwexprowST);
         const sidetoneLabels = [
-            _("Value for off"),
-            _("Value for low"),
-            _("Value for medium"),
-            _("Value for high"),
-            _("Value for max"),
+            _("Value for Off"),
+            _("Value for Low"),
+            _("Value for Medium"),
+            _("Value for High"),
+            _("Value for Maximum"),
         ];
 
         sidetoneLabels.forEach((label, index) => {
