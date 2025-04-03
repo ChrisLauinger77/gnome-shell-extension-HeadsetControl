@@ -389,18 +389,26 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             let arrayEqualizerSetting = this._settings.get_strv(
                 "option-equalizer-settings"
             );
+
             const equalizerSettingValues = [
                 [_("Setting 1"), arrayEqualizerSetting[0]],
                 [_("Setting 2"), arrayEqualizerSetting[1]],
                 [_("Setting 3"), arrayEqualizerSetting[2]],
                 [_("Setting 4"), arrayEqualizerSetting[3]],
             ];
-            equalizerSettingValues.forEach((item) =>
+            equalizerSettingValues.forEach((item) => {
+                if (item[1].includes(":")) {
+                    let itemarray = [];
+                    itemarray = item[1].split(":");
+                    item[0] = itemarray[0];
+                    item[1] = itemarray[1];
+
+                };
                 this._addPopupMenuItem(
                     popupMenuExpander,
                     item[0],
                     headsetcontrolCommands.cmdEqualizer + " " + item[1]
-                )
+                )}
             );
             popupMenuExpander.menu.box.style_class =
                 "PopupSubMenuMenuItemStyle";

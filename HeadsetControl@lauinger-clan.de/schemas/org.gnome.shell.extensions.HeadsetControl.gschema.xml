@@ -56,7 +56,7 @@
       <description>Passed to headsetcontrol to set the equalizer setting</description>
     </key>
     <key name="option-equalizer-settings" type="as">
-      <default>['0,0,0,0,0,0,0,0,0,0', '1,1,1,1,1,1,1,1,1,1', '2,2,2,2,2,2,2,2,2,2', '3,3,3,3,3,3,3,3,3,3']</default>
+      <default>['Flat:0,0,0,0,0,0,0,0,0,0', 'Setting 1:1,1,1,1,1,1,1,1,1,1', 'Setting 2:2,2,2,2,2,2,2,2,2,2', 'Setting 3:3,3,3,3,3,3,3,3,3,3']</default>
       <summary>Equalizer options (equalizer might not be supported by your headset)</summary>
       <description>Passed to headsetcontrol as parameter to equalizer option (when supported)</description>
     </key>
