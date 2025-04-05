@@ -210,10 +210,18 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this._setMenuTitle();
         }
 
-        _updateBatteryStatus(strBattery, lngBattery) {
+        _updateBatteryStatus(strStatus, strBattery, lngBattery) {
             if (capabilities.battery) {
-                this._valueBattery = _("Charge") + ": " + strBattery;
                 this._valueBattery_num = lngBattery;
+                if (this._valueBattery_num < 0) {
+                    this._valueBattery = _("Disconnected");
+                    return;
+                }
+                if (strStatus === "BATTERY_CHARGING") {
+                    this._valueBattery = _("Charging...");
+                } else {
+                    this._valueBattery = _("Charge") + ": " + strBattery;
+                }
             }
         }
 
@@ -402,14 +410,13 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                     itemarray = item[1].split(":");
                     item[0] = itemarray[0];
                     item[1] = itemarray[1];
-
-                };
+                }
                 this._addPopupMenuItem(
                     popupMenuExpander,
                     item[0],
                     headsetcontrolCommands.cmdEqualizer + " " + item[1]
-                )}
-            );
+                );
+            });
             popupMenuExpander.menu.box.style_class =
                 "PopupSubMenuMenuItemStyle";
             this.menu.addMenuItem(popupMenuExpander);
@@ -657,8 +664,7 @@ export default class HeadsetControl extends Extension {
                             "CAP_EQUALIZER"
                         );
                     _logoutput(
-                        "capabilities.equalizer: " +
-                            capabilities.equalizer
+                        "capabilities.equalizer: " + capabilities.equalizer
                     );
                     capabilities.equalizerpreset =
                         output.devices[0].capabilities.includes(
@@ -673,6 +679,7 @@ export default class HeadsetControl extends Extension {
             }
             if (updateIndicator) {
                 this._HeadsetControlIndicator._HeadSetControlMenuToggle._updateBatteryStatus(
+                    output.devices[0].battery.status,
                     output.devices[0].battery.level + "%",
                     output.devices[0].battery.level
                 );
@@ -785,9 +792,7 @@ export default class HeadsetControl extends Extension {
         if (strOutput.includes("* equalizer")) {
             capabilities.equalizer = true;
         }
-        _logoutput(
-            "capabilities.equalizer: " + capabilities.equalizer
-        );
+        _logoutput("capabilities.equalizer: " + capabilities.equalizer);
         if (strOutput.includes("* equalizer preset")) {
             capabilities.equalizerpreset = true;
         }
@@ -805,6 +810,7 @@ export default class HeadsetControl extends Extension {
         }
         let strBattery = this._getHeadSetControlValue(strOutput, "Battery");
         this._HeadsetControlIndicator._HeadSetControlMenuToggle._updateBatteryStatus(
+            "N/A",
             strBattery,
             strBattery.replace("%", "")
         );
@@ -892,7 +898,10 @@ export default class HeadsetControl extends Extension {
             { key: "use-logging", callback: "_initCmd" },
             { key: "show-systemindicator", callback: "onParamChanged" },
             { key: "sidetone-values", callback: "onParamChangedMenu" },
-            { key: "option-equalizer-settings", callback: "onParamChangedMenu" },
+            {
+                key: "option-equalizer-settings",
+                callback: "onParamChangedMenu",
+            },
             { key: "option-equalizer-preset", callback: "onParamChangedMenu" },
             { key: "use-colors", callback: "_initCmd" },
         ];

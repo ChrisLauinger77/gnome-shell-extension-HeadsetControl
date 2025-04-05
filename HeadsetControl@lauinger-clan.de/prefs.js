@@ -72,12 +72,15 @@ export default class AdwPrefs extends ExtensionPreferences {
         return adwrow;
     }
 
-    applyChanges(valueExecutable,options) {
+    applyChanges(valueExecutable, options) {
         this.changeOption(
             "headsetcontrol-executable",
             valueExecutable.get_text()
         );
-        this.changeOption("option-output-format", options.opt_oformat.get_text());
+        this.changeOption(
+            "option-output-format",
+            options.opt_oformat.get_text()
+        );
         this.changeOption("option-capabilities", options.opt_capa.get_text());
         this.changeOption("option-battery", options.opt_bat.get_text());
         this.changeOption("option-chatmix", options.opt_chm.get_text());
@@ -87,7 +90,10 @@ export default class AdwPrefs extends ExtensionPreferences {
         this.changeOption("option-voice", options.opt_voice.get_text());
         this.changeOption("option-rotate-mute", options.opt_rot.get_text());
         this.changeOption("option-equalizer", options.opt_equalizer.get_text());
-        this.changeOption("option-equalizer-preset", options.opt_equalizer_preset.get_text());
+        this.changeOption(
+            "option-equalizer-preset",
+            options.opt_equalizer_preset.get_text()
+        );
     }
 
     _onColorChanged(color_setting_button, strSetting) {
@@ -258,7 +264,7 @@ export default class AdwPrefs extends ExtensionPreferences {
         });
         buttonApply.connect(
             "clicked",
-            this.applyChanges.bind(this, valueExecutable,{
+            this.applyChanges.bind(this, valueExecutable, {
                 opt_oformat,
                 opt_capa,
                 opt_bat,
@@ -269,8 +275,8 @@ export default class AdwPrefs extends ExtensionPreferences {
                 opt_voice,
                 opt_rot,
                 opt_equalizer,
-                opt_equalizer_preset,}
-            )
+                opt_equalizer_preset,
+            })
         );
         adwrow.add_suffix(buttonApply);
         adwrow.activatable_widget = buttonApply;
@@ -424,8 +430,14 @@ export default class AdwPrefs extends ExtensionPreferences {
         const adwexprowEQ = new Adw.ExpanderRow({
             title: _("Equalizer settings"),
         });
-        adwexprowEQ.set_tooltip_text(_("Equalizer options (equalizer might not be supported by your headset)"));
-        let arrayEQsettings = window._settings.get_strv("option-equalizer-settings");
+        adwexprowEQ.set_tooltip_text(
+            _(
+                "Equalizer options (equalizer might not be supported by your headset)"
+            )
+        );
+        let arrayEQsettings = window._settings.get_strv(
+            "option-equalizer-settings"
+        );
         groupC3.add(adwexprowEQ);
         const equalizerLabels = [
             _("Setting 1"),
@@ -438,12 +450,19 @@ export default class AdwPrefs extends ExtensionPreferences {
                 let adwrowEQ = this.addEqualizerRow(
                     adwexprowEQ,
                     label,
-                    _("Passed to headsetcontrol as parameter to equalizer option (when supported)"),
+                    _(
+                        "Passed to headsetcontrol as parameter to equalizer option (when supported)"
+                    ),
                     arrayEQsettings[index]
                 );
                 adwrowEQ.connect(
                     "changed",
-                    this._onEQvaluechanged.bind(this, adwrowEQ, index,"option-equalizer-settings")
+                    this._onEQvaluechanged.bind(
+                        this,
+                        adwrowEQ,
+                        index,
+                        "option-equalizer-settings"
+                    )
                 );
             }
         });
@@ -451,7 +470,11 @@ export default class AdwPrefs extends ExtensionPreferences {
         const adwexprowEQP = new Adw.ExpanderRow({
             title: _("Equalizer presets"),
         });
-        adwexprowEQP.set_tooltip_text(_("Names of the equalizer presets (equalizer preset might not be supported by your headset)"));
+        adwexprowEQP.set_tooltip_text(
+            _(
+                "Names of the equalizer presets (equalizer preset might not be supported by your headset)"
+            )
+        );
         let arrayEQPnames = window._settings.get_strv("equalizer-preset-names");
         groupC3.add(adwexprowEQP);
         const equalizerPresetLabels = [
@@ -470,7 +493,12 @@ export default class AdwPrefs extends ExtensionPreferences {
                 );
                 adwrowEQP.connect(
                     "changed",
-                    this._onEQvaluechanged.bind(this, adwrowEQP, index,"equalizer-preset-names")
+                    this._onEQvaluechanged.bind(
+                        this,
+                        adwrowEQP,
+                        index,
+                        "equalizer-preset-names"
+                    )
                 );
             }
         });
@@ -483,7 +511,9 @@ export default class AdwPrefs extends ExtensionPreferences {
         const adwexprowST = new Adw.ExpanderRow({
             title: _("Values for sidetone"),
         });
-        adwexprowST.set_tooltip_text(_("Off Low Medium High Maximum (-1 disable)"));
+        adwexprowST.set_tooltip_text(
+            _("Off Low Medium High Maximum (-1 disable)")
+        );
         let arraySidetone = window._settings.get_strv("sidetone-values");
         groupC4.add(adwexprowST);
         const sidetoneLabels = [
