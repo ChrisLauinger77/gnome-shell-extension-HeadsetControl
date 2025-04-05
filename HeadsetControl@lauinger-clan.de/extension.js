@@ -105,9 +105,11 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             super({
                 title: _("HeadsetControl"),
                 iconName: "audio-headset-symbolic",
-                toggleMode: true,
+                toggleMode: false,
             });
             this._settings = _settings;
+            this._valueDeviceName = "";
+            this._valueDeviceStatus = "";
             this._valueBattery = "";
             this._valueBattery_num = 0;
             this._valueChatMix = "";
@@ -204,16 +206,34 @@ const HeadsetControlMenuToggle = GObject.registerClass(
         }
 
         refresh() {
+            this._updateDeviceName();
             this._updateBatteryStatus();
             this._updateChatMixStatus();
+            this._updateDeviceStatus();
             this._setMenuSetHeader();
             this._setMenuTitle();
         }
 
-        _updateBatteryStatus(strBattery, lngBattery) {
+        _updateDeviceName(strDeviceName) {
+            this._valueDeviceName = strDeviceName ?? _("HeadsetControl");
+        }
+
+        _updateDeviceStatus()  {
+            if (capabilities.battery && this._valueBattery_num < 0)  {
+                this._valueDeviceStatus  = _("Disconnected");
+            } else {
+                this._valueDeviceStatus = _("Connected");
+            }
+        }
+
+        _updateBatteryStatus(strStatus, lngBattery) {
             if (capabilities.battery) {
-                this._valueBattery = _("Charge") + ": " + strBattery;
                 this._valueBattery_num = lngBattery;
+                if (strStatus == "BATTERY_CHARGING") {
+                    this._valueBattery = _("Charge") + ": " + _("Charging...");
+                } else {
+                    this._valueBattery = _("Charge") + ": " + lngBattery + "%";
+                }
             }
         }
 
@@ -227,17 +247,22 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             if (capabilities.battery && capabilities.chatmix) {
                 this.set({
                     title: this._valueBattery,
-                });
-                this.set({
                     subtitle: this._valueChatMix,
                 });
-            } else if (capabilities.battery) {
+            } else if (capabilities.battery && this._valueBattery_num > 0) {
                 this.set({
-                    title: this._valueBattery,
+                    title: this._valueDeviceName,
+                    subtitle: this._valueBattery,
                 });
             } else if (capabilities.chatmix) {
                 this.set({
-                    title: this._valueChatMix,
+                    title: this._valueDeviceName,
+                    subtitle: this._valueChatMix,
+                });
+            } else {
+                this.set({
+                    title: this._valueDeviceName,
+                    subtitle: this._valueDeviceStatus,
                 });
             }
         }
@@ -255,9 +280,10 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                         " / " +
                         this._valueChatMix
                 );
-            } else if (capabilities.battery) {
+            } else if (capabilities.battery && this._valueBattery_num > 0) {
                 this.menu.setHeader(
                     "audio-headset-symbolic",
+                    this._valueDeviceName,
                     this._valueBattery,
                     ""
                 );
@@ -265,6 +291,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             } else if (capabilities.chatmix) {
                 this.menu.setHeader(
                     "audio-headset-symbolic",
+                    this._valueDeviceName,
                     this._valueChatMix,
                     ""
                 );
@@ -272,7 +299,8 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             } else {
                 this.menu.setHeader(
                     "audio-headset-symbolic",
-                    _("HeadsetControl"),
+                    this._valueDeviceName,
+                    this._valueDeviceStatus,
                     ""
                 );
             }
@@ -672,13 +700,17 @@ export default class HeadsetControl extends Extension {
                 this._needCapabilitiesRefresh = false;
             }
             if (updateIndicator) {
+                this._HeadsetControlIndicator._HeadSetControlMenuToggle._updateDeviceName(
+                    output.devices[0].device
+                );
                 this._HeadsetControlIndicator._HeadSetControlMenuToggle._updateBatteryStatus(
-                    output.devices[0].battery.level + "%",
+                    output.devices[0].battery.status,
                     output.devices[0].battery.level
                 );
                 this._HeadsetControlIndicator._HeadSetControlMenuToggle._updateChatMixStatus(
                     output.devices[0].chatmix
                 );
+                this._HeadsetControlIndicator._HeadSetControlMenuToggle._updateDeviceStatus();
                 this._HeadsetControlIndicator._HeadSetControlMenuToggle._setMenuSetHeader();
                 this._HeadsetControlIndicator._HeadSetControlMenuToggle._setMenuTitle();
             }
@@ -735,6 +767,8 @@ export default class HeadsetControl extends Extension {
                 this._refreshChatMixStatus();
             }
         } finally {
+            this._HeadsetControlIndicator._HeadSetControlMenuToggle._updateDeviceName();
+            this._HeadsetControlIndicator._HeadSetControlMenuToggle._updateDeviceStatus();
             this._HeadsetControlIndicator._HeadSetControlMenuToggle._setMenuSetHeader();
             this._HeadsetControlIndicator._HeadSetControlMenuToggle._setMenuTitle();
         }
@@ -805,8 +839,8 @@ export default class HeadsetControl extends Extension {
         }
         let strBattery = this._getHeadSetControlValue(strOutput, "Battery");
         this._HeadsetControlIndicator._HeadSetControlMenuToggle._updateBatteryStatus(
-            strBattery,
-            strBattery.replace("%", "")
+            strBattery == "N/A" ? "BATTERY_AVAILABLE" : "BATTERY_AVAILABLE",
+            strBattery == "N/A" ?  -1 : strBattery.replace("%", "")
         );
         return true;
     }
