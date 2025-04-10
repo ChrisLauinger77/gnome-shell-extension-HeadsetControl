@@ -527,41 +527,60 @@ export default class HeadsetControl extends Extension {
         usenotifications = this._settings.get_boolean("use-notifications");
         uselogging = this._settings.get_boolean("use-logging");
         usecolors = this._settings.get_boolean("use-colors");
-        let cmdExecutable = this._settings.get_string(
+
+        // Helper function to construct commands
+        const buildCommand = (executable, option) => `${executable} ${option}`;
+
+        // Cache the executable path
+        const cmdExecutable = this._settings.get_string(
             "headsetcontrol-executable"
         );
-        headsetcontrolCommands.cmdCapabilities =
-            cmdExecutable +
-            " " +
-            this._settings.get_string("option-capabilities");
-        headsetcontrolCommands.cmdBattery =
-            cmdExecutable + " " + this._settings.get_string("option-battery");
-        headsetcontrolCommands.cmdChatMix =
-            cmdExecutable + " " + this._settings.get_string("option-chatmix");
-        headsetcontrolCommands.cmdSidetone =
-            cmdExecutable + " " + this._settings.get_string("option-sidetone");
-        headsetcontrolCommands.cmdLED =
-            cmdExecutable + " " + this._settings.get_string("option-led");
-        headsetcontrolCommands.cmdVoice =
-            cmdExecutable + " " + this._settings.get_string("option-voice");
-        headsetcontrolCommands.cmdRotateMute =
-            cmdExecutable +
-            " " +
-            this._settings.get_string("option-rotate-mute");
-        headsetcontrolCommands.cmdInacitetime =
-            cmdExecutable +
-            " " +
-            this._settings.get_string("option-inactive-time");
-        headsetcontrolCommands.cmdOutputFormat =
-            cmdExecutable +
-            " " +
-            this._settings.get_string("option-output-format");
-        headsetcontrolCommands.cmdEqualizer =
-            cmdExecutable + " " + this._settings.get_string("option-equalizer");
-        headsetcontrolCommands.cmdEqualizerPreset =
-            cmdExecutable +
-            " " +
-            this._settings.get_string("option-equalizer-preset");
+
+        // Define headset control commands using the helper function
+        headsetcontrolCommands.cmdCapabilities = buildCommand(
+            cmdExecutable,
+            this._settings.get_string("option-capabilities")
+        );
+        headsetcontrolCommands.cmdBattery = buildCommand(
+            cmdExecutable,
+            this._settings.get_string("option-battery")
+        );
+        headsetcontrolCommands.cmdChatMix = buildCommand(
+            cmdExecutable,
+            this._settings.get_string("option-chatmix")
+        );
+        headsetcontrolCommands.cmdSidetone = buildCommand(
+            cmdExecutable,
+            this._settings.get_string("option-sidetone")
+        );
+        headsetcontrolCommands.cmdLED = buildCommand(
+            cmdExecutable,
+            this._settings.get_string("option-led")
+        );
+        headsetcontrolCommands.cmdVoice = buildCommand(
+            cmdExecutable,
+            this._settings.get_string("option-voice")
+        );
+        headsetcontrolCommands.cmdRotateMute = buildCommand(
+            cmdExecutable,
+            this._settings.get_string("option-rotate-mute")
+        );
+        headsetcontrolCommands.cmdInacitetime = buildCommand(
+            cmdExecutable,
+            this._settings.get_string("option-inactive-time")
+        );
+        headsetcontrolCommands.cmdOutputFormat = buildCommand(
+            cmdExecutable,
+            this._settings.get_string("option-output-format")
+        );
+        headsetcontrolCommands.cmdEqualizer = buildCommand(
+            cmdExecutable,
+            this._settings.get_string("option-equalizer")
+        );
+        headsetcontrolCommands.cmdEqualizerPreset = buildCommand(
+            cmdExecutable,
+            this._settings.get_string("option-equalizer-preset")
+        );
     }
 
     _getHeadSetControlValue(stroutput, valuetosearch) {
