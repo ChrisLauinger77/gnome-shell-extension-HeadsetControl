@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-05 17:38+0200\n"
-"PO-Revision-Date: 2025-04-05 17:40+0200\n"
+"PO-Revision-Date: 2025-04-28 13:54+0200\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: cs\n"
@@ -35,7 +35,7 @@ msgstr "Příkaz:"
 #: HeadsetControl@lauinger-clan.de/extension.js:137
 #: HeadsetControl@lauinger-clan.de/extension.js:223
 msgid "Charge"
-msgstr "Nabíjení"
+msgstr "Nabití"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:140
 #: HeadsetControl@lauinger-clan.de/extension.js:230
@@ -67,7 +67,7 @@ msgstr "Hlasové pokyny"
 #: HeadsetControl@lauinger-clan.de/extension.js:166
 #: HeadsetControl@lauinger-clan.de/prefs.js:241
 msgid "Rotate to Mute"
-msgstr "Otočením ztlumit"
+msgstr "Ztlumit otočením"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:171
 msgid "Equalizer Setting"
@@ -76,7 +76,7 @@ msgstr "Nastavení ekvalizéru"
 #: HeadsetControl@lauinger-clan.de/extension.js:176
 #: HeadsetControl@lauinger-clan.de/prefs.js:253
 msgid "Equalizer Preset"
-msgstr "Přednastavení ekvalizéru"
+msgstr "Předvolby ekvalizéru"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:199
 msgid "Settings"
@@ -84,7 +84,7 @@ msgstr "Nastavení"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:217
 msgid "Disconnected"
-msgstr "Odpojení"
+msgstr "Odpojeno"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:221
 msgid "Charging..."
@@ -122,31 +122,31 @@ msgstr "Zapnuto"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:376
 msgid "05 minutes"
-msgstr "05 minuty"
+msgstr "05 minut"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:377
 msgid "15 minutes"
-msgstr "15 minuty"
+msgstr "15 minut"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:378
 msgid "30 minutes"
-msgstr "30 minuty"
+msgstr "30 minut"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:379
 msgid "45 minutes"
-msgstr "45 minuty"
+msgstr "45 minut"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:380
 msgid "60 minutes"
-msgstr "60 minuty"
+msgstr "60 minut"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:381
 msgid "75 minutes"
-msgstr "75 minuty"
+msgstr "75 minut"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:382
 msgid "90 minutes"
-msgstr "90 minuty"
+msgstr "90 minut"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:402
 #: HeadsetControl@lauinger-clan.de/prefs.js:443
@@ -180,7 +180,7 @@ msgstr "Obnovování..."
 #: HeadsetControl@lauinger-clan.de/prefs.js:24
 #: HeadsetControl@lauinger-clan.de/prefs.js:156
 msgid "Select headsetcontrol executable"
-msgstr "Vyberte spustitelný soubor ovládání sluchátek"
+msgstr "Vyberte headsetcontrol spustitelný soubor"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:129
 msgid "Global"
@@ -189,7 +189,7 @@ msgstr "Globální"
 #: HeadsetControl@lauinger-clan.de/prefs.js:134
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:6
 msgid "File and path of headsetcontrol executable"
-msgstr "Soubor a cesta spustitelného souboru ovládání sluchátek"
+msgstr "Cesta k headsetcontrol spustitelnému souboru"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:146
 msgid "..."
@@ -265,7 +265,7 @@ msgstr "Parametr pro dotaz na sidetone"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:224
 msgid "Passed to headsetcontrol to set for led"
-msgstr "Posláno do ovládání sluchátek pro nastavení LED"
+msgstr "Předáno do headsetcontrol pro nastavení LED"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:230
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:35
@@ -274,7 +274,7 @@ msgstr "Parametr pro dotaz na dobu nečinnosti"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:236
 msgid "Passed to headsetcontrol to set for voice prompts"
-msgstr "Posláno do ovládání sluchátek pro nastavení hlasových pokynů"
+msgstr "Předáno do headsetcontrol pro nastavení hlasových pokynů"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:242
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:45
@@ -289,12 +289,12 @@ msgstr "Ekvalizér"
 #: HeadsetControl@lauinger-clan.de/prefs.js:248
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:56
 msgid "Passed to headsetcontrol to set the equalizer setting"
-msgstr "Posláno do ovládání sluchátek pro nastavení ekvalizéru"
+msgstr "Předáno do headsetcontrol pro nastavení ekvalizéru"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:254
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:66
 msgid "Passed to headsetcontrol to set the equalizer preset"
-msgstr "Posláno do ovládání sluchátek pro nastavení přednastavení ekvalizéru"
+msgstr "Předáno do headsetcontrol pro nastavení přednastavení ekvalizéru"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:261
 msgid "Apply"
@@ -405,7 +405,7 @@ msgid ""
 "your headset)"
 msgstr ""
 "Názvy přednastavení ekvalizéru (přednastavení ekvalizéru nemusí být "
-"podporováno vašimi sluchátky)"
+"podporována vašimi sluchátky)"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:481
 msgid "Default"
@@ -470,11 +470,11 @@ msgstr "Cesta ke spustitelnému souboru"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:11
 msgid "Passed to headsetcontrol to ask for capabilities"
-msgstr "Posláno do ovládání sluchátek pro nastavení možností"
+msgstr "Předáno do headsetcontrol pro nastavení možností"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:16
 msgid "Passed to headsetcontrol to get battery"
-msgstr "Posláno do ovládání sluchátek pro nastavení baterie"
+msgstr "Předáno do headsetcontrol pro získání stavu baterie"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:20
 msgid "Parameter to ask for chatmix"
@@ -482,11 +482,11 @@ msgstr "Parametr pro dotaz na chatmix"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:21
 msgid "Passed to headsetcontrol to get chatmix"
-msgstr "Posláno do ovládání sluchátek pro nastavení chatmix"
+msgstr "Předáno do headsetcontrol pro nastavení chatmix"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:26
 msgid "Passed to headsetcontrol to set sidetone"
-msgstr "Posláno do ovládání sluchátek pro nastavení sidetone"
+msgstr "Předáno do headsetcontrol pro nastavení sidetone"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:30
 msgid "Parameter to ask for led"
@@ -494,11 +494,11 @@ msgstr "Parametr pro dotaz na led"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:31
 msgid "Passed to headsetcontrol to set led"
-msgstr "Posláno do ovládání sluchátek pro nastavení LED"
+msgstr "Předáno do headsetcontrol pro nastavení LED"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:36
 msgid "Passed to headsetcontrol to set inactive time"
-msgstr "Posláno do ovládání sluchátek pro nastavení doby nečinnosti"
+msgstr "Předáno do headsetcontrol pro nastavení doby nečinnosti"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:40
 msgid "Parameter to ask for voice prompts"
@@ -506,23 +506,23 @@ msgstr "Parametr pro dotaz na hlasové pokyny"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:41
 msgid "Passed to headsetcontrol to set voice prompts"
-msgstr "Posláno do ovládání sluchátek pro nastavení hlasových pokynů"
+msgstr "Předáno do headsetcontrol pro nastavení hlasových pokynů"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:46
 msgid "Passed to headsetcontrol to set rotate to mute"
-msgstr "Posláno do ovládání sluchátek pro nastavení ztlumení"
+msgstr "Předáno do headsetcontrol pro nastavení ztlumení"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:51
 msgid ""
 "Passed to headsetcontrol to get all data - needs a newer version of "
 "headsetcontrol"
 msgstr ""
-"Posláno do ovládání sluchátek pro získání všech dat - vyžaduje novější verzi "
-"ovládání sluchátek"
+"Předáno do headsetcontrol pro získání všech dat - vyžaduje novější verzi "
+"headsetcontrol"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:55
 msgid "Parameter to set equalizer setting"
-msgstr "Parametr pro nastavení ekvalizéru"
+msgstr "Parametr pro nastavení nastavení ekvalizéru"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:65
 msgid "Parameter to set equalizer preset"
@@ -534,7 +534,7 @@ msgstr "Parametr pro povolení upozornění"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:80
 msgid "Parameter to enable log outputs"
-msgstr "Parametr pro povolení výstupů protokolu"
+msgstr "Parametr pro povolení logovacích výstupů"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:86
 msgid "Makes the systemindicator show/hide"
