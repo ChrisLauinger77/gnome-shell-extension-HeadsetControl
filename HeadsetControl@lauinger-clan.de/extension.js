@@ -112,6 +112,8 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this._valueBattery_num = 0;
             this._valueChatMix = "";
             this._valueHeadsetname = _("Disconnected");
+            //remember style
+            this._originalStyle = this.get_style();
             this.setMenuSetHeader();
             this.setMenuTitle();
 
@@ -130,9 +132,6 @@ const HeadsetControlMenuToggle = GObject.registerClass(
 
             this._buildMenu();
             this._addSettingsAction(Me);
-
-            //remember style
-            this._originalStyle = this.get_style();
         }
 
         _buildMenu() {
