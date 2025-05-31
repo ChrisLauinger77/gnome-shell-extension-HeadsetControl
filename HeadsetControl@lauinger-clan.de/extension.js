@@ -114,7 +114,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this._valueHeadsetname = _("Disconnected");
             //remember style
             this._originalStyle = this.get_style();
-            this.setMenuSetHeader();
+            this.setMenuHeader();
             this.setMenuTitle();
 
             this.menu.setHeader(
@@ -122,9 +122,23 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 _("HeadsetControl"),
                 ""
             );
-
+            let quicksettingstoggle = _settings.get_int("quicksettings-toggle");
+            let quicksettingstogglekey;
+            switch (quicksettingstoggle) {
+                case 1:
+                    quicksettingstogglekey = "use-notifications";
+                    break;
+                case 2:
+                    quicksettingstogglekey = "use-logging";
+                    break;
+                case 3:
+                    quicksettingstogglekey = "use-colors";
+                    break;
+                default:
+                    quicksettingstogglekey = "show-systemindicator";
+            }
             _settings.bind(
-                "show-systemindicator",
+                quicksettingstogglekey,
                 this,
                 "checked",
                 Gio.SettingsBindFlags.DEFAULT
@@ -254,35 +268,35 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             }
         }
 
-        setMenuSetHeader() {
+        setMenuHeader() {
             if (capabilities.battery && capabilities.chatmix) {
                 this.menu.setHeader(
                     "audio-headset-symbolic",
                     this._valueBattery,
                     this._valueChatMix
                 );
-                _logoutput("setMenuSetHeader: Battery and Chatmix");
+                _logoutput("setMenuHeader: Battery and Chatmix");
             } else if (capabilities.battery) {
                 this.menu.setHeader(
                     "audio-headset-symbolic",
                     this._valueBattery,
                     this._valueHeadsetname
                 );
-                _logoutput("setMenuSetHeader: Battery");
+                _logoutput("setMenuHeader: Battery");
             } else if (capabilities.chatmix) {
                 this.menu.setHeader(
                     "audio-headset-symbolic",
                     this._valueChatMix,
                     this._valueHeadsetname
                 );
-                _logoutput("setMenuSetHeader: Chatmix");
+                _logoutput("setMenuHeader: Chatmix");
             } else {
                 this.menu.setHeader(
                     "audio-headset-symbolic",
                     _("HeadsetControl"),
                     this._valueHeadsetname
                 );
-                _logoutput("setMenuSetHeader: Headsetname");
+                _logoutput("setMenuHeader: Headsetname");
             }
             this._changeColor(this._valueBattery, this._valueBattery_num);
         }
@@ -720,7 +734,7 @@ export default class HeadsetControl extends Extension {
                     this._HeadsetControlIndicator._HeadSetControlMenuToggle.updateChatMixStatus(
                         output.devices[0].chatmix
                     );
-                    this._HeadsetControlIndicator._HeadSetControlMenuToggle.setMenuSetHeader();
+                    this._HeadsetControlIndicator._HeadSetControlMenuToggle.setMenuHeader();
                     this._HeadsetControlIndicator._HeadSetControlMenuToggle.setMenuTitle();
                 }
                 this._needCapabilitiesRefresh = false;
@@ -781,7 +795,7 @@ export default class HeadsetControl extends Extension {
                 this._refreshChatMixStatus();
             }
         } finally {
-            this._HeadsetControlIndicator._HeadSetControlMenuToggle.setMenuSetHeader();
+            this._HeadsetControlIndicator._HeadSetControlMenuToggle.setMenuHeader();
             this._HeadsetControlIndicator._HeadSetControlMenuToggle.setMenuTitle();
         }
     }
@@ -891,7 +905,7 @@ export default class HeadsetControl extends Extension {
         if (capabilities.chatmix) {
             this._refreshChatMixStatus();
         }
-        this._HeadsetControlIndicator._HeadSetControlMenuToggle.setMenuSetHeader();
+        this._HeadsetControlIndicator._HeadSetControlMenuToggle.setMenuHeader();
         this._HeadsetControlIndicator._HeadSetControlMenuToggle.setMenuTitle();
     }
 
@@ -944,6 +958,7 @@ export default class HeadsetControl extends Extension {
             },
             { key: "option-equalizer-preset", callback: "onParamChangedMenu" },
             { key: "use-colors", callback: "_initCmd" },
+            { key: "quicksettings-toggle", callback: "onParamChanged" },
         ];
 
         settingsToMonitor.forEach((setting) => {
