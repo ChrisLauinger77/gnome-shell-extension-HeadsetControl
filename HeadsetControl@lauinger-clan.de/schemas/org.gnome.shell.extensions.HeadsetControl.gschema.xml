@@ -110,5 +110,10 @@
       <summary>Sidetone values</summary>
       <description>Used for sidetone values off, low, medium, high, max (-1 disable)</description>
     </key>
+    <key name="quicksettings-toggle" type="i">
+      <default>0</default>
+      <summary>Usage of quicksettings toggle</summary>
+      <description>Enum - 0 Systemindicator, 1 Notifications, 2 Logs, 3 Colors</description>
+    </key>
   </schema>
 </schemalist>

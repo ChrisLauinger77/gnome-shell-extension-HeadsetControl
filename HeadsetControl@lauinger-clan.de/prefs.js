@@ -114,7 +114,9 @@ export default class AdwPrefs extends ExtensionPreferences {
         arraySidetone[index] = adwrow.get_value().toString();
         this.getSettings().set_strv("sidetone-values", arraySidetone);
     }
-
+    _onQSToggleValuechanged(_settings, cmb) {
+        _settings.set_int("quicksettings-toggle", cmb.get_selected());
+    }
     fillPreferencesWindow(window) {
         window.search_enabled = true;
         window._settings = this.getSettings();
@@ -294,6 +296,23 @@ export default class AdwPrefs extends ExtensionPreferences {
         groupC1.set_title(_("Options"));
         groupC1.set_name("headsetcontrol_options");
         page2.add(groupC1);
+        // quicksettings-toggle
+        adwrow = new Adw.ComboRow({ title: _("Quicksettings toggle") });
+        adwrow.set_tooltip_text(_("Usage of quicksettings toggle"));
+
+        let stringlist = new Gtk.StringList();
+        stringlist.append(_("Show SystemIndicator"));
+        stringlist.append(_("Use notifications"));
+        stringlist.append(_("Use logging"));
+        stringlist.append(_("Use colors"));
+        adwrow.set_model(stringlist);
+
+        groupC1.add(adwrow);
+        adwrow.set_selected(window._settings.get_int("quicksettings-toggle"));
+        adwrow.connect(
+            "notify",
+            this._onQSToggleValuechanged.bind(this, window._settings, adwrow)
+        );
         //show systemindicator
         adwrow = new Adw.SwitchRow({ title: _("Show SystemIndicator") });
         adwrow.set_tooltip_text(_("Toggle to show systemindicator"));
