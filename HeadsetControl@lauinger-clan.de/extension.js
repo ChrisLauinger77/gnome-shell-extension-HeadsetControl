@@ -114,14 +114,14 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this._valueHeadsetname = _("Disconnected");
             //remember style
             this._originalStyle = this.get_style();
-            this.setMenuHeader();
-            this.setMenuTitle();
-
             this.menu.setHeader(
                 "audio-headset-symbolic",
                 _("HeadsetControl"),
                 ""
             );
+            this.setMenuHeader();
+            this.setMenuTitle();
+
             let quicksettingstoggle = _settings.get_int("quicksettings-toggle");
             let quicksettingstogglekey;
             switch (quicksettingstoggle) {
@@ -253,17 +253,17 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 });
             } else if (capabilities.battery) {
                 this.set({
-                    title: this._valueBattery,
+                    title: this._valueHeadsetname,
                 });
                 this.set({
-                    subtitle: this._valueHeadsetname,
+                    subtitle: this._valueBattery,
                 });
             } else if (capabilities.chatmix) {
                 this.set({
-                    title: this._valueChatMix,
+                    title: this._valueHeadsetname,
                 });
                 this.set({
-                    subtitle: this._valueHeadsetname,
+                    subtitle: this._valueChatMix,
                 });
             }
         }
@@ -272,22 +272,22 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             if (capabilities.battery && capabilities.chatmix) {
                 this.menu.setHeader(
                     "audio-headset-symbolic",
-                    this._valueBattery,
-                    this._valueChatMix
+                    this._valueHeadsetname,
+                    this._valueBattery + " " + this._valueChatMix
                 );
                 _logoutput("setMenuHeader: Battery and Chatmix");
             } else if (capabilities.battery) {
                 this.menu.setHeader(
                     "audio-headset-symbolic",
-                    this._valueBattery,
-                    this._valueHeadsetname
+                    this._valueHeadsetname,
+                    this._valueBattery
                 );
                 _logoutput("setMenuHeader: Battery");
             } else if (capabilities.chatmix) {
                 this.menu.setHeader(
                     "audio-headset-symbolic",
-                    this._valueChatMix,
-                    this._valueHeadsetname
+                    this._valueHeadsetname,
+                    this._valueChatMix
                 );
                 _logoutput("setMenuHeader: Chatmix");
             } else {
