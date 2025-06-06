@@ -44,7 +44,7 @@ cd gnome-shell-extension-HeadsetControl.git
 
 Now restart gnome-shell.
 
-# Development
+# Contributing
 
 Pull requests are welcome.
 
