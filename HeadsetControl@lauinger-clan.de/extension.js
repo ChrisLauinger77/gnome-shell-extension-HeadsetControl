@@ -247,22 +247,16 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             if (capabilities.battery && capabilities.chatmix) {
                 this.set({
                     title: this._valueBattery,
-                });
-                this.set({
                     subtitle: this._valueChatMix,
                 });
             } else if (capabilities.battery) {
                 this.set({
                     title: this._valueHeadsetname,
-                });
-                this.set({
                     subtitle: this._valueBattery,
                 });
             } else if (capabilities.chatmix) {
                 this.set({
                     title: this._valueHeadsetname,
-                });
-                this.set({
                     subtitle: this._valueChatMix,
                 });
             }
