@@ -6,8 +6,9 @@ labels: bug
 assignees: ""
 ---
 
-PLEASE MAKE SURE TO CHECK EXISTING ISSUES (open/closed) TO NOT FILE A DUPLICATE !
-PLEASE MAKE SURE headsetcontrol BINARY WORKS IN A TERMINAL BEFORE FILING AN ISSUE !
+Please make sure to check existing issues (open/closed) to not file a duplicate!
+
+Please make sure headsetcontrol binary works in a terminal before filing an issue!
 
 **Describe the bug**
 
