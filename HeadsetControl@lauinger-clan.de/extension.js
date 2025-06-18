@@ -21,6 +21,8 @@
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
 import GObject from "gi://GObject";
+import St from "gi://St";
+import Clutter from "gi://Clutter";
 
 import * as Main from "resource:///org/gnome/shell/ui/main.js";
 import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
@@ -233,8 +235,8 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             }
         }
 
-        get valueBattery() {
-            return this._valueBattery;
+        get valueBattery_num() {
+            return this._valueBattery_num;
         }
 
         updateHeadsetName(strHeadsetname) {
@@ -504,16 +506,19 @@ const HeadsetControlIndicator = GObject.registerClass(
         constructor(Me) {
             const { _settings } = Me;
             super();
-            if (_settings.get_boolean("show-systemindicator")) {
-                // Create the icon for the indicator
-                this._indicator = this._addIndicator();
-                this._indicator.icon_name = "audio-headset-symbolic";
-                this._indicatorLabel = new St.Label({
-                    text: "N/A",
-                    style_class: "quick-toggle-subtitle",
-                });
-                this._indicator.add_child(this._indicatorLabel);
-            }
+
+            // Create the icon for the indicator
+            this._indicator = this._addIndicator();
+            this._indicatorLabel = new St.Label({
+                text: "N/A",
+                y_expand: true,
+                y_align: Clutter.ActorAlign.CENTER,
+            });
+            this.add_child(this._indicatorLabel);
+            this._indicator.icon_name = "audio-headset-symbolic";
+            let showindicator = _settings.get_boolean("show-systemindicator");
+            this._indicator.visible = showindicator;
+            this._indicatorLabel.visible = showindicator;
 
             // Create the toggle menu and associate it with the indicator, being
             // sure to destroy it along with the indicator
@@ -525,14 +530,24 @@ const HeadsetControlIndicator = GObject.registerClass(
             });
 
             // Add the indicator to the panel and the toggle to the menu
-            QuickSettingsMenu._indicators.add_child(this);
+            QuickSettingsMenu._indicators.insert_child_at_index(this, 0);
             QuickSettingsMenu.addExternalIndicator(this);
         }
 
+        setVisible(state) {
+            this._indicator.visible = state;
+            this._indicatorLabel.visible = state;
+        }
+
         updateLabel() {
-            if (!this._indicatorLabel) {
-                let strText = this._headSetControlMenuToggle.valueBattery;
-                this._indicatorLabel.set_text(strText);
+            if (this._indicatorLabel) {
+                let battery_num =
+                    this._headSetControlMenuToggle.valueBattery_num;
+                if (battery_num < 0) {
+                    this._indicatorLabel.set_text("N/A");
+                    return;
+                }
+                this._indicatorLabel.set_text(battery_num.toString() + "%");
             }
         }
 
@@ -938,6 +953,13 @@ export default class HeadsetControl extends Extension {
         }
     }
 
+    onParamChangedIndicator() {
+        this.HeadsetControlIndicator.setVisible(
+            this._settings.get_boolean("show-systemindicator")
+        );
+        this.HeadsetControlIndicator.updateLabel();
+    }
+
     _openPreferences() {
         this.openPreferences();
         QuickSettingsMenu.menu.close(PopupAnimation.FADE);
@@ -948,11 +970,11 @@ export default class HeadsetControl extends Extension {
         this._settings = this.getSettings();
         this._initCmd();
 
-        if (!this._refreshJSONall(false)) {
+        this.HeadsetControlIndicator = new HeadsetControlIndicator(this);
+        let showindicator = this._settings.get_boolean("show-systemindicator");
+        if (!this._refreshJSONall(showindicator)) {
             this._refreshCapabilities();
         }
-
-        this.HeadsetControlIndicator = new HeadsetControlIndicator(this);
 
         // add Signals to array
         this._SignalsArray = [];
@@ -966,7 +988,10 @@ export default class HeadsetControl extends Extension {
             { key: "headsetcontrol-executable", callback: "_initCmd" },
             { key: "use-notifications", callback: "_initCmd" },
             { key: "use-logging", callback: "_initCmd" },
-            { key: "show-systemindicator", callback: "onParamChanged" },
+            {
+                key: "show-systemindicator",
+                callback: "onParamChangedIndicator",
+            },
             { key: "sidetone-values", callback: "onParamChangedMenu" },
             {
                 key: "option-equalizer-settings",
