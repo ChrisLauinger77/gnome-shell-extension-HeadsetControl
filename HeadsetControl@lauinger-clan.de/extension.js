@@ -233,6 +233,10 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             }
         }
 
+        get valueBattery() {
+            return this._valueBattery;
+        }
+
         updateHeadsetName(strHeadsetname) {
             this._valueHeadsetname = strHeadsetname;
         }
@@ -504,12 +508,17 @@ const HeadsetControlIndicator = GObject.registerClass(
                 // Create the icon for the indicator
                 this._indicator = this._addIndicator();
                 this._indicator.icon_name = "audio-headset-symbolic";
+                this._indicatorLabel = new St.Label({
+                    text: "N/A",
+                    style_class: "quick-toggle-subtitle",
+                });
+                this._indicator.add_child(this._indicatorLabel);
             }
 
             // Create the toggle menu and associate it with the indicator, being
             // sure to destroy it along with the indicator
-            this._HeadSetControlMenuToggle = new HeadsetControlMenuToggle(Me);
-            this.quickSettingsItems.push(this._HeadSetControlMenuToggle);
+            this._headSetControlMenuToggle = new HeadsetControlMenuToggle(Me);
+            this.quickSettingsItems.push(this._headSetControlMenuToggle);
 
             this.connect("destroy", () => {
                 this.quickSettingsItems.forEach((item) => item.destroy());
@@ -518,6 +527,18 @@ const HeadsetControlIndicator = GObject.registerClass(
             // Add the indicator to the panel and the toggle to the menu
             QuickSettingsMenu._indicators.add_child(this);
             QuickSettingsMenu.addExternalIndicator(this);
+        }
+
+        updateLabel() {
+            if (!this._indicatorLabel) {
+                let strText = this._headSetControlMenuToggle.valueBattery;
+                this._indicatorLabel.set_text(strText);
+            }
+        }
+
+        updateUIElements() {
+            this._headSetControlMenuToggle.setMenuHeader();
+            this._headSetControlMenuToggle.setMenuTitle();
         }
     }
 );
@@ -713,23 +734,24 @@ export default class HeadsetControl extends Extension {
                 _logoutput(headsetname);
                 if (updateIndicator) {
                     if (this._needCapabilitiesRefresh) {
-                        this._HeadsetControlIndicator._HeadSetControlMenuToggle.refreshMenu(
+                        this.HeadsetControlIndicator._headSetControlMenuToggle.refreshMenu(
                             this
                         );
                     }
-                    this._HeadsetControlIndicator._HeadSetControlMenuToggle.updateHeadsetName(
+                    this.HeadsetControlIndicator._headSetControlMenuToggle.updateHeadsetName(
                         headsetname
                     );
-                    this._HeadsetControlIndicator._HeadSetControlMenuToggle.updateBatteryStatus(
+
+                    this.HeadsetControlIndicator._headSetControlMenuToggle.updateBatteryStatus(
                         output.devices[0].battery.status,
                         output.devices[0].battery.level + "%",
                         output.devices[0].battery.level
                     );
-                    this._HeadsetControlIndicator._HeadSetControlMenuToggle.updateChatMixStatus(
+                    this.HeadsetControlIndicator._headSetControlMenuToggle.updateChatMixStatus(
                         output.devices[0].chatmix
                     );
-                    this._HeadsetControlIndicator._HeadSetControlMenuToggle.setMenuHeader();
-                    this._HeadsetControlIndicator._HeadSetControlMenuToggle.setMenuTitle();
+                    this.HeadsetControlIndicator.updateLabel();
+                    this.HeadsetControlIndicator.updateUIElements();
                 }
                 this._needCapabilitiesRefresh = false;
             }
@@ -789,8 +811,8 @@ export default class HeadsetControl extends Extension {
                 this._refreshChatMixStatus();
             }
         } finally {
-            this._HeadsetControlIndicator._HeadSetControlMenuToggle.setMenuHeader();
-            this._HeadsetControlIndicator._HeadSetControlMenuToggle.setMenuTitle();
+            this.HeadsetControlIndicator.updateLabel();
+            this.HeadsetControlIndicator.updateUIElements();
         }
     }
 
@@ -856,7 +878,7 @@ export default class HeadsetControl extends Extension {
             return false;
         }
         let strBattery = this._getHeadSetControlValue(strOutput, "Battery");
-        this._HeadsetControlIndicator._HeadSetControlMenuToggle.updateBatteryStatus(
+        this.HeadsetControlIndicator._headSetControlMenuToggle.updateBatteryStatus(
             "N/A",
             strBattery,
             strBattery.replace("%", "")
@@ -871,7 +893,7 @@ export default class HeadsetControl extends Extension {
             return false;
         }
         let strChatMix = this._getHeadSetControlValue(strOutput, "Chat"); //ChatMix or Chat-Mix
-        this._HeadsetControlIndicator._HeadSetControlMenuToggle.updateChatMixStatus(
+        this.HeadsetControlIndicator._headSetControlMenuToggle.updateChatMixStatus(
             strChatMix
         );
         return true;
@@ -899,8 +921,8 @@ export default class HeadsetControl extends Extension {
         if (capabilities.chatmix) {
             this._refreshChatMixStatus();
         }
-        this._HeadsetControlIndicator._HeadSetControlMenuToggle.setMenuHeader();
-        this._HeadsetControlIndicator._HeadSetControlMenuToggle.setMenuTitle();
+        this.HeadsetControlIndicator.updateLabel();
+        this.HeadsetControlIndicator.updateUIElements();
     }
 
     onParamChanged() {
@@ -910,7 +932,7 @@ export default class HeadsetControl extends Extension {
 
     onParamChangedMenu() {
         if (capabilities.sidetone) {
-            this._HeadsetControlIndicator._HeadSetControlMenuToggle.refreshMenu(
+            this.HeadsetControlIndicator._headSetControlMenuToggle.refreshMenu(
                 this
             );
         }
@@ -930,7 +952,7 @@ export default class HeadsetControl extends Extension {
             this._refreshCapabilities();
         }
 
-        this._HeadsetControlIndicator = new HeadsetControlIndicator(this);
+        this.HeadsetControlIndicator = new HeadsetControlIndicator(this);
 
         // add Signals to array
         this._SignalsArray = [];
@@ -972,8 +994,8 @@ export default class HeadsetControl extends Extension {
         }, this);
         this._SignalsArray = null;
         this._settings = null;
-        this._HeadsetControlIndicator.destroy();
-        this._HeadsetControlIndicator = null;
+        this.HeadsetControlIndicator.destroy();
+        this.HeadsetControlIndicator = null;
         this._devicecount = null;
         usenotifications = null;
         uselogging = null;
