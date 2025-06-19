@@ -552,6 +552,9 @@ const HeadsetControlIndicator = GObject.registerClass(
 
         updateLabel() {
             if (this._indicatorLabel) {
+                this._indicatorLabel.set_style(
+                    this._headsetControlMenuToggle.menuButtonStyle
+                );
                 let battery_num =
                     this._headsetControlMenuToggle.valueBatteryNum;
                 if (battery_num < 0) {
@@ -559,9 +562,6 @@ const HeadsetControlIndicator = GObject.registerClass(
                     return;
                 }
                 this._indicatorLabel.set_text(battery_num.toString() + "%");
-                this._indicatorLabel.set_style(
-                    this._headsetControlMenuToggle.menuButtonStyle
-                );
             }
         }
 
@@ -942,20 +942,28 @@ export default class HeadsetControl extends Extension {
         return true;
     }
 
-    _hideWhenDisconnected() {
+    _changeIndicatorVisibility() {
+        if (!this._showIndicator) {
+            _logoutput(
+                "_changeIndicatorVisibility - showIndicator is false - hide indicator"
+            );
+            this._headsetControlIndicator.setIconVisible(false);
+            this._headsetControlIndicator.setLabelVisible(false);
+            return;
+        }
         if (
             this._hideWhenDisconnectedSystemindicator &&
             (this._devicecount === 0 ||
                 this._headsetControlIndicator.valueBatteryNum < 0)
         ) {
             _logoutput(
-                "_hideWhenDisconnected - headset not connected - hide indicator"
+                "_changeIndicatorVisibility - headset not connected - hide indicator"
             );
             this._headsetControlIndicator.setIconVisible(false);
             this._headsetControlIndicator.setLabelVisible(false);
         } else {
             _logoutput(
-                "_hideWhenDisconnected - headset connected - show indicator"
+                "_changeIndicatorVisibility - headset connected - show indicator"
             );
             this._headsetControlIndicator.setIconVisible(this._showIndicator);
             this._headsetControlIndicator.setLabelVisible(
@@ -969,16 +977,22 @@ export default class HeadsetControl extends Extension {
         _logoutput("_refreshIndicator - " + _("Refreshing..."));
         if (this._JSONoutputSupported) {
             this._refreshJSON_async();
+            this._changeIndicatorVisibility();
             return;
         }
         if (capabilities.battery) {
             this._refreshBatteryStatus();
             this._headsetControlIndicator.updateLabel();
             this._headsetControlIndicator.updateUIElements();
+            this._changeIndicatorVisibility();
         }
     }
 
     _refresh() {
+        if (this._refreshIndicatorRunning) {
+            _logoutput(_("Quicksettings open - refresh indicator running..."));
+            return;
+        }
         this._visible = !this._visible;
         if (!this._visible) {
             _logoutput(_("Quicksettings not open - do nothing..."));
@@ -989,6 +1003,7 @@ export default class HeadsetControl extends Extension {
 
         if (this._JSONoutputSupported) {
             this._refreshJSON_async();
+            this._changeIndicatorVisibility();
             return;
         }
         if (this._needCapabilitiesRefresh) {
@@ -1002,6 +1017,7 @@ export default class HeadsetControl extends Extension {
             this._refreshChatMixStatus();
         }
         this._headsetControlIndicator.updateUIElements();
+        this._changeIndicatorVisibility();
     }
 
     _onParamChanged() {
@@ -1027,16 +1043,17 @@ export default class HeadsetControl extends Extension {
         this._refreshIntervalSystemindicator = this._settings.get_int(
             "refreshinterval-systemindicator"
         );
-        this._headsetControlIndicator.setIconVisible(this._showIndicator);
-        if (this._showIndicator) {
-            this._headsetControlIndicator.setLabelVisible(capabilities.battery);
-        }
         this._headsetControlIndicator.updateLabel();
         this._refreshIntervalHandler();
+        if (!this._showIndicator) {
+            this._changeIndicatorVisibility();
+        }
     }
 
     _calculateRefreshInterval(refreshIntervalmin) {
-        return refreshIntervalmin * 60 * 1000; // Convert minutes to milliseconds
+        let refreshIntervalms = refreshIntervalmin * 60 * 1000; // Convert minutes to milliseconds
+        _logoutput("_CalculateRefreshInterval: " + refreshIntervalms);
+        return refreshIntervalms;
     }
 
     _refreshIntervalHandler() {
@@ -1046,12 +1063,15 @@ export default class HeadsetControl extends Extension {
         }
 
         if (this._showIndicator && this._refreshIntervalSystemindicator > 0) {
+            this._refreshIndicatorRunning = true;
+            this._refreshIndicator();
+            this._refreshIndicatorRunning = false;
             this._refreshIntervalSignal = GLib.timeout_add(
                 GLib.PRIORITY_DEFAULT,
                 this._calculateRefreshInterval(
                     this._refreshIntervalSystemindicator
                 ),
-                this._refreshIndicator.bind(this)
+                this._refreshIntervalHandler.bind(this)
             );
             return GLib.SOURCE_CONTINUE;
         } else {
@@ -1067,6 +1087,7 @@ export default class HeadsetControl extends Extension {
     enable() {
         this._devicecount = 0;
         this._visible = false;
+        this._refreshIndicatorRunning = false;
         this._settings = this.getSettings();
         this._initCmd();
 
@@ -1138,7 +1159,7 @@ export default class HeadsetControl extends Extension {
         this._visible = null;
         this._devicecount = null;
         this._showIndicator = null;
-        this._hideWhenDisconnectedSystemindicator = null;
+        this._refreshIndicatorRunning = null;
         this._refreshIntervalSystemindicator = null;
         usenotifications = null;
         uselogging = null;

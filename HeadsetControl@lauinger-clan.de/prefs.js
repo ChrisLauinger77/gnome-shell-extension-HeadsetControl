@@ -295,7 +295,7 @@ export default class AdwPrefs extends ExtensionPreferences {
         //page2
         const page2 = Adw.PreferencesPage.new();
         page2.set_title(_("Customization"));
-        page2.set_name("headsetcontrol_page1");
+        page2.set_name("headsetcontrol_page2");
         page2.set_icon_name("preferences-system-symbolic");
 
         // groupC1
