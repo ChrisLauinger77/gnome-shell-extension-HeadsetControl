@@ -998,6 +998,7 @@ export default class HeadsetControl extends Extension {
 
     enable() {
         this._devicecount = 0;
+        this._visible = false;
         this._settings = this.getSettings();
         this._initCmd();
 
@@ -1054,6 +1055,7 @@ export default class HeadsetControl extends Extension {
         this._settings = null;
         this.headsetControlIndicator.destroy();
         this.headsetControlIndicator = null;
+        this._visible = null;
         this._devicecount = null;
         this._showIndicator = null;
         usenotifications = null;
