@@ -85,6 +85,16 @@
       <summary>Toggle to show systemindicator</summary>
       <description>Makes the systemindicator show/hide</description>
     </key>
+    <key name="hidewhendisconnected-systemindicator" type="b">
+      <default>false</default>
+      <summary>Hide the systemindicator when no headset is connected</summary>
+      <description>Will be delayed by refresh interval - can be enforced by toggling the quicksettings</description>
+    </key>
+    <key name="refreshinterval-systemindicator" type="i">
+      <default>5</default>
+      <summary>Refresh the systemindicator every X minutes</summary>
+      <description>Value in minutes to refresh the headset data on the systemindicator</description>
+    </key>
     <key name="use-colors" type="b">
       <default>true</default>
       <summary>Parameter to enable battery percentage text color</summary>

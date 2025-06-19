@@ -114,9 +114,16 @@ export default class AdwPrefs extends ExtensionPreferences {
         arraySidetone[index] = adwrow.get_value().toString();
         this.getSettings().set_strv("sidetone-values", arraySidetone);
     }
+
+    _onRIvaluechanged(adwrow) {
+        const value = adwrow.get_value();
+        this.getSettings().set_int("refreshinterval-systemindicator", value);
+    }
+
     _onQSToggleValuechanged(_settings, cmb) {
         _settings.set_int("quicksettings-toggle", cmb.get_selected());
     }
+
     fillPreferencesWindow(window) {
         window.search_enabled = true;
         window._settings = this.getSettings();
@@ -288,7 +295,7 @@ export default class AdwPrefs extends ExtensionPreferences {
         //page2
         const page2 = Adw.PreferencesPage.new();
         page2.set_title(_("Customization"));
-        page2.set_name("headsetcontrol_page1");
+        page2.set_name("headsetcontrol_page2");
         page2.set_icon_name("preferences-system-symbolic");
 
         // groupC1
@@ -314,14 +321,67 @@ export default class AdwPrefs extends ExtensionPreferences {
             this._onQSToggleValuechanged.bind(this, window._settings, adwrow)
         );
         //show systemindicator
-        adwrow = new Adw.SwitchRow({ title: _("Show SystemIndicator") });
-        adwrow.set_tooltip_text(_("Toggle to show systemindicator"));
-        groupC1.add(adwrow);
+        let adwexprow = new Adw.ExpanderRow({
+            title: _("Show SystemIndicator"),
+        });
+        adwexprow.set_tooltip_text(_("Toggle to show systemindicator"));
+        groupC1.add(adwexprow);
         window._settings.bind(
             "show-systemindicator",
+            adwexprow,
+            "active",
+            Gio.SettingsBindFlags.DEFAULT
+        );
+        const toggleshowsystemindicator = new Gtk.Switch({
+            active: window._settings.get_boolean("show-systemindicator"),
+            valign: Gtk.Align.CENTER,
+        });
+        window._settings.bind(
+            "show-systemindicator",
+            toggleshowsystemindicator,
+            "active",
+            Gio.SettingsBindFlags.DEFAULT
+        );
+        adwexprow.add_suffix(toggleshowsystemindicator);
+        adwexprow.set_expanded(toggleshowsystemindicator.get_active());
+        adwexprow.activatable_widget = toggleshowsystemindicator;
+        toggleshowsystemindicator.bind_property(
+            "active",
+            adwexprow,
+            "expanded",
+            GObject.BindingFlags.DEFAULT
+        );
+        // hide when disconnected
+        adwrow = new Adw.SwitchRow({
+            title: _("Hide when disconnected"),
+            subtitle: _(
+                "Hide the systemindicator when no headset is connected"
+            ),
+        });
+        adwrow.set_tooltip_text(
+            _(
+                "Will be delayed by refresh interval - can be enforced by toggling the quicksettings"
+            )
+        );
+        adwexprow.add_row(adwrow);
+        window._settings.bind(
+            "hidewhendisconnected-systemindicator",
             adwrow,
             "active",
             Gio.SettingsBindFlags.DEFAULT
+        );
+        // refresh interval
+        let adwrowSR = this.addSpinRow(
+            adwexprow,
+            _("Refresh interval (minutes)"),
+            _("Refresh the systemindicator every X minutes"),
+            _("0 to disable"),
+            [0, 60, 1, 10],
+            this.getSettings().get_int("refreshinterval-systemindicator")
+        );
+        adwrowSR.connect(
+            "changed",
+            this._onRIvaluechanged.bind(this, adwrowSR)
         );
         //use notifications
         adwrow = new Adw.SwitchRow({ title: _("Use notifications") });
@@ -349,7 +409,7 @@ export default class AdwPrefs extends ExtensionPreferences {
         groupC2.set_name("headsetcontrol_colors");
         page2.add(groupC2);
         //use colors
-        const adwexprow = new Adw.ExpanderRow({ title: _("Use colors") });
+        adwexprow = new Adw.ExpanderRow({ title: _("Use colors") });
         adwexprow.set_tooltip_text(_("Enable / disable text colors"));
         groupC2.add(adwexprow);
         const toggleusecolors = new Gtk.Switch({
