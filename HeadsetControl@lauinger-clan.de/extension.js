@@ -520,8 +520,9 @@ const HeadsetControlIndicator = GObject.registerClass(
             });
             this.add_child(this._indicatorLabel);
             this._indicator.icon_name = "audio-headset-symbolic";
-            let showIndicator = _settings.get_boolean("show-systemindicator");
-            this._indicator.visible = showIndicator;
+            this._indicator.visible = _settings.get_boolean(
+                "show-systemindicator"
+            );
             this._indicatorLabel.visible = false;
 
             // Create the toggle menu and associate it with the indicator, being
