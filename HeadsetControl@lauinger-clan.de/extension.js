@@ -1110,36 +1110,48 @@ export default class HeadsetControl extends Extension {
             )
         );
         const settingsToMonitor = [
-            { key: "headsetcontrol-executable", callback: "_initCmd" },
-            { key: "use-notifications", callback: "_initCmd" },
-            { key: "use-logging", callback: "_initCmd" },
+            {
+                key: "headsetcontrol-executable",
+                callback: this._initCmd.bind(this),
+            },
+            { key: "use-notifications", callback: this._initCmd.bind(this) },
+            { key: "use-logging", callback: this._initCmd.bind(this) },
             {
                 key: "show-systemindicator",
-                callback: "_onParamChangedIndicator",
+                callback: this._onParamChangedIndicator.bind(this),
             },
             {
                 key: "hidewhendisconnected-systemindicator",
-                callback: "_onParamChangedIndicator",
+                callback: this._onParamChangedIndicator.bind(this),
             },
             {
                 key: "refreshinterval-systemindicator",
-                callback: "_onParamChangedIndicator",
+                callback: this._onParamChangedIndicator.bind(this),
             },
-            { key: "sidetone-values", callback: "_onParamChangedMenu" },
+            {
+                key: "sidetone-values",
+                callback: this._onParamChangedMenu.bind(this),
+            },
             {
                 key: "option-equalizer-settings",
-                callback: "_onParamChangedMenu",
+                callback: this._onParamChangedMenu.bind(this),
             },
-            { key: "option-equalizer-preset", callback: "_onParamChangedMenu" },
-            { key: "use-colors", callback: "_initCmd" },
-            { key: "quicksettings-toggle", callback: "_onParamChanged" },
+            {
+                key: "option-equalizer-preset",
+                callback: this._onParamChangedMenu.bind(this),
+            },
+            { key: "use-colors", callback: this._initCmd.bind(this) },
+            {
+                key: "quicksettings-toggle",
+                callback: this._onParamChanged.bind(this),
+            },
         ];
 
         settingsToMonitor.forEach((setting) => {
             this._SignalsArray.push(
                 this._settings.connect(
                     `changed::${setting.key}`,
-                    this[setting.callback].bind(this)
+                    setting.callback
                 )
             );
         });
