@@ -605,7 +605,7 @@ export default class AdwPrefs extends ExtensionPreferences {
 
         sidetoneLabels.forEach((label, index) => {
             if (arraySidetone[index] !== -1) {
-                let adwrowSR = this.addSpinRow(
+                adwrowSR = this.addSpinRow(
                     adwexprowST,
                     label,
                     _("Input for headsetcontrol sidetone command"),
