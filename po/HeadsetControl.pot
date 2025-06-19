@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-19 07:54+0200\n"
+"POT-Creation-Date: 2025-06-19 10:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -169,14 +169,18 @@ msgstr ""
 msgid "Setting 4"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:931
-#: HeadsetControl@lauinger-clan.de/extension.js:932
-#: HeadsetControl@lauinger-clan.de/extension.js:950
-#: HeadsetControl@lauinger-clan.de/extension.js:951
+#: HeadsetControl@lauinger-clan.de/extension.js:976
+#: HeadsetControl@lauinger-clan.de/extension.js:977
+#: HeadsetControl@lauinger-clan.de/extension.js:1001
+#: HeadsetControl@lauinger-clan.de/extension.js:1002
 msgid "Refreshing..."
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:947
+#: HeadsetControl@lauinger-clan.de/extension.js:993
+msgid "Quicksettings open - refresh indicator running..."
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/extension.js:998
 msgid "Quicksettings not open - do nothing..."
 msgstr ""
 
