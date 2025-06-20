@@ -111,7 +111,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             });
             this._settings = _settings;
             this._valueBattery = "";
-            this._valueBatteryNum = 0;
+            this._valueBatteryNum = -1;
             this._valueChatMix = "";
             this._valueHeadsetname = _("Disconnected");
             //remember style
@@ -852,6 +852,7 @@ export default class HeadsetControl extends Extension {
         } finally {
             this._headsetControlIndicator.updateLabel();
             this._headsetControlIndicator.updateUIElements();
+            this._changeIndicatorVisibility();
         }
     }
 
@@ -978,7 +979,6 @@ export default class HeadsetControl extends Extension {
         _logoutput("_refreshIndicator - " + _("Refreshing..."));
         if (this._JSONoutputSupported) {
             this._refreshJSON_async();
-            this._changeIndicatorVisibility();
             return;
         }
         if (capabilities.battery) {
@@ -1004,7 +1004,6 @@ export default class HeadsetControl extends Extension {
 
         if (this._JSONoutputSupported) {
             this._refreshJSON_async();
-            this._changeIndicatorVisibility();
             return;
         }
         if (this._needCapabilitiesRefresh) {
@@ -1049,6 +1048,11 @@ export default class HeadsetControl extends Extension {
         if (!this._showIndicator) {
             this._changeIndicatorVisibility();
         }
+    }
+
+    _onParamChangedColors() {
+        usecolors = this._settings.get_boolean("use-colors");
+        if (!this._refreshIndicatorRunning) this._refreshIndicator();
     }
 
     _calculateRefreshInterval(refreshIntervalmin) {
@@ -1096,11 +1100,15 @@ export default class HeadsetControl extends Extension {
         this._showIndicator = this._settings.get_boolean(
             "show-systemindicator"
         );
+        this._hideWhenDisconnectedSystemindicator = this._settings.get_boolean(
+            "hidewhendisconnected-systemindicator"
+        );
         if (!this._refreshJSONall(this._showIndicator)) {
             this._refreshCapabilities();
         }
         this._refreshIntervalSignal = null;
         this._refreshIntervalHandler();
+        this._changeIndicatorVisibility();
         // add Signals to array
         this._SignalsArray = [];
         this._SignalsArray.push(
@@ -1140,7 +1148,10 @@ export default class HeadsetControl extends Extension {
                 key: "option-equalizer-preset",
                 callback: this._onParamChangedMenu.bind(this),
             },
-            { key: "use-colors", callback: this._initCmd.bind(this) },
+            {
+                key: "use-colors",
+                callback: this._onParamChangedColors.bind(this),
+            },
             {
                 key: "quicksettings-toggle",
                 callback: this._onParamChanged.bind(this),
@@ -1172,6 +1183,7 @@ export default class HeadsetControl extends Extension {
         this._visible = null;
         this._devicecount = null;
         this._showIndicator = null;
+        this._hideWhenDisconnectedSystemindicator = null;
         this._refreshIndicatorRunning = null;
         this._refreshIntervalSystemindicator = null;
         usenotifications = null;
