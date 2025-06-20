@@ -62,18 +62,14 @@ const headsetcontrolCommands = {
 const _rgbToHex = (r, g, b) =>
     "#" + [r, g, b].map((x) => x.toString(16).padStart(2, "0")).join("");
 
-let usenotifications;
-let uselogging;
-let usecolors;
-
 function _notify(strText) {
-    if (usenotifications) {
+    if (HeadsetControl.useNotifications) {
         Main.notify(_("HeadsetControl"), strText);
     }
 }
 
 function _logoutput(strText) {
-    if (uselogging) {
+    if (HeadsetControl.useLogging) {
         console.log(_("HeadsetControl") + " " + strText);
     }
 }
@@ -485,7 +481,10 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             let colorY = this._getColorHEXValue("color-batterymedium");
             let colorG = this._getColorHEXValue("color-batteryhigh");
 
-            if (!usecolors || strvalueBattery === "N/A") {
+            if (
+                !this._settings.get_boolean("use-colors") ||
+                strvalueBattery === "N/A"
+            ) {
                 this._menuButton.set_style(this._originalStyle);
                 return false;
             }
@@ -587,9 +586,9 @@ export default class HeadsetControl extends Extension {
     }
 
     _initCmd() {
-        usenotifications = this._settings.get_boolean("use-notifications");
-        uselogging = this._settings.get_boolean("use-logging");
-        usecolors = this._settings.get_boolean("use-colors");
+        this._useNotifications =
+            this._settings.get_boolean("use-notifications");
+        this._useLogging = this._settings.get_boolean("use-logging");
 
         // Helper function to construct commands
         const buildCommand = (executable, option) => `${executable} ${option}`;
@@ -1051,7 +1050,7 @@ export default class HeadsetControl extends Extension {
     }
 
     _onParamChangedColors() {
-        usecolors = this._settings.get_boolean("use-colors");
+        this._useColors = this._settings.get_boolean("use-colors");
         if (!this._refreshIndicatorRunning) this._refreshIndicator();
     }
 
@@ -1089,6 +1088,14 @@ export default class HeadsetControl extends Extension {
         QuickSettingsMenu.menu.close(PopupAnimation.FADE);
     }
 
+    get useLogging() {
+        return this._useLogging;
+    }
+
+    get useNotifications() {
+        return this._useNotifications;
+    }
+
     enable() {
         this._devicecount = 0;
         this._visible = false;
@@ -1097,6 +1104,7 @@ export default class HeadsetControl extends Extension {
         this._initCmd();
 
         this._headsetControlIndicator = new HeadsetControlIndicator(this);
+        this._useColors = this._settings.get_boolean("use-colors");
         this._showIndicator = this._settings.get_boolean(
             "show-systemindicator"
         );
@@ -1186,8 +1194,8 @@ export default class HeadsetControl extends Extension {
         this._hideWhenDisconnectedSystemindicator = null;
         this._refreshIndicatorRunning = null;
         this._refreshIntervalSystemindicator = null;
-        usenotifications = null;
-        uselogging = null;
-        usecolors = null;
+        this._useNotifications = null;
+        this._useLogging = null;
+        this._useColors = null;
     }
 }
