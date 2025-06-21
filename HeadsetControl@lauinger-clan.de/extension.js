@@ -1140,6 +1140,9 @@ export default class HeadsetControl extends Extension {
         this._hideWhenDisconnectedSystemindicator = this._settings.get_boolean(
             "hidewhendisconnected-systemindicator"
         );
+        this._refreshIntervalSystemindicator = this._settings.get_int(
+            "refreshinterval-systemindicator"
+        );
         if (!this._refreshJSONall(this._showIndicator)) {
             this._refreshCapabilities();
         }
