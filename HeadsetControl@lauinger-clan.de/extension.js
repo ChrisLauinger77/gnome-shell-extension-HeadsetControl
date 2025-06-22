@@ -1150,13 +1150,7 @@ export default class HeadsetControl extends Extension {
         this._refreshIntervalHandler();
         this._changeIndicatorVisibility();
         // add Signals to array
-        this._SignalsArray = [];
-        this._SignalsArray.push(
-            QuickSettingsMenu.menu.connect(
-                "open-state-changed",
-                this._refresh.bind(this)
-            )
-        );
+        this._settingSignals = [];
         const settingsToMonitor = [
             {
                 key: "headsetcontrol-executable",
@@ -1197,26 +1191,33 @@ export default class HeadsetControl extends Extension {
                 callback: this._onParamChanged.bind(this),
             },
         ];
-
         settingsToMonitor.forEach((setting) => {
-            this._SignalsArray.push(
+            this._settingSignals.push(
                 this._settings.connect(
                     `changed::${setting.key}`,
                     setting.callback
                 )
             );
         });
+        this._quicksettingSignal = QuickSettingsMenu.menu.connect(
+            "open-state-changed",
+            this._refresh.bind(this)
+        );
     }
 
     disable() {
         if (this._refreshIntervalSignal !== null)
             GLib.Source.remove(this._refreshIntervalSignal);
         this._refreshIntervalSignal = null;
+        if (this._quicksettingSignal !== null) {
+            QuickSettingsMenu.menu.disconnect(this._quicksettingSignal);
+        }
+        this._quicksettingSignal = null;
         // remove setting Signals
-        this._SignalsArray.forEach(function (signal) {
+        this._settingSignals.forEach(function (signal) {
             this._settings.disconnect(signal);
         }, this);
-        this._SignalsArray = null;
+        this._settingSignals = null;
         this._settings = null;
         this._headsetControlIndicator.destroy();
         this._headsetControlIndicator = null;
