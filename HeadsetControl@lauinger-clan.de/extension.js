@@ -27,10 +27,7 @@ import Clutter from "gi://Clutter";
 import * as Main from "resource:///org/gnome/shell/ui/main.js";
 import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
 import * as QuickSettings from "resource:///org/gnome/shell/ui/quickSettings.js";
-import {
-    Extension,
-    gettext as _,
-} from "resource:///org/gnome/shell/extensions/extension.js";
+import { Extension, gettext as _ } from "resource:///org/gnome/shell/extensions/extension.js";
 import { PopupAnimation } from "resource:///org/gnome/shell/ui/boxpointer.js";
 
 const QuickSettingsMenu = Main.panel.statusArea.quickSettings;
@@ -59,16 +56,12 @@ const headsetcontrolCommands = {
     cmdEqualizerPreset: "",
 };
 
-const rgbToHex = (r, g, b) =>
-    "#" + [r, g, b].map((x) => x.toString(16).padStart(2, "0")).join("");
+const rgbToHex = (r, g, b) => "#" + [r, g, b].map((x) => x.toString(16).padStart(2, "0")).join("");
 
-function invokeCmd(cmd) {
+function invokeCmd(cmd, logger) {
     try {
         let output = GLib.spawn_command_line_sync(cmd)[1];
-        let strOutput = imports.byteArray
-            .toString(output)
-            .replace("\n", "###")
-            .replace("Success!", "###");
+        let strOutput = imports.byteArray.toString(output).replace("\n", "###").replace("Success!", "###");
         strOutput = strOutput.split("###")[1];
         if (cmd.includes("-o json")) {
             strOutput = output;
@@ -76,7 +69,7 @@ function invokeCmd(cmd) {
         return strOutput;
     } catch (err) {
         // could not execute the command
-        console.error(err, "HeadsetControl");
+        logger.error(err);
         return "N/A";
     }
 }
@@ -90,6 +83,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 iconName: "audio-headset-symbolic",
                 toggleMode: true,
             });
+            this._logger = Me.getLogger();
             this._useLogging = Me._useLogging;
             this._settings = _settings;
             this._valueBatteryStatus = "";
@@ -99,11 +93,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this._valueHeadsetname = _("HeadsetControl");
             //remember style
             this._originalStyle = this.get_style();
-            this.menu.setHeader(
-                "audio-headset-symbolic",
-                _("HeadsetControl"),
-                ""
-            );
+            this.menu.setHeader("audio-headset-symbolic", _("HeadsetControl"), "");
             this.setMenuHeader();
             this.setMenuTitle();
 
@@ -122,12 +112,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 default:
                     quicksettingstogglekey = "show-systemindicator";
             }
-            _settings.bind(
-                quicksettingstogglekey,
-                this,
-                "checked",
-                Gio.SettingsBindFlags.DEFAULT
-            );
+            _settings.bind(quicksettingstogglekey, this, "checked", Gio.SettingsBindFlags.DEFAULT);
 
             this._buildMenu();
             this._addSettingsAction(Me);
@@ -139,7 +124,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
 
         _logOutput(strText) {
             if (this._useLogging) {
-                console.log(_("HeadsetControl") + " " + strText);
+                this._logger.log(strText);
             }
         }
 
@@ -190,8 +175,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
 
             menuItems.forEach((item) => {
                 if (capabilities[item.capability]) {
-                    const popupMenuExpander =
-                        new PopupMenu.PopupSubMenuMenuItem(item.label);
+                    const popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem(item.label);
                     item.method.call(this, popupMenuExpander);
                     this.menu.addMenuItem(popupMenuExpander);
                 }
@@ -206,9 +190,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
 
         _addSettingsAction(Me) {
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-            const settingsItem = this.menu.addAction(_("Settings"), () =>
-                Me._openPreferences()
-            );
+            const settingsItem = this.menu.addAction(_("Settings"), () => Me._openPreferences());
             settingsItem.visible = Main.sessionMode.allowSettings;
             this.menu._settingsActions[Me.uuid] = settingsItem;
         }
@@ -271,25 +253,13 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 );
                 this._logOutput("setMenuHeader: Battery and Chatmix");
             } else if (capabilities.battery) {
-                this.menu.setHeader(
-                    "audio-headset-symbolic",
-                    this._valueHeadsetname,
-                    this._valueBattery
-                );
+                this.menu.setHeader("audio-headset-symbolic", this._valueHeadsetname, this._valueBattery);
                 this._logOutput("setMenuHeader: Battery");
             } else if (capabilities.chatmix) {
-                this.menu.setHeader(
-                    "audio-headset-symbolic",
-                    this._valueHeadsetname,
-                    this._valueChatMix
-                );
+                this.menu.setHeader("audio-headset-symbolic", this._valueHeadsetname, this._valueChatMix);
                 this._logOutput("setMenuHeader: Chatmix");
             } else {
-                this.menu.setHeader(
-                    "audio-headset-symbolic",
-                    _("HeadsetControl"),
-                    this._valueHeadsetname
-                );
+                this.menu.setHeader("audio-headset-symbolic", _("HeadsetControl"), this._valueHeadsetname);
                 this._logOutput("setMenuHeader: Headsetname");
             }
             this._changeColor(this._valueBattery, this._valueBatteryNum);
@@ -297,7 +267,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
 
         _invokeCmd(cmd) {
             this._logOutput("_invokeCmd: " + cmd);
-            const retval = invokeCmd(cmd);
+            const retval = invokeCmd(cmd, this._logger);
             this._logOutput("_invokeCmd retval: " + retval);
             return retval;
         }
@@ -319,15 +289,10 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 [_("Maximum"), arraySidetone[4]],
             ].filter(([, value]) => value !== "-1");
             sidetoneValues.forEach((item) =>
-                this._addPopupMenuItem(
-                    popupMenuExpander,
-                    item[0],
-                    headsetcontrolCommands.cmdSidetone + " " + item[1]
-                )
+                this._addPopupMenuItem(popupMenuExpander, item[0], headsetcontrolCommands.cmdSidetone + " " + item[1])
             );
             this.menu.addMenuItem(popupMenuExpander);
-            popupMenuExpander.menu.box.style_class =
-                "PopupSubMenuMenuItemStyle";
+            popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
         }
 
         _addLEDMenu(popupMenuExpander) {
@@ -336,14 +301,9 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 [_("On"), "1"],
             ];
             LEDvalues.forEach((item) =>
-                this._addPopupMenuItem(
-                    popupMenuExpander,
-                    item[0],
-                    headsetcontrolCommands.cmdLED + " " + item[1]
-                )
+                this._addPopupMenuItem(popupMenuExpander, item[0], headsetcontrolCommands.cmdLED + " " + item[1])
             );
-            popupMenuExpander.menu.box.style_class =
-                "PopupSubMenuMenuItemStyle";
+            popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
             this.menu.addMenuItem(popupMenuExpander);
         }
 
@@ -353,14 +313,9 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 [_("On"), "1"],
             ];
             voiceValues.forEach((item) =>
-                this._addPopupMenuItem(
-                    popupMenuExpander,
-                    item[0],
-                    headsetcontrolCommands.cmdVoice + " " + item[1]
-                )
+                this._addPopupMenuItem(popupMenuExpander, item[0], headsetcontrolCommands.cmdVoice + " " + item[1])
             );
-            popupMenuExpander.menu.box.style_class =
-                "PopupSubMenuMenuItemStyle";
+            popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
             this.menu.addMenuItem(popupMenuExpander);
         }
 
@@ -370,14 +325,9 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 [_("On"), "1"],
             ];
             rotateMuteValues.forEach((item) =>
-                this._addPopupMenuItem(
-                    popupMenuExpander,
-                    item[0],
-                    headsetcontrolCommands.cmdRotateMute + " " + item[1]
-                )
+                this._addPopupMenuItem(popupMenuExpander, item[0], headsetcontrolCommands.cmdRotateMute + " " + item[1])
             );
-            popupMenuExpander.menu.box.style_class =
-                "PopupSubMenuMenuItemStyle";
+            popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
             this.menu.addMenuItem(popupMenuExpander);
         }
 
@@ -399,15 +349,12 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                     headsetcontrolCommands.cmdInacitetime + " " + item[1]
                 )
             );
-            popupMenuExpander.menu.box.style_class =
-                "PopupSubMenuMenuItemStyle";
+            popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
             this.menu.addMenuItem(popupMenuExpander);
         }
 
         _addEqualizerSettingMenu(popupMenuExpander) {
-            let arrayEqualizerSetting = this._settings.get_strv(
-                "option-equalizer-settings"
-            );
+            let arrayEqualizerSetting = this._settings.get_strv("option-equalizer-settings");
 
             const equalizerSettingValues = [
                 [_("Setting 1"), arrayEqualizerSetting[0]],
@@ -422,21 +369,14 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                     item[0] = itemarray[0];
                     item[1] = itemarray[1];
                 }
-                this._addPopupMenuItem(
-                    popupMenuExpander,
-                    item[0],
-                    headsetcontrolCommands.cmdEqualizer + " " + item[1]
-                );
+                this._addPopupMenuItem(popupMenuExpander, item[0], headsetcontrolCommands.cmdEqualizer + " " + item[1]);
             });
-            popupMenuExpander.menu.box.style_class =
-                "PopupSubMenuMenuItemStyle";
+            popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
             this.menu.addMenuItem(popupMenuExpander);
         }
 
         _addEqualizerPresetMenu(popupMenuExpander) {
-            let arrayEqualizerPreset = this._settings.get_strv(
-                "equalizer-preset-names"
-            );
+            let arrayEqualizerPreset = this._settings.get_strv("equalizer-preset-names");
             const equalizerPresetValues = [
                 [_(arrayEqualizerPreset[0]), "0"],
                 [_(arrayEqualizerPreset[1]), "1"],
@@ -450,26 +390,16 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                     headsetcontrolCommands.cmdEqualizerPreset + " " + item[1]
                 )
             );
-            popupMenuExpander.menu.box.style_class =
-                "PopupSubMenuMenuItemStyle";
+            popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
             this.menu.addMenuItem(popupMenuExpander);
         }
 
         _getColorHEXValue(strSettingsColor) {
             const strcolor = this._settings.get_string(strSettingsColor);
-            this._logOutput(
-                "_getColorHEXValue-strSettingsColor: " + strSettingsColor
-            );
+            this._logOutput("_getColorHEXValue-strSettingsColor: " + strSettingsColor);
             this._logOutput("_getColorHEXValue-strcolor: " + strcolor);
-            const arrColor = strcolor
-                .replace("rgb(", "")
-                .replace(")", "")
-                .split(",");
-            const color = rgbToHex(
-                parseInt(arrColor[0]),
-                parseInt(arrColor[1]),
-                parseInt(arrColor[2])
-            );
+            const arrColor = strcolor.replace("rgb(", "").replace(")", "").split(",");
+            const color = rgbToHex(parseInt(arrColor[0]), parseInt(arrColor[1]), parseInt(arrColor[2]));
             return color;
         }
 
@@ -482,18 +412,15 @@ const HeadsetControlMenuToggle = GObject.registerClass(
         }
 
         _changeColor(strvalueBattery, valueBattery_num) {
-            let colorR = this._getColorHEXValue("color-batterylow");
-            let colorY = this._getColorHEXValue("color-batterymedium");
-            let colorG = this._getColorHEXValue("color-batteryhigh");
+            const colorR = this._getColorHEXValue("color-batterylow");
+            const colorY = this._getColorHEXValue("color-batterymedium");
+            const colorG = this._getColorHEXValue("color-batteryhigh");
 
-            if (
-                !this._settings.get_boolean("use-colors") ||
-                strvalueBattery === "N/A"
-            ) {
+            if (!this._settings.get_boolean("use-colors") || strvalueBattery === "N/A") {
                 this._menuButton.set_style(this._originalStyle);
                 return false;
             }
-            this._logOutput("_changeColor: " + valueBattery_num);
+            this._logOutput("_changeColor valueBattery_num: " + valueBattery_num);
             if (valueBattery_num >= 51) {
                 this._menuButton.set_style("color: " + colorG + ";");
                 this._logOutput("_changeColor: " + colorG);
@@ -524,9 +451,7 @@ const HeadsetControlIndicator = GObject.registerClass(
             });
             this.add_child(this._indicatorLabel);
             this._indicator.icon_name = "audio-headset-symbolic";
-            this._indicator.visible = _settings.get_boolean(
-                "show-systemindicator"
-            );
+            this._indicator.visible = _settings.get_boolean("show-systemindicator");
             this._indicatorLabel.visible = false;
 
             // Create the toggle menu and associate it with the indicator, being
@@ -557,22 +482,15 @@ const HeadsetControlIndicator = GObject.registerClass(
 
         updateLabel() {
             if (this._indicatorLabel) {
-                this._indicatorLabel.set_style(
-                    this._headsetControlMenuToggle.menuButtonStyle
-                );
-                const battery_num =
-                    this._headsetControlMenuToggle.valueBatteryNum;
+                this._indicatorLabel.set_style(this._headsetControlMenuToggle.menuButtonStyle);
+                const battery_num = this._headsetControlMenuToggle.valueBatteryNum;
                 if (battery_num < 0) {
                     this._indicatorLabel.set_text("N/A");
                     return;
                 }
                 // Add "+" if charging
-                const isCharging =
-                    this._headsetControlMenuToggle.valueBatteryStatus ===
-                    "BATTERY_CHARGING";
-                this._indicatorLabel.set_text(
-                    `${isCharging ? "+" : ""}${battery_num}%`
-                );
+                const isCharging = this._headsetControlMenuToggle.valueBatteryStatus === "BATTERY_CHARGING";
+                this._indicatorLabel.set_text(`${isCharging ? "+" : ""}${battery_num}%`);
             }
         }
 
@@ -595,13 +513,13 @@ export default class HeadsetControl extends Extension {
 
     _logOutput(strText) {
         if (this._useLogging) {
-            console.log(_("HeadsetControl") + " " + strText);
+            this.getLogger().log(strText);
         }
     }
 
     _invokeCmd(cmd) {
         this._logOutput("_invokeCmd: " + cmd);
-        const retval = invokeCmd(cmd);
+        const retval = invokeCmd(cmd, this.getLogger());
         this._logOutput("_invokeCmd return: " + retval);
         return retval;
     }
@@ -613,45 +531,26 @@ export default class HeadsetControl extends Extension {
     }
 
     _initCmd() {
-        this._useNotifications =
-            this._settings.get_boolean("use-notifications");
+        this._useNotifications = this._settings.get_boolean("use-notifications");
         this._useLogging = this._settings.get_boolean("use-logging");
-        this._headsetControlIndicator.headsetControlMenuToggle.updateUseLogging(
-            this._useLogging
-        );
+        this._headsetControlIndicator.headsetControlMenuToggle.updateUseLogging(this._useLogging);
+
         // Helper function to construct commands
         const buildCommand = (executable, option) => `${executable} ${option}`;
 
         // Cache the executable path
-        const cmdExecutable = this._settings.get_string(
-            "headsetcontrol-executable"
-        );
+        const cmdExecutable = this._settings.get_string("headsetcontrol-executable");
 
         // Define headset control commands using the helper function
         headsetcontrolCommands.cmdCapabilities = buildCommand(
             cmdExecutable,
             this._settings.get_string("option-capabilities")
         );
-        headsetcontrolCommands.cmdBattery = buildCommand(
-            cmdExecutable,
-            this._settings.get_string("option-battery")
-        );
-        headsetcontrolCommands.cmdChatMix = buildCommand(
-            cmdExecutable,
-            this._settings.get_string("option-chatmix")
-        );
-        headsetcontrolCommands.cmdSidetone = buildCommand(
-            cmdExecutable,
-            this._settings.get_string("option-sidetone")
-        );
-        headsetcontrolCommands.cmdLED = buildCommand(
-            cmdExecutable,
-            this._settings.get_string("option-led")
-        );
-        headsetcontrolCommands.cmdVoice = buildCommand(
-            cmdExecutable,
-            this._settings.get_string("option-voice")
-        );
+        headsetcontrolCommands.cmdBattery = buildCommand(cmdExecutable, this._settings.get_string("option-battery"));
+        headsetcontrolCommands.cmdChatMix = buildCommand(cmdExecutable, this._settings.get_string("option-chatmix"));
+        headsetcontrolCommands.cmdSidetone = buildCommand(cmdExecutable, this._settings.get_string("option-sidetone"));
+        headsetcontrolCommands.cmdLED = buildCommand(cmdExecutable, this._settings.get_string("option-led"));
+        headsetcontrolCommands.cmdVoice = buildCommand(cmdExecutable, this._settings.get_string("option-voice"));
         headsetcontrolCommands.cmdRotateMute = buildCommand(
             cmdExecutable,
             this._settings.get_string("option-rotate-mute")
@@ -672,6 +571,7 @@ export default class HeadsetControl extends Extension {
             cmdExecutable,
             this._settings.get_string("option-equalizer-preset")
         );
+        if (!this._JSONoutputSupported) this._updateBinaryCapabilities();
     }
 
     _getHeadSetControlValue(stroutput, valuetosearch) {
@@ -701,7 +601,7 @@ export default class HeadsetControl extends Extension {
             return JSON.parse(new TextDecoder().decode(strOutput));
         } catch (err) {
             // could not parse JSON
-            console.error(err, "HeadsetControl");
+            this.getLogger().error(err);
             return "";
         }
     }
@@ -718,129 +618,74 @@ export default class HeadsetControl extends Extension {
         capabilities.equalizerpreset = value;
     }
 
+    _refreshCapabilitiesJSON(device) {
+        capabilities.sidetone = device.capabilities.includes("CAP_SIDETONE");
+        capabilities.battery = device.capabilities.includes("CAP_BATTERY_STATUS");
+        if (this._showIndicator) {
+            this._headsetControlIndicator.setLabelVisible(capabilities.battery);
+        }
+        capabilities.led = device.capabilities.includes("CAP_LIGHTS");
+        capabilities.inactivetime = device.capabilities.includes("CAP_INACTIVE_TIME");
+        capabilities.chatmix = device.capabilities.includes("CAP_CHATMIX_STATUS");
+        capabilities.voice = device.capabilities.includes("CAP_VOICE_PROMPTS");
+        capabilities.rotatemute = device.capabilities.includes("CAP_ROTATE_TO_MUTE");
+        capabilities.equalizer = device.capabilities.includes("CAP_EQUALIZER");
+        capabilities.equalizerpreset = device.capabilities.includes("CAP_EQUALIZER_PRESET");
+        for (const cap in capabilities) {
+            this._logOutput(`${cap}: ${capabilities[cap]}`);
+        }
+    }
+
+    _isDeviceStatusSuccess(device) {
+        this._logOutput("device.status:" + " " + device.status);
+        return device.status && device.status.includes("success");
+    }
+
     _processOutput(output, updateIndicator) {
-        if (output) {
-            this._JSONoutputSupported = true;
-            let device_count = output.device_count;
-            this._logOutput("device_count:" + " " + device_count);
-            if (this._devicecount !== device_count) {
-                this._devicecount = device_count;
-                this._logOutput("device_count changed: " + device_count);
-                this._needCapabilitiesRefresh = true;
-            }
-            if (device_count > 0) {
-                this._logOutput(
-                    "devices(0).status:" + " " + output.devices[0].status
-                );
-                // if we cannot get the capabilities, set all to true
-                if (!output.devices[0].status.includes("success")) {
-                    this._setAllCapabilities(true);
-                    return false;
-                }
-                if (this._needCapabilitiesRefresh) {
-                    capabilities.sidetone =
-                        output.devices[0].capabilities.includes("CAP_SIDETONE");
-                    this._logOutput(
-                        "capabilities.sidetone: " + capabilities.sidetone
-                    );
-                    capabilities.battery =
-                        output.devices[0].capabilities.includes(
-                            "CAP_BATTERY_STATUS"
-                        );
-                    if (this._showIndicator) {
-                        this._headsetControlIndicator.setLabelVisible(
-                            capabilities.battery
-                        );
-                    }
-                    this._logOutput(
-                        "capabilities.battery: " + capabilities.battery
-                    );
-                    capabilities.led =
-                        output.devices[0].capabilities.includes("CAP_LIGHTS");
-                    this._logOutput("capabilities.led: " + capabilities.led);
-                    capabilities.inactivetime =
-                        output.devices[0].capabilities.includes(
-                            "CAP_INACTIVE_TIME"
-                        );
-                    this._logOutput(
-                        "capabilities.inactivetime: " +
-                            capabilities.inactivetime
-                    );
-                    capabilities.chatmix =
-                        output.devices[0].capabilities.includes(
-                            "CAP_CHATMIX_STATUS"
-                        );
-                    this._logOutput(
-                        "capabilities.chatmix: " + capabilities.chatmix
-                    );
-                    capabilities.voice =
-                        output.devices[0].capabilities.includes(
-                            "CAP_VOICE_PROMPTS"
-                        );
-                    this._logOutput(
-                        "capabilities.voice: " + capabilities.voice
-                    );
-                    capabilities.rotatemute =
-                        output.devices[0].capabilities.includes(
-                            "CAP_ROTATE_TO_MUTE"
-                        );
-                    this._logOutput(
-                        "capabilities.rotatemute: " + capabilities.rotatemute
-                    );
-                    capabilities.equalizer =
-                        output.devices[0].capabilities.includes(
-                            "CAP_EQUALIZER"
-                        );
-                    this._logOutput(
-                        "capabilities.equalizer: " + capabilities.equalizer
-                    );
-                    capabilities.equalizerpreset =
-                        output.devices[0].capabilities.includes(
-                            "CAP_EQUALIZER_PRESET"
-                        );
-                    this._logOutput(
-                        "capabilities.equalizerpreset: " +
-                            capabilities.equalizerpreset
-                    );
-                }
-
-                let headsetname = output.devices[0].device;
-                this._logOutput(headsetname);
-                if (updateIndicator) {
-                    if (this._needCapabilitiesRefresh) {
-                        this._headsetControlIndicator.headsetControlMenuToggle.refreshMenu(
-                            this
-                        );
-                    }
-                    this._headsetControlIndicator.headsetControlMenuToggle.updateHeadsetName(
-                        headsetname
-                    );
-
-                    this._headsetControlIndicator.headsetControlMenuToggle.updateBatteryStatus(
-                        output.devices[0].battery.status,
-                        output.devices[0].battery.level + "%",
-                        output.devices[0].battery.level
-                    );
-                    this._headsetControlIndicator.headsetControlMenuToggle.updateChatMixStatus(
-                        output.devices[0].chatmix
-                    );
-                    this._headsetControlIndicator.updateUIElements();
-                }
-                this._needCapabilitiesRefresh = false;
-            }
-            return true;
-        } else {
+        if (!output) {
             this._devicecount = 0;
             return false;
         }
+        this._JSONoutputSupported = true;
+        const device_count = output.device_count;
+        this._logOutput("device_count:" + " " + device_count);
+        if (this._devicecount !== device_count) {
+            this._devicecount = device_count;
+            this._logOutput("device_count changed: " + device_count);
+            this._needCapabilitiesRefresh = true;
+        }
+        if (device_count > 0) {
+            if (!this._isDeviceStatusSuccess(output.devices[0])) {
+                this._setAllCapabilities(true); // if we cannot get the capabilities, set all to true
+                return false;
+            }
+            if (this._needCapabilitiesRefresh) {
+                this._refreshCapabilitiesJSON(output.devices[0]);
+            }
+            const headsetname = output.devices[0].device;
+            this._logOutput(headsetname);
+            if (updateIndicator) {
+                if (this._needCapabilitiesRefresh) {
+                    this._headsetControlIndicator.headsetControlMenuToggle.refreshMenu(this);
+                }
+                this._headsetControlIndicator.headsetControlMenuToggle.updateHeadsetName(headsetname);
+                this._headsetControlIndicator.headsetControlMenuToggle.updateBatteryStatus(
+                    output.devices[0].battery.status,
+                    output.devices[0].battery.level + "%",
+                    output.devices[0].battery.level
+                );
+                this._headsetControlIndicator.headsetControlMenuToggle.updateChatMixStatus(output.devices[0].chatmix);
+                this._headsetControlIndicator.updateUIElements();
+            }
+            this._needCapabilitiesRefresh = false;
+        }
+        return true;
     }
 
     async _refreshJSON_async() {
         try {
             const flags = Gio.SubprocessFlags.STDOUT_PIPE;
-            const [, argv] = GLib.shell_parse_argv(
-                headsetcontrolCommands.cmdOutputFormat
-            );
+            const [, argv] = GLib.shell_parse_argv(headsetcontrolCommands.cmdOutputFormat);
 
             const proc = new Gio.Subprocess({ argv, flags });
             proc.init(null);
@@ -852,9 +697,7 @@ export default class HeadsetControl extends Extension {
                             subprocess.communicate_finish(res);
                         resolve(stdoutFinish);
                     } catch (err) {
-                        this._logOutput(
-                            `Error executing command: ${err.message}`
-                        );
+                        this._logOutput(`Error executing command: ${err.message}`);
                         reject(err);
                     }
                 });
@@ -872,7 +715,7 @@ export default class HeadsetControl extends Extension {
             this._processOutput(output, true);
             this._logOutput("JSON refresh completed successfully");
         } catch (error) {
-            console.error("HeadsetControl: _refreshJSON_async error:", error);
+            this.getLogger().error("_refreshJSON_async error:", error);
             this._logOutput(`JSON refresh failed: ${error.message}`);
             this._JSONoutputSupported = false;
             // Fallback to non-JSON method
@@ -910,9 +753,7 @@ export default class HeadsetControl extends Extension {
         if (strOutput.includes("* battery")) {
             capabilities.battery = true;
             if (this._showIndicator) {
-                this._headsetControlIndicator.setLabelVisible(
-                    capabilities.battery
-                );
+                this._headsetControlIndicator.setLabelVisible(capabilities.battery);
             }
         }
         this._logOutput("capabilities.battery: " + capabilities.battery);
@@ -923,9 +764,7 @@ export default class HeadsetControl extends Extension {
         if (strOutput.includes("* inactive time")) {
             capabilities.inactivetime = true;
         }
-        this._logOutput(
-            "capabilities.inactivetime: " + capabilities.inactivetime
-        );
+        this._logOutput("capabilities.inactivetime: " + capabilities.inactivetime);
         if (strOutput.includes("* chatmix")) {
             capabilities.chatmix = true;
         }
@@ -945,9 +784,7 @@ export default class HeadsetControl extends Extension {
         if (strOutput.includes("* equalizer preset")) {
             capabilities.equalizerpreset = true;
         }
-        this._logOutput(
-            "capabilities.equalizerpreset: " + capabilities.equalizerpreset
-        );
+        this._logOutput("capabilities.equalizerpreset: " + capabilities.equalizerpreset);
         this._needCapabilitiesRefresh = false; // when headset was connected
     }
 
@@ -973,39 +810,28 @@ export default class HeadsetControl extends Extension {
             return false;
         }
         let strChatMix = this._getHeadSetControlValue(strOutput, "Chat"); //ChatMix or Chat-Mix
-        this._headsetControlIndicator.headsetControlMenuToggle.updateChatMixStatus(
-            strChatMix
-        );
+        this._headsetControlIndicator.headsetControlMenuToggle.updateChatMixStatus(strChatMix);
         return true;
     }
 
     _changeIndicatorVisibility() {
         if (!this._showIndicator) {
-            this._logOutput(
-                "_changeIndicatorVisibility - showIndicator is false - hide indicator"
-            );
+            this._logOutput("_changeIndicatorVisibility - showIndicator is false - hide indicator");
             this._headsetControlIndicator.setIconVisible(false);
             this._headsetControlIndicator.setLabelVisible(false);
             return;
         }
         if (
             this._hideWhenDisconnectedSystemindicator &&
-            (this._devicecount === 0 ||
-                this._headsetControlIndicator.valueBatteryNum < 0)
+            (this._devicecount === 0 || this._headsetControlIndicator.valueBatteryNum < 0)
         ) {
-            this._logOutput(
-                "_changeIndicatorVisibility - headset not connected - hide indicator"
-            );
+            this._logOutput("_changeIndicatorVisibility - headset not connected - hide indicator");
             this._headsetControlIndicator.setIconVisible(false);
             this._headsetControlIndicator.setLabelVisible(false);
         } else {
-            this._logOutput(
-                "_changeIndicatorVisibility - headset connected - show indicator"
-            );
+            this._logOutput("_changeIndicatorVisibility - headset connected - show indicator");
             this._headsetControlIndicator.setIconVisible(this._showIndicator);
-            this._headsetControlIndicator.setLabelVisible(
-                capabilities.battery && this._showIndicator
-            );
+            this._headsetControlIndicator.setLabelVisible(capabilities.battery && this._showIndicator);
         }
     }
 
@@ -1025,9 +851,7 @@ export default class HeadsetControl extends Extension {
 
     _refresh() {
         if (this._refreshIndicatorRunning) {
-            this._logOutput(
-                _("Quicksettings open - refresh indicator running...")
-            );
+            this._logOutput(_("Quicksettings open - refresh indicator running..."));
             return;
         }
         this._visible = !this._visible;
@@ -1062,22 +886,14 @@ export default class HeadsetControl extends Extension {
 
     _onParamChangedMenu() {
         if (capabilities.sidetone) {
-            this._headsetControlIndicator.headsetControlMenuToggle.refreshMenu(
-                this
-            );
+            this._headsetControlIndicator.headsetControlMenuToggle.refreshMenu(this);
         }
     }
 
     _onParamChangedIndicator() {
-        this._showIndicator = this._settings.get_boolean(
-            "show-systemindicator"
-        );
-        this._hideWhenDisconnectedSystemindicator = this._settings.get_boolean(
-            "hidewhendisconnected-systemindicator"
-        );
-        this._refreshIntervalSystemindicator = this._settings.get_int(
-            "refreshinterval-systemindicator"
-        );
+        this._showIndicator = this._settings.get_boolean("show-systemindicator");
+        this._hideWhenDisconnectedSystemindicator = this._settings.get_boolean("hidewhendisconnected-systemindicator");
+        this._refreshIntervalSystemindicator = this._settings.get_int("refreshinterval-systemindicator");
         this._headsetControlIndicator.updateLabel();
         this._refreshIntervalHandler();
         if (!this._showIndicator) {
@@ -1108,9 +924,7 @@ export default class HeadsetControl extends Extension {
             this._refreshIndicatorRunning = false;
             this._refreshIntervalSignal = GLib.timeout_add(
                 GLib.PRIORITY_DEFAULT,
-                this._calculateRefreshInterval(
-                    this._refreshIntervalSystemindicator
-                ),
+                this._calculateRefreshInterval(this._refreshIntervalSystemindicator),
                 this._refreshIntervalHandler.bind(this)
             );
             return GLib.SOURCE_CONTINUE;
@@ -1124,6 +938,12 @@ export default class HeadsetControl extends Extension {
         QuickSettingsMenu.menu.close(PopupAnimation.FADE);
     }
 
+    _updateBinaryCapabilities() {
+        if (!this._refreshJSONall(this._showIndicator)) {
+            this._refreshCapabilities();
+        }
+    }
+
     enable() {
         this._devicecount = 0;
         this._visible = false;
@@ -1134,18 +954,10 @@ export default class HeadsetControl extends Extension {
         this._headsetControlIndicator = new HeadsetControlIndicator(this);
         this._initCmd();
         this._useColors = this._settings.get_boolean("use-colors");
-        this._showIndicator = this._settings.get_boolean(
-            "show-systemindicator"
-        );
-        this._hideWhenDisconnectedSystemindicator = this._settings.get_boolean(
-            "hidewhendisconnected-systemindicator"
-        );
-        this._refreshIntervalSystemindicator = this._settings.get_int(
-            "refreshinterval-systemindicator"
-        );
-        if (!this._refreshJSONall(this._showIndicator)) {
-            this._refreshCapabilities();
-        }
+        this._showIndicator = this._settings.get_boolean("show-systemindicator");
+        this._hideWhenDisconnectedSystemindicator = this._settings.get_boolean("hidewhendisconnected-systemindicator");
+        this._refreshIntervalSystemindicator = this._settings.get_int("refreshinterval-systemindicator");
+        this._updateBinaryCapabilities();
         this._refreshIntervalSignal = null;
         this._refreshIntervalHandler();
         this._changeIndicatorVisibility();
@@ -1192,26 +1004,15 @@ export default class HeadsetControl extends Extension {
             },
         ];
         settingsToMonitor.forEach((setting) => {
-            this._settingSignals.push(
-                this._settings.connect(
-                    `changed::${setting.key}`,
-                    setting.callback
-                )
-            );
+            this._settingSignals.push(this._settings.connect(`changed::${setting.key}`, setting.callback));
         });
-        this._quicksettingSignal = QuickSettingsMenu.menu.connect(
-            "open-state-changed",
-            this._refresh.bind(this)
-        );
+        this._quicksettingSignal = QuickSettingsMenu.menu.connect("open-state-changed", this._refresh.bind(this));
     }
 
     disable() {
-        if (this._refreshIntervalSignal !== null)
-            GLib.Source.remove(this._refreshIntervalSignal);
+        if (this._refreshIntervalSignal !== null) GLib.Source.remove(this._refreshIntervalSignal);
         this._refreshIntervalSignal = null;
-        if (this._quicksettingSignal !== null) {
-            QuickSettingsMenu.menu.disconnect(this._quicksettingSignal);
-        }
+        if (this._quicksettingSignal !== null) QuickSettingsMenu.menu.disconnect(this._quicksettingSignal);
         this._quicksettingSignal = null;
         // remove setting Signals
         this._settingSignals.forEach(function (signal) {
