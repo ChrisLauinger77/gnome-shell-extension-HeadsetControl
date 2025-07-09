@@ -96,7 +96,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this._valueBattery = "";
             this._valueBatteryNum = -1;
             this._valueChatMix = "";
-            this._valueHeadsetname = _("Disconnected");
+            this._valueHeadsetname = _("HeadsetControl");
             //remember style
             this._originalStyle = this.get_style();
             this.menu.setHeader(
@@ -676,17 +676,15 @@ export default class HeadsetControl extends Extension {
 
     _getHeadSetControlValue(stroutput, valuetosearch) {
         let strValue = "N/A";
-
-        if (stroutput.includes(valuetosearch)) {
-            strValue = stroutput.split(":")[1].toString().trim();
-            if (strValue.startsWith("Status")) {
-                strValue = stroutput.split(":")[2].toString().trim();
-                if (strValue.startsWith("BATTERY_AVAILABLE")) {
-                    strValue = stroutput.split(":")[3].toString().trim();
-                } else {
-                    strValue = "N/A";
+        switch (valuetosearch) {
+            case "Battery":
+                if (stroutput.includes("BATTERY_AVAILABLE") || stroutput.includes("BATTERY_CHARGING")) {
+                    strValue = stroutput.split(":").at(-1);
                 }
-            }
+                break;
+            case "Chat":
+                strValue = stroutput.split(":").at(-1);
+                break;
         }
         return strValue.toString().trim();
     }
