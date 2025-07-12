@@ -12,7 +12,7 @@ case "$1" in
     ;;
   install)
     gnome-extensions install HeadsetControl\@lauinger-clan.de.shell-extension.zip --force
-    gnome-extensions enable HeadsetControl\@lauinger-clan.shell-extension.de
+    gnome-extensions enable HeadsetControl\@lauinger-clan.de
     ;;
   upload)
     gnome-extensions upload HeadsetControl\@lauinger-clan.de.shell-extension.zip

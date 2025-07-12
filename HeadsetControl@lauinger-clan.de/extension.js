@@ -571,17 +571,16 @@ export default class HeadsetControl extends Extension {
             cmdExecutable,
             this._settings.get_string("option-equalizer-preset")
         );
-        if (!this._JSONoutputSupported) this._updateBinaryCapabilities();
+        if (!this._JSONoutputSupported) {
+            this._updateBinaryCapabilities();
+        }
     }
 
     _getHeadSetControlValue(stroutput, valuetosearch) {
         let strValue = "N/A";
         switch (valuetosearch) {
             case "Battery":
-                if (
-                    stroutput.includes("BATTERY_AVAILABLE") ||
-                    stroutput.includes("BATTERY_CHARGING")
-                ) {
+                if (stroutput.includes("BATTERY_AVAILABLE") || stroutput.includes("BATTERY_CHARGING")) {
                     strValue = stroutput.split(":").at(-1);
                 }
                 break;
@@ -693,8 +692,7 @@ export default class HeadsetControl extends Extension {
             const stdout = await new Promise((resolve, reject) => {
                 proc.communicate_async(null, null, (subprocess, res) => {
                     try {
-                        const [, stdoutFinish] =
-                            subprocess.communicate_finish(res);
+                        const [, stdoutFinish] = subprocess.communicate_finish(res);
                         resolve(stdoutFinish);
                     } catch (err) {
                         this._logOutput(`Error executing command: ${err.message}`);
@@ -1010,7 +1008,9 @@ export default class HeadsetControl extends Extension {
     }
 
     disable() {
-        if (this._refreshIntervalSignal !== null) GLib.Source.remove(this._refreshIntervalSignal);
+        if (this._refreshIntervalSignal !== null) {
+            GLib.Source.remove(this._refreshIntervalSignal);
+        }
         this._refreshIntervalSignal = null;
         if (this._quicksettingSignal !== null) QuickSettingsMenu.menu.disconnect(this._quicksettingSignal);
         this._quicksettingSignal = null;
