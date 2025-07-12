@@ -846,9 +846,10 @@ export default class HeadsetControl extends Extension {
             proc.init(null);
 
             const stdout = await new Promise((resolve, reject) => {
-                proc.communicate_async(null, null, (proc, res) => {
+                proc.communicate_async(null, null, (subprocess, res) => {
                     try {
-                        const [, stdoutFinish] = proc.communicate_finish(res);
+                        const [, stdoutFinish] =
+                            subprocess.communicate_finish(res);
                         resolve(stdoutFinish);
                     } catch (err) {
                         this._logOutput(
