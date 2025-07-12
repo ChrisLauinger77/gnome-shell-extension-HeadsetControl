@@ -678,7 +678,10 @@ export default class HeadsetControl extends Extension {
         let strValue = "N/A";
         switch (valuetosearch) {
             case "Battery":
-                if (stroutput.includes("BATTERY_AVAILABLE") || stroutput.includes("BATTERY_CHARGING")) {
+                if (
+                    stroutput.includes("BATTERY_AVAILABLE") ||
+                    stroutput.includes("BATTERY_CHARGING")
+                ) {
                     strValue = stroutput.split(":").at(-1);
                 }
                 break;
@@ -843,12 +846,10 @@ export default class HeadsetControl extends Extension {
             proc.init(null);
 
             const stdout = await new Promise((resolve, reject) => {
-                // eslint-disable-next-line no-shadow
                 proc.communicate_async(null, null, (proc, res) => {
                     try {
-                        // eslint-disable-next-line no-shadow
-                        const [, stdout] = proc.communicate_finish(res);
-                        resolve(stdout);
+                        const [, stdoutFinish] = proc.communicate_finish(res);
+                        resolve(stdoutFinish);
                     } catch (err) {
                         this._logOutput(
                             `Error executing command: ${err.message}`
