@@ -358,18 +358,12 @@ const HeadsetControlMenuToggle = GObject.registerClass(
         }
 
         _addEqualizerPresetMenu(popupMenuExpander) {
-            let arrayEqualizerPreset = this._settings.get_strv("equalizer-preset-names");
-            const equalizerPresetValues = [
-                [_(arrayEqualizerPreset[0]), "0"],
-                [_(arrayEqualizerPreset[1]), "1"],
-                [_(arrayEqualizerPreset[2]), "2"],
-                [_(arrayEqualizerPreset[3]), "3"],
-            ];
-            equalizerPresetValues.forEach((item) =>
+            const arrayEqualizerPreset = this._settings.get_strv("equalizer-preset-names");
+            arrayEqualizerPreset.forEach((item, index) =>
                 this._addPopupMenuItem(
                     popupMenuExpander,
-                    item[0],
-                    headsetcontrolCommands.cmdEqualizerPreset + " " + item[1]
+                    item,
+                    headsetcontrolCommands.cmdEqualizerPreset + " " + index.toString()
                 )
             );
             popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
@@ -622,6 +616,18 @@ export default class HeadsetControl extends Extension {
         return device.status && device.status.includes("success");
     }
 
+    _hasEqualizerPresetSupport(device) {
+        if ("equalizer_presets_count" in device) {
+            this._logOutput("equalizer_presets_count: " + device.equalizer_presets_count);
+            if (device.equalizer_presets_count > 0) {
+                // Get preset names from the keys of the equalizer_presets object
+                const presetNames = Object.keys(device.equalizer_presets);
+                this._logOutput("equalizer preset names: " + presetNames.join(", "));
+                this._settings.set_strv("equalizer-preset-names", presetNames);
+            }
+        }
+    }
+
     _processOutput(output, updateIndicator) {
         if (!output) {
             this._devicecount = 0;
@@ -645,6 +651,7 @@ export default class HeadsetControl extends Extension {
             }
             const headsetname = output.devices[0].device;
             this._logOutput(headsetname);
+            this._hasEqualizerPresetSupport(output.devices[0]);
             if (updateIndicator) {
                 if (this._needCapabilitiesRefresh) {
                     this._headsetControlIndicator.headsetControlMenuToggle.refreshMenu(this);

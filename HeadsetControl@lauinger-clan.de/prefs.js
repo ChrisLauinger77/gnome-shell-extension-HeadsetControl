@@ -430,9 +430,12 @@ export default class AdwPrefs extends ExtensionPreferences {
         adwexprowEQP.set_tooltip_text(
             _("Names of the equalizer presets (equalizer preset might not be supported by your headset)")
         );
-        let arrayEQPnames = window._settings.get_strv("equalizer-preset-names");
+        const arrayEQPnames = window._settings.get_strv("equalizer-preset-names");
         groupC3.add(adwexprowEQP);
-        const equalizerPresetLabels = [_("Default"), _("Preset 1"), _("Preset 2"), _("Preset 3")];
+        const equalizerPresetLabels =
+            !arrayEQPnames || arrayEQPnames.length === 0
+                ? [_("Default"), _("Preset 1"), _("Preset 2"), _("Preset 3")]
+                : arrayEQPnames;
         equalizerPresetLabels.forEach((label, index) => {
             if (arrayEQPnames[index] !== -1) {
                 let adwrowEQP = this.addEqualizerRow(
