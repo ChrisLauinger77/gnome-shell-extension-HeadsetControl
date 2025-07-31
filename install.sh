@@ -1,21 +1,30 @@
 #!/bin/bash
+# Script to pack, install, or upload the HeadsetControl GNOME Shell extension
+extension="HeadsetControl@lauinger-clan.de"
+extensionfile=$extension".shell-extension.zip"
 
-# glib-compile-schemas HeadsetControl\@lauinger-clan.de/schemas/
-
-cd HeadsetControl\@lauinger-clan.de
-gnome-extensions pack --podir=../po/ --out-dir=../ --extra-source=../LICENSE --force
-cd ..
+echo "Running $0 for $extension with arguments: $@"
 
 case "$1" in
   zip|pack)
+    cd $extension
+    gnome-extensions pack --podir=../po/ --out-dir=../ --extra-source=./lib --extra-source=./ui/ --extra-source=./icons/ --extra-source=../LICENSE --force
+    cd ..
     echo "Extension zip created ..."
     ;;
   install)
-    gnome-extensions install HeadsetControl\@lauinger-clan.de.shell-extension.zip --force
-    gnome-extensions enable HeadsetControl\@lauinger-clan.de
+    if [ ! -f $extensionfile ]; then
+      $0 zip
+    fi
+    gnome-extensions install $extensionfile --force
+    gnome-extensions enable $extension
+    echo "Extension zip installed ..."
     ;;
   upload)
-    gnome-extensions upload HeadsetControl\@lauinger-clan.de.shell-extension.zip
+    if [ ! -f $extensionfile ]; then
+      $0 zip
+    fi
+    gnome-extensions upload $extensionfile
     ;;
   *)
     echo "Usage: $0 {zip|pack|install|upload}"
