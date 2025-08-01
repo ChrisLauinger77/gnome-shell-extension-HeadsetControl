@@ -1,12 +1,11 @@
+"use strict";
+
 import Gdk from "gi://Gdk";
 import Gtk from "gi://Gtk";
 import Gio from "gi://Gio";
 import Adw from "gi://Adw";
 import GObject from "gi://GObject";
-import {
-    ExtensionPreferences,
-    gettext as _,
-} from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
+import { ExtensionPreferences, gettext as _ } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 
 export default class AdwPrefs extends ExtensionPreferences {
     changeOption(option, text) {
@@ -27,9 +26,7 @@ export default class AdwPrefs extends ExtensionPreferences {
     }
 
     _updateExecutable(valueExecutable) {
-        valueExecutable.set_text(
-            this.getSettings().get_string("headsetcontrol-executable")
-        );
+        valueExecutable.set_text(this.getSettings().get_string("headsetcontrol-executable"));
     }
 
     _onFileChooserResponse(native, response) {
@@ -73,14 +70,8 @@ export default class AdwPrefs extends ExtensionPreferences {
     }
 
     applyChanges(valueExecutable, options) {
-        this.changeOption(
-            "headsetcontrol-executable",
-            valueExecutable.get_text()
-        );
-        this.changeOption(
-            "option-output-format",
-            options.opt_oformat.get_text()
-        );
+        this.changeOption("headsetcontrol-executable", valueExecutable.get_text());
+        this.changeOption("option-output-format", options.opt_oformat.get_text());
         this.changeOption("option-capabilities", options.opt_capa.get_text());
         this.changeOption("option-battery", options.opt_bat.get_text());
         this.changeOption("option-chatmix", options.opt_chm.get_text());
@@ -90,17 +81,11 @@ export default class AdwPrefs extends ExtensionPreferences {
         this.changeOption("option-voice", options.opt_voice.get_text());
         this.changeOption("option-rotate-mute", options.opt_rot.get_text());
         this.changeOption("option-equalizer", options.opt_equalizer.get_text());
-        this.changeOption(
-            "option-equalizer-preset",
-            options.opt_equalizer_preset.get_text()
-        );
+        this.changeOption("option-equalizer-preset", options.opt_equalizer_preset.get_text());
     }
 
     _onColorChanged(color_setting_button, strSetting) {
-        this.getSettings().set_string(
-            strSetting,
-            color_setting_button.get_rgba().to_string()
-        );
+        this.getSettings().set_string(strSetting, color_setting_button.get_rgba().to_string());
     }
 
     _onEQvaluechanged(adwrow, index, option) {
@@ -139,14 +124,10 @@ export default class AdwPrefs extends ExtensionPreferences {
         group1.set_name("headsetcontrol_global");
         page1.add(group1);
         const valueExecutable = new Adw.EntryRow({ title: _("Command:") });
-        valueExecutable.set_tooltip_text(
-            _("File and path of headsetcontrol executable")
-        );
+        valueExecutable.set_tooltip_text(_("File and path of headsetcontrol executable"));
         group1.add(valueExecutable);
 
-        valueExecutable.set_text(
-            window._settings.get_string("headsetcontrol-executable")
-        );
+        valueExecutable.set_text(window._settings.get_string("headsetcontrol-executable"));
         window._settings.connect(
             "changed::headsetcontrol-executable",
             this._updateExecutable.bind(this, valueExecutable)
@@ -155,9 +136,7 @@ export default class AdwPrefs extends ExtensionPreferences {
             label: _("..."),
             valign: Gtk.Align.CENTER,
         });
-        buttonExecutable.set_tooltip_text(
-            _("Usually located in '/usr/bin' OR '/usr/local/bin'")
-        );
+        buttonExecutable.set_tooltip_text(_("Usually located in '/usr/bin' OR '/usr/local/bin'"));
         valueExecutable.add_suffix(buttonExecutable);
         valueExecutable.activatable_widget = buttonExecutable;
 
@@ -166,14 +145,8 @@ export default class AdwPrefs extends ExtensionPreferences {
             modal: true,
             action: Gtk.FileChooserAction.OPEN,
         });
-        buttonExecutable.connect(
-            "clicked",
-            this._onBtnClicked.bind(this, buttonExecutable, _filechooser)
-        );
-        _filechooser.connect(
-            "response",
-            this._onFileChooserResponse.bind(this)
-        );
+        buttonExecutable.connect("clicked", this._onBtnClicked.bind(this, buttonExecutable, _filechooser));
+        _filechooser.connect("response", this._onFileChooserResponse.bind(this));
 
         // group2
         const group2 = Adw.PreferencesGroup.new();
@@ -182,9 +155,7 @@ export default class AdwPrefs extends ExtensionPreferences {
         page1.add(group2);
         const expRow1 = Adw.ExpanderRow.new();
         expRow1.set_title(_("HeadsetControl Version Option output format"));
-        expRow1.set_subtitle(
-            _("Used starting with HeadsetControl tool version newer then 2.7.0")
-        );
+        expRow1.set_subtitle(_("Used starting with HeadsetControl tool version newer then 2.7.0"));
         expRow1.set_expanded(true);
         group2.add(expRow1);
         const opt_oformat = this.addOptionRow(
@@ -204,18 +175,8 @@ export default class AdwPrefs extends ExtensionPreferences {
             _("Parameter to ask for capabilities"),
             "option-capabilities"
         );
-        const opt_bat = this.addOptionRow(
-            expRow2,
-            _("Battery"),
-            _("Parameter to ask for battery"),
-            "option-battery"
-        );
-        const opt_chm = this.addOptionRow(
-            expRow2,
-            _("Chat-Mix"),
-            _("Parameter to ask for chat-mix"),
-            "option-chatmix"
-        );
+        const opt_bat = this.addOptionRow(expRow2, _("Battery"), _("Parameter to ask for battery"), "option-battery");
+        const opt_chm = this.addOptionRow(expRow2, _("Chat-Mix"), _("Parameter to ask for chat-mix"), "option-chatmix");
         const expRow3 = Adw.ExpanderRow.new();
         expRow3.set_title(_("HeadsetControl Common"));
         expRow3.set_subtitle(_("Used in all HeadsetControl tool versions"));
@@ -316,22 +277,14 @@ export default class AdwPrefs extends ExtensionPreferences {
 
         groupC1.add(adwrow);
         adwrow.set_selected(window._settings.get_int("quicksettings-toggle"));
-        adwrow.connect(
-            "notify",
-            this._onQSToggleValuechanged.bind(this, window._settings, adwrow)
-        );
+        adwrow.connect("notify", this._onQSToggleValuechanged.bind(this, window._settings, adwrow));
         //show systemindicator
         let adwexprow = new Adw.ExpanderRow({
             title: _("Show SystemIndicator"),
         });
         adwexprow.set_tooltip_text(_("Toggle to show systemindicator"));
         groupC1.add(adwexprow);
-        window._settings.bind(
-            "show-systemindicator",
-            adwexprow,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT
-        );
+        window._settings.bind("show-systemindicator", adwexprow, "active", Gio.SettingsBindFlags.DEFAULT);
         const toggleshowsystemindicator = new Gtk.Switch({
             active: window._settings.get_boolean("show-systemindicator"),
             valign: Gtk.Align.CENTER,
@@ -345,31 +298,17 @@ export default class AdwPrefs extends ExtensionPreferences {
         adwexprow.add_suffix(toggleshowsystemindicator);
         adwexprow.set_expanded(toggleshowsystemindicator.get_active());
         adwexprow.activatable_widget = toggleshowsystemindicator;
-        toggleshowsystemindicator.bind_property(
-            "active",
-            adwexprow,
-            "expanded",
-            GObject.BindingFlags.DEFAULT
-        );
+        toggleshowsystemindicator.bind_property("active", adwexprow, "expanded", GObject.BindingFlags.DEFAULT);
         // hide when disconnected
         adwrow = new Adw.SwitchRow({
             title: _("Hide when disconnected"),
-            subtitle: _(
-                "Hide the systemindicator when no headset is connected"
-            ),
+            subtitle: _("Hide the systemindicator when no headset is connected"),
         });
         adwrow.set_tooltip_text(
-            _(
-                "Will be delayed by refresh interval - can be enforced by toggling the quicksettings"
-            )
+            _("Will be delayed by refresh interval - can be enforced by toggling the quicksettings")
         );
         adwexprow.add_row(adwrow);
-        window._settings.bind(
-            "hidewhendisconnected-systemindicator",
-            adwrow,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT
-        );
+        window._settings.bind("hidewhendisconnected-systemindicator", adwrow, "active", Gio.SettingsBindFlags.DEFAULT);
         // refresh interval
         let adwrowSR = this.addSpinRow(
             adwexprow,
@@ -379,30 +318,17 @@ export default class AdwPrefs extends ExtensionPreferences {
             [0, 60, 1, 10],
             this.getSettings().get_int("refreshinterval-systemindicator")
         );
-        adwrowSR.connect(
-            "changed",
-            this._onRIvaluechanged.bind(this, adwrowSR)
-        );
+        adwrowSR.connect("changed", this._onRIvaluechanged.bind(this, adwrowSR));
         //use notifications
         adwrow = new Adw.SwitchRow({ title: _("Use notifications") });
         adwrow.set_tooltip_text(_("Enable / disable notifications"));
         groupC1.add(adwrow);
-        window._settings.bind(
-            "use-notifications",
-            adwrow,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT
-        );
+        window._settings.bind("use-notifications", adwrow, "active", Gio.SettingsBindFlags.DEFAULT);
         //use logging
         adwrow = new Adw.SwitchRow({ title: _("Use logging") });
         adwrow.set_tooltip_text(_("Enable / disable log outputs"));
         groupC1.add(adwrow);
-        window._settings.bind(
-            "use-logging",
-            adwrow,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT
-        );
+        window._settings.bind("use-logging", adwrow, "active", Gio.SettingsBindFlags.DEFAULT);
         // groupC2
         const groupC2 = Adw.PreferencesGroup.new();
         groupC2.set_title(_("Colors"));
@@ -416,29 +342,17 @@ export default class AdwPrefs extends ExtensionPreferences {
             active: window._settings.get_boolean("use-colors"),
             valign: Gtk.Align.CENTER,
         });
-        window._settings.bind(
-            "use-colors",
-            toggleusecolors,
-            "active",
-            Gio.SettingsBindFlags.DEFAULT
-        );
+        window._settings.bind("use-colors", toggleusecolors, "active", Gio.SettingsBindFlags.DEFAULT);
         adwexprow.add_suffix(toggleusecolors);
         adwexprow.set_expanded(toggleusecolors.get_active());
         adwexprow.activatable_widget = toggleusecolors;
-        toggleusecolors.bind_property(
-            "active",
-            adwexprow,
-            "expanded",
-            GObject.BindingFlags.DEFAULT
-        );
+        toggleusecolors.bind_property("active", adwexprow, "expanded", GObject.BindingFlags.DEFAULT);
         // color high charge
         const mycolor = new Gdk.RGBA();
         adwrow = new Adw.ActionRow({
             title: _("Color battery charge high"),
         });
-        adwrow.set_tooltip_text(
-            _("The text color for battery charge 100% to 50%")
-        );
+        adwrow.set_tooltip_text(_("The text color for battery charge 100% to 50%"));
         adwexprow.add_row(adwrow);
         const colorbatteryhigh = new Gtk.ColorButton({
             valign: Gtk.Align.CENTER,
@@ -446,23 +360,14 @@ export default class AdwPrefs extends ExtensionPreferences {
 
         mycolor.parse(window._settings.get_string("color-batteryhigh"));
         colorbatteryhigh.set_rgba(mycolor);
-        colorbatteryhigh.connect(
-            "color-set",
-            this._onColorChanged.bind(
-                this,
-                colorbatteryhigh,
-                "color-batteryhigh"
-            )
-        );
+        colorbatteryhigh.connect("color-set", this._onColorChanged.bind(this, colorbatteryhigh, "color-batteryhigh"));
         adwrow.add_suffix(colorbatteryhigh);
         adwrow.activatable_widget = colorbatteryhigh;
         // color medium charge
         adwrow = new Adw.ActionRow({
             title: _("Color battery charge medium"),
         });
-        adwrow.set_tooltip_text(
-            _("The text color for battery charge 49% to 25%")
-        );
+        adwrow.set_tooltip_text(_("The text color for battery charge 49% to 25%"));
         adwexprow.add_row(adwrow);
         const colorbatterymedium = new Gtk.ColorButton({
             valign: Gtk.Align.CENTER,
@@ -472,11 +377,7 @@ export default class AdwPrefs extends ExtensionPreferences {
         colorbatterymedium.set_rgba(mycolor);
         colorbatterymedium.connect(
             "color-set",
-            this._onColorChanged.bind(
-                this,
-                colorbatterymedium,
-                "color-batterymedium"
-            )
+            this._onColorChanged.bind(this, colorbatterymedium, "color-batterymedium")
         );
         adwrow.add_suffix(colorbatterymedium);
         adwrow.activatable_widget = colorbatterymedium;
@@ -484,9 +385,7 @@ export default class AdwPrefs extends ExtensionPreferences {
         adwrow = new Adw.ActionRow({
             title: _("Color battery charge low"),
         });
-        adwrow.set_tooltip_text(
-            _("The text color for battery charge 24% to 0%")
-        );
+        adwrow.set_tooltip_text(_("The text color for battery charge 24% to 0%"));
         adwexprow.add_row(adwrow);
         const colorbatterylow = new Gtk.ColorButton({
             valign: Gtk.Align.CENTER,
@@ -494,10 +393,7 @@ export default class AdwPrefs extends ExtensionPreferences {
 
         mycolor.parse(window._settings.get_string("color-batterylow"));
         colorbatterylow.set_rgba(mycolor);
-        colorbatterylow.connect(
-            "color-set",
-            this._onColorChanged.bind(this, colorbatterylow, "color-batterylow")
-        );
+        colorbatterylow.connect("color-set", this._onColorChanged.bind(this, colorbatterylow, "color-batterylow"));
         adwrow.add_suffix(colorbatterylow);
         adwrow.activatable_widget = colorbatterylow;
         // groupC3
@@ -509,39 +405,21 @@ export default class AdwPrefs extends ExtensionPreferences {
         const adwexprowEQ = new Adw.ExpanderRow({
             title: _("Equalizer settings"),
         });
-        adwexprowEQ.set_tooltip_text(
-            _(
-                "Equalizer options (equalizer might not be supported by your headset)"
-            )
-        );
-        let arrayEQsettings = window._settings.get_strv(
-            "option-equalizer-settings"
-        );
+        adwexprowEQ.set_tooltip_text(_("Equalizer options (equalizer might not be supported by your headset)"));
+        let arrayEQsettings = window._settings.get_strv("option-equalizer-settings");
         groupC3.add(adwexprowEQ);
-        const equalizerLabels = [
-            _("Setting 1"),
-            _("Setting 2"),
-            _("Setting 3"),
-            _("Setting 4"),
-        ];
+        const equalizerLabels = [_("Setting 1"), _("Setting 2"), _("Setting 3"), _("Setting 4")];
         equalizerLabels.forEach((label, index) => {
             if (arrayEQsettings[index] !== -1) {
                 let adwrowEQ = this.addEqualizerRow(
                     adwexprowEQ,
                     label,
-                    _(
-                        "Passed to headsetcontrol as parameter to equalizer option (when supported)"
-                    ),
+                    _("Passed to headsetcontrol as parameter to equalizer option (when supported)"),
                     arrayEQsettings[index]
                 );
                 adwrowEQ.connect(
                     "changed",
-                    this._onEQvaluechanged.bind(
-                        this,
-                        adwrowEQ,
-                        index,
-                        "option-equalizer-settings"
-                    )
+                    this._onEQvaluechanged.bind(this, adwrowEQ, index, "option-equalizer-settings")
                 );
             }
         });
@@ -550,18 +428,14 @@ export default class AdwPrefs extends ExtensionPreferences {
             title: _("Equalizer presets"),
         });
         adwexprowEQP.set_tooltip_text(
-            _(
-                "Names of the equalizer presets (equalizer preset might not be supported by your headset)"
-            )
+            _("Names of the equalizer presets (equalizer preset might not be supported by your headset)")
         );
-        let arrayEQPnames = window._settings.get_strv("equalizer-preset-names");
+        const arrayEQPnames = window._settings.get_strv("equalizer-preset-names");
         groupC3.add(adwexprowEQP);
-        const equalizerPresetLabels = [
-            _("Default"),
-            _("Preset 1"),
-            _("Preset 2"),
-            _("Preset 3"),
-        ];
+        const equalizerPresetLabels =
+            !arrayEQPnames || arrayEQPnames.length === 0
+                ? [_("Default"), _("Preset 1"), _("Preset 2"), _("Preset 3")]
+                : arrayEQPnames;
         equalizerPresetLabels.forEach((label, index) => {
             if (arrayEQPnames[index] !== -1) {
                 let adwrowEQP = this.addEqualizerRow(
@@ -572,12 +446,7 @@ export default class AdwPrefs extends ExtensionPreferences {
                 );
                 adwrowEQP.connect(
                     "changed",
-                    this._onEQvaluechanged.bind(
-                        this,
-                        adwrowEQP,
-                        index,
-                        "equalizer-preset-names"
-                    )
+                    this._onEQvaluechanged.bind(this, adwrowEQP, index, "equalizer-preset-names")
                 );
             }
         });
@@ -590,9 +459,7 @@ export default class AdwPrefs extends ExtensionPreferences {
         const adwexprowST = new Adw.ExpanderRow({
             title: _("Values for sidetone"),
         });
-        adwexprowST.set_tooltip_text(
-            _("Off Low Medium High Maximum (-1 disable)")
-        );
+        adwexprowST.set_tooltip_text(_("Off Low Medium High Maximum (-1 disable)"));
         let arraySidetone = window._settings.get_strv("sidetone-values");
         groupC4.add(adwexprowST);
         const sidetoneLabels = [
@@ -613,10 +480,7 @@ export default class AdwPrefs extends ExtensionPreferences {
                     [-1, 128, 1, 1],
                     arraySidetone[index]
                 );
-                adwrowSR.connect(
-                    "changed",
-                    this._onSTvaluechanged.bind(this, adwrowSR, index)
-                );
+                adwrowSR.connect("changed", this._onSTvaluechanged.bind(this, adwrowSR, index));
             }
         });
         window.add(page2);

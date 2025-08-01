@@ -1,16 +1,33 @@
 #!/bin/bash
+# Script to pack, install, or upload the HeadsetControl GNOME Shell extension
+extension="HeadsetControl@lauinger-clan.de"
+extensionfile=$extension".shell-extension.zip"
 
-# glib-compile-schemas HeadsetControl\@lauinger-clan.de/schemas/
+echo "Running $0 for $extension with arguments: $@"
 
-cd HeadsetControl\@lauinger-clan.de
-gnome-extensions pack --podir=../po/ --out-dir=../ --extra-source=../LICENSE
-cd ..
-mv HeadsetControl@lauinger-clan.de.shell-extension.zip HeadsetControl@lauinger-clan.de.zip
-
-if [ "$1" = "zip" ]; then
-   echo "Extension zip created ..."
-else
-    gnome-extensions install HeadsetControl\@lauinger-clan.de.zip --force
-    gnome-extensions enable HeadsetControl\@lauinger-clan.de
-fi
-
+case "$1" in
+  zip|pack)
+    cd $extension
+    gnome-extensions pack --podir=../po/ --out-dir=../ --extra-source=./lib --extra-source=./ui/ --extra-source=./icons/ --extra-source=../LICENSE --force
+    cd ..
+    echo "Extension zip created ..."
+    ;;
+  install)
+    if [ ! -f $extensionfile ]; then
+      $0 zip
+    fi
+    gnome-extensions install $extensionfile --force
+    gnome-extensions enable $extension
+    echo "Extension zip installed ..."
+    ;;
+  upload)
+    if [ ! -f $extensionfile ]; then
+      $0 zip
+    fi
+    gnome-extensions upload --user ChrisLauinger77 --password-file /mnt/2TB/dev/ego_password $extensionfile
+    ;;
+  *)
+    echo "Usage: $0 {zip|pack|install|upload}"
+    exit 1
+    ;;
+esac
