@@ -694,7 +694,7 @@ export default class HeadsetControl extends Extension {
             if (!stdout) {
                 throw new Error("No output received from command");
             }
-            const output = this._readJSONOutputFormat(stdout);
+            const output = this._readJSONOutputFormat(this._textDecoder.decode(stdout));
 
             if (!output) {
                 throw new Error("Failed to parse JSON output");

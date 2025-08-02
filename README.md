@@ -30,7 +30,7 @@ Make sure you have gnome-icon-theme package installed.
 
 1. Download the zip file from the [release page](https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl/releases)
 2. The md5 and sig files can be used to verify the integrity of the zip file
-3. Unzip and run install.sh from the zip
+3. Unzip and run headsetcontrol.sh from the zip
 
 ### Install from source
 
@@ -39,7 +39,7 @@ Use the `main` branch.
 ```bash
 git clone https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl.git
 cd gnome-shell-extension-HeadsetControl.git
-./install.sh
+./headsetcontrol.sh install
 ```
 
 Now restart gnome-shell.
@@ -49,7 +49,7 @@ Now restart gnome-shell.
 Pull requests are welcome.
 
 To update the translation files run
-`./update-translation-po-files.sh` in the extensions directory after your code changes are finished. This will update the files in po folder.
+`./headsetcontrol.sh translate` in the extensions directory after your code changes are finished. This will update the files in po folder.
 Then poedit (https://poedit.net/download) can be used to translate the strings. poedit can also be used to create new localization files.
 
 # Debugging
