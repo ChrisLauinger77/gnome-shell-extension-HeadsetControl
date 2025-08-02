@@ -26,8 +26,19 @@ case "$1" in
     fi
     gnome-extensions upload --user ChrisLauinger77 --password-file /mnt/2TB/dev/ego_password $extensionfile
     ;;
+  translate)
+    reffile=HeadsetControl.pot
+    xgettext --from-code=UTF-8 --output=po/"$reffile" $extension/*.js $extension/schemas/*.xml
+    cd po
+    for pofile in *.po
+      do
+        echo "Updating: $pofile"
+        msgmerge --backup=off -U "$pofile" "$reffile"
+      done
+    echo "Done."
+    ;;
   *)
-    echo "Usage: $0 {zip|pack|install|upload}"
+    echo "Usage: $0 {zip|pack|install|translate|upload}"
     exit 1
     ;;
 esac
