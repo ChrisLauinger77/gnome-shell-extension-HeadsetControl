@@ -40,15 +40,15 @@ const headsetcontrolCommands = {
 
 const rgbToHex = (r, g, b) => "#" + [r, g, b].map((x) => x.toString(16).padStart(2, "0")).join("");
 
-function invokeCmd(cmd, logger) {
+function invokeCmd(cmd, logger, textDecoder) {
     try {
-        let output = GLib.spawn_command_line_sync(cmd)[1];
-        let strOutput = imports.byteArray.toString(output).replace("\n", "###").replace("Success!", "###");
-        strOutput = strOutput.split("###")[1];
+        const output = textDecoder.decode(GLib.spawn_command_line_sync(cmd)[1]);
         if (cmd.includes("-o json")) {
-            strOutput = output;
+            return output;
+        } else {
+            const strOutput = output.replace("\n", "###").replace("Success!", "###");
+            return strOutput.split("###")[1];
         }
-        return strOutput;
     } catch (err) {
         // could not execute the command
         logger.error(err);
@@ -66,6 +66,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 toggleMode: true,
             });
             this._logger = Me.getLogger();
+            this._textDecoder = Me._textDecoder;
             this._useLogging = Me._useLogging;
             this._settings = _settings;
             this._valueBatteryStatus = "";
@@ -249,7 +250,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
 
         _invokeCmd(cmd) {
             this._logOutput("_invokeCmd: " + cmd);
-            const retval = invokeCmd(cmd, this._logger);
+            const retval = invokeCmd(cmd, this._logger, this._textDecoder);
             this._logOutput("_invokeCmd retval: " + retval);
             return retval;
         }
@@ -495,7 +496,7 @@ export default class HeadsetControl extends Extension {
 
     _invokeCmd(cmd) {
         this._logOutput("_invokeCmd: " + cmd);
-        const retval = invokeCmd(cmd, this.getLogger());
+        const retval = invokeCmd(cmd, this.getLogger(), this._textDecoder);
         this._logOutput("_invokeCmd return: " + retval);
         return retval;
     }
@@ -573,7 +574,7 @@ export default class HeadsetControl extends Extension {
             this._logOutput("_readJSONOutputFormat: calling _invokeCmd");
         }
         try {
-            return JSON.parse(new TextDecoder().decode(strOutput));
+            return JSON.parse(strOutput);
         } catch (err) {
             // could not parse JSON
             this.getLogger().error(err);
@@ -936,6 +937,7 @@ export default class HeadsetControl extends Extension {
         this._visible = false;
         this._refreshIndicatorRunning = false;
         this._settings = this.getSettings();
+        this._textDecoder = new TextDecoder();
 
         this._useLogging = this._settings.get_boolean("use-logging");
         this._headsetControlIndicator = new HeadsetControlIndicator(this);
@@ -1009,6 +1011,7 @@ export default class HeadsetControl extends Extension {
         }, this);
         this._settingSignals = null;
         this._settings = null;
+        this._textDecoder = null;
         this._headsetControlIndicator.destroy();
         this._headsetControlIndicator = null;
         this._visible = null;
