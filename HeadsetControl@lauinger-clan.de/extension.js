@@ -40,13 +40,27 @@ const headsetcontrolCommands = {
 
 const rgbToHex = (r, g, b) => "#" + [r, g, b].map((x) => x.toString(16).padStart(2, "0")).join("");
 
-function invokeCmd(cmd, logger, textDecoder) {
+async function invokeCmd(cmd, logger) {
+    const flags = Gio.SubprocessFlags.STDOUT_PIPE;
+    const [, argv] = GLib.shell_parse_argv(cmd);
+    const proc = new Gio.Subprocess({ argv, flags });
+    proc.init(null);
     try {
-        const output = textDecoder.decode(GLib.spawn_command_line_sync(cmd)[1]);
+        const stdout = await new Promise((resolve, reject) => {
+            proc.communicate_utf8_async(null, null, (subprocess, res) => {
+                try {
+                    const [, stdoutFinish] = subprocess.communicate_utf8_finish(res);
+                    resolve(stdoutFinish);
+                } catch (err) {
+                    logger.error(`Error executing command: ${err.message}`);
+                    reject(err);
+                }
+            });
+        });
         if (cmd.includes("-o json")) {
-            return output;
+            return stdout.trim();
         } else {
-            const strOutput = output.replace("\n", "###").replace("Success!", "###");
+            const strOutput = stdout.replace("\n", "###").replace("Success!", "###");
             return strOutput.split("###")[1];
         }
     } catch (err) {
@@ -66,7 +80,6 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 toggleMode: true,
             });
             this._logger = Me.getLogger();
-            this._textDecoder = Me._textDecoder;
             this._useLogging = Me._useLogging;
             this._settings = _settings;
             this._valueBatteryStatus = "";
@@ -248,9 +261,9 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this._changeColor(this._valueBattery, this._valueBatteryNum);
         }
 
-        _invokeCmd(cmd) {
+        async _invokeCmd(cmd) {
             this._logOutput("_invokeCmd: " + cmd);
-            const retval = invokeCmd(cmd, this._logger, this._textDecoder);
+            const retval = await invokeCmd(cmd, this._logger);
             this._logOutput("_invokeCmd retval: " + retval);
             return retval;
         }
@@ -494,9 +507,9 @@ export default class HeadsetControl extends Extension {
         }
     }
 
-    _invokeCmd(cmd) {
+    async _invokeCmd(cmd) {
         this._logOutput("_invokeCmd: " + cmd);
-        const retval = invokeCmd(cmd, this.getLogger(), this._textDecoder);
+        const retval = await invokeCmd(cmd, this.getLogger());
         this._logOutput("_invokeCmd return: " + retval);
         return retval;
     }
@@ -568,9 +581,9 @@ export default class HeadsetControl extends Extension {
         return strValue.toString().trim();
     }
 
-    _readJSONOutputFormat(strOutput) {
+    async _readJSONOutputFormat(strOutput) {
         if (!strOutput) {
-            strOutput = this._invokeCmd(headsetcontrolCommands.cmdOutputFormat);
+            strOutput = await this._invokeCmd(headsetcontrolCommands.cmdOutputFormat);
             this._logOutput("_readJSONOutputFormat: calling _invokeCmd");
         }
         try {
@@ -680,9 +693,9 @@ export default class HeadsetControl extends Extension {
             proc.init(null);
 
             const stdout = await new Promise((resolve, reject) => {
-                proc.communicate_async(null, null, (subprocess, res) => {
+                proc.communicate_utf8_async(null, null, (subprocess, res) => {
                     try {
-                        const [, stdoutFinish] = subprocess.communicate_finish(res);
+                        const [, stdoutFinish] = subprocess.communicate_utf8_finish(res);
                         resolve(stdoutFinish);
                     } catch (err) {
                         this._logOutput(`Error executing command: ${err.message}`);
@@ -690,16 +703,13 @@ export default class HeadsetControl extends Extension {
                     }
                 });
             });
-
             if (!stdout) {
                 throw new Error("No output received from command");
             }
-            const output = this._readJSONOutputFormat(this._textDecoder.decode(stdout));
-
+            const output = await this._readJSONOutputFormat(stdout);
             if (!output) {
                 throw new Error("Failed to parse JSON output");
             }
-
             this._processOutput(output, true);
             this._logOutput("JSON refresh completed successfully");
         } catch (error) {
@@ -720,14 +730,14 @@ export default class HeadsetControl extends Extension {
         }
     }
 
-    _refreshJSONall(updateIndicator) {
+    async _refreshJSONall(updateIndicator) {
         this._JSONoutputSupported = false;
-        let strOutput = this._readJSONOutputFormat("");
+        let strOutput = await this._readJSONOutputFormat("");
         return this._processOutput(strOutput, updateIndicator);
     }
 
-    _refreshCapabilities() {
-        let strOutput = this._invokeCmd(headsetcontrolCommands.cmdCapabilities);
+    async _refreshCapabilities() {
+        let strOutput = await this._invokeCmd(headsetcontrolCommands.cmdCapabilities);
 
         // if we cannot get the capabilities, set all to true
         if (!strOutput || strOutput.includes("No supported headset found")) {
@@ -776,8 +786,8 @@ export default class HeadsetControl extends Extension {
         this._needCapabilitiesRefresh = false; // when headset was connected
     }
 
-    _refreshBatteryStatus() {
-        let strOutput = this._invokeCmd(headsetcontrolCommands.cmdBattery);
+    async _refreshBatteryStatus() {
+        let strOutput = await this._invokeCmd(headsetcontrolCommands.cmdBattery);
 
         if (!strOutput) {
             return false;
@@ -791,8 +801,8 @@ export default class HeadsetControl extends Extension {
         return true;
     }
 
-    _refreshChatMixStatus() {
-        let strOutput = this._invokeCmd(headsetcontrolCommands.cmdChatMix);
+    async _refreshChatMixStatus() {
+        let strOutput = await this._invokeCmd(headsetcontrolCommands.cmdChatMix);
 
         if (!strOutput) {
             return false;
@@ -823,11 +833,11 @@ export default class HeadsetControl extends Extension {
         }
     }
 
-    _refreshIndicator() {
+    async _refreshIndicator() {
         this._notify("_refreshIndicator - " + _("Refreshing..."));
         this._logOutput("_refreshIndicator - " + _("Refreshing..."));
         if (this._JSONoutputSupported) {
-            this._refreshJSON_async();
+            await this._refreshJSON_async();
             return;
         }
         if (capabilities.battery) {
@@ -883,7 +893,7 @@ export default class HeadsetControl extends Extension {
         this._hideWhenDisconnectedSystemindicator = this._settings.get_boolean("hidewhendisconnected-systemindicator");
         this._refreshIntervalSystemindicator = this._settings.get_int("refreshinterval-systemindicator");
         this._headsetControlIndicator.updateLabel();
-        this._refreshIntervalHandler();
+        this._refreshIntervalHandler(true);
         if (!this._showIndicator) {
             this._changeIndicatorVisibility();
         }
@@ -891,7 +901,11 @@ export default class HeadsetControl extends Extension {
 
     _onParamChangedColors() {
         this._useColors = this._settings.get_boolean("use-colors");
-        if (!this._refreshIndicatorRunning) this._refreshIndicator();
+        if (!this._refreshIndicatorRunning) {
+            (async () => {
+                await this._refreshIndicator();
+            })();
+        }
     }
 
     _calculateRefreshInterval(refreshIntervalmin) {
@@ -900,7 +914,7 @@ export default class HeadsetControl extends Extension {
         return refreshIntervalms;
     }
 
-    _refreshIntervalHandler() {
+    _refreshIntervalHandler(doRefreshIndicator) {
         if (this._refreshIntervalSignal !== null) {
             GLib.Source.remove(this._refreshIntervalSignal);
             this._refreshIntervalSignal = null;
@@ -908,12 +922,16 @@ export default class HeadsetControl extends Extension {
 
         if (this._showIndicator && this._refreshIntervalSystemindicator > 0) {
             this._refreshIndicatorRunning = true;
-            this._refreshIndicator();
+            if (doRefreshIndicator) {
+                (async () => {
+                    await this._refreshIndicator();
+                })();
+            }
             this._refreshIndicatorRunning = false;
             this._refreshIntervalSignal = GLib.timeout_add(
                 GLib.PRIORITY_DEFAULT,
                 this._calculateRefreshInterval(this._refreshIntervalSystemindicator),
-                this._refreshIntervalHandler.bind(this)
+                this._refreshIntervalHandler.bind(this, true)
             );
             return GLib.SOURCE_CONTINUE;
         } else {
@@ -926,10 +944,13 @@ export default class HeadsetControl extends Extension {
         QuickSettingsMenu.menu.close(PopupAnimation.FADE);
     }
 
-    _updateBinaryCapabilities() {
-        if (!this._refreshJSONall(this._showIndicator)) {
-            this._refreshCapabilities();
+    async _updateBinaryCapabilities() {
+        this._logOutput("_updateBinaryCapabilities - calling _refreshJSONall");
+        let ret = await this._refreshJSONall(this._showIndicator);
+        if (!ret) {
+            await this._refreshCapabilities();
         }
+        await this._refreshIndicator();
     }
 
     enable() {
@@ -937,7 +958,6 @@ export default class HeadsetControl extends Extension {
         this._visible = false;
         this._refreshIndicatorRunning = false;
         this._settings = this.getSettings();
-        this._textDecoder = new TextDecoder();
 
         this._useLogging = this._settings.get_boolean("use-logging");
         this._headsetControlIndicator = new HeadsetControlIndicator(this);
@@ -948,7 +968,7 @@ export default class HeadsetControl extends Extension {
         this._refreshIntervalSystemindicator = this._settings.get_int("refreshinterval-systemindicator");
         this._updateBinaryCapabilities();
         this._refreshIntervalSignal = null;
-        this._refreshIntervalHandler();
+        this._refreshIntervalHandler(false);
         this._changeIndicatorVisibility();
         // add Signals to array
         this._settingSignals = [];
@@ -1011,7 +1031,6 @@ export default class HeadsetControl extends Extension {
         }, this);
         this._settingSignals = null;
         this._settings = null;
-        this._textDecoder = null;
         this._headsetControlIndicator.destroy();
         this._headsetControlIndicator = null;
         this._visible = null;
