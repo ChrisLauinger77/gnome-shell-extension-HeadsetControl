@@ -510,7 +510,7 @@ export default class HeadsetControl extends Extension {
     async _invokeCmd(cmd) {
         this._logOutput("_invokeCmd: " + cmd);
         const retval = await invokeCmd(cmd, this.getLogger());
-        this._logOutput("_invokeCmd return: " + retval);
+        this._logOutput("_invokeCmd retval: " + retval);
         return retval;
     }
 
@@ -686,24 +686,8 @@ export default class HeadsetControl extends Extension {
 
     async _refreshJSON_async() {
         try {
-            const flags = Gio.SubprocessFlags.STDOUT_PIPE;
-            const [, argv] = GLib.shell_parse_argv(headsetcontrolCommands.cmdOutputFormat);
-
-            const proc = new Gio.Subprocess({ argv, flags });
-            proc.init(null);
-
-            const stdout = await new Promise((resolve, reject) => {
-                proc.communicate_utf8_async(null, null, (subprocess, res) => {
-                    try {
-                        const [, stdoutFinish] = subprocess.communicate_utf8_finish(res);
-                        resolve(stdoutFinish);
-                    } catch (err) {
-                        this._logOutput(`Error executing command: ${err.message}`);
-                        reject(err);
-                    }
-                });
-            });
-            if (!stdout) {
+            const stdout = await this._invokeCmd(headsetcontrolCommands.cmdOutputFormat);
+            if (!stdout || stdout === "N/A") {
                 throw new Error("No output received from command");
             }
             const output = await this._readJSONOutputFormat(stdout);
