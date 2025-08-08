@@ -684,7 +684,7 @@ export default class HeadsetControl extends Extension {
         return true;
     }
 
-    async _refreshJSON_async() {
+    async _refreshJSON() {
         try {
             const stdout = await this._invokeCmd(headsetcontrolCommands.cmdOutputFormat);
             if (!stdout || stdout === "N/A") {
@@ -697,16 +697,16 @@ export default class HeadsetControl extends Extension {
             this._processOutput(output, true);
             this._logOutput("JSON refresh completed successfully");
         } catch (error) {
-            this.getLogger().error("_refreshJSON_async error:", error);
+            this.getLogger().error("_refreshJSON error:", error);
             this._logOutput(`JSON refresh failed: ${error.message}`);
             this._JSONoutputSupported = false;
             // Fallback to non-JSON method
-            this._refreshCapabilities();
+            await this._refreshCapabilities();
             if (capabilities.battery) {
-                this._refreshBatteryStatus();
+                await this._refreshBatteryStatus();
             }
             if (capabilities.chatmix) {
-                this._refreshChatMixStatus();
+                await this._refreshChatMixStatus();
             }
         } finally {
             this._headsetControlIndicator.updateUIElements();
@@ -714,7 +714,7 @@ export default class HeadsetControl extends Extension {
         }
     }
 
-    async _refreshJSONall(updateIndicator) {
+    async _refreshJSONupdate(updateIndicator) {
         this._JSONoutputSupported = false;
         let strOutput = await this._readJSONOutputFormat("");
         return this._processOutput(strOutput, updateIndicator);
@@ -821,17 +821,17 @@ export default class HeadsetControl extends Extension {
         this._notify("_refreshIndicator - " + _("Refreshing..."));
         this._logOutput("_refreshIndicator - " + _("Refreshing..."));
         if (this._JSONoutputSupported) {
-            await this._refreshJSON_async();
+            await this._refreshJSON();
             return;
         }
         if (capabilities.battery) {
-            this._refreshBatteryStatus();
+            await this._refreshBatteryStatus();
             this._headsetControlIndicator.updateUIElements();
             this._changeIndicatorVisibility();
         }
     }
 
-    _refresh() {
+    async _refresh() {
         if (this._refreshIndicatorRunning) {
             this._logOutput(_("Quicksettings open - refresh indicator running..."));
             return;
@@ -845,17 +845,17 @@ export default class HeadsetControl extends Extension {
         this._logOutput(_("Refreshing..."));
 
         if (this._JSONoutputSupported) {
-            this._refreshJSON_async();
+            await this._refreshJSON();
             return;
         }
         if (this._needCapabilitiesRefresh) {
-            this._refreshCapabilities();
+            await this._refreshCapabilities();
         }
         if (capabilities.battery) {
-            this._refreshBatteryStatus();
+            await this._refreshBatteryStatus();
         }
         if (capabilities.chatmix) {
-            this._refreshChatMixStatus();
+            await this._refreshChatMixStatus();
         }
         this._headsetControlIndicator.updateUIElements();
         this._changeIndicatorVisibility();
@@ -929,8 +929,8 @@ export default class HeadsetControl extends Extension {
     }
 
     async _updateBinaryCapabilities() {
-        this._logOutput("_updateBinaryCapabilities - calling _refreshJSONall");
-        let ret = await this._refreshJSONall(this._showIndicator);
+        this._logOutput("_updateBinaryCapabilities - calling _refreshJSONupdate");
+        let ret = await this._refreshJSONupdate(this._showIndicator);
         if (!ret) {
             await this._refreshCapabilities();
         }
