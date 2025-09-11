@@ -24,7 +24,7 @@ case "$1" in
     if [ ! -f $extensionfile ]; then
       $0 zip
     fi
-    gnome-extensions upload --user ChrisLauinger77 --password-file /mnt/2TB/dev/ego_password $extensionfile
+    gnome-extensions upload --user ChrisLauinger77 --password-file /var/data/dev/ego_password $extensionfile
     ;;
   translate)
     reffile=HeadsetControl.pot
