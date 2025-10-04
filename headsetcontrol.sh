@@ -5,6 +5,11 @@ extensionfile=$extension".shell-extension.zip"
 
 echo "Running $0 for $extension with arguments: $@"
 
+//cleanup old zip if exists
+if [ -f $extensionfile ]; then
+    rm $extensionfile
+fi
+
 case "$1" in
   zip|pack)
     cd $extension
