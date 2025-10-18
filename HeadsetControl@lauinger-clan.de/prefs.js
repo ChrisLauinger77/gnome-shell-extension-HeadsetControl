@@ -409,7 +409,7 @@ export default class AdwPrefs extends ExtensionPreferences {
         let arrayEQsettings = window._settings.get_strv("option-equalizer-settings");
         groupC3.add(adwexprowEQ);
         const equalizerLabels = [_("Setting 1"), _("Setting 2"), _("Setting 3"), _("Setting 4")];
-        equalizerLabels.forEach((label, index) => {
+        for (const [index, label] of equalizerLabels.entries()) {
             if (arrayEQsettings[index] !== -1) {
                 let adwrowEQ = this.addEqualizerRow(
                     adwexprowEQ,
@@ -422,7 +422,7 @@ export default class AdwPrefs extends ExtensionPreferences {
                     this._onEQvaluechanged.bind(this, adwrowEQ, index, "option-equalizer-settings")
                 );
             }
-        });
+        }
         //equalizer preset
         const adwexprowEQP = new Adw.ExpanderRow({
             title: _("Equalizer presets"),
@@ -436,7 +436,7 @@ export default class AdwPrefs extends ExtensionPreferences {
             !arrayEQPnames || arrayEQPnames.length === 0
                 ? [_("Default"), _("Preset 1"), _("Preset 2"), _("Preset 3")]
                 : arrayEQPnames;
-        equalizerPresetLabels.forEach((label, index) => {
+        for (const [index, label] of equalizerPresetLabels.entries()) {
             if (arrayEQPnames[index] !== -1) {
                 let adwrowEQP = this.addEqualizerRow(
                     adwexprowEQP,
@@ -449,7 +449,7 @@ export default class AdwPrefs extends ExtensionPreferences {
                     this._onEQvaluechanged.bind(this, adwrowEQP, index, "equalizer-preset-names")
                 );
             }
-        });
+        }
         // groupC4
         const groupC4 = Adw.PreferencesGroup.new();
         groupC4.set_title(_("Sidetone"));
@@ -470,7 +470,7 @@ export default class AdwPrefs extends ExtensionPreferences {
             _("Value for Maximum"),
         ];
 
-        sidetoneLabels.forEach((label, index) => {
+        for (const [index, label] of sidetoneLabels.entries()) {
             if (arraySidetone[index] !== -1) {
                 adwrowSR = this.addSpinRow(
                     adwexprowST,
@@ -482,7 +482,7 @@ export default class AdwPrefs extends ExtensionPreferences {
                 );
                 adwrowSR.connect("changed", this._onSTvaluechanged.bind(this, adwrowSR, index));
             }
-        });
+        }
         window.add(page2);
     }
 }

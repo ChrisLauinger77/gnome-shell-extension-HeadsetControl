@@ -169,13 +169,13 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 },
             ];
 
-            menuItems.forEach((item) => {
+            for (const item of menuItems) {
                 if (capabilities[item.capability]) {
                     const popupMenuExpander = new PopupMenu.PopupSubMenuMenuItem(item.label);
                     item.method.call(this, popupMenuExpander);
                     this.menu.addMenuItem(popupMenuExpander);
                 }
-            });
+            }
         }
 
         refreshMenu(Me) {
@@ -284,9 +284,9 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 [_("High"), arraySidetone[3]],
                 [_("Maximum"), arraySidetone[4]],
             ].filter(([, value]) => value !== "-1");
-            sidetoneValues.forEach((item) =>
-                this._addPopupMenuItem(popupMenuExpander, item[0], headsetcontrolCommands.cmdSidetone + " " + item[1])
-            );
+            for (const item of sidetoneValues) {
+                this._addPopupMenuItem(popupMenuExpander, item[0], headsetcontrolCommands.cmdSidetone + " " + item[1]);
+            }
             this.menu.addMenuItem(popupMenuExpander);
             popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
         }
@@ -296,9 +296,9 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 [_("Off"), "0"],
                 [_("On"), "1"],
             ];
-            LEDvalues.forEach((item) =>
-                this._addPopupMenuItem(popupMenuExpander, item[0], headsetcontrolCommands.cmdLED + " " + item[1])
-            );
+            for (const item of LEDvalues) {
+                this._addPopupMenuItem(popupMenuExpander, item[0], headsetcontrolCommands.cmdLED + " " + item[1]);
+            }
             popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
             this.menu.addMenuItem(popupMenuExpander);
         }
@@ -308,9 +308,9 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 [_("Off"), "0"],
                 [_("On"), "1"],
             ];
-            voiceValues.forEach((item) =>
-                this._addPopupMenuItem(popupMenuExpander, item[0], headsetcontrolCommands.cmdVoice + " " + item[1])
-            );
+            for (const item of voiceValues) {
+                this._addPopupMenuItem(popupMenuExpander, item[0], headsetcontrolCommands.cmdVoice + " " + item[1]);
+            }
             popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
             this.menu.addMenuItem(popupMenuExpander);
         }
@@ -320,9 +320,13 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 [_("Off"), "0"],
                 [_("On"), "1"],
             ];
-            rotateMuteValues.forEach((item) =>
-                this._addPopupMenuItem(popupMenuExpander, item[0], headsetcontrolCommands.cmdRotateMute + " " + item[1])
-            );
+            for (const item of rotateMuteValues) {
+                this._addPopupMenuItem(
+                    popupMenuExpander,
+                    item[0],
+                    headsetcontrolCommands.cmdRotateMute + " " + item[1]
+                );
+            }
             popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
             this.menu.addMenuItem(popupMenuExpander);
         }
@@ -338,13 +342,13 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 [_("75 minutes"), "75"],
                 [_("90 minutes"), "90"],
             ];
-            inacitetimeValues.forEach((item) =>
+            for (const item of inacitetimeValues) {
                 this._addPopupMenuItem(
                     popupMenuExpander,
                     item[0],
                     headsetcontrolCommands.cmdInacitetime + " " + item[1]
-                )
-            );
+                );
+            }
             popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
             this.menu.addMenuItem(popupMenuExpander);
         }
@@ -358,7 +362,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 [_("Setting 3"), arrayEqualizerSetting[2]],
                 [_("Setting 4"), arrayEqualizerSetting[3]],
             ];
-            equalizerSettingValues.forEach((item) => {
+            for (const item of equalizerSettingValues) {
                 if (item[1].includes(":")) {
                     let itemarray = [];
                     itemarray = item[1].split(":");
@@ -366,20 +370,21 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                     item[1] = itemarray[1];
                 }
                 this._addPopupMenuItem(popupMenuExpander, item[0], headsetcontrolCommands.cmdEqualizer + " " + item[1]);
-            });
+            }
             popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
             this.menu.addMenuItem(popupMenuExpander);
         }
 
         _addEqualizerPresetMenu(popupMenuExpander) {
             const arrayEqualizerPreset = this._settings.get_strv("equalizer-preset-names");
-            arrayEqualizerPreset.forEach((item, index) =>
+            for (let index = 0; index < arrayEqualizerPreset.length; index++) {
+                const item = arrayEqualizerPreset[index];
                 this._addPopupMenuItem(
                     popupMenuExpander,
                     item,
                     headsetcontrolCommands.cmdEqualizerPreset + " " + index.toString()
-                )
-            );
+                );
+            }
             popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
             this.menu.addMenuItem(popupMenuExpander);
         }
@@ -389,7 +394,11 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this._logOutput("_getColorHEXValue-strSettingsColor: " + strSettingsColor);
             this._logOutput("_getColorHEXValue-strcolor: " + strcolor);
             const arrColor = strcolor.replace("rgb(", "").replace(")", "").split(",");
-            const color = rgbToHex(parseInt(arrColor[0]), parseInt(arrColor[1]), parseInt(arrColor[2]));
+            const color = rgbToHex(
+                Number.parseInt(arrColor[0]),
+                Number.parseInt(arrColor[1]),
+                Number.parseInt(arrColor[2])
+            );
             return color;
         }
 
@@ -450,7 +459,9 @@ const HeadsetControlIndicator = GObject.registerClass(
             this.quickSettingsItems.push(this._headsetControlMenuToggle);
 
             this.connect("destroy", () => {
-                this.quickSettingsItems.forEach((item) => item.destroy());
+                for (const item of this.quickSettingsItems) {
+                    item.destroy();
+                }
             });
 
             // Add the indicator to the panel and the toggle to the menu
@@ -996,9 +1007,9 @@ export default class HeadsetControl extends Extension {
                 callback: this._onParamChanged.bind(this),
             },
         ];
-        settingsToMonitor.forEach((setting) => {
+        for (const setting of settingsToMonitor) {
             this._settingSignals.push(this._settings.connect(`changed::${setting.key}`, setting.callback));
-        });
+        }
         this._quicksettingSignal = QuickSettingsMenu.menu.connect("open-state-changed", this._refresh.bind(this));
     }
 
@@ -1010,9 +1021,11 @@ export default class HeadsetControl extends Extension {
         if (this._quicksettingSignal !== null) QuickSettingsMenu.menu.disconnect(this._quicksettingSignal);
         this._quicksettingSignal = null;
         // remove setting Signals
-        this._settingSignals.forEach(function (signal) {
-            this._settings.disconnect(signal);
-        }, this);
+        if (this._settingSignals) {
+            for (const signal of this._settingSignals) {
+                this._settings.disconnect(signal);
+            }
+        }
         this._settingSignals = null;
         this._settings = null;
         this._headsetControlIndicator.destroy();
