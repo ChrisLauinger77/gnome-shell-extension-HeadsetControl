@@ -645,10 +645,12 @@ export default class HeadsetControl extends Extension {
         if ("equalizer_presets_count" in device) {
             this._logOutput("equalizer_presets_count: " + device.equalizer_presets_count);
             if (device.equalizer_presets_count > 0) {
-                // Get preset names from the keys of the equalizer_presets object
-                const presetNames = Object.keys(device.equalizer_presets);
-                this._logOutput("equalizer preset names: " + presetNames.join(", "));
-                this._settings.set_strv("equalizer-preset-names", presetNames);
+                if (Object.hasOwn(device, "equalizer_presets")) {
+                    // Get preset names from the keys of the equalizer_presets object
+                    const presetNames = Object.keys(device.equalizer_presets);
+                    this._logOutput("equalizer preset names: " + presetNames.join(", "));
+                    this._settings.set_strv("equalizer-preset-names", presetNames);
+                }
             }
         }
     }
