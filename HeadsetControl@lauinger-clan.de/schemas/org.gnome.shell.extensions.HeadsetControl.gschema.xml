@@ -1,5 +1,6 @@
 <schemalist>
-  <schema id="org.gnome.shell.extensions.HeadsetControl" path="/org/gnome/shell/extensions/HeadsetControl/">
+  <schema id="org.gnome.shell.extensions.HeadsetControl"
+    path="/org/gnome/shell/extensions/HeadsetControl/">
     <key name="headsetcontrol-executable" type="s">
       <default>'/usr/local/bin/headsetcontrol'</default>
       <summary>Path to executable</summary>
@@ -48,7 +49,8 @@
     <key name="option-output-format" type="s">
       <default>'-o json'</default>
       <summary>Parameter to ask for all data in new output format</summary>
-      <description>Passed to headsetcontrol to get all data - needs a newer version of headsetcontrol</description>
+      <description>Passed to headsetcontrol to get all data - needs a newer version of
+        headsetcontrol</description>
     </key>
     <key name="option-equalizer" type="s">
       <default>'-e'</default>
@@ -56,7 +58,8 @@
       <description>Passed to headsetcontrol to set the equalizer setting</description>
     </key>
     <key name="option-equalizer-settings" type="as">
-      <default>['Flat:0,0,0,0,0,0,0,0,0,0', 'Setting 1:1,1,1,1,1,1,1,1,1,1', 'Setting 2:2,2,2,2,2,2,2,2,2,2', 'Setting 3:3,3,3,3,3,3,3,3,3,3']</default>
+      <default>['Flat:0,0,0,0,0,0,0,0,0,0', 'Setting 1:1,1,1,1,1,1,1,1,1,1', 'Setting
+        2:2,2,2,2,2,2,2,2,2,2', 'Setting 3:3,3,3,3,3,3,3,3,3,3']</default>
       <summary>Equalizer options (equalizer might not be supported by your headset)</summary>
       <description>Passed to headsetcontrol as parameter to equalizer option (when supported)</description>
     </key>
@@ -67,7 +70,8 @@
     </key>
     <key name="equalizer-preset-names" type="as">
       <default>['Default', 'Preset 1', 'Preset 2', 'Preset 3']</default>
-      <summary>Names of the equalizer presets (equalizer preset might not be supported by your headset)</summary>
+      <summary>Names of the equalizer presets (equalizer preset might not be supported by your
+        headset)</summary>
       <description>Shown in equalizer preset menu (when supported)</description>
     </key>
     <key name="use-notifications" type="b">
@@ -88,7 +92,8 @@
     <key name="hidewhendisconnected-systemindicator" type="b">
       <default>false</default>
       <summary>Hide the systemindicator when no headset is connected</summary>
-      <description>Will be delayed by refresh interval - can be enforced by toggling the quicksettings</description>
+      <description>Will be delayed by refresh interval - can be enforced by toggling the
+        quicksettings</description>
     </key>
     <key name="refreshinterval-systemindicator" type="i">
       <default>5</default>
@@ -103,17 +108,17 @@
     <key name="color-batteryhigh" type="s">
       <default>'rgb(0,255,0)'</default>
       <summary>Color battery charge high</summary>
-      <description>The text color for battery charge 100% to 50%</description>
+      <description>The text color for battery charge 100% to 51%</description>
     </key>
     <key name="color-batterymedium" type="s">
       <default>'rgb(255,255,0)'</default>
       <summary>Color battery charge medium</summary>
-      <description>The text color for battery charge 49% to 25%</description>
+      <description>The text color for battery charge 50% to 26%</description>
     </key>
     <key name="color-batterylow" type="s">
       <default>'rgb(255,0,0)'</default>
       <summary>Color battery charge low</summary>
-      <description>The text color for battery charge 24% to 0%</description>
+      <description>The text color for battery charge 25% to 0%</description>
     </key>
     <key name="sidetone-values" type="as">
       <default>['0', '32', '64', '96', '128']</default>
