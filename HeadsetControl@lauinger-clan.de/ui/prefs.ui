@@ -31,6 +31,7 @@
           <object class="AdwExpanderRow" id="HeadsetControl_row_outputformat_new1">
             <property name="title" translatable="yes">HeadsetControl Version Option output format</property>
             <property name="subtitle" translatable="yes">Used starting with HeadsetControl tool version newer then 2.7.0</property>
+            <property name="expanded" >true</property>
             <child>
               <object class="AdwEntryRow" id="HeadsetControl_row_outputformat_new2">
                 <property name="title" translatable="yes">Output format</property>
@@ -67,6 +68,7 @@
           <object class="AdwExpanderRow" id="HeadsetControl_row_common1">
             <property name="title" translatable="yes">HeadsetControl Common</property>
             <property name="subtitle" translatable="yes">Used in all HeadsetControl tool versions</property>
+            <property name="expanded" >true</property>
             <child>
               <object class="AdwEntryRow" id="HeadsetControl_row_common2">
                 <property name="title" translatable="yes">Sidetone</property>
