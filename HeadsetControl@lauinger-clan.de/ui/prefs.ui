@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface domain="HeadsetControl">
+  <object class="AdwPreferencesPage" id="HeadsetControl_page_headsetcontrol">
+    <property name="name">HeadsetControl_page_headsetcontrol</property>
+    <property name="title" translatable="yes">HeadsetControl</property>
+    <property name="icon-name">audio-headset-symbolic</property>
+    <child>
+      <object class="AdwPreferencesGroup" id="HeadsetControl_group_global">
+        <property name="title" translatable="yes">Global</property>
+        <child>
+          <object class="AdwEntryRow" id="HeadsetControl_row_command">
+            <property name="title" translatable="yes">Command</property>
+            <property name="tooltip-text" translatable="yes">File and path of headsetcontrol executable</property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwButtonRow" id="HeadsetControl_row_commandselect">
+            <property name="title" translatable="yes">Select</property>
+            <property name="tooltip-text" translatable="yes">Usually located in '/usr/bin' OR '/usr/local/bin'</property>
+            <style>
+              <class name="suggested-action" />
+            </style>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="AdwPreferencesGroup" id="HeadsetControl_group_parameter">
+        <property name="title" translatable="yes">HeadsetControl parameters</property>
+        <child>
+          <object class="AdwExpanderRow" id="HeadsetControl_row_outputformat_new1">
+            <property name="title" translatable="yes">HeadsetControl Version Option output format</property>
+            <property name="subtitle" translatable="yes">Used starting with HeadsetControl tool version newer then 2.7.0</property>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_outputformat_new2">
+                <property name="title" translatable="yes">Output format</property>
+                <property name="tooltip-text" translatable="yes">Parameter to ask for all data in new output format</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwExpanderRow" id="HeadsetControl_row_outputformat_old1">
+            <property name="title" translatable="yes">HeadsetControl Version Legacy</property>
+            <property name="subtitle" translatable="yes">Used until HeadsetControl tool version 2.7.0</property>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_outputformat_old2">
+                <property name="title" translatable="yes">Capabilities</property>
+                <property name="tooltip-text" translatable="yes">Parameter to ask for capabilities</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_outputformat_old3">
+                <property name="title" translatable="yes">Battery</property>
+                <property name="tooltip-text" translatable="yes">Parameter to ask for battery</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_outputformat_old4">
+                <property name="title" translatable="yes">Chat-Mix</property>
+                <property name="tooltip-text" translatable="yes">Parameter to ask for chat-mix</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwExpanderRow" id="HeadsetControl_row_common1">
+            <property name="title" translatable="yes">HeadsetControl Common</property>
+            <property name="subtitle" translatable="yes">Used in all HeadsetControl tool versions</property>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_common2">
+                <property name="title" translatable="yes">Sidetone</property>
+                <property name="tooltip-text" translatable="yes">Parameter to ask for sidetone</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_common3">
+                <property name="title" translatable="yes">LED</property>
+                <property name="tooltip-text" translatable="yes">Passed to headsetcontrol to set for led</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_common4">
+                <property name="title" translatable="yes">Inactive time</property>
+                <property name="tooltip-text" translatable="yes">Parameter to ask for inactive time</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_common5">
+                <property name="title" translatable="yes">Voice Prompts</property>
+                <property name="tooltip-text" translatable="yes">Passed to headsetcontrol to set for voice prompts</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_common6">
+                <property name="title" translatable="yes">Rotate to Mute</property>
+                <property name="tooltip-text" translatable="yes">Parameter to ask for rotate to mute</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_common7">
+                <property name="title" translatable="yes">Equalizer</property>
+                <property name="tooltip-text" translatable="yes">Passed to headsetcontrol to set the equalizer setting</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_common8">
+                <property name="title" translatable="yes">Equalizer Preset</property>
+                <property name="tooltip-text" translatable="yes">Passed to headsetcontrol to set the equalizer preset</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwButtonRow" id="HeadsetControl_row_apply">
+            <property name="title" translatable="yes">Apply</property>
+            <style>
+              <class name="suggested-action" />
+            </style>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="AdwPreferencesPage" id="HeadsetControl_page_customization">
+    <property name="name">HeadsetControl_page_customization</property>
+    <property name="title" translatable="yes">Customization</property>
+    <property name="icon-name">preferences-system-symbolic</property>
+    <child>
+      <object class="AdwPreferencesGroup" id="HeadsetControl_group_options">
+        <property name="title" translatable="yes">Options</property>
+        <child>
+          <object class="AdwComboRow" id="HeadsetControl_row_qstoggle">
+            <property name="title" translatable="yes">Quicksettings toggle</property>
+            <property name="subtitle" translatable="yes">Usage of quicksettings toggle</property>
+            <property name="tooltip-text" translatable="yes">Usage of quicksettings toggle</property>
+            <property name="model">
+              <object class="GtkStringList">
+                <items>
+                  <item translatable="yes">Show SystemIndicator</item>
+                  <item translatable="yes">Use notifications</item>
+                  <item translatable="yes">Use logging</item>
+                  <item translatable="yes">Use colors</item>
+                </items>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwExpanderRow" id="HeadsetControl_row_showindicator1">
+            <property name="title" translatable="yes">Show SystemIndicator</property>
+            <property name="tooltip-text" translatable="yes">Toggle to show systemindicator</property>
+            <child>
+              <object class="AdwSwitchRow" id="HeadsetControl_row_showindicator2">
+                <property name="title" translatable="yes">Hide when disconnected</property>
+                <property name="subtitle" translatable="yes">Hide the systemindicator when no headset is connected</property>
+                <property name="tooltip-text" translatable="yes">Will be delayed by refresh interval - can be enforced by toggling the quicksettings</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="HeadsetControl_row_showindicator3">
+                <property name="title" translatable="yes">Refresh interval (minutes)</property>
+                <property name="subtitle" translatable="yes">Refresh the systemindicator every X minutes</property>
+                <property name="tooltip-text" translatable="yes">0 to disable</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">0</property>
+                    <property name="upper">60</property>
+                    <property name="value">5</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">10</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwSwitchRow" id="HeadsetControl_row_notifications">
+            <property name="title" translatable="yes">Use notifications</property>
+            <property name="subtitle" translatable="yes">Enable / disable notifications</property>
+            <property name="tooltip-text" translatable="yes">Enable / disable notifications</property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwSwitchRow" id="HeadsetControl_row_logging">
+            <property name="title" translatable="yes">Use logging</property>
+            <property name="subtitle" translatable="yes">Enable / disable log outputs</property>
+            <property name="tooltip-text" translatable="yes">Enable / disable log outputs</property>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="AdwPreferencesGroup" id="HeadsetControl_group_colors">
+        <property name="title" translatable="yes">Colors</property>
+        <child>
+          <object class="AdwExpanderRow" id="HeadsetControl_row_colors">
+            <property name="title" translatable="yes">Use colors</property>
+            <property name="subtitle" translatable="yes">Enable / disable text colors</property>
+            <property name="tooltip-text" translatable="yes">Enable / disable text colors</property>
+            <child>
+              <object class="AdwSwitchRow" id="HeadsetControl_row_colorhigh">
+                <property name="title" translatable="yes">Color battery charge high</property>
+                <property name="subtitle" translatable="yes">The text color for battery charge 100% to 51%</property>
+                <property name="tooltip-text" translatable="yes">The text color for battery charge 100% to 51%</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSwitchRow" id="HeadsetControl_row_colormedium">
+                <property name="title" translatable="yes">Color battery charge medium</property>
+                <property name="subtitle" translatable="yes">The text color for battery charge 50% to 26%</property>
+                <property name="tooltip-text" translatable="yes">The text color for battery charge 50% to 26%</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSwitchRow" id="HeadsetControl_row_colorlow">
+                <property name="title" translatable="yes">Color battery charge low</property>
+                <property name="subtitle" translatable="yes">The text color for battery charge 25% to 0%</property>
+                <property name="tooltip-text" translatable="yes">The text color for battery charge 25% to 0%</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="AdwPreferencesGroup" id="HeadsetControl_group_equalizer">
+        <property name="title" translatable="yes">Equalizer</property>
+        <child>
+          <object class="AdwExpanderRow" id="HeadsetControl_row_equalizersettings">
+            <property name="title" translatable="yes">Equalizer settings</property>
+            <property name="subtitle" translatable="yes">Equalizer options (equalizer might not be supported by your headset)</property>
+            <property name="tooltip-text" translatable="yes">Equalizer options (equalizer might not be supported by your headset)</property>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_equalizersetting1">
+                <property name="title" translatable="yes">Setting 1</property>
+                <property name="tooltip-text" translatable="yes">Passed to headsetcontrol as parameter to equalizer option (when supported)</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_equalizersetting2">
+                <property name="title" translatable="yes">Setting 2</property>
+                <property name="tooltip-text" translatable="yes">Passed to headsetcontrol as parameter to equalizer option (when supported)</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_equalizersetting3">
+                <property name="title" translatable="yes">Setting 3</property>
+                <property name="tooltip-text" translatable="yes">Passed to headsetcontrol as parameter to equalizer option (when supported)</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_equalizersetting4">
+                <property name="title" translatable="yes">Setting 4</property>
+                <property name="tooltip-text" translatable="yes">Passed to headsetcontrol as parameter to equalizer option (when supported)</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwExpanderRow" id="HeadsetControl_row_equalizerpresets">
+            <property name="title" translatable="yes">Equalizer presets</property>
+            <property name="subtitle" translatable="yes">Names of the equalizer presets (equalizer preset might not be supported by your headset)</property>
+            <property name="tooltip-text" translatable="yes">Names of the equalizer presets (equalizer preset might not be supported by your headset)</property>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_equalizerpreset1">
+                <property name="title" translatable="yes">Default</property>
+                <property name="tooltip-text" translatable="yes">Shown in equalizer preset menu (when supported)</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_equalizerpreset2">
+                <property name="title" translatable="yes">Preset 1</property>
+                <property name="tooltip-text" translatable="yes">Shown in equalizer preset menu (when supported)</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_equalizerpreset3">
+                <property name="title" translatable="yes">Preset 2</property>
+                <property name="tooltip-text" translatable="yes">Shown in equalizer preset menu (when supported)</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_equalizerpreset4">
+                <property name="title" translatable="yes">Preset 3</property>
+                <property name="tooltip-text" translatable="yes">Shown in equalizer preset menu (when supported)</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="AdwPreferencesGroup" id="HeadsetControl_group_sidetone">
+        <property name="title" translatable="yes">Sidetone</property>
+        <child>
+          <object class="AdwExpanderRow" id="HeadsetControl_row_sidetone">
+            <property name="title" translatable="yes">Values for sidetone</property>
+            <property name="subtitle" translatable="yes">Off Low Medium High Maximum (-1 disable)</property>
+            <property name="tooltip-text" translatable="yes">Off Low Medium High Maximum (-1 disable)</property>
+            <child>
+              <object class="AdwSpinRow" id="HeadsetControl_row_sidetone1">
+                <property name="title" translatable="yes">Value for Off</property>
+                <property name="subtitle" translatable="yes">Input for headsetcontrol sidetone command</property>
+                <property name="tooltip-text" translatable="yes">-1 to disable</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">-1</property>
+                    <property name="upper">128</property>
+                    <property name="value">0</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">1</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="HeadsetControl_row_sidetone2">
+                <property name="title" translatable="yes">Value for Low</property>
+                <property name="subtitle" translatable="yes">Input for headsetcontrol sidetone command</property>
+                <property name="tooltip-text" translatable="yes">-1 to disable</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">-1</property>
+                    <property name="upper">128</property>
+                    <property name="value">32</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">1</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="HeadsetControl_row_sidetone3">
+                <property name="title" translatable="yes">Value for Medium</property>
+                <property name="subtitle" translatable="yes">Input for headsetcontrol sidetone command</property>
+                <property name="tooltip-text" translatable="yes">-1 to disable</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">-1</property>
+                    <property name="upper">128</property>
+                    <property name="value">64</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">1</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="HeadsetControl_row_sidetone4">
+                <property name="title" translatable="yes">Value for High</property>
+                <property name="subtitle" translatable="yes">Input for headsetcontrol sidetone command</property>
+                <property name="tooltip-text" translatable="yes">-1 to disable</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">-1</property>
+                    <property name="upper">128</property>
+                    <property name="value">96</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">1</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="HeadsetControl_row_sidetone5">
+                <property name="title" translatable="yes">Value for Maximum</property>
+                <property name="subtitle" translatable="yes">Input for headsetcontrol sidetone command</property>
+                <property name="tooltip-text" translatable="yes">-1 to disable</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">-1</property>
+                    <property name="upper">128</property>
+                    <property name="value">128</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">1</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

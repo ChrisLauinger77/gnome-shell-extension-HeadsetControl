@@ -13,7 +13,7 @@ fi
 case "$1" in
   zip|pack)
     cd $extension
-    gnome-extensions pack --podir=../po/ --out-dir=../ --extra-source=./lib --extra-source=./ui/ --extra-source=./icons/ --extra-source=../LICENSE --force
+    gnome-extensions pack --podir=../po/ --out-dir=../ --extra-source=./ui/ --extra-source=../LICENSE --force
     cd ..
     echo "Extension zip created ..."
     ;;
@@ -33,7 +33,7 @@ case "$1" in
     ;;
   translate)
     reffile=HeadsetControl.pot
-    xgettext --from-code=UTF-8 --output=po/"$reffile" $extension/*.js $extension/schemas/*.xml
+    xgettext --from-code=UTF-8 --output=po/"$reffile" $extension/*.js $extension/schemas/*.xml $extension/ui/*.ui
     cd po
     for pofile in *.po
       do
