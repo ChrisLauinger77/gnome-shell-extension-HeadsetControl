@@ -202,21 +202,21 @@
             <property name="subtitle" translatable="yes">Enable / disable text colors</property>
             <property name="tooltip-text" translatable="yes">Enable / disable text colors</property>
             <child>
-              <object class="AdwSwitchRow" id="HeadsetControl_row_colorhigh">
+              <object class="AdwActionRow" id="HeadsetControl_row_colorhigh">
                 <property name="title" translatable="yes">Color battery charge high</property>
                 <property name="subtitle" translatable="yes">The text color for battery charge 100% to 51%</property>
                 <property name="tooltip-text" translatable="yes">The text color for battery charge 100% to 51%</property>
               </object>
             </child>
             <child>
-              <object class="AdwSwitchRow" id="HeadsetControl_row_colormedium">
+              <object class="AdwActionRow" id="HeadsetControl_row_colormedium">
                 <property name="title" translatable="yes">Color battery charge medium</property>
                 <property name="subtitle" translatable="yes">The text color for battery charge 50% to 26%</property>
                 <property name="tooltip-text" translatable="yes">The text color for battery charge 50% to 26%</property>
               </object>
             </child>
             <child>
-              <object class="AdwSwitchRow" id="HeadsetControl_row_colorlow">
+              <object class="AdwActionRow" id="HeadsetControl_row_colorlow">
                 <property name="title" translatable="yes">Color battery charge low</property>
                 <property name="subtitle" translatable="yes">The text color for battery charge 25% to 0%</property>
                 <property name="tooltip-text" translatable="yes">The text color for battery charge 25% to 0%</property>
