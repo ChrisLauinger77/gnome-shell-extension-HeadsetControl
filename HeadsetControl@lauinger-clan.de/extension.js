@@ -5,7 +5,6 @@ import Gio from "gi://Gio";
 import GObject from "gi://GObject";
 import St from "gi://St";
 import Clutter from "gi://Clutter";
-import Gdk from "gi://Gdk";
 
 import * as Main from "resource:///org/gnome/shell/ui/main.js";
 import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
@@ -391,15 +390,15 @@ const HeadsetControlMenuToggle = GObject.registerClass(
         }
 
         _getColorHEXValue(strSettingsColor) {
-            const strcolor = this._settings.get_string(strSettingsColor);
+            const strColor = this._settings.get_string(strSettingsColor);
             this._logOutput("_getColorHEXValue-strSettingsColor: " + strSettingsColor);
-            this._logOutput("_getColorHEXValue-strcolor: " + strcolor);
+            this._logOutput("_getColorHEXValue-strcolor: " + strColor);
 
-            const myColor = new Gdk.RGBA.parse(strcolor);
+            const arrColor = strColor.replace("rgb(", "").replace(")", "").split(",");
             const color = rgbToHex(
-                Math.round(myColor.red * 255),
-                Math.round(myColor.green * 255),
-                Math.round(myColor.blue * 255)
+                Number.parseInt(arrColor[0]),
+                Number.parseInt(arrColor[1]),
+                Number.parseInt(arrColor[2])
             );
             return color;
         }
