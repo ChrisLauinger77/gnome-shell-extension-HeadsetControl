@@ -38,8 +38,6 @@ const headsetcontrolCommands = {
     cmdEqualizerPreset: "",
 };
 
-const rgbToHex = (r, g, b) => "#" + [r, g, b].map((x) => x.toString(16).padStart(2, "0")).join("");
-
 async function invokeCmd(cmd, logger) {
     const flags = Gio.SubprocessFlags.STDOUT_PIPE;
     const [, argv] = GLib.shell_parse_argv(cmd);
@@ -389,20 +387,6 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this.menu.addMenuItem(popupMenuExpander);
         }
 
-        _getColorHEXValue(strSettingsColor) {
-            const strColor = this._settings.get_string(strSettingsColor);
-            this._logOutput("_getColorHEXValue-strSettingsColor: " + strSettingsColor);
-            this._logOutput("_getColorHEXValue-strcolor: " + strColor);
-
-            const arrColor = strColor.replace("rgb(", "").replace(")", "").split(",");
-            const color = rgbToHex(
-                Number.parseInt(arrColor[0]),
-                Number.parseInt(arrColor[1]),
-                Number.parseInt(arrColor[2])
-            );
-            return color;
-        }
-
         get menuButtonStyle() {
             return this._menuButton.get_style();
         }
@@ -412,9 +396,9 @@ const HeadsetControlMenuToggle = GObject.registerClass(
         }
 
         _changeColor(strvalueBattery, valueBattery_num) {
-            const colorR = this._getColorHEXValue("color-batterylow");
-            const colorY = this._getColorHEXValue("color-batterymedium");
-            const colorG = this._getColorHEXValue("color-batteryhigh");
+            const colorR = this._settings.get_string("color-batterylow");
+            const colorY = this._settings.get_string("color-batterymedium");
+            const colorG = this._settings.get_string("color-batteryhigh");
 
             if (!this._settings.get_boolean("use-colors") || strvalueBattery === "N/A") {
                 this._menuButton.set_style(this._originalStyle);
