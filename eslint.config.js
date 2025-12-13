@@ -89,6 +89,7 @@ export default [
             ],
             'no-var': 'warn',
             'unicode-bom': 'error',
+            'prefer-const': 'error',
             // GJS Restrictions
             'no-restricted-globals': [
                 'error',
