@@ -623,7 +623,7 @@ export default class HeadsetControl extends Extension {
 
     _isDeviceStatusSuccess(device) {
         this._logOutput("device.status:" + " " + device.status);
-        return device.status && device.status.includes("success");
+        return typeof device.status === "string" && (device.status.includes("success") || device.status.includes("partial"));
     }
 
     _hasEqualizerPresetSupport(device) {
