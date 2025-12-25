@@ -91,7 +91,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this.setMenuHeader();
             this.setMenuTitle();
 
-            let quicksettingstoggle = _settings.get_int("quicksettings-toggle");
+            const quicksettingstoggle = _settings.get_int("quicksettings-toggle");
             let quicksettingstogglekey;
             switch (quicksettingstoggle) {
                 case 1:
@@ -267,14 +267,13 @@ const HeadsetControlMenuToggle = GObject.registerClass(
         }
 
         _addPopupMenuItem(popupMenuExpander, strLabel, strValue) {
-            let submenu;
-            submenu = new PopupMenu.PopupMenuItem(_(strLabel));
+            const submenu = new PopupMenu.PopupMenuItem(_(strLabel));
             submenu.connect("activate", this._invokeCmd.bind(this, strValue));
             popupMenuExpander.menu.addMenuItem(submenu);
         }
 
         _addSidetoneMenu(popupMenuExpander) {
-            let arraySidetone = this._settings.get_strv("sidetone-values");
+            const arraySidetone = this._settings.get_strv("sidetone-values");
             const sidetoneValues = [
                 [_("Off"), arraySidetone[0]],
                 [_("Low"), arraySidetone[1]],
@@ -352,7 +351,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
         }
 
         _addEqualizerSettingMenu(popupMenuExpander) {
-            let arrayEqualizerSetting = this._settings.get_strv("option-equalizer-settings");
+            const arrayEqualizerSetting = this._settings.get_strv("option-equalizer-settings");
 
             const equalizerSettingValues = [
                 [_("Setting 1"), arrayEqualizerSetting[0]],
@@ -623,7 +622,10 @@ export default class HeadsetControl extends Extension {
 
     _isDeviceStatusSuccess(device) {
         this._logOutput("device.status:" + " " + device.status);
-        return typeof device.status === "string" && (device.status.includes("success") || device.status.includes("partial"));
+        return (
+            typeof device.status === "string" &&
+            (device.status.includes("success") || device.status.includes("partial"))
+        );
     }
 
     _hasEqualizerPresetSupport(device) {
@@ -714,12 +716,12 @@ export default class HeadsetControl extends Extension {
 
     async _refreshJSONupdate(updateIndicator) {
         this._JSONoutputSupported = false;
-        let strOutput = await this._readJSONOutputFormat("");
+        const strOutput = await this._readJSONOutputFormat("");
         return this._processOutput(strOutput, updateIndicator);
     }
 
     async _refreshCapabilities() {
-        let strOutput = await this._invokeCmd(headsetcontrolCommands.cmdCapabilities);
+        const strOutput = await this._invokeCmd(headsetcontrolCommands.cmdCapabilities);
 
         // if we cannot get the capabilities, set all to true
         if (!strOutput || strOutput.includes("No supported headset found")) {
@@ -769,12 +771,12 @@ export default class HeadsetControl extends Extension {
     }
 
     async _refreshBatteryStatus() {
-        let strOutput = await this._invokeCmd(headsetcontrolCommands.cmdBattery);
+        const strOutput = await this._invokeCmd(headsetcontrolCommands.cmdBattery);
 
         if (!strOutput) {
             return false;
         }
-        let strBattery = this._getHeadSetControlValue(strOutput, "Battery");
+        const strBattery = this._getHeadSetControlValue(strOutput, "Battery");
         this._headsetControlIndicator.headsetControlMenuToggle.updateBatteryStatus(
             "N/A",
             strBattery,
@@ -784,12 +786,12 @@ export default class HeadsetControl extends Extension {
     }
 
     async _refreshChatMixStatus() {
-        let strOutput = await this._invokeCmd(headsetcontrolCommands.cmdChatMix);
+        const strOutput = await this._invokeCmd(headsetcontrolCommands.cmdChatMix);
 
         if (!strOutput) {
             return false;
         }
-        let strChatMix = this._getHeadSetControlValue(strOutput, "Chat"); //ChatMix or Chat-Mix
+        const strChatMix = this._getHeadSetControlValue(strOutput, "Chat"); //ChatMix or Chat-Mix
         this._headsetControlIndicator.headsetControlMenuToggle.updateChatMixStatus(strChatMix);
         return true;
     }
@@ -891,7 +893,7 @@ export default class HeadsetControl extends Extension {
     }
 
     _calculateRefreshInterval(refreshIntervalmin) {
-        let refreshIntervalms = refreshIntervalmin * 60 * 1000; // Convert minutes to milliseconds
+        const refreshIntervalms = refreshIntervalmin * 60 * 1000; // Convert minutes to milliseconds
         this._logOutput("_CalculateRefreshInterval: " + refreshIntervalms);
         return refreshIntervalms;
     }
@@ -928,7 +930,7 @@ export default class HeadsetControl extends Extension {
 
     async _updateBinaryCapabilities() {
         this._logOutput("_updateBinaryCapabilities - calling _refreshJSONupdate");
-        let ret = await this._refreshJSONupdate(this._showIndicator);
+        const ret = await this._refreshJSONupdate(this._showIndicator);
         if (!ret) {
             await this._refreshCapabilities();
         }

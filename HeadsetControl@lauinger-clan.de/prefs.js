@@ -57,13 +57,13 @@ export default class AdwPrefs extends ExtensionPreferences {
     }
 
     _onEQvaluechanged(adwrow, index, option) {
-        let arrayEQsettings = this.getSettings().get_strv(option);
+        const arrayEQsettings = this.getSettings().get_strv(option);
         arrayEQsettings[index] = adwrow.get_text();
         this.getSettings().set_strv(option, arrayEQsettings);
     }
 
     _onSTvaluechanged(adwrow, index) {
-        let arraySidetone = this.getSettings().get_strv("sidetone-values");
+        const arraySidetone = this.getSettings().get_strv("sidetone-values");
         arraySidetone[index] = adwrow.get_value().toString();
         this.getSettings().set_strv("sidetone-values", arraySidetone);
     }
@@ -230,7 +230,7 @@ export default class AdwPrefs extends ExtensionPreferences {
         const arrayEQsettings = window._settings.get_strv("option-equalizer-settings");
         for (const [index, value] of arrayEQsettings.entries()) {
             if (index >= 4) break;
-            let adwrowEQ = builder.get_object("HeadsetControl_row_equalizersetting" + (index + 1));
+            const adwrowEQ = builder.get_object("HeadsetControl_row_equalizersetting" + (index + 1));
             if (!adwrowEQ) continue; // Prevent TypeError
             adwrowEQ.set_text(_(value));
             adwrowEQ.connect(
@@ -246,7 +246,7 @@ export default class AdwPrefs extends ExtensionPreferences {
                 : arrayEQPnames;
         for (const [index, value] of equalizerPresetLabels.entries()) {
             if (index >= 4) break;
-            let adwrowEQP = builder.get_object("HeadsetControl_row_equalizerpreset" + (index + 1));
+            const adwrowEQP = builder.get_object("HeadsetControl_row_equalizerpreset" + (index + 1));
             if (!adwrowEQP) continue; // Prevent TypeError
             adwrowEQP.set_text(_(value));
             adwrowEQP.connect("changed", this._onEQvaluechanged.bind(this, adwrowEQP, index, "equalizer-preset-names"));
