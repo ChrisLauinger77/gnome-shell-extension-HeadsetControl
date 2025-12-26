@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-16 19:24+0100\n"
-"PO-Revision-Date: 2025-11-16 19:25+0100\n"
+"PO-Revision-Date: 2025-12-26 09:51+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -172,11 +172,11 @@ msgstr "Aktualisiere..."
 
 #: HeadsetControl@lauinger-clan.de/extension.js:849
 msgid "Quicksettings open - refresh indicator running..."
-msgstr "Quicksettings geöffnet - Indikatoraktualisierung läuft..."
+msgstr "Schnelleinstellungen geöffnet - Indikatoraktualisierung läuft..."
 
 #: HeadsetControl@lauinger-clan.de/extension.js:854
 msgid "Quicksettings not open - do nothing..."
-msgstr "Quicksettings nicht geöffnet - tue nichts..."
+msgstr "Schnelleinstellungen nicht geöffnet - tue nichts..."
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:22
 #: HeadsetControl@lauinger-clan.de/prefs.js:97
@@ -414,7 +414,7 @@ msgid ""
 "quicksettings"
 msgstr ""
 "Wird um das Aktualisierungsintervall verzögert - kann durch Umschalten der "
-"Quicksettings erzwungen werden"
+"Schnelleinstellungen erzwungen werden"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:100
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:163
@@ -481,7 +481,7 @@ msgstr ""
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:135
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:136
 msgid "Usage of quicksettings toggle"
-msgstr "Verwendung des Quicksettings-Umschalters"
+msgstr "Verwendung des Schnelleinstellungen-Umschalters"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:131
 msgid "Enum - 0 Systemindicator, 1 Notifications, 2 Logs, 3 Colors"
@@ -574,7 +574,7 @@ msgstr "Optionen"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:134
 msgid "Quicksettings toggle"
-msgstr "Quicksettings-Umschalter"
+msgstr "Schnelleinstellungen-Umschalter"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:140
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:151
