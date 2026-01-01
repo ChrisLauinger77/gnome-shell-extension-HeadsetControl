@@ -38,7 +38,8 @@ case "$1" in
     for pofile in *.po
       do
         echo "Updating: $pofile"
-        msgmerge --backup=off -U "$pofile" "$reffile"
+        msgmerge --backup=off -N -U "$pofile" "$reffile"
+        msgattrib --no-obsolete -o "$pofile" "$pofile"
       done
     echo "Done."
     ;;
