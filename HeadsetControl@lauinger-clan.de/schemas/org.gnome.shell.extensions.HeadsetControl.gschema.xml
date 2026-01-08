@@ -74,10 +74,10 @@
         headset)</summary>
       <description>Shown in equalizer preset menu (when supported)</description>
     </key>
-    <key name="use-notifications" type="b">
-      <default>false</default>
-      <summary>Parameter to enable notifications</summary>
-      <description>Enable / disable notifications</description>
+    <key name="notification-low-battery" type="b">
+      <default>true</default>
+      <summary>Parameter to enable notification when battery is low</summary>
+      <description>Send a notification when the battery level is low</description>
     </key>
     <key name="use-logging" type="b">
       <default>false</default>

@@ -172,9 +172,9 @@ export default class AdwPrefs extends ExtensionPreferences {
         adwrow = builder.get_object("HeadsetControl_row_showindicator3");
         adwrow.set_value(this.getSettings().get_int("refreshinterval-systemindicator"));
         adwrow.connect("changed", this._onRIvaluechanged.bind(this, adwrow));
-        //use notifications
+        // notification for low battery
         adwrow = builder.get_object("HeadsetControl_row_notifications");
-        window._settings.bind("use-notifications", adwrow, "active", Gio.SettingsBindFlags.DEFAULT);
+        window._settings.bind("notification-low-battery", adwrow, "active", Gio.SettingsBindFlags.DEFAULT);
         //use logging
         adwrow = builder.get_object("HeadsetControl_row_logging");
         window._settings.bind("use-logging", adwrow, "active", Gio.SettingsBindFlags.DEFAULT);
