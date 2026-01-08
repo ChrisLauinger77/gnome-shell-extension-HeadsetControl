@@ -70,15 +70,15 @@ async function invokeCmd(cmd, logger) {
 
 const HeadsetControlMenuToggle = GObject.registerClass(
     class HeadsetControlMenuToggle extends QuickSettings.QuickMenuToggle {
-        constructor(Me) {
-            const { _settings } = Me;
+        constructor(extension) {
+            const { _settings } = extension;
             super({
                 title: _("HeadsetControl"),
                 iconName: "audio-headset-symbolic",
                 toggleMode: true,
             });
-            this._logger = Me.getLogger();
-            this._useLogging = Me._useLogging;
+            this._logger = extension.getLogger();
+            this._useLogging = extension._useLogging;
             this._settings = _settings;
             this._valueBatteryStatus = "";
             this._valueBattery = "";
@@ -91,7 +91,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this.setMenuHeader();
             this.setMenuTitle();
 
-            const quicksettingstoggle = _settings.get_int("quicksettings-toggle");
+            const quicksettingstoggle = this._settings.get_int("quicksettings-toggle");
             let quicksettingstogglekey;
             switch (quicksettingstoggle) {
                 case 1:
@@ -106,10 +106,10 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 default:
                     quicksettingstogglekey = "show-systemindicator";
             }
-            _settings.bind(quicksettingstogglekey, this, "checked", Gio.SettingsBindFlags.DEFAULT);
+            this._settings.bind(quicksettingstogglekey, this, "checked", Gio.SettingsBindFlags.DEFAULT);
 
             this._buildMenu();
-            this._addSettingsAction(Me);
+            this._addSettingsAction(extension);
         }
 
         updateUseLogging(value) {
@@ -176,15 +176,18 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             }
         }
 
-        refreshMenu(Me) {
+        refreshMenu(extension) {
             this.menu.removeAll();
             this._buildMenu();
-            this._addSettingsAction(Me);
+            this._addSettingsAction(extension);
         }
 
-        _addSettingsAction(Me) {
+        _addSettingsAction(extension) {
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-            const settingsItem = this.menu.addAction(_("Settings"), () => Me._openPreferences());
+            const settingsItem = this.menu.addAction(_("Settings"), () => {
+                extension.openPreferences();
+                QuickSettingsMenu.menu.close(PopupAnimation.FADE);
+            });
             settingsItem.visible = Main.sessionMode.allowSettings;
             this.menu._settingsActions[Me.uuid] = settingsItem;
         }
@@ -421,8 +424,8 @@ const HeadsetControlMenuToggle = GObject.registerClass(
 
 const HeadsetControlIndicator = GObject.registerClass(
     class HeadsetControlIndicator extends QuickSettings.SystemIndicator {
-        constructor(Me) {
-            const { _settings } = Me;
+        constructor(extension) {
+            const { _settings } = extension;
             super();
 
             // Create the icon for the indicator
@@ -439,7 +442,7 @@ const HeadsetControlIndicator = GObject.registerClass(
 
             // Create the toggle menu and associate it with the indicator, being
             // sure to destroy it along with the indicator
-            this._headsetControlMenuToggle = new HeadsetControlMenuToggle(Me);
+            this._headsetControlMenuToggle = new HeadsetControlMenuToggle(extension);
             this.quickSettingsItems.push(this._headsetControlMenuToggle);
 
             this.connect("destroy", () => {
@@ -921,11 +924,6 @@ export default class HeadsetControl extends Extension {
         } else {
             return GLib.SOURCE_REMOVE;
         }
-    }
-
-    _openPreferences() {
-        this.openPreferences();
-        QuickSettingsMenu.menu.close(PopupAnimation.FADE);
     }
 
     async _updateBinaryCapabilities() {
