@@ -31,7 +31,7 @@
           <object class="AdwExpanderRow" id="HeadsetControl_row_outputformat_new1">
             <property name="title" translatable="yes">HeadsetControl Version Option output format</property>
             <property name="subtitle" translatable="yes">Used starting with HeadsetControl tool version newer then 2.7.0</property>
-            <property name="expanded" >true</property>
+            <property name="expanded">true</property>
             <child>
               <object class="AdwEntryRow" id="HeadsetControl_row_outputformat_new2">
                 <property name="title" translatable="yes">Output format</property>
@@ -68,7 +68,7 @@
           <object class="AdwExpanderRow" id="HeadsetControl_row_common1">
             <property name="title" translatable="yes">HeadsetControl Common</property>
             <property name="subtitle" translatable="yes">Used in all HeadsetControl tool versions</property>
-            <property name="expanded" >true</property>
+            <property name="expanded">true</property>
             <child>
               <object class="AdwEntryRow" id="HeadsetControl_row_common2">
                 <property name="title" translatable="yes">Sidetone</property>
@@ -140,7 +140,7 @@
               <object class="GtkStringList">
                 <items>
                   <item translatable="yes">Show SystemIndicator</item>
-                  <item translatable="yes">Use notifications</item>
+                  <item translatable="yes">Notification on low battery</item>
                   <item translatable="yes">Use logging</item>
                   <item translatable="yes">Use colors</item>
                 </items>
@@ -179,9 +179,9 @@
         </child>
         <child>
           <object class="AdwSwitchRow" id="HeadsetControl_row_notifications">
-            <property name="title" translatable="yes">Use notifications</property>
-            <property name="subtitle" translatable="yes">Enable / disable notifications</property>
-            <property name="tooltip-text" translatable="yes">Enable / disable notifications</property>
+            <property name="title" translatable="yes">Notification on low battery</property>
+            <property name="subtitle" translatable="yes">Send a notification when the battery level is low</property>
+            <property name="tooltip-text" translatable="yes">Send a notification when the battery level is low</property>
           </object>
         </child>
         <child>

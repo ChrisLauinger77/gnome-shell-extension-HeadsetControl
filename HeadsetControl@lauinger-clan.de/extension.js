@@ -9,6 +9,7 @@ import Clutter from "gi://Clutter";
 import * as Main from "resource:///org/gnome/shell/ui/main.js";
 import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
 import * as QuickSettings from "resource:///org/gnome/shell/ui/quickSettings.js";
+import * as MessageTray from "resource:///org/gnome/shell/ui/messageTray.js";
 import { Extension, gettext as _ } from "resource:///org/gnome/shell/extensions/extension.js";
 import { PopupAnimation } from "resource:///org/gnome/shell/ui/boxpointer.js";
 
@@ -70,15 +71,15 @@ async function invokeCmd(cmd, logger) {
 
 const HeadsetControlMenuToggle = GObject.registerClass(
     class HeadsetControlMenuToggle extends QuickSettings.QuickMenuToggle {
-        constructor(Me) {
-            const { _settings } = Me;
+        constructor(extension) {
+            const { _settings } = extension;
             super({
                 title: _("HeadsetControl"),
                 iconName: "audio-headset-symbolic",
                 toggleMode: true,
             });
-            this._logger = Me.getLogger();
-            this._useLogging = Me._useLogging;
+            this._logger = extension.getLogger();
+            this._useLogging = extension._useLogging;
             this._settings = _settings;
             this._valueBatteryStatus = "";
             this._valueBattery = "";
@@ -91,7 +92,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this.setMenuHeader();
             this.setMenuTitle();
 
-            const quicksettingstoggle = _settings.get_int("quicksettings-toggle");
+            const quicksettingstoggle = this._settings.get_int("quicksettings-toggle");
             let quicksettingstogglekey;
             switch (quicksettingstoggle) {
                 case 1:
@@ -106,10 +107,10 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 default:
                     quicksettingstogglekey = "show-systemindicator";
             }
-            _settings.bind(quicksettingstogglekey, this, "checked", Gio.SettingsBindFlags.DEFAULT);
+            this._settings.bind(quicksettingstogglekey, this, "checked", Gio.SettingsBindFlags.DEFAULT);
 
             this._buildMenu();
-            this._addSettingsAction(Me);
+            this._addSettingsAction(extension);
         }
 
         updateUseLogging(value) {
@@ -176,17 +177,20 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             }
         }
 
-        refreshMenu(Me) {
+        refreshMenu(extension) {
             this.menu.removeAll();
             this._buildMenu();
-            this._addSettingsAction(Me);
+            this._addSettingsAction(extension);
         }
 
-        _addSettingsAction(Me) {
+        _addSettingsAction(extension) {
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-            const settingsItem = this.menu.addAction(_("Settings"), () => Me._openPreferences());
+            const settingsItem = this.menu.addAction(_("Settings"), () => {
+                extension.openPreferences();
+                QuickSettingsMenu.menu.close(PopupAnimation.FADE);
+            });
             settingsItem.visible = Main.sessionMode.allowSettings;
-            this.menu._settingsActions[Me.uuid] = settingsItem;
+            this.menu._settingsActions[extension.uuid] = settingsItem;
         }
 
         updateBatteryStatus(strStatus, strBattery, lngBattery) {
@@ -421,8 +425,8 @@ const HeadsetControlMenuToggle = GObject.registerClass(
 
 const HeadsetControlIndicator = GObject.registerClass(
     class HeadsetControlIndicator extends QuickSettings.SystemIndicator {
-        constructor(Me) {
-            const { _settings } = Me;
+        constructor(extension) {
+            const { _settings } = extension;
             super();
 
             // Create the icon for the indicator
@@ -439,7 +443,7 @@ const HeadsetControlIndicator = GObject.registerClass(
 
             // Create the toggle menu and associate it with the indicator, being
             // sure to destroy it along with the indicator
-            this._headsetControlMenuToggle = new HeadsetControlMenuToggle(Me);
+            this._headsetControlMenuToggle = new HeadsetControlMenuToggle(extension);
             this.quickSettingsItems.push(this._headsetControlMenuToggle);
 
             this.connect("destroy", () => {
@@ -509,17 +513,7 @@ export default class HeadsetControl extends Extension {
         return retval;
     }
 
-    _notify(strText) {
-        if (this._useNotifications) {
-            Main.notify(_("HeadsetControl"), strText);
-        }
-    }
-
     _initCmd() {
-        this._useNotifications = this._settings.get_boolean("use-notifications");
-        this._useLogging = this._settings.get_boolean("use-logging");
-        this._headsetControlIndicator.headsetControlMenuToggle.updateUseLogging(this._useLogging);
-
         // Helper function to construct commands
         const buildCommand = (executable, option) => `${executable} ${option}`;
 
@@ -711,6 +705,10 @@ export default class HeadsetControl extends Extension {
         } finally {
             this._headsetControlIndicator.updateUIElements();
             this._changeIndicatorVisibility();
+            this._notifyLowBattery(
+                this._headsetControlIndicator.headsetControlMenuToggle.valueBatteryStatus,
+                this._headsetControlIndicator.valueBatteryNum
+            );
         }
     }
 
@@ -818,7 +816,6 @@ export default class HeadsetControl extends Extension {
     }
 
     async _refreshIndicator() {
-        this._notify("_refreshIndicator - " + _("Refreshing..."));
         this._logOutput("_refreshIndicator - " + _("Refreshing..."));
         if (this._JSONoutputSupported) {
             await this._refreshJSON();
@@ -828,6 +825,10 @@ export default class HeadsetControl extends Extension {
             await this._refreshBatteryStatus();
             this._headsetControlIndicator.updateUIElements();
             this._changeIndicatorVisibility();
+            this._notifyLowBattery(
+                this._headsetControlIndicator.headsetControlMenuToggle.valueBatteryStatus,
+                this._headsetControlIndicator.valueBatteryNum
+            );
         }
     }
 
@@ -841,7 +842,6 @@ export default class HeadsetControl extends Extension {
             this._logOutput(_("Quicksettings not open - do nothing..."));
             return;
         }
-        this._notify(_("Refreshing..."));
         this._logOutput(_("Refreshing..."));
 
         if (this._JSONoutputSupported) {
@@ -859,11 +859,21 @@ export default class HeadsetControl extends Extension {
         }
         this._headsetControlIndicator.updateUIElements();
         this._changeIndicatorVisibility();
+        this._notifyLowBattery(
+            this._headsetControlIndicator.headsetControlMenuToggle.valueBatteryStatus,
+            this._headsetControlIndicator.valueBatteryNum
+        );
     }
 
     _onParamChanged() {
         this.disable();
         this.enable();
+    }
+
+    _onParamChangedLogNot() {
+        this._notificationLowBattery = this._settings.get_boolean("notification-low-battery");
+        this._useLogging = this._settings.get_boolean("use-logging");
+        this._headsetControlIndicator.headsetControlMenuToggle.updateUseLogging(this._useLogging);
     }
 
     _onParamChangedMenu() {
@@ -923,11 +933,6 @@ export default class HeadsetControl extends Extension {
         }
     }
 
-    _openPreferences() {
-        this.openPreferences();
-        QuickSettingsMenu.menu.close(PopupAnimation.FADE);
-    }
-
     async _updateBinaryCapabilities() {
         this._logOutput("_updateBinaryCapabilities - calling _refreshJSONupdate");
         const ret = await this._refreshJSONupdate(this._showIndicator);
@@ -937,15 +942,41 @@ export default class HeadsetControl extends Extension {
         await this._refreshIndicator();
     }
 
+    _notifyLowBattery(strStatus, valueBatteryNum) {
+        this._logOutput("_notifyLowBattery - Battery: " + valueBatteryNum);
+        this._logOutput("_notifyLowBattery - _notificationLowBattery: " + this._notificationLowBattery);
+        this._logOutput("_notifyLowBattery - batteryLowNotified: " + this._batteryLowNotified);
+        if (
+            strStatus !== "BATTERY_UNAVAILABLE" &&
+            strStatus !== "BATTERY_CHARGING" &&
+            valueBatteryNum <= 25 &&
+            this._notificationLowBattery
+        ) {
+            if (!this._batteryLowNotified) {
+                const source = MessageTray.getSystemSource();
+                const notification = new MessageTray.Notification({
+                    source,
+                    title: _("HeadsetControl"),
+                    body: _("Battery low! Please charge your headset."),
+                    isTransient: false,
+                });
+                source.addNotification(notification);
+                this._batteryLowNotified = true;
+            }
+        }
+    }
+
     enable() {
         this._devicecount = 0;
         this._visible = false;
         this._refreshIndicatorRunning = false;
+        this._batteryLowNotified = false;
         this._settings = this.getSettings();
 
-        this._useLogging = this._settings.get_boolean("use-logging");
         this._headsetControlIndicator = new HeadsetControlIndicator(this);
         this._initCmd();
+        this._notificationLowBattery = this._settings.get_boolean("notification-low-battery");
+        this._useLogging = this._settings.get_boolean("use-logging");
         this._useColors = this._settings.get_boolean("use-colors");
         this._showIndicator = this._settings.get_boolean("show-systemindicator");
         this._hideWhenDisconnectedSystemindicator = this._settings.get_boolean("hidewhendisconnected-systemindicator");
@@ -961,8 +992,12 @@ export default class HeadsetControl extends Extension {
                 key: "headsetcontrol-executable",
                 callback: this._initCmd.bind(this),
             },
-            { key: "use-notifications", callback: this._initCmd.bind(this) },
-            { key: "use-logging", callback: this._initCmd.bind(this) },
+            {
+                key: "option-output-format",
+                callback: this._initCmd.bind(this),
+            },
+            { key: "notification-low-battery", callback: this._onParamChangedLogNot.bind(this) },
+            { key: "use-logging", callback: this._onParamChangedLogNot.bind(this) },
             {
                 key: "show-systemindicator",
                 callback: this._onParamChangedIndicator.bind(this),
@@ -1024,8 +1059,9 @@ export default class HeadsetControl extends Extension {
         this._showIndicator = null;
         this._hideWhenDisconnectedSystemindicator = null;
         this._refreshIndicatorRunning = null;
+        this._batteryLowNotified = null;
         this._refreshIntervalSystemindicator = null;
-        this._useNotifications = null;
+        this._notificationLowBattery = null;
         this._useLogging = null;
         this._useColors = null;
     }
