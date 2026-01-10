@@ -960,6 +960,8 @@ export default class HeadsetControl extends Extension {
                     body: _("Battery low! Please charge your headset."),
                     isTransient: false,
                 });
+                notification.iconName("audio-headset-symbolic");
+                notification.urgency(MessageTray.Urgency.HIGH);
                 source.addNotification(notification);
                 this._batteryLowNotified = true;
             }
