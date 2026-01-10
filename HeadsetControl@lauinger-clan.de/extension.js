@@ -96,7 +96,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             let quicksettingstogglekey;
             switch (quicksettingstoggle) {
                 case 1:
-                    quicksettingstogglekey = "use-notifications";
+                    quicksettingstogglekey = "notification-low-battery";
                     break;
                 case 2:
                     quicksettingstogglekey = "use-logging";
@@ -960,8 +960,8 @@ export default class HeadsetControl extends Extension {
                     body: _("Battery low! Please charge your headset."),
                     isTransient: false,
                 });
-                notification.iconName("audio-headset-symbolic");
-                notification.urgency(MessageTray.Urgency.HIGH);
+                notification.iconName = "audio-headset-symbolic";
+                notification.urgency = MessageTray.Urgency.HIGH;
                 source.addNotification(notification);
                 this._batteryLowNotified = true;
             }
