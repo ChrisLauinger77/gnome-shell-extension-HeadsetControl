@@ -8,6 +8,8 @@ Supported capabilities can also be controlled like ChatMix, Sidetone, Equalizer 
 
 ![Screenshot](https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl/blob/main/screenshot_4x.png)
 
+![Notification](https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl/blob/main/screenshot_notify.png)
+
 # GNOME 42
 
 ![Screenshot](https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl/blob/main/screenshot_42.png)
