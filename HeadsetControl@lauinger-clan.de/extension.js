@@ -995,7 +995,44 @@ export default class HeadsetControl extends Extension {
                 callback: this._initCmd.bind(this),
             },
             {
+                key: "option-capabilities",
+                callback: this._initCmd.bind(this),
+            },
+            {
+                key: "option-battery",
+                callback: this._initCmd.bind(this),
+            },
+            {
+                key: "option-chatmix",
+                callback: this._initCmd.bind(this),
+            },
+            { key: "option-sidetone", callback: this._initCmd.bind(this) },
+            {
+                key: "option-led",
+                callback: this._initCmd.bind(this),
+            },
+            {
+                key: "option-inactive-time",
+                callback: this._initCmd.bind(this),
+            },
+            {
+                key: "option-voice",
+                callback: this._initCmd.bind(this),
+            },
+            {
+                key: "option-rotatemute",
+                callback: this._initCmd.bind(this),
+            },
+            {
                 key: "option-output-format",
+                callback: this._initCmd.bind(this),
+            },
+            {
+                key: "option-equalizer",
+                callback: this._initCmd.bind(this),
+            },
+            {
+                key: "option-equalizerpreset",
                 callback: this._initCmd.bind(this),
             },
             { key: "notification-low-battery", callback: this._onParamChangedLogNot.bind(this) },
