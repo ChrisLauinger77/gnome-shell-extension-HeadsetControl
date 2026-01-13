@@ -942,29 +942,42 @@ export default class HeadsetControl extends Extension {
         await this._refreshIndicator();
     }
 
+    _addNotification() {
+        const source = MessageTray.getSystemSource();
+        const notification = new MessageTray.Notification({
+            source,
+            title: _("HeadsetControl"),
+            body: _("Battery low! Please charge your headset."),
+            isTransient: false,
+        });
+        notification.iconName = "audio-headset-symbolic";
+        notification.urgency = MessageTray.Urgency.HIGH;
+        notification.headset_warning_id = "battery_low";
+        source.addNotification(notification);
+    }
+
+    _removeNotification() {
+        const source = MessageTray.getSystemSource();
+        const targets = source.notifications.filter(
+            (notification) => notification.headset_warning_id === "battery_low"
+        );
+        targets.forEach((notification) => notification.destroy());
+    }
+
     _notifyLowBattery(strStatus, valueBatteryNum) {
-        this._logOutput("_notifyLowBattery - Battery: " + valueBatteryNum);
-        this._logOutput("_notifyLowBattery - _notificationLowBattery: " + this._notificationLowBattery);
-        this._logOutput("_notifyLowBattery - batteryLowNotified: " + this._batteryLowNotified);
-        if (
-            strStatus !== "BATTERY_UNAVAILABLE" &&
-            strStatus !== "BATTERY_CHARGING" &&
-            valueBatteryNum <= 25 &&
-            this._notificationLowBattery
-        ) {
+        if (!this._notificationLowBattery) {
+            return;
+        }
+        this._logOutput("_notifyLowBattery - strStatus: " + strStatus + " valueBatteryNum: " + valueBatteryNum);
+        const threshold = 25;
+        if (strStatus === "BATTERY_AVAILABLE" && valueBatteryNum <= threshold) {
             if (!this._batteryLowNotified) {
-                const source = MessageTray.getSystemSource();
-                const notification = new MessageTray.Notification({
-                    source,
-                    title: _("HeadsetControl"),
-                    body: _("Battery low! Please charge your headset."),
-                    isTransient: false,
-                });
-                notification.iconName = "audio-headset-symbolic";
-                notification.urgency = MessageTray.Urgency.HIGH;
-                source.addNotification(notification);
                 this._batteryLowNotified = true;
+                this._addNotification();
             }
+        } else if (strStatus === "BATTERY_CHARGING" || valueBatteryNum > threshold) {
+            this._batteryLowNotified = false;
+            this._removeNotification();
         }
     }
 
