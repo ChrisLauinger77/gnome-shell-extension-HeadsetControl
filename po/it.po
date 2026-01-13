@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-08 18:03+0100\n"
-"PO-Revision-Date: 2025-11-16 19:26+0100\n"
-"Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
+"PO-Revision-Date: 2026-01-13 21:26+0100\n"
+"Last-Translator: ALbano Battistella <albanobattistella@gmail.com>\n"
 "Language-Team: Italian <LL@li.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -82,7 +82,7 @@ msgstr "Disconnesso"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:204
 msgid "Charging..."
-msgstr "Carica..."
+msgstr "Caricamento..."
 
 #: HeadsetControl@lauinger-clan.de/extension.js:281
 #: HeadsetControl@lauinger-clan.de/extension.js:296
@@ -164,7 +164,7 @@ msgstr "Impostazione 4"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:517
 msgid "Battery low! Please charge your headset."
-msgstr ""
+msgstr "Batteria scarica! Ricaricare le cuffie."
 
 #: HeadsetControl@lauinger-clan.de/extension.js:824
 #: HeadsetControl@lauinger-clan.de/extension.js:846
@@ -173,7 +173,7 @@ msgstr "Ricaricare..."
 
 #: HeadsetControl@lauinger-clan.de/extension.js:838
 msgid "Quicksettings open - refresh indicator running..."
-msgstr ""
+msgstr "Impostazioni rapide aperte - indicatore di aggiornamento in esecuzione..."
 
 #: HeadsetControl@lauinger-clan.de/extension.js:843
 msgid "Quicksettings not open - do nothing..."
@@ -386,13 +386,13 @@ msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:79
 msgid "Parameter to enable notification when battery is low"
-msgstr ""
+msgstr "Parametro per abilitare la notifica quando la batteria è bassa"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:80
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:183
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:184
 msgid "Send a notification when the battery level is low"
-msgstr ""
+msgstr "Invia una notifica quando il livello della batteria è basso"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:84
 msgid "Parameter to enable log outputs"
@@ -416,7 +416,7 @@ msgstr "Mostra/nascondi l'indicatore di sistema"
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:94
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:158
 msgid "Hide the systemindicator when no headset is connected"
-msgstr ""
+msgstr "Nascondi l'indicatore di sistema quando non è collegata alcuna cuffia"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:95
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:159
@@ -424,15 +424,17 @@ msgid ""
 "Will be delayed by refresh interval - can be enforced by toggling the "
 "quicksettings"
 msgstr ""
+"Sarà ritardato dall'intervallo di aggiornamento - può essere applicato attivando/disattivando le "
+"impostazioni rapide"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:100
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:165
 msgid "Refresh the systemindicator every X minutes"
-msgstr ""
+msgstr "Aggiorna l'indicatore di sistema ogni X minuti"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:101
 msgid "Value in minutes to refresh the headset data on the systemindicator"
-msgstr ""
+msgstr "Valore in minuti per aggiornare i dati dell'auricolare sull'indicatore di sistema"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:105
 msgid "Parameter to enable battery percentage text color"
@@ -488,11 +490,11 @@ msgstr "Off bassa media alta max (-1 disabilita)"
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:137
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:138
 msgid "Usage of quicksettings toggle"
-msgstr ""
+msgstr "Utilizzo di attivazione/disattivazione delle impostazioni rapide"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:131
 msgid "Enum - 0 Systemindicator, 1 Notifications, 2 Logs, 3 Colors"
-msgstr ""
+msgstr "Enum - 0 Indicatore di sistema, 1 Notifiche, 2 Log, 3 Colori"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:9
 msgid "Global"
@@ -504,7 +506,7 @@ msgstr "Comando"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:18
 msgid "Select"
-msgstr ""
+msgstr "Seleziona"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:19
 msgid "Usually located in '/usr/bin' OR '/usr/local/bin'"
@@ -582,7 +584,7 @@ msgstr "Opzioni"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:136
 msgid "Quicksettings toggle"
-msgstr ""
+msgstr "Attiva/disattiva le impostazioni rapide"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:142
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:153
@@ -592,7 +594,7 @@ msgstr "Mostra indicatore di sistema"
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:143
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:182
 msgid "Notification on low battery"
-msgstr ""
+msgstr "Notifica di batteria scarica"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:144
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:189
@@ -606,11 +608,11 @@ msgstr "Usa colori"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:157
 msgid "Hide when disconnected"
-msgstr ""
+msgstr "Nascondi quando disconnesso"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:164
 msgid "Refresh interval (minutes)"
-msgstr ""
+msgstr "Intervallo di aggiornamento (minuti)"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:166
 msgid "0 to disable"
