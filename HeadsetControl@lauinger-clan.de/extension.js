@@ -398,7 +398,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             return this._valueBatteryStatus;
         }
 
-        _changeColor(strvalueBattery, valueBattery_num) {
+        _changeColor(strvalueBattery, valueBatteryNum) {
             const colorLow = this._settings.get_string("color-batterylow");
             const colorMedium = this._settings.get_string("color-batterymedium");
             const colorHigh = this._settings.get_string("color-batteryhigh");
@@ -407,13 +407,13 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 this._menuButton.set_style(this._originalStyle);
                 return false;
             }
-            this._logOutput("_changeColor valueBattery_num: " + valueBattery_num);
+            this._logOutput("_changeColor valueBatteryNum: " + valueBatteryNum);
             const thresholdMedium = 50;
             const thresholdLow = 25;
-            if (valueBattery_num > thresholdMedium) {
+            if (valueBatteryNum > thresholdMedium) {
                 this._menuButton.set_style("color: " + colorHigh + ";");
                 this._logOutput("_changeColor: " + colorHigh);
-            } else if (valueBattery_num > thresholdLow) {
+            } else if (valueBatteryNum > thresholdLow) {
                 this._menuButton.set_style("color: " + colorMedium + ";");
                 this._logOutput("_changeColor: " + colorMedium);
             } else {
