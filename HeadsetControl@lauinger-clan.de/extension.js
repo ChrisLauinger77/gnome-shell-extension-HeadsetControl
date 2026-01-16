@@ -942,25 +942,23 @@ export default class HeadsetControl extends Extension {
         await this._refreshIndicator();
     }
 
-    _addNotification() {
+    _addNotification(title, body, isTransient, id = "battery_low") {
         const source = MessageTray.getSystemSource();
         const notification = new MessageTray.Notification({
             source,
-            title: _("HeadsetControl"),
-            body: _("Battery low! Please charge your headset."),
-            isTransient: false,
+            title: title,
+            body: body,
+            isTransient: isTransient,
         });
         notification.iconName = "audio-headset-symbolic";
         notification.urgency = MessageTray.Urgency.HIGH;
-        notification.headset_warning_id = "battery_low";
+        notification.headset_warning_id = id;
         source.addNotification(notification);
     }
 
-    _removeNotification() {
+    _removeNotification(id = "battery_low") {
         const source = MessageTray.getSystemSource();
-        const targets = source.notifications.filter(
-            (notification) => notification.headset_warning_id === "battery_low"
-        );
+        const targets = source.notifications.filter((notification) => notification.headset_warning_id === id);
         targets.forEach((notification) => notification.destroy());
     }
 
@@ -973,11 +971,16 @@ export default class HeadsetControl extends Extension {
         if (strStatus === "BATTERY_AVAILABLE" && valueBatteryNum <= threshold) {
             if (!this._batteryLowNotified) {
                 this._batteryLowNotified = true;
-                this._addNotification();
+                this._addNotification(
+                    _("HeadsetControl"),
+                    _("Battery low! Please charge your headset."),
+                    false,
+                    "battery_low"
+                );
             }
         } else if (strStatus === "BATTERY_CHARGING" || valueBatteryNum > threshold) {
             this._batteryLowNotified = false;
-            this._removeNotification();
+            this._removeNotification("battery_low");
         }
     }
 
