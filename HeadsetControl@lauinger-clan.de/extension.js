@@ -399,24 +399,26 @@ const HeadsetControlMenuToggle = GObject.registerClass(
         }
 
         _changeColor(strvalueBattery, valueBattery_num) {
-            const colorR = this._settings.get_string("color-batterylow");
-            const colorY = this._settings.get_string("color-batterymedium");
-            const colorG = this._settings.get_string("color-batteryhigh");
+            const colorLow = this._settings.get_string("color-batterylow");
+            const colorMedium = this._settings.get_string("color-batterymedium");
+            const colorHigh = this._settings.get_string("color-batteryhigh");
 
             if (!this._settings.get_boolean("use-colors") || strvalueBattery === "N/A") {
                 this._menuButton.set_style(this._originalStyle);
                 return false;
             }
             this._logOutput("_changeColor valueBattery_num: " + valueBattery_num);
-            if (valueBattery_num >= 51) {
-                this._menuButton.set_style("color: " + colorG + ";");
-                this._logOutput("_changeColor: " + colorG);
-            } else if (valueBattery_num >= 26) {
-                this._menuButton.set_style("color: " + colorY + ";");
-                this._logOutput("_changeColor: " + colorY);
+            const thresholdMedium = 50;
+            const thresholdLow = 25;
+            if (valueBattery_num > thresholdMedium) {
+                this._menuButton.set_style("color: " + colorHigh + ";");
+                this._logOutput("_changeColor: " + colorHigh);
+            } else if (valueBattery_num > thresholdLow) {
+                this._menuButton.set_style("color: " + colorMedium + ";");
+                this._logOutput("_changeColor: " + colorMedium);
             } else {
-                this._menuButton.set_style("color: " + colorR + ";");
-                this._logOutput("_changeColor: " + colorR);
+                this._menuButton.set_style("color: " + colorLow + ";");
+                this._logOutput("_changeColor: " + colorLow);
             }
             return true;
         }
@@ -472,14 +474,14 @@ const HeadsetControlIndicator = GObject.registerClass(
         updateLabel() {
             if (this._indicatorLabel) {
                 this._indicatorLabel.set_style(this._headsetControlMenuToggle.menuButtonStyle);
-                const battery_num = this._headsetControlMenuToggle.valueBatteryNum;
-                if (battery_num < 0) {
+                const batteryNum = this._headsetControlMenuToggle.valueBatteryNum;
+                if (batteryNum < 0) {
                     this._indicatorLabel.set_text("N/A");
                     return;
                 }
                 // Add "+" if charging
                 const isCharging = this._headsetControlMenuToggle.valueBatteryStatus === "BATTERY_CHARGING";
-                this._indicatorLabel.set_text(`${isCharging ? "+" : ""}${battery_num}%`);
+                this._indicatorLabel.set_text(`${isCharging ? "+" : ""}${batteryNum}%`);
             }
         }
 
