@@ -481,7 +481,9 @@ const HeadsetControlIndicator = GObject.registerClass(
                 }
                 // Add "+" if charging
                 const isCharging = this._headsetControlMenuToggle.valueBatteryStatus === "BATTERY_CHARGING";
-                this._indicatorLabel.set_text(`${isCharging ? "+" : ""}${batteryNum}%`);
+                // \u26A1 is the flash, \uFE0E forces the monochrome text representation
+                const lightning = "\u26A1\uFE0E";
+                this._indicatorLabel.set_text(`${isCharging ? lightning : ""}${batteryNum}%`);
             }
         }
 
