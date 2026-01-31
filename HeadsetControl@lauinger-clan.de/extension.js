@@ -193,7 +193,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this.menu._settingsActions[extension.uuid] = settingsItem;
         }
 
-        updateBatteryStatus(strStatus, strBattery, lngBattery) {
+        updateBatteryStatus(strStatus, strBattery, lngBattery, timeToEmptyHours) {
             if (capabilities.battery) {
                 this._valueBatteryNum = lngBattery;
                 this._valueBatteryStatus = strStatus;
@@ -204,7 +204,12 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 if (strStatus === "BATTERY_CHARGING") {
                     this._valueBattery = _("Charging...");
                 } else {
-                    this._valueBattery = _("Charge") + ": " + strBattery;
+                    // Append time-to-empty in hours if available
+                    const hoursSuffix =
+                        typeof timeToEmptyHours === "number" && Number.isFinite(timeToEmptyHours)
+                            ? ` (${timeToEmptyHours}h)`
+                            : "";
+                    this._valueBattery = strBattery + " " + _("Charge") + hoursSuffix;
                 }
             }
         }
@@ -242,22 +247,43 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             }
         }
 
+        _getMenuIconName() {
+            let iconName = "audio-headset-symbolic";
+            if (this._valueBatteryStatus === "BATTERY_CHARGING") {
+                iconName = "battery-charging-symbolic";
+            }
+            if (this._valueBatteryStatus === "BATTERY_AVAILABLE") {
+                const thresholdMedium = 50;
+                const thresholdLow = 25;
+                if (this._valueBatteryNum > thresholdMedium) {
+                    iconName = "battery-full-symbolic";
+                } else if (this._valueBatteryNum > thresholdLow) {
+                    iconName = "battery-good-symbolic";
+                } else {
+                    iconName = "battery-low-symbolic";
+                }
+            }
+            const iconTheme = new St.IconTheme();
+            if (iconTheme.has_icon(iconName)) {
+                return iconName;
+            }
+            return "audio-headset-symbolic";
+        }
+
         setMenuHeader() {
+            const iconName = this._getMenuIconName();
+            this._logOutput("setMenuHeader iconName: " + iconName);
             if (capabilities.battery && capabilities.chatmix) {
-                this.menu.setHeader(
-                    "audio-headset-symbolic",
-                    this._valueHeadsetname,
-                    this._valueBattery + " " + this._valueChatMix
-                );
+                this.menu.setHeader(iconName, this._valueHeadsetname, this._valueBattery + " " + this._valueChatMix);
                 this._logOutput("setMenuHeader: Battery and Chatmix");
             } else if (capabilities.battery) {
-                this.menu.setHeader("audio-headset-symbolic", this._valueHeadsetname, this._valueBattery);
+                this.menu.setHeader(iconName, this._valueHeadsetname, this._valueBattery);
                 this._logOutput("setMenuHeader: Battery");
             } else if (capabilities.chatmix) {
-                this.menu.setHeader("audio-headset-symbolic", this._valueHeadsetname, this._valueChatMix);
+                this.menu.setHeader(iconName, this._valueHeadsetname, this._valueChatMix);
                 this._logOutput("setMenuHeader: Chatmix");
             } else {
-                this.menu.setHeader("audio-headset-symbolic", _("HeadsetControl"), this._valueHeadsetname);
+                this.menu.setHeader(iconName, _("HeadsetControl"), this._valueHeadsetname);
                 this._logOutput("setMenuHeader: Headsetname");
             }
             this._changeColor(this._valueBattery, this._valueBatteryNum);
@@ -669,10 +695,16 @@ export default class HeadsetControl extends Extension {
                     this._headsetControlIndicator.headsetControlMenuToggle.refreshMenu(this);
                 }
                 this._headsetControlIndicator.headsetControlMenuToggle.updateHeadsetName(headsetname);
+                let timeToEmptyHours = null;
+                if ("time_to_empty_min" in output.devices[0].battery) {
+                    // input is minutes; convert to whole hours
+                    timeToEmptyHours = Math.floor(output.devices[0].battery.time_to_empty_min / 60);
+                }
                 this._headsetControlIndicator.headsetControlMenuToggle.updateBatteryStatus(
                     output.devices[0].battery.status,
                     output.devices[0].battery.level + "%",
-                    output.devices[0].battery.level
+                    output.devices[0].battery.level,
+                    timeToEmptyHours
                 );
                 this._headsetControlIndicator.headsetControlMenuToggle.updateChatMixStatus(output.devices[0].chatmix);
                 this._headsetControlIndicator.updateUIElements();
@@ -782,7 +814,8 @@ export default class HeadsetControl extends Extension {
         this._headsetControlIndicator.headsetControlMenuToggle.updateBatteryStatus(
             "N/A",
             strBattery,
-            strBattery.replace("%", "")
+            strBattery.replace("%", ""),
+            null
         );
         return true;
     }
