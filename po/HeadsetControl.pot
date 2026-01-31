@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-31 12:21+0100\n"
+"POT-Creation-Date: 2026-01-31 12:50+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -193,7 +193,7 @@ msgid "Preset 3"
 msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:262
-#: HeadsetControl@lauinger-clan.de/prefs.js:275
+#: HeadsetControl@lauinger-clan.de/prefs.js:277
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:306
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:399
 msgid "Value for Off"
@@ -219,52 +219,52 @@ msgstr ""
 msgid "Value for Maximum"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:276
+#: HeadsetControl@lauinger-clan.de/prefs.js:278
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:415
 msgid "Value 1"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:277
+#: HeadsetControl@lauinger-clan.de/prefs.js:279
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:431
 msgid "Value 2"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:278
+#: HeadsetControl@lauinger-clan.de/prefs.js:280
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:447
 msgid "Value 3"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:279
+#: HeadsetControl@lauinger-clan.de/prefs.js:281
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:463
 msgid "Value 4"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:280
+#: HeadsetControl@lauinger-clan.de/prefs.js:282
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:479
 msgid "Value 5"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:281
+#: HeadsetControl@lauinger-clan.de/prefs.js:283
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:495
 msgid "Value 6"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:282
+#: HeadsetControl@lauinger-clan.de/prefs.js:284
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:511
 msgid "Value 7"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:283
+#: HeadsetControl@lauinger-clan.de/prefs.js:285
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:527
 msgid "Value 8"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:284
+#: HeadsetControl@lauinger-clan.de/prefs.js:286
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:543
 msgid "Value 9"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:285
+#: HeadsetControl@lauinger-clan.de/prefs.js:287
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:559
 msgid "Value 10"
 msgstr ""
