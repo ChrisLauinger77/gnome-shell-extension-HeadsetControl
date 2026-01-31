@@ -385,5 +385,196 @@
         </child>
       </object>
     </child>
+
+    <child>
+      <object class="AdwPreferencesGroup" id="HeadsetControl_group_inactivetime">
+        <property name="title" translatable="yes">Inactive Time</property>
+        <child>
+          <object class="AdwExpanderRow" id="HeadsetControl_row_inactivetime">
+            <property name="title" translatable="yes">Values for inactive time</property>
+            <property name="subtitle" translatable="yes">Values are used with parameter '-i' (-1 disable)</property>
+            <property name="tooltip-text" translatable="yes">Values are used with parameter '-i' (-1 disable)</property>
+            <child>
+              <object class="AdwSpinRow" id="HeadsetControl_row_inactivetime1">
+                <property name="title" translatable="yes">Value for Off</property>
+                <property name="subtitle" translatable="yes">Input for headsetcontrol inactive time command</property>
+                <property name="tooltip-text" translatable="yes">-1 to disable</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">-1</property>
+                    <property name="upper">90</property>
+                    <property name="value">0</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">10</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="HeadsetControl_row_inactivetime2">
+                <property name="title" translatable="yes">Value 1</property>
+                <property name="subtitle" translatable="yes">Input for headsetcontrol inactive time command</property>
+                <property name="tooltip-text" translatable="yes">-1 to disable</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">-1</property>
+                    <property name="upper">90</property>
+                    <property name="value">1</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">10</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="HeadsetControl_row_inactivetime3">
+                <property name="title" translatable="yes">Value 2</property>
+                <property name="subtitle" translatable="yes">Input for headsetcontrol inactive time command</property>
+                <property name="tooltip-text" translatable="yes">-1 to disable</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">-1</property>
+                    <property name="upper">90</property>
+                    <property name="value">2</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">10</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="HeadsetControl_row_inactivetime4">
+                <property name="title" translatable="yes">Value 3</property>
+                <property name="subtitle" translatable="yes">Input for headsetcontrol inactive time command</property>
+                <property name="tooltip-text" translatable="yes">-1 to disable</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">-1</property>
+                    <property name="upper">90</property>
+                    <property name="value">5</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">10</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="HeadsetControl_row_inactivetime5">
+                <property name="title" translatable="yes">Value 4</property>
+                <property name="subtitle" translatable="yes">Input for headsetcontrol inactive time command</property>
+                <property name="tooltip-text" translatable="yes">-1 to disable</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">-1</property>
+                    <property name="upper">90</property>
+                    <property name="value">10</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">10</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="HeadsetControl_row_inactivetime6">
+                <property name="title" translatable="yes">Value 5</property>
+                <property name="subtitle" translatable="yes">Input for headsetcontrol inactive time command</property>
+                <property name="tooltip-text" translatable="yes">-1 to disable</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">-1</property>
+                    <property name="upper">90</property>
+                    <property name="value">15</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">10</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="HeadsetControl_row_inactivetime7">
+                <property name="title" translatable="yes">Value 6</property>
+                <property name="subtitle" translatable="yes">Input for headsetcontrol inactive time command</property>
+                <property name="tooltip-text" translatable="yes">-1 to disable</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">-1</property>
+                    <property name="upper">90</property>
+                    <property name="value">30</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">10</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="HeadsetControl_row_inactivetime8">
+                <property name="title" translatable="yes">Value 7</property>
+                <property name="subtitle" translatable="yes">Input for headsetcontrol inactive time command</property>
+                <property name="tooltip-text" translatable="yes">-1 to disable</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">-1</property>
+                    <property name="upper">90</property>
+                    <property name="value">45</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">10</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="HeadsetControl_row_inactivetime9">
+                <property name="title" translatable="yes">Value 8</property>
+                <property name="subtitle" translatable="yes">Input for headsetcontrol inactive time command</property>
+                <property name="tooltip-text" translatable="yes">-1 to disable</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">-1</property>
+                    <property name="upper">90</property>
+                    <property name="value">60</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">10</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="HeadsetControl_row_inactivetime10">
+                <property name="title" translatable="yes">Value 9</property>
+                <property name="subtitle" translatable="yes">Input for headsetcontrol inactive time command</property>
+                <property name="tooltip-text" translatable="yes">-1 to disable</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">-1</property>
+                    <property name="upper">90</property>
+                    <property name="value">75</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">10</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="HeadsetControl_row_inactivetime11">
+                <property name="title" translatable="yes">Value 10</property>
+                <property name="subtitle" translatable="yes">Input for headsetcontrol inactive time command</property>
+                <property name="tooltip-text" translatable="yes">-1 to disable</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">-1</property>
+                    <property name="upper">90</property>
+                    <property name="value">90</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">10</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+
+
   </object>
 </interface>

@@ -68,6 +68,12 @@ export default class AdwPrefs extends ExtensionPreferences {
         this.getSettings().set_strv("sidetone-values", arraySidetone);
     }
 
+    _onITvaluechanged(adwrow, index) {
+        const arrayInactiveTime = this.getSettings().get_strv("inactivetime-values");
+        arrayInactiveTime[index] = adwrow.get_value().toString();
+        this.getSettings().set_strv("inactivetime-values", arrayInactiveTime);
+    }
+
     _onRIvaluechanged(adwrow) {
         const value = adwrow.get_value();
         this.getSettings().set_int("refreshinterval-systemindicator", value);
@@ -259,10 +265,33 @@ export default class AdwPrefs extends ExtensionPreferences {
             _("Value for High"),
             _("Value for Maximum"),
         ];
+        const arraySidetone = this.getSettings().get_strv("sidetone-values");
         for (const [index] of sidetoneLabels.entries()) {
             adwrow = builder.get_object("HeadsetControl_row_sidetone" + (index + 1));
             if (!adwrow) continue; // Prevent TypeError
+            adwrow.set_value(Number.parseInt(arraySidetone[index]) || 0);
             adwrow.connect("changed", this._onSTvaluechanged.bind(this, adwrow, index));
+        }
+        //inactive time
+        const inactiveTimeLabels = [
+            _("Value for Off"),
+            _("Value 1"),
+            _("Value 2"),
+            _("Value 3"),
+            _("Value 4"),
+            _("Value 5"),
+            _("Value 6"),
+            _("Value 7"),
+            _("Value 8"),
+            _("Value 9"),
+            _("Value 10"),
+        ];
+        const arrayInactiveTime = this.getSettings().get_strv("inactivetime-values");
+        for (const [index] of inactiveTimeLabels.entries()) {
+            adwrow = builder.get_object("HeadsetControl_row_inactivetime" + (index + 1));
+            if (!adwrow) continue; // Prevent TypeError
+            adwrow.set_value(Number.parseInt(arrayInactiveTime[index]) || 0);
+            adwrow.connect("changed", this._onITvaluechanged.bind(this, adwrow, index));
         }
         window.add(page2);
     }

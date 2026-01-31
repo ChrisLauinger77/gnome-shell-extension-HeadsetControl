@@ -359,16 +359,21 @@ const HeadsetControlMenuToggle = GObject.registerClass(
         }
 
         _addInactivetimeMenu(popupMenuExpander) {
+            const arrayInactiveTime = this._settings.get_strv("inactivetime-values");
             const inacitetimeValues = [
-                [_("Off"), "0"],
-                [_("05 minutes"), "05"],
-                [_("15 minutes"), "15"],
-                [_("30 minutes"), "30"],
-                [_("45 minutes"), "45"],
-                [_("60 minutes"), "60"],
-                [_("75 minutes"), "75"],
-                [_("90 minutes"), "90"],
-            ];
+                [_("Off"), arrayInactiveTime[0]],
+                [arrayInactiveTime[1] + _(" Minute"), arrayInactiveTime[1]],
+                [arrayInactiveTime[2] + _(" Minutes"), arrayInactiveTime[2]],
+                [arrayInactiveTime[3] + _(" Minutes"), arrayInactiveTime[3]],
+                [arrayInactiveTime[4] + _(" Minutes"), arrayInactiveTime[4]],
+                [arrayInactiveTime[5] + _(" Minutes"), arrayInactiveTime[5]],
+                [arrayInactiveTime[6] + _(" Minutes"), arrayInactiveTime[6]],
+                [arrayInactiveTime[7] + _(" Minutes"), arrayInactiveTime[7]],
+                [arrayInactiveTime[8] + _(" Minutes"), arrayInactiveTime[8]],
+                [arrayInactiveTime[9] + _(" Minutes"), arrayInactiveTime[9]],
+                [arrayInactiveTime[10] + _(" Minutes"), arrayInactiveTime[10]],
+            ].filter(([, value]) => value !== "-1");
+
             for (const item of inacitetimeValues) {
                 this._addPopupMenuItem(
                     popupMenuExpander,

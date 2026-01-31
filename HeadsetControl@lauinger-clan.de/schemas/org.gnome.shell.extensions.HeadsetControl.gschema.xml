@@ -130,5 +130,10 @@
       <summary>Usage of quicksettings toggle</summary>
       <description>Enum - 0 Systemindicator, 1 Notifications, 2 Logs, 3 Colors</description>
     </key>
+    <key name="inactivetime-values" type="as">
+      <default>['0', '1', '2', '5', '10', '15', '30', '45', '60', '75', '90']</default>
+      <summary>Inactive time values</summary>
+      <description>Used for inactive time values (-1 disable)</description>
+    </key>
   </schema>
 </schemalist>
