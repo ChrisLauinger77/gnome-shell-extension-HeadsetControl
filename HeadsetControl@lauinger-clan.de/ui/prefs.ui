@@ -405,7 +405,7 @@
                     <property name="upper">90</property>
                     <property name="value">0</property>
                     <property name="step-increment">1</property>
-                    <property name="page-increment">1</property>
+                    <property name="page-increment">10</property>
                   </object>
                 </property>
               </object>
@@ -421,7 +421,7 @@
                     <property name="upper">90</property>
                     <property name="value">1</property>
                     <property name="step-increment">1</property>
-                    <property name="page-increment">1</property>
+                    <property name="page-increment">10</property>
                   </object>
                 </property>
               </object>
@@ -437,7 +437,7 @@
                     <property name="upper">90</property>
                     <property name="value">2</property>
                     <property name="step-increment">1</property>
-                    <property name="page-increment">1</property>
+                    <property name="page-increment">10</property>
                   </object>
                 </property>
               </object>
@@ -453,7 +453,7 @@
                     <property name="upper">90</property>
                     <property name="value">5</property>
                     <property name="step-increment">1</property>
-                    <property name="page-increment">1</property>
+                    <property name="page-increment">10</property>
                   </object>
                 </property>
               </object>
@@ -469,7 +469,7 @@
                     <property name="upper">90</property>
                     <property name="value">10</property>
                     <property name="step-increment">1</property>
-                    <property name="page-increment">1</property>
+                    <property name="page-increment">10</property>
                   </object>
                 </property>
               </object>
@@ -485,7 +485,7 @@
                     <property name="upper">90</property>
                     <property name="value">15</property>
                     <property name="step-increment">1</property>
-                    <property name="page-increment">1</property>
+                    <property name="page-increment">10</property>
                   </object>
                 </property>
               </object>
@@ -501,7 +501,7 @@
                     <property name="upper">90</property>
                     <property name="value">30</property>
                     <property name="step-increment">1</property>
-                    <property name="page-increment">1</property>
+                    <property name="page-increment">10</property>
                   </object>
                 </property>
               </object>
@@ -517,7 +517,7 @@
                     <property name="upper">90</property>
                     <property name="value">45</property>
                     <property name="step-increment">1</property>
-                    <property name="page-increment">1</property>
+                    <property name="page-increment">10</property>
                   </object>
                 </property>
               </object>
@@ -533,7 +533,7 @@
                     <property name="upper">90</property>
                     <property name="value">60</property>
                     <property name="step-increment">1</property>
-                    <property name="page-increment">1</property>
+                    <property name="page-increment">10</property>
                   </object>
                 </property>
               </object>
@@ -549,7 +549,7 @@
                     <property name="upper">90</property>
                     <property name="value">75</property>
                     <property name="step-increment">1</property>
-                    <property name="page-increment">1</property>
+                    <property name="page-increment">10</property>
                   </object>
                 </property>
               </object>
@@ -565,7 +565,7 @@
                     <property name="upper">90</property>
                     <property name="value">90</property>
                     <property name="step-increment">1</property>
-                    <property name="page-increment">1</property>
+                    <property name="page-increment">10</property>
                   </object>
                 </property>
               </object>
