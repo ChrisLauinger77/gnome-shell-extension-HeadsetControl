@@ -68,6 +68,12 @@ export default class AdwPrefs extends ExtensionPreferences {
         this.getSettings().set_strv("sidetone-values", arraySidetone);
     }
 
+    _onITvaluechanged(adwrow, index) {
+        const arrayInactiveTime = this.getSettings().get_strv("inactive-time-values");
+        arrayInactiveTime[index] = adwrow.get_value().toString();
+        this.getSettings().set_strv("inactive-time-values", arrayInactiveTime);
+    }
+
     _onRIvaluechanged(adwrow) {
         const value = adwrow.get_value();
         this.getSettings().set_int("refreshinterval-systemindicator", value);
@@ -263,6 +269,24 @@ export default class AdwPrefs extends ExtensionPreferences {
             adwrow = builder.get_object("HeadsetControl_row_sidetone" + (index + 1));
             if (!adwrow) continue; // Prevent TypeError
             adwrow.connect("changed", this._onSTvaluechanged.bind(this, adwrow, index));
+        }
+        //inactive time
+        const inactiveTimeLabels = [
+            _("Value for Off"),
+            _("Value for 1 Minute"),
+            _("Value for 2 Minutes"),
+            _("Value for 5 Minutes"),
+            _("Value for 15 Minutes"),
+            _("Value for 30 Minutes"),
+            _("Value for 45 Minutes"),
+            _("Value for 60 Minutes"),
+            _("Value for 75 Minutes"),
+            _("Value for 90 Minutes"),
+        ];
+        for (const [index] of inactiveTimeLabels.entries()) {
+            adwrow = builder.get_object("HeadsetControl_row_inactivetime" + (index + 1));
+            if (!adwrow) continue; // Prevent TypeError
+            adwrow.connect("changed", this._onITvaluechanged.bind(this, adwrow, index));
         }
         window.add(page2);
     }
