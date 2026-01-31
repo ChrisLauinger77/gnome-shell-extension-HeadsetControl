@@ -273,15 +273,16 @@ export default class AdwPrefs extends ExtensionPreferences {
         //inactive time
         const inactiveTimeLabels = [
             _("Value for Off"),
-            _("Value for 1 Minute"),
-            _("Value for 2 Minutes"),
-            _("Value for 5 Minutes"),
-            _("Value for 15 Minutes"),
-            _("Value for 30 Minutes"),
-            _("Value for 45 Minutes"),
-            _("Value for 60 Minutes"),
-            _("Value for 75 Minutes"),
-            _("Value for 90 Minutes"),
+            _("Value 1"),
+            _("Value 2"),
+            _("Value 3"),
+            _("Value 4"),
+            _("Value 5"),
+            _("Value 6"),
+            _("Value 7"),
+            _("Value 8"),
+            _("Value 9"),
+            _("Value 10"),
         ];
         for (const [index] of inactiveTimeLabels.entries()) {
             adwrow = builder.get_object("HeadsetControl_row_inactivetime" + (index + 1));

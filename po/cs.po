@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-08 18:03+0100\n"
+"POT-Creation-Date: 2026-01-31 12:21+0100\n"
 "PO-Revision-Date: 2025-11-16 17:57+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
@@ -17,217 +17,257 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.6\n"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:76
-#: HeadsetControl@lauinger-clan.de/extension.js:87
-#: HeadsetControl@lauinger-clan.de/extension.js:90
-#: HeadsetControl@lauinger-clan.de/extension.js:259
-#: HeadsetControl@lauinger-clan.de/extension.js:517
+#: HeadsetControl@lauinger-clan.de/extension.js:77
+#: HeadsetControl@lauinger-clan.de/extension.js:88
+#: HeadsetControl@lauinger-clan.de/extension.js:91
+#: HeadsetControl@lauinger-clan.de/extension.js:286
+#: HeadsetControl@lauinger-clan.de/extension.js:1017
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:5
 msgid "HeadsetControl"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:127
-#: HeadsetControl@lauinger-clan.de/extension.js:206
+#: HeadsetControl@lauinger-clan.de/extension.js:128
+#: HeadsetControl@lauinger-clan.de/extension.js:212
 msgid "Charge"
 msgstr "Nabití"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:130
-#: HeadsetControl@lauinger-clan.de/extension.js:221
+#: HeadsetControl@lauinger-clan.de/extension.js:131
+#: HeadsetControl@lauinger-clan.de/extension.js:227
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:61
 msgid "Chat-Mix"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:135
+#: HeadsetControl@lauinger-clan.de/extension.js:136
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:74
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:298
 msgid "Sidetone"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:140
+#: HeadsetControl@lauinger-clan.de/extension.js:141
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:80
 msgid "LED"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:145
+#: HeadsetControl@lauinger-clan.de/extension.js:146
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:86
 msgid "Inactive time"
 msgstr "Doba nečinnosti"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:150
+#: HeadsetControl@lauinger-clan.de/extension.js:151
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:92
 msgid "Voice Prompts"
 msgstr "Hlasové pokyny"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:155
+#: HeadsetControl@lauinger-clan.de/extension.js:156
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:98
 msgid "Rotate to Mute"
 msgstr "Ztlumit otočením"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:160
+#: HeadsetControl@lauinger-clan.de/extension.js:161
 msgid "Equalizer Setting"
 msgstr "Nastavení ekvalizéru"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:165
+#: HeadsetControl@lauinger-clan.de/extension.js:166
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:110
 msgid "Equalizer Preset"
 msgstr "Předvolby ekvalizéru"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:187
+#: HeadsetControl@lauinger-clan.de/extension.js:188
 msgid "Settings"
 msgstr "Nastavení"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:200
+#: HeadsetControl@lauinger-clan.de/extension.js:201
 msgid "Disconnected"
 msgstr "Odpojeno"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:204
+#: HeadsetControl@lauinger-clan.de/extension.js:205
 msgid "Charging..."
 msgstr "Nabíjení..."
 
-#: HeadsetControl@lauinger-clan.de/extension.js:281
-#: HeadsetControl@lauinger-clan.de/extension.js:296
 #: HeadsetControl@lauinger-clan.de/extension.js:308
-#: HeadsetControl@lauinger-clan.de/extension.js:320
-#: HeadsetControl@lauinger-clan.de/extension.js:336
+#: HeadsetControl@lauinger-clan.de/extension.js:323
+#: HeadsetControl@lauinger-clan.de/extension.js:335
+#: HeadsetControl@lauinger-clan.de/extension.js:347
+#: HeadsetControl@lauinger-clan.de/extension.js:364
 msgid "Off"
 msgstr "Vypnuto"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:282
+#: HeadsetControl@lauinger-clan.de/extension.js:309
 msgid "Low"
 msgstr "Nízká"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:283
+#: HeadsetControl@lauinger-clan.de/extension.js:310
 msgid "Medium"
 msgstr "Střední"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:284
+#: HeadsetControl@lauinger-clan.de/extension.js:311
 msgid "High"
 msgstr "Vysoká"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:285
+#: HeadsetControl@lauinger-clan.de/extension.js:312
 msgid "Maximum"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:297
-#: HeadsetControl@lauinger-clan.de/extension.js:309
-#: HeadsetControl@lauinger-clan.de/extension.js:321
+#: HeadsetControl@lauinger-clan.de/extension.js:324
+#: HeadsetControl@lauinger-clan.de/extension.js:336
+#: HeadsetControl@lauinger-clan.de/extension.js:348
 msgid "On"
 msgstr "Zapnuto"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:337
-msgid "05 minutes"
-msgstr "05 minut"
+#: HeadsetControl@lauinger-clan.de/extension.js:365
+msgid " Minute"
+msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:338
-msgid "15 minutes"
-msgstr "15 minut"
+#: HeadsetControl@lauinger-clan.de/extension.js:366
+#: HeadsetControl@lauinger-clan.de/extension.js:367
+#: HeadsetControl@lauinger-clan.de/extension.js:368
+#: HeadsetControl@lauinger-clan.de/extension.js:369
+#: HeadsetControl@lauinger-clan.de/extension.js:370
+#: HeadsetControl@lauinger-clan.de/extension.js:371
+#: HeadsetControl@lauinger-clan.de/extension.js:372
+#: HeadsetControl@lauinger-clan.de/extension.js:373
+#: HeadsetControl@lauinger-clan.de/extension.js:374
+msgid " Minutes"
+msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:339
-msgid "30 minutes"
-msgstr "30 minut"
-
-#: HeadsetControl@lauinger-clan.de/extension.js:340
-msgid "45 minutes"
-msgstr "45 minut"
-
-#: HeadsetControl@lauinger-clan.de/extension.js:341
-msgid "60 minutes"
-msgstr "60 minut"
-
-#: HeadsetControl@lauinger-clan.de/extension.js:342
-msgid "75 minutes"
-msgstr "75 minut"
-
-#: HeadsetControl@lauinger-clan.de/extension.js:343
-msgid "90 minutes"
-msgstr "90 minut"
-
-#: HeadsetControl@lauinger-clan.de/extension.js:360
+#: HeadsetControl@lauinger-clan.de/extension.js:392
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:239
 msgid "Setting 1"
 msgstr "Nastavení 1"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:361
+#: HeadsetControl@lauinger-clan.de/extension.js:393
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:245
 msgid "Setting 2"
 msgstr "Nastavení 2"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:362
+#: HeadsetControl@lauinger-clan.de/extension.js:394
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:251
 msgid "Setting 3"
 msgstr "Nastavení 3"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:363
+#: HeadsetControl@lauinger-clan.de/extension.js:395
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:257
 msgid "Setting 4"
 msgstr "Nastavení 4"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:517
-msgid "Battery low! Please charge your headset."
-msgstr ""
-
-#: HeadsetControl@lauinger-clan.de/extension.js:824
-#: HeadsetControl@lauinger-clan.de/extension.js:846
+#: HeadsetControl@lauinger-clan.de/extension.js:861
+#: HeadsetControl@lauinger-clan.de/extension.js:887
 msgid "Refreshing..."
 msgstr "Obnovování..."
 
-#: HeadsetControl@lauinger-clan.de/extension.js:838
+#: HeadsetControl@lauinger-clan.de/extension.js:879
 msgid "Quicksettings open - refresh indicator running..."
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:843
+#: HeadsetControl@lauinger-clan.de/extension.js:884
 msgid "Quicksettings not open - do nothing..."
 msgstr "Rychlá nastavení nejsou otevřena - nedělat nic..."
 
+#: HeadsetControl@lauinger-clan.de/extension.js:1018
+msgid "Battery low! Please charge your headset."
+msgstr ""
+
 #: HeadsetControl@lauinger-clan.de/prefs.js:22
-#: HeadsetControl@lauinger-clan.de/prefs.js:98
+#: HeadsetControl@lauinger-clan.de/prefs.js:104
 msgid "Select headsetcontrol executable"
 msgstr "Vyberte headsetcontrol spustitelný soubor"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:245
+#: HeadsetControl@lauinger-clan.de/prefs.js:251
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:270
 msgid "Default"
 msgstr "Výchozí"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:245
+#: HeadsetControl@lauinger-clan.de/prefs.js:251
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:276
 msgid "Preset 1"
 msgstr "Předvolba 1"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:245
+#: HeadsetControl@lauinger-clan.de/prefs.js:251
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:282
 msgid "Preset 2"
 msgstr "Předvolba 2"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:245
+#: HeadsetControl@lauinger-clan.de/prefs.js:251
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:288
 msgid "Preset 3"
 msgstr "Předvolba 3"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:256
+#: HeadsetControl@lauinger-clan.de/prefs.js:262
+#: HeadsetControl@lauinger-clan.de/prefs.js:275
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:306
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:399
 msgid "Value for Off"
 msgstr "Hodnota pro Vypnuto"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:257
+#: HeadsetControl@lauinger-clan.de/prefs.js:263
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:322
 msgid "Value for Low"
 msgstr "Hodnota pro Nzká"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:258
+#: HeadsetControl@lauinger-clan.de/prefs.js:264
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:338
 msgid "Value for Medium"
 msgstr "Hodnota pro Střední"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:259
+#: HeadsetControl@lauinger-clan.de/prefs.js:265
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:354
 msgid "Value for High"
 msgstr "Hodnota pro Vysoká"
 
-#: HeadsetControl@lauinger-clan.de/prefs.js:260
+#: HeadsetControl@lauinger-clan.de/prefs.js:266
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:370
 msgid "Value for Maximum"
 msgstr "Hodnota pro Maximální"
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:276
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:415
+msgid "Value 1"
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:277
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:431
+msgid "Value 2"
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:278
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:447
+msgid "Value 3"
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:279
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:463
+msgid "Value 4"
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:280
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:479
+msgid "Value 5"
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:281
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:495
+msgid "Value 6"
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:282
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:511
+msgid "Value 7"
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:283
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:527
+msgid "Value 8"
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:284
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:543
+msgid "Value 9"
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/prefs.js:285
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:559
+msgid "Value 10"
+msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:6
 msgid "Path to executable"
@@ -482,6 +522,14 @@ msgstr ""
 msgid "Enum - 0 Systemindicator, 1 Notifications, 2 Logs, 3 Colors"
 msgstr ""
 
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:135
+msgid "Inactive time values"
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:136
+msgid "Used for inactive time values (-1 disable)"
+msgstr ""
+
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:9
 msgid "Global"
 msgstr "Globální"
@@ -642,5 +690,43 @@ msgstr "Vstup pro příkaz sidetone ovládání sluchátek"
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:340
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:356
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:372
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:401
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:417
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:433
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:449
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:465
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:481
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:497
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:513
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:529
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:545
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:561
 msgid "-1 to disable"
 msgstr "-1 pro zakázání"
+
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:391
+msgid "Inactive Time"
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:394
+msgid "Values for inactive time"
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:395
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:396
+msgid "Values are used with parameter '-i' (-1 disable)"
+msgstr ""
+
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:400
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:416
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:432
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:448
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:464
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:480
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:496
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:512
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:528
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:544
+#: HeadsetControl@lauinger-clan.de/ui/prefs.ui:560
+msgid "Input for headsetcontrol inactive time command"
+msgstr ""

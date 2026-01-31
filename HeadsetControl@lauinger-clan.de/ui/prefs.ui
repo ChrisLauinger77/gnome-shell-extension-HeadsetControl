@@ -412,7 +412,7 @@
             </child>
             <child>
               <object class="AdwSpinRow" id="HeadsetControl_row_inactivetime2">
-                <property name="title" translatable="yes">Value for 1 Minute</property>
+                <property name="title" translatable="yes">Value 1</property>
                 <property name="subtitle" translatable="yes">Input for headsetcontrol inactive time command</property>
                 <property name="tooltip-text" translatable="yes">-1 to disable</property>
                 <property name="adjustment">
@@ -428,7 +428,7 @@
             </child>
             <child>
               <object class="AdwSpinRow" id="HeadsetControl_row_inactivetime3">
-                <property name="title" translatable="yes">Value for 2 Minutes</property>
+                <property name="title" translatable="yes">Value 2</property>
                 <property name="subtitle" translatable="yes">Input for headsetcontrol inactive time command</property>
                 <property name="tooltip-text" translatable="yes">-1 to disable</property>
                 <property name="adjustment">
@@ -444,7 +444,7 @@
             </child>
             <child>
               <object class="AdwSpinRow" id="HeadsetControl_row_inactivetime4">
-                <property name="title" translatable="yes">Value for 5 Minutes</property>
+                <property name="title" translatable="yes">Value 3</property>
                 <property name="subtitle" translatable="yes">Input for headsetcontrol inactive time command</property>
                 <property name="tooltip-text" translatable="yes">-1 to disable</property>
                 <property name="adjustment">
@@ -460,7 +460,7 @@
             </child>
             <child>
               <object class="AdwSpinRow" id="HeadsetControl_row_inactivetime5">
-                <property name="title" translatable="yes">Value for 10 Minutes</property>
+                <property name="title" translatable="yes">Value 4</property>
                 <property name="subtitle" translatable="yes">Input for headsetcontrol inactive time command</property>
                 <property name="tooltip-text" translatable="yes">-1 to disable</property>
                 <property name="adjustment">
@@ -476,7 +476,7 @@
             </child>
             <child>
               <object class="AdwSpinRow" id="HeadsetControl_row_inactivetime6">
-                <property name="title" translatable="yes">Value for 15 Minutes</property>
+                <property name="title" translatable="yes">Value 5</property>
                 <property name="subtitle" translatable="yes">Input for headsetcontrol inactive time command</property>
                 <property name="tooltip-text" translatable="yes">-1 to disable</property>
                 <property name="adjustment">
@@ -492,7 +492,7 @@
             </child>
             <child>
               <object class="AdwSpinRow" id="HeadsetControl_row_inactivetime7">
-                <property name="title" translatable="yes">Value for 30 Minutes</property>
+                <property name="title" translatable="yes">Value 6</property>
                 <property name="subtitle" translatable="yes">Input for headsetcontrol inactive time command</property>
                 <property name="tooltip-text" translatable="yes">-1 to disable</property>
                 <property name="adjustment">
@@ -508,7 +508,7 @@
             </child>
             <child>
               <object class="AdwSpinRow" id="HeadsetControl_row_inactivetime8">
-                <property name="title" translatable="yes">Value for 45 Minutes</property>
+                <property name="title" translatable="yes">Value 7</property>
                 <property name="subtitle" translatable="yes">Input for headsetcontrol inactive time command</property>
                 <property name="tooltip-text" translatable="yes">-1 to disable</property>
                 <property name="adjustment">
@@ -524,7 +524,7 @@
             </child>
             <child>
               <object class="AdwSpinRow" id="HeadsetControl_row_inactivetime9">
-                <property name="title" translatable="yes">Value for 60 Minutes</property>
+                <property name="title" translatable="yes">Value 8</property>
                 <property name="subtitle" translatable="yes">Input for headsetcontrol inactive time command</property>
                 <property name="tooltip-text" translatable="yes">-1 to disable</property>
                 <property name="adjustment">
@@ -540,7 +540,7 @@
             </child>
             <child>
               <object class="AdwSpinRow" id="HeadsetControl_row_inactivetime10">
-                <property name="title" translatable="yes">Value for 75 Minutes</property>
+                <property name="title" translatable="yes">Value 9</property>
                 <property name="subtitle" translatable="yes">Input for headsetcontrol inactive time command</property>
                 <property name="tooltip-text" translatable="yes">-1 to disable</property>
                 <property name="adjustment">
@@ -556,7 +556,7 @@
             </child>
             <child>
               <object class="AdwSpinRow" id="HeadsetControl_row_inactivetime11">
-                <property name="title" translatable="yes">Value for 90 Minutes</property>
+                <property name="title" translatable="yes">Value 10</property>
                 <property name="subtitle" translatable="yes">Input for headsetcontrol inactive time command</property>
                 <property name="tooltip-text" translatable="yes">-1 to disable</property>
                 <property name="adjustment">
