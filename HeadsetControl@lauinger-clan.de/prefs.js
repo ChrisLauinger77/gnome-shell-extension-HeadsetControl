@@ -69,9 +69,9 @@ export default class AdwPrefs extends ExtensionPreferences {
     }
 
     _onITvaluechanged(adwrow, index) {
-        const arrayInactiveTime = this.getSettings().get_strv("inactive-time-values");
+        const arrayInactiveTime = this.getSettings().get_strv("inactivetime-values");
         arrayInactiveTime[index] = adwrow.get_value().toString();
-        this.getSettings().set_strv("inactive-time-values", arrayInactiveTime);
+        this.getSettings().set_strv("inactivetime-values", arrayInactiveTime);
     }
 
     _onRIvaluechanged(adwrow) {
