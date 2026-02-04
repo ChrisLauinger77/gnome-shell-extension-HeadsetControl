@@ -3,12 +3,13 @@
     "gettext-domain": "HeadsetControl",
     "description": "Gnome Shell Extension to visualize headset status from HeadsetControl (https://github.com/Sapd/HeadsetControl) command line tool.\nSupported capabilities can also be controlled like ChatMix, Sidetone, Equalizer etc.",
     "uuid": "HeadsetControl@lauinger-clan.de",
-    "shell-version": ["48", "49"],
+    "shell-version": ["48", "49", "50"],
     "url": "https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl",
     "settings-schema": "org.gnome.shell.extensions.HeadsetControl",
     "donations": {
         "github": "ChrisLauinger77",
         "paypal": "ChrisLauinger"
     },
-    "version-name": "49.9"
+    "version": 999,
+    "version-name": "50.0"
 }
