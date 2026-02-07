@@ -249,25 +249,31 @@ const HeadsetControlMenuToggle = GObject.registerClass(
 
         _getMenuIconName() {
             let iconName = "audio-headset-symbolic";
-            if (this._valueBatteryStatus === "BATTERY_CHARGING") {
-                iconName = "battery-charging-symbolic";
-            }
-            if (this._valueBatteryStatus === "BATTERY_AVAILABLE") {
-                const thresholdMedium = 50;
-                const thresholdLow = 25;
-                if (this._valueBatteryNum > thresholdMedium) {
-                    iconName = "battery-full-symbolic";
-                } else if (this._valueBatteryNum > thresholdLow) {
-                    iconName = "battery-good-symbolic";
-                } else {
-                    iconName = "battery-low-symbolic";
+            if (capabilities.battery) {
+                if (this._valueBatteryStatus === "BATTERY_CHARGING") {
+                    iconName = "battery-charging-symbolic";
                 }
-            }
-            const iconTheme = new St.IconTheme();
-            if (iconTheme.has_icon(iconName)) {
+                if (this._valueBatteryStatus === "BATTERY_AVAILABLE") {
+                    const thresholdMedium = 50;
+                    const thresholdLow = 25;
+                    const thresholdCritical = 10;
+                    if (this._valueBatteryNum > thresholdMedium) {
+                        iconName = "battery-full-symbolic";
+                    } else if (this._valueBatteryNum > thresholdLow) {
+                        iconName = "battery-good-symbolic";
+                    } else if (this._valueBatteryNum > thresholdCritical) {
+                        iconName = "battery-low-symbolic";
+                    } else {
+                        iconName = "battery-caution-symbolic";
+                    }
+                }
+                const iconTheme = new St.IconTheme();
+                if (iconTheme.has_icon(iconName)) {
+                    return iconName;
+                }
+            } else {
                 return iconName;
             }
-            return "audio-headset-symbolic";
         }
 
         setMenuHeader() {
