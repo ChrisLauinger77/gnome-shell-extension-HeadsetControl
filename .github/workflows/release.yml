@@ -1,0 +1,64 @@
+name: Release Extension
+
+on:
+    push:
+        tags:
+            - "v*" # Reacts to v48.1, v49.0, etc.
+    workflow_dispatch:
+        inputs:
+            do_ego_upload:
+                description: "Manual upload to EGO?"
+                type: boolean
+                default: false
+
+jobs:
+    release:
+        runs-on: ubuntu-latest
+        container:
+            image: ubuntu:25.10
+        env:
+            # Elegant: We check for manual input OR the tag pattern to decide on EGO upload
+            SHOULD_UPLOAD: ${{ github.event.inputs.do_ego_upload == 'true' || startsWith(github.ref, 'refs/tags/v') }}
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Install dependencies
+              run: |
+                  apt-get update
+                  apt-get install -y gnome-shell gnome-shell-extensions gettext zip unzip libglib2.0-dev dbus
+
+            - name: Build extension
+              run: |
+                  set -e
+                  dbus-run-session -- ./headsetcontrol.sh zip
+
+            - name: Verify Build Output
+              run: |
+                  if [ ! -f HeadsetControl@lauinger-clan.de.shell-extension.zip ]; then
+                    echo "Build failed! Extension ZIP file missing."
+                    exit 1
+                  fi
+
+            - name: Create GitHub Release
+              if: startsWith(github.ref, 'refs/tags/v')
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  # Uses the logic from the release.yml above to generate release notes based on PR labels
+                  gh release create ${{ github.ref_name }} \
+                    --generate-notes \
+                    ./HeadsetControl@lauinger-clan.de.shell-extension.zip
+
+            - name: EGO Upload
+              if: env.SHOULD_UPLOAD == 'true'
+              env:
+                  EGO_USER: ${{ secrets.EGO_USER }}
+                  EGO_PASSWORD: ${{ secrets.EGO_PASSWORD }}
+              run: |
+                  dbus-run-session -- gnome-extensions upload \
+                    --accept-tos \
+                    --user="$EGO_USER" \
+                    --password="$EGO_PASSWORD" \
+                    ./HeadsetControl@lauinger-clan.de.shell-extension.zip
