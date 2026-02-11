@@ -270,10 +270,11 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 const iconTheme = new St.IconTheme();
                 if (iconTheme.has_icon(iconName)) {
                     return iconName;
+                } else {
+                    iconName = "audio-headset-symbolic";
                 }
-            } else {
-                return iconName;
             }
+            return iconName; // fallback to default icon if specific battery icon is not available
         }
 
         setMenuHeader() {
