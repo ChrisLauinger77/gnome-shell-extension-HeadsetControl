@@ -14,8 +14,6 @@ on:
 jobs:
     release:
         runs-on: ubuntu-latest
-        container:
-            image: ubuntu:25.10
         env:
             # Elegant: We check for manual input OR the tag pattern to decide on EGO upload
             SHOULD_UPLOAD: ${{ github.event.inputs.do_ego_upload == 'true' || startsWith(github.ref, 'refs/tags/v') }}
@@ -26,8 +24,8 @@ jobs:
 
             - name: Install dependencies
               run: |
-                  apt-get update
-                  apt-get install -y gnome-shell gnome-shell-extensions gettext zip unzip libglib2.0-dev dbus
+                  sudo apt-get update
+                  sudo apt-get install -y gnome-shell gnome-shell-extensions gettext zip unzip libglib2.0-dev dbus
 
             - name: Build extension
               run: |
