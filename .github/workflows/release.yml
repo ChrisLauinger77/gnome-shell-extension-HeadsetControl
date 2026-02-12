@@ -50,7 +50,7 @@ jobs:
                     ./HeadsetControl@lauinger-clan.de.shell-extension.zip
 
             - name: EGO Upload
-              if: env.SHOULD_UPLOAD =='true'
+              if: env.SHOULD_UPLOAD == 'true'
               uses: fire-man-x/gnome-shell-extension-uploader@v1
               with:
                   # Using your secret names: EGO_USER and EGO_PASSWORD
