@@ -40,7 +40,7 @@ const headsetcontrolCommands = {
 
 const rgbToHex = (r, g, b) => "#" + [r, g, b].map((x) => x.toString(16).padStart(2, "0")).join("");
 
-async function invokeCmd(cmd, logger) {
+async function invokeCmd(cmd) {
     const flags = Gio.SubprocessFlags.STDOUT_PIPE;
     const [, argv] = GLib.shell_parse_argv(cmd);
     const proc = new Gio.Subprocess({ argv, flags });
@@ -52,7 +52,7 @@ async function invokeCmd(cmd, logger) {
                     const [, stdoutFinish] = subprocess.communicate_utf8_finish(res);
                     resolve(stdoutFinish);
                 } catch (err) {
-                    logger.error(`Error executing command: ${err.message}`);
+                    console.error(`Error executing command: ${err.message}`);
                     reject(err);
                 }
             });
@@ -65,7 +65,7 @@ async function invokeCmd(cmd, logger) {
         }
     } catch (err) {
         // could not execute the command
-        logger.error(err);
+        console.error(err);
         return "N/A";
     }
 }
@@ -79,7 +79,6 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 iconName: "audio-headset-symbolic",
                 toggleMode: true,
             });
-            this._logger = Me.getLogger();
             this._useLogging = Me._useLogging;
             this._settings = _settings;
             this._valueBatteryStatus = "";
@@ -120,7 +119,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
 
         _logOutput(strText) {
             if (this._useLogging) {
-                this._logger.log(strText);
+                console.log(strText);
             }
         }
 
@@ -263,7 +262,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
 
         async _invokeCmd(cmd) {
             this._logOutput("_invokeCmd: " + cmd);
-            const retval = await invokeCmd(cmd, this._logger);
+            const retval = await invokeCmd(cmd);
             this._logOutput("_invokeCmd retval: " + retval);
             return retval;
         }
@@ -514,13 +513,13 @@ export default class HeadsetControl extends Extension {
 
     _logOutput(strText) {
         if (this._useLogging) {
-            this.getLogger().log(strText);
+            console.log(strText);
         }
     }
 
     async _invokeCmd(cmd) {
         this._logOutput("_invokeCmd: " + cmd);
-        const retval = await invokeCmd(cmd, this.getLogger());
+        const retval = await invokeCmd(cmd);
         this._logOutput("_invokeCmd retval: " + retval);
         return retval;
     }
@@ -601,7 +600,7 @@ export default class HeadsetControl extends Extension {
             return JSON.parse(strOutput);
         } catch (err) {
             // could not parse JSON
-            this.getLogger().error(err);
+            console.error(err);
             return "";
         }
     }
@@ -710,7 +709,7 @@ export default class HeadsetControl extends Extension {
             this._processOutput(output, true);
             this._logOutput("JSON refresh completed successfully");
         } catch (error) {
-            this.getLogger().error("_refreshJSON error:", error);
+            console.error("_refreshJSON error:", error);
             this._logOutput(`JSON refresh failed: ${error.message}`);
             this._JSONoutputSupported = false;
             // Fallback to non-JSON method
