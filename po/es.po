@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-07 09:49+0100\n"
-"PO-Revision-Date: 2025-11-16 19:26+0100\n"
+"PO-Revision-Date: 2026-03-05 17:22+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -30,7 +30,7 @@ msgstr "HeadsetControl"
 #: HeadsetControl@lauinger-clan.de/extension.js:128
 #: HeadsetControl@lauinger-clan.de/extension.js:212
 msgid "Charge"
-msgstr "Cargar"
+msgstr "Carga"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:131
 #: HeadsetControl@lauinger-clan.de/extension.js:227
