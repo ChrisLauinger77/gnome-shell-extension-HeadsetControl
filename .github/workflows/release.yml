@@ -20,7 +20,7 @@ jobs:
 
         steps:
             - name: Checkout code
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
 
             - name: Install dependencies
               run: |
@@ -41,7 +41,7 @@ jobs:
 
             - name: Upload Build Artifact (Manual Runs)
               if: github.event_name == 'workflow_dispatch'
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                   name: extension-build
                   path: ./HeadsetControl@lauinger-clan.de.shell-extension.zip
