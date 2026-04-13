@@ -1,5 +1,11 @@
 # gnome-shell-extension-HeadsetControl
 
+<div align="center">
+
+![Gnome Extensions Downloads](https://img.shields.io/gnome-extensions/dt/HeadsetControl@lauinger-clan.de) ![GNOME Shell](https://img.shields.io/badge/GNOME-42%20--%2050-blue?logo=gnome&logoColor=white) ![GitHub License](https://img.shields.io/github/license/ChrisLauinger77/gnome-shell-extension-HeadsetControl)
+
+</div>
+
 Gnome Shell Extension to visualize headset status from HeadsetControl (https://github.com/Sapd/HeadsetControl) command line tool.
 
 Supported capabilities can also be controlled like ChatMix, Sidetone, Equalizer etc.
