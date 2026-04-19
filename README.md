@@ -6,7 +6,8 @@
 
 </div>
 
-Gnome Shell Extension to visualize headset status from HeadsetControl (https://github.com/Sapd/HeadsetControl) command line tool.
+Gnome Shell Extension to visualize headset status from HeadsetControl (https://github.com/Sapd/HeadsetControl) command line tool.<br>
+For a list of supported headsets visit [here](https://github.com/Sapd/HeadsetControl?tab=readme-ov-file#supported-devices).
 
 Supported capabilities can also be controlled like ChatMix, Sidetone, Equalizer etc.
 
@@ -60,7 +61,7 @@ Pull requests are welcome.
 
 To update the translation files run
 `./headsetcontrol.sh translate` in the extensions directory after your code changes are finished. This will update the files in po folder.
-Then poedit (https://poedit.net/download) can be used to translate the strings. poedit can also be used to create new localization files.
+Then [Poedit](https://poedit.net/download) can be used to translate the strings. poedit can also be used to create new localization files.
 
 # Debugging
 
