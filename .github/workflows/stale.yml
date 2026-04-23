@@ -17,15 +17,15 @@ jobs:
             pull-requests: write
 
         steps:
-            - uses: actions/stale@v6
+            - uses: actions/stale@v10
               with:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
                   stale-issue-label: "stale"
                   stale-issue-message: "This issue is stale because it has been open for 30 days with no activity."
                   close-issue-message: "This issue was closed because it has been inactive for 14 days since being marked as stale."
-                  stale-pr-message: "Stale pull request message"
+                  stale-pr-message: "This pull request is stale because it has been open for 30 days with no activity."
                   stale-pr-label: "no-pr-activity"
-                  days-before-issue-stale: 21
-                  days-before-issue-close: 7
+                  days-before-issue-stale: 30
+                  days-before-issue-close: 14
                   days-before-pr-stale: -1
                   days-before-pr-close: -1
