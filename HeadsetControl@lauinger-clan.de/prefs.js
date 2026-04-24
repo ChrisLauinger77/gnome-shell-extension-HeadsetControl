@@ -246,17 +246,8 @@ export default class AdwPrefs extends ExtensionPreferences {
         }
         //equalizer preset
         const arrayEQPnames = window._settings.get_strv("equalizer-preset-names");
-        const equalizerPresetLabels =
-            !arrayEQPnames || arrayEQPnames.length === 0
-                ? [_("Default"), _("Preset 1"), _("Preset 2"), _("Preset 3")]
-                : arrayEQPnames;
-        for (const [index, value] of equalizerPresetLabels.entries()) {
-            if (index >= 4) break;
-            const adwrowEQP = builder.get_object("HeadsetControl_row_equalizerpreset" + (index + 1));
-            if (!adwrowEQP) continue; // Prevent TypeError
-            adwrowEQP.set_text(_(value));
-            adwrowEQP.connect("changed", this._onEQvaluechanged.bind(this, adwrowEQP, index, "equalizer-preset-names"));
-        }
+        const adwrowEQP = builder.get_object("HeadsetControl_row_equalizerpreset1");
+        adwrowEQP.set_title(arrayEQPnames.toString());
         //sidetone
         const sidetoneLabels = [
             _("Value for Off"),
