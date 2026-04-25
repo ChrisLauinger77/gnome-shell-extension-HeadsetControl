@@ -921,6 +921,7 @@ export default class HeadsetControl extends Extension {
 
     _onParamChangedLogNot() {
         this._notificationLowBattery = this._settings.get_boolean("notification-low-battery");
+        this._lowBatteryThreshold = this._settings.get_boolean("low-battery-threshold");
         this._useLogging = this._settings.get_boolean("use-logging");
         this._headsetControlIndicator.headsetControlMenuToggle.updateUseLogging(this._useLogging);
     }
@@ -1016,8 +1017,7 @@ export default class HeadsetControl extends Extension {
             return;
         }
         this._logOutput("_notifyLowBattery - strStatus: " + strStatus + " valueBatteryNum: " + valueBatteryNum);
-        const threshold = 25;
-        if (strStatus === "BATTERY_AVAILABLE" && valueBatteryNum <= threshold) {
+        if (strStatus === "BATTERY_AVAILABLE" && valueBatteryNum <= this._lowBatteryThreshold) {
             if (!this._batteryLowNotified) {
                 this._batteryLowNotified = true;
                 this._addNotification(
@@ -1027,7 +1027,7 @@ export default class HeadsetControl extends Extension {
                     "battery_low"
                 );
             }
-        } else if (strStatus === "BATTERY_CHARGING" || valueBatteryNum > threshold) {
+        } else if (strStatus === "BATTERY_CHARGING" || valueBatteryNum > this._lowBatteryThreshold) {
             this._batteryLowNotified = false;
             this._removeNotification("battery_low");
         }
@@ -1043,6 +1043,7 @@ export default class HeadsetControl extends Extension {
         this._headsetControlIndicator = new HeadsetControlIndicator(this);
         this._initCmd();
         this._notificationLowBattery = this._settings.get_boolean("notification-low-battery");
+        this._lowBatteryThreshold = this._settings.get_boolean("low-battery-threshold");
         this._useLogging = this._settings.get_boolean("use-logging");
         this._useColors = this._settings.get_boolean("use-colors");
         this._showIndicator = this._settings.get_boolean("show-systemindicator");
@@ -1101,6 +1102,7 @@ export default class HeadsetControl extends Extension {
                 callback: this._initCmd.bind(this),
             },
             { key: "notification-low-battery", callback: this._onParamChangedLogNot.bind(this) },
+            { key: "low-battery-threshold", callback: this._onParamChangedLogNot.bind(this) },
             { key: "use-logging", callback: this._onParamChangedLogNot.bind(this) },
             {
                 key: "show-systemindicator",
@@ -1166,6 +1168,7 @@ export default class HeadsetControl extends Extension {
         this._batteryLowNotified = null;
         this._refreshIntervalSystemindicator = null;
         this._notificationLowBattery = null;
+        this._lowBatteryThreshold = null;
         this._useLogging = null;
         this._useColors = null;
     }
