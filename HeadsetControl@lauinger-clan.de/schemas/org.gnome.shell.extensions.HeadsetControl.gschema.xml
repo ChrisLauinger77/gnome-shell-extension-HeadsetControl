@@ -135,5 +135,10 @@
       <summary>Inactive time values</summary>
       <description>Used for inactive time values (-1 disable)</description>
     </key>
+    <key name="low-battery-threshold" type="i">
+      <default>25</default>
+      <summary>Battery percentage to trigger low battery notification</summary>
+      <description>When battery percentage falls below this value, a low battery notification will be triggered</description>
+    </key>
   </schema>
 </schemalist>

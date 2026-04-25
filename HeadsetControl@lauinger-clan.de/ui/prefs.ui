@@ -185,6 +185,22 @@
           </object>
         </child>
         <child>
+          <object class="AdwSpinRow" id="HeadsetControl_row_lowbatterythreshold">
+            <property name="title" translatable="yes">Threshold for low battery notification (%)</property>
+            <property name="subtitle" translatable="yes">Battery percentage to trigger low battery notification</property>
+            <property name="tooltip-text" translatable="yes">When battery percentage falls below this value, a low battery notification will be triggered</property>
+            <property name="adjustment">
+              <object class="GtkAdjustment">
+                <property name="lower">5</property>
+                <property name="upper">30</property>
+                <property name="value">1</property>
+                <property name="step-increment">1</property>
+                <property name="page-increment">5</property>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
           <object class="AdwSwitchRow" id="HeadsetControl_row_logging">
             <property name="title" translatable="yes">Use logging</property>
             <property name="subtitle" translatable="yes">Enable / disable log outputs</property>

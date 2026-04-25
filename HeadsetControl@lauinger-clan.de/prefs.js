@@ -79,6 +79,11 @@ export default class AdwPrefs extends ExtensionPreferences {
         this.getSettings().set_int("refreshinterval-systemindicator", value);
     }
 
+    _onBTvaluechanged(adwrow) {
+        const value = adwrow.get_value();
+        this.getSettings().set_int("low-battery-threshold", value);
+    }
+
     _onQSToggleValuechanged(_settings, cmb) {
         _settings.set_int("quicksettings-toggle", cmb.get_selected());
     }
@@ -181,6 +186,10 @@ export default class AdwPrefs extends ExtensionPreferences {
         // notification for low battery
         adwrow = builder.get_object("HeadsetControl_row_notifications");
         window._settings.bind("notification-low-battery", adwrow, "active", Gio.SettingsBindFlags.DEFAULT);
+        // low battery threshold
+        adwrow = builder.get_object("HeadsetControl_row_lowbatterythreshold");
+        adwrow.set_value(this.getSettings().get_int("low-battery-threshold"));
+        adwrow.connect("changed", this._onBTvaluechanged.bind(this, adwrow));
         //use logging
         adwrow = builder.get_object("HeadsetControl_row_logging");
         window._settings.bind("use-logging", adwrow, "active", Gio.SettingsBindFlags.DEFAULT);
