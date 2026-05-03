@@ -58,7 +58,7 @@ jobs:
 
             - name: EGO Upload
               if: env.SHOULD_UPLOAD == 'true'
-              uses: fire-man-x/gnome-shell-extension-uploader@v1
+              uses: fire-man-x/gnome-shell-extension-uploader@v2
               with:
                   # Using your secret names: EGO_USERNAME and EGO_PASSWORD
                   gnome_username: ${{ secrets.EGO_USERNAME }}

@@ -921,7 +921,7 @@ export default class HeadsetControl extends Extension {
 
     _onParamChangedLogNot() {
         this._notificationLowBattery = this._settings.get_boolean("notification-low-battery");
-        this._lowBatteryThreshold = this._settings.get_boolean("low-battery-threshold");
+        this._lowBatteryThreshold = this._settings.get_int("low-battery-threshold");
         this._useLogging = this._settings.get_boolean("use-logging");
         this._headsetControlIndicator.headsetControlMenuToggle.updateUseLogging(this._useLogging);
     }
