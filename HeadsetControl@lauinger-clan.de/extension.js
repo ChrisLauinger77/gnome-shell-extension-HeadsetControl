@@ -1043,7 +1043,7 @@ export default class HeadsetControl extends Extension {
         this._headsetControlIndicator = new HeadsetControlIndicator(this);
         this._initCmd();
         this._notificationLowBattery = this._settings.get_boolean("notification-low-battery");
-        this._lowBatteryThreshold = this._settings.get_boolean("low-battery-threshold");
+        this._lowBatteryThreshold = this._settings.get_int("low-battery-threshold");
         this._useLogging = this._settings.get_boolean("use-logging");
         this._useColors = this._settings.get_boolean("use-colors");
         this._showIndicator = this._settings.get_boolean("show-systemindicator");
