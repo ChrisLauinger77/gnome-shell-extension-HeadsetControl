@@ -9,7 +9,17 @@
 Gnome Shell Extension to visualize headset status from HeadsetControl (https://github.com/Sapd/HeadsetControl) command line tool.<br>
 For a list of supported headsets visit [here](https://github.com/Sapd/HeadsetControl?tab=readme-ov-file#supported-devices).
 
-Supported capabilities can also be controlled like ChatMix, Sidetone, Equalizer etc.
+Depending on what your headset supports, the extension can show and control several HeadsetControl capabilities directly from GNOME Shell:
+
+- Show battery level and charging state in the panel and Quick Settings.
+- Show ChatMix status when supported by the headset.
+- Control Sidetone levels from off to maximum.
+- Toggle headset LEDs/lights, voice prompts, and rotate-to-mute.
+- Change equalizer settings and equalizer presets.
+- Send a configurable low-battery notification.
+- Customize the battery percentage text color for high, medium, and low charge levels.
+
+Only capabilities reported by HeadsetControl for the connected headset are shown. If a feature is missing, check whether your headset and installed HeadsetControl version support it.
 
 # GNOME43+
 
