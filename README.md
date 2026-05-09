@@ -90,3 +90,7 @@ Using the github version until Fedora updates the package is recommended.
 # ✨️ Contributors
 
 [![Contributors](https://contrib.rocks/image?repo=ChrisLauinger77/gnome-shell-extension-HeadsetControl)](https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl/graphs/contributors)
+
+## Credits
+
+- [Sapd](https://github.com/sapd/) for [HeadsetControl](https://github.com/Sapd/HeadsetControl)
