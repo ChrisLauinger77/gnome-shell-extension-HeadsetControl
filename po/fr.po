@@ -117,7 +117,7 @@ msgstr "Activé"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:372
 msgid " Minute"
-msgstr ""
+msgstr " minute"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:373
 #: HeadsetControl@lauinger-clan.de/extension.js:374
@@ -129,7 +129,7 @@ msgstr ""
 #: HeadsetControl@lauinger-clan.de/extension.js:380
 #: HeadsetControl@lauinger-clan.de/extension.js:381
 msgid " Minutes"
-msgstr ""
+msgstr " minutes"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:399
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:255
@@ -204,52 +204,52 @@ msgstr "Valeur pour Maximum"
 #: HeadsetControl@lauinger-clan.de/prefs.js:278
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:414
 msgid "Value 1"
-msgstr ""
+msgstr "Valeur 1"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:279
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:430
 msgid "Value 2"
-msgstr ""
+msgstr "Valeur 2"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:280
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:446
 msgid "Value 3"
-msgstr ""
+msgstr "Valeur 3"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:281
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:462
 msgid "Value 4"
-msgstr ""
+msgstr "Valeur 4"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:282
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:478
 msgid "Value 5"
-msgstr ""
+msgstr "Valeur 5"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:283
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:494
 msgid "Value 6"
-msgstr ""
+msgstr "Valeur 6"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:284
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:510
 msgid "Value 7"
-msgstr ""
+msgstr "Valeur 7"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:285
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:526
 msgid "Value 8"
-msgstr ""
+msgstr "Valeur 8"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:286
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:542
 msgid "Value 9"
-msgstr ""
+msgstr "Valeur 9"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:287
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:558
 msgid "Value 10"
-msgstr ""
+msgstr "Valeur 10"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:6
 msgid "Path to executable"
@@ -521,16 +521,16 @@ msgstr "Enum - 0 Indicateur système, 1 Notifications, 2 Journaux, 3 Couleurs"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:135
 msgid "Inactive time values"
-msgstr ""
+msgstr "Valeurs de temps d'inactivité"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:136
 msgid "Used for inactive time values (-1 disable)"
-msgstr ""
+msgstr "Utilisé pour les valeurs de temps d'inactivité (-1 désactiver)"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:140
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:190
 msgid "Battery percentage to trigger low battery notification"
-msgstr ""
+msgstr "Pourcentage de batterie déclenchant la notification de batterie faible"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:141
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:191
@@ -538,6 +538,8 @@ msgid ""
 "When battery percentage falls below this value, a low battery notification "
 "will be triggered"
 msgstr ""
+"Lorsque le pourcentage de batterie passe sous cette valeur, une notification "
+"de batterie faible est déclenchée"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:9
 msgid "Global"
@@ -663,7 +665,7 @@ msgstr "0 pour désactiver"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:189
 msgid "Threshold for low battery notification (%)"
-msgstr ""
+msgstr "Seuil de notification de batterie faible (%)"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:214
 msgid "Colors"
@@ -724,16 +726,16 @@ msgstr "-1 pour désactiver"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:390
 msgid "Inactive Time"
-msgstr ""
+msgstr "Temps d'inactivité"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:393
 msgid "Values for inactive time"
-msgstr ""
+msgstr "Valeurs pour le temps d'inactivité"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:394
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:395
 msgid "Values are used with parameter '-i' (-1 disable)"
-msgstr ""
+msgstr "Les valeurs sont utilisées avec le paramètre '-i' (-1 désactiver)"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:399
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:415
@@ -747,4 +749,4 @@ msgstr ""
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:543
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:559
 msgid "Input for headsetcontrol inactive time command"
-msgstr ""
+msgstr "Entrée pour la commande de temps d'inactivité du contrôle du casque"

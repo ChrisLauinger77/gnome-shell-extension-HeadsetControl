@@ -3,7 +3,6 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
@@ -522,7 +521,7 @@ msgstr "Usado para valores de tiempo inactivo (-1 deshabilitar)"
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:140
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:190
 msgid "Battery percentage to trigger low battery notification"
-msgstr ""
+msgstr "Porcentaje de batería para activar la notificación de batería baja"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:141
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:191
@@ -530,6 +529,8 @@ msgid ""
 "When battery percentage falls below this value, a low battery notification "
 "will be triggered"
 msgstr ""
+"Cuando el porcentaje de batería caiga por debajo de este valor, se activará "
+"una notificación de batería baja"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:9
 msgid "Global"
@@ -655,7 +656,7 @@ msgstr "0 para deshabilitar"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:189
 msgid "Threshold for low battery notification (%)"
-msgstr ""
+msgstr "Umbral para notificación de batería baja (%)"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:214
 msgid "Colors"

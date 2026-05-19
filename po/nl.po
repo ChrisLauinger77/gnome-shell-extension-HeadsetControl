@@ -117,7 +117,7 @@ msgstr "Aan"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:372
 msgid " Minute"
-msgstr ""
+msgstr " minuut"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:373
 #: HeadsetControl@lauinger-clan.de/extension.js:374
@@ -129,7 +129,7 @@ msgstr ""
 #: HeadsetControl@lauinger-clan.de/extension.js:380
 #: HeadsetControl@lauinger-clan.de/extension.js:381
 msgid " Minutes"
-msgstr ""
+msgstr " minuten"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:399
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:255
@@ -158,7 +158,7 @@ msgstr "Bezig met herladen…"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:886
 msgid "Quicksettings open - refresh indicator running..."
-msgstr ""
+msgstr "Quicksettings geopend - vernieuwingsindicator actief..."
 
 #: HeadsetControl@lauinger-clan.de/extension.js:891
 msgid "Quicksettings not open - do nothing..."
@@ -166,7 +166,7 @@ msgstr "Quicksettings niet geopend - niets doen..."
 
 #: HeadsetControl@lauinger-clan.de/extension.js:1025
 msgid "Battery low! Please charge your headset."
-msgstr ""
+msgstr "Accu bijna leeg! Laad je headset op."
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:22
 #: HeadsetControl@lauinger-clan.de/prefs.js:109
@@ -203,52 +203,52 @@ msgstr "Waarde voor Maximaal"
 #: HeadsetControl@lauinger-clan.de/prefs.js:278
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:414
 msgid "Value 1"
-msgstr ""
+msgstr "Waarde 1"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:279
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:430
 msgid "Value 2"
-msgstr ""
+msgstr "Waarde 2"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:280
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:446
 msgid "Value 3"
-msgstr ""
+msgstr "Waarde 3"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:281
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:462
 msgid "Value 4"
-msgstr ""
+msgstr "Waarde 4"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:282
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:478
 msgid "Value 5"
-msgstr ""
+msgstr "Waarde 5"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:283
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:494
 msgid "Value 6"
-msgstr ""
+msgstr "Waarde 6"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:284
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:510
 msgid "Value 7"
-msgstr ""
+msgstr "Waarde 7"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:285
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:526
 msgid "Value 8"
-msgstr ""
+msgstr "Waarde 8"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:286
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:542
 msgid "Value 9"
-msgstr ""
+msgstr "Waarde 9"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:287
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:558
 msgid "Value 10"
-msgstr ""
+msgstr "Waarde 10"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:6
 msgid "Path to executable"
@@ -402,13 +402,13 @@ msgstr "Weergegeven in het equalizer-voorkeuzemenu (indien ondersteund)"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:79
 msgid "Parameter to enable notification when battery is low"
-msgstr ""
+msgstr "Optie om een melding in te schakelen wanneer de accu bijna leeg is"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:80
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:183
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:184
 msgid "Send a notification when the battery level is low"
-msgstr ""
+msgstr "Stuur een melding wanneer het accuniveau laag is"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:84
 msgid "Parameter to enable log outputs"
@@ -432,7 +432,7 @@ msgstr "Toon/Verberg de systeemindicator"
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:94
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:158
 msgid "Hide the systemindicator when no headset is connected"
-msgstr ""
+msgstr "Verberg de systeemindicator wanneer er geen headset is verbonden"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:95
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:159
@@ -440,15 +440,17 @@ msgid ""
 "Will be delayed by refresh interval - can be enforced by toggling the "
 "quicksettings"
 msgstr ""
+"Wordt vertraagd door het vernieuwingsinterval - kan worden afgedwongen door "
+"quicksettings om te schakelen"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:100
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:165
 msgid "Refresh the systemindicator every X minutes"
-msgstr ""
+msgstr "Vernieuw de systeemindicator elke X minuten"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:101
 msgid "Value in minutes to refresh the headset data on the systemindicator"
-msgstr ""
+msgstr "Waarde in minuten om de headsetgegevens op de systeemindicator te vernieuwen"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:105
 msgid "Parameter to enable battery percentage text color"
@@ -503,24 +505,24 @@ msgstr "Uit laag gemiddeld hoog max (-1 uitschakelen)"
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:137
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:138
 msgid "Usage of quicksettings toggle"
-msgstr ""
+msgstr "Gebruik van de quicksettings-schakelaar"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:131
 msgid "Enum - 0 Systemindicator, 1 Notifications, 2 Logs, 3 Colors"
-msgstr ""
+msgstr "Enum - 0 Systeemindicator, 1 Meldingen, 2 Logboeken, 3 Kleuren"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:135
 msgid "Inactive time values"
-msgstr ""
+msgstr "Waarden voor inactieve tijd"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:136
 msgid "Used for inactive time values (-1 disable)"
-msgstr ""
+msgstr "Gebruikt voor waarden voor inactieve tijd (-1 uitschakelen)"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:140
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:190
 msgid "Battery percentage to trigger low battery notification"
-msgstr ""
+msgstr "Accupercentage om melding voor laag accuniveau te activeren"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:141
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:191
@@ -528,6 +530,8 @@ msgid ""
 "When battery percentage falls below this value, a low battery notification "
 "will be triggered"
 msgstr ""
+"Wanneer het accupercentage onder deze waarde komt, wordt een melding voor "
+"laag accuniveau geactiveerd"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:9
 msgid "Global"
@@ -539,7 +543,7 @@ msgstr "Opdracht"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:18
 msgid "Select"
-msgstr ""
+msgstr "Selecteren"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:19
 msgid "Usually located in '/usr/bin' OR '/usr/local/bin'"
@@ -617,7 +621,7 @@ msgstr "Opties"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:136
 msgid "Quicksettings toggle"
-msgstr ""
+msgstr "Quicksettings-schakelaar"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:142
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:153
@@ -627,7 +631,7 @@ msgstr "Systeemindicator tonen"
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:143
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:182
 msgid "Notification on low battery"
-msgstr ""
+msgstr "Melding bij laag accuniveau"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:144
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:205
@@ -641,11 +645,11 @@ msgstr "Kleuren gebruiken"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:157
 msgid "Hide when disconnected"
-msgstr ""
+msgstr "Verbergen wanneer ontkoppeld"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:164
 msgid "Refresh interval (minutes)"
-msgstr ""
+msgstr "Vernieuwingsinterval (minuten)"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:166
 msgid "0 to disable"
@@ -653,7 +657,7 @@ msgstr "0 om uit te schakelen"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:189
 msgid "Threshold for low battery notification (%)"
-msgstr ""
+msgstr "Drempel voor melding bij laag accuniveau (%)"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:214
 msgid "Colors"
@@ -714,16 +718,16 @@ msgstr "-1 om uit te schakelen"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:390
 msgid "Inactive Time"
-msgstr ""
+msgstr "Inactieve tijd"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:393
 msgid "Values for inactive time"
-msgstr ""
+msgstr "Waarden voor inactieve tijd"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:394
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:395
 msgid "Values are used with parameter '-i' (-1 disable)"
-msgstr ""
+msgstr "Waarden worden gebruikt met parameter '-i' (-1 uitschakelen)"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:399
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:415
@@ -737,4 +741,4 @@ msgstr ""
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:543
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:559
 msgid "Input for headsetcontrol inactive time command"
-msgstr ""
+msgstr "Invoer voor headsetcontrol-opdracht voor inactieve tijd"
