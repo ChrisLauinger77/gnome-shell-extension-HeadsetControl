@@ -140,5 +140,10 @@
       <summary>Battery percentage to trigger low battery notification</summary>
       <description>When battery percentage falls below this value, a low battery notification will be triggered</description>
     </key>
+    <key name="test-mode" type="i">
+      <default>0</default>
+      <summary>Test mode</summary>
+      <description>Enable different test modes, resets on restart</description>
+    </key>
   </schema>
 </schemalist>
