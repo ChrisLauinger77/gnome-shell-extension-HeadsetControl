@@ -22,6 +22,27 @@
             </style>
           </object>
         </child>
+        <child>
+          <object class="AdwComboRow" id="HeadsetControl_row_testmodeselect">
+            <property name="title" translatable="yes">Test Mode</property>
+            <property name="subtitle" translatable="yes">Enable different test modes, resets on restart</property>
+            <property name="tooltip-text" translatable="yes">Enable different test modes, resets on restart</property>
+            <property name="model">
+              <object class="GtkStringList">
+                <items>
+                  <item translatable="yes">Off</item>
+                  <item translatable="yes">Error conditions</item>
+                  <item translatable="yes">Charging battery</item>
+                  <item translatable="yes">Basic battery</item>
+                  <item translatable="yes">Battery unavailable</item>
+                  <item translatable="yes">Timeout</item>
+                  <item translatable="yes">Full battery</item>
+                  <item translatable="yes">Low battery</item>
+                </items>
+              </object>
+            </property>
+          </object>
+        </child>
       </object>
     </child>
     <child>

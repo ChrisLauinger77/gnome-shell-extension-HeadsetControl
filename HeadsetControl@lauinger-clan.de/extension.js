@@ -39,9 +39,12 @@ const headsetcontrolCommands = {
     cmdEqualizerPreset: "",
 };
 
-async function invokeCmd(cmd, logger) {
+async function invokeCmd(cmd, logger, testMode = 0) {
     const flags = Gio.SubprocessFlags.STDOUT_PIPE;
     const [, argv] = GLib.shell_parse_argv(cmd);
+    if (testMode > 0) {
+        argv.push("--test-device", testMode.toString());
+    }
     const proc = new Gio.Subprocess({ argv, flags });
     proc.init(null);
     try {
@@ -86,6 +89,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this._valueBatteryNum = -1;
             this._valueChatMix = "";
             this._valueHeadsetname = _("HeadsetControl");
+            this._testMode = extension._testMode;
             //remember style
             this._originalStyle = this.get_style();
             this.menu.setHeader("audio-headset-symbolic", _("HeadsetControl"), "");
@@ -214,6 +218,10 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             }
         }
 
+        set testMode(value) {
+            this._testMode = value;
+        }
+
         get valueBatteryNum() {
             return this._valueBatteryNum;
         }
@@ -298,7 +306,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
 
         async _invokeCmd(cmd) {
             this._logOutput("_invokeCmd: " + cmd);
-            const retval = await invokeCmd(cmd, this._logger);
+            const retval = await invokeCmd(cmd, this._logger, this._testMode);
             this._logOutput("_invokeCmd retval: " + retval);
             return retval;
         }
@@ -550,7 +558,7 @@ export default class HeadsetControl extends Extension {
 
     async _invokeCmd(cmd) {
         this._logOutput("_invokeCmd: " + cmd);
-        const retval = await invokeCmd(cmd, this.getLogger());
+        const retval = await invokeCmd(cmd, this.getLogger(), this._testMode);
         this._logOutput("_invokeCmd retval: " + retval);
         return retval;
     }
@@ -952,6 +960,11 @@ export default class HeadsetControl extends Extension {
         }
     }
 
+    _onParamChangedTestMode() {
+        this._testMode = this._settings.get_int("test-mode");
+        this._headsetControlIndicator.headsetControlMenuToggle.testMode = this._testMode;
+    }
+
     _calculateRefreshInterval(refreshIntervalmin) {
         const refreshIntervalms = refreshIntervalmin * 60 * 1000; // Convert minutes to milliseconds
         this._logOutput("_CalculateRefreshInterval: " + refreshIntervalms);
@@ -1040,6 +1053,9 @@ export default class HeadsetControl extends Extension {
         this._batteryLowNotified = false;
         this._settings = this.getSettings();
 
+        this._testMode = 0;
+        this._settings.set_int("test-mode", 0); // make sure test mode is off when extension is enabled
+
         this._headsetControlIndicator = new HeadsetControlIndicator(this);
         this._initCmd();
         this._notificationLowBattery = this._settings.get_boolean("notification-low-battery");
@@ -1049,6 +1065,7 @@ export default class HeadsetControl extends Extension {
         this._showIndicator = this._settings.get_boolean("show-systemindicator");
         this._hideWhenDisconnectedSystemindicator = this._settings.get_boolean("hidewhendisconnected-systemindicator");
         this._refreshIntervalSystemindicator = this._settings.get_int("refreshinterval-systemindicator");
+
         this._updateBinaryCapabilities();
         this._refreshIntervalSignal = null;
         this._refreshIntervalHandler(false);
@@ -1136,6 +1153,10 @@ export default class HeadsetControl extends Extension {
                 key: "quicksettings-toggle",
                 callback: this._onParamChanged.bind(this),
             },
+            {
+                key: "test-mode",
+                callback: this._onParamChangedTestMode.bind(this),
+            },
         ];
         for (const setting of settingsToMonitor) {
             this._settingSignals.push(this._settings.connect(`changed::${setting.key}`, setting.callback));
@@ -1165,6 +1186,7 @@ export default class HeadsetControl extends Extension {
         this._showIndicator = null;
         this._hideWhenDisconnectedSystemindicator = null;
         this._refreshIndicatorRunning = null;
+        this._testMode = null;
         this._batteryLowNotified = null;
         this._refreshIntervalSystemindicator = null;
         this._notificationLowBattery = null;

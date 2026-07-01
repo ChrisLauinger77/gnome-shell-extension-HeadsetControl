@@ -88,6 +88,10 @@ export default class AdwPrefs extends ExtensionPreferences {
         _settings.set_int("quicksettings-toggle", cmb.get_selected());
     }
 
+    _onTestModeValuechanged(_settings, cmb) {
+        _settings.set_int("test-mode", cmb.get_selected());
+    }
+
     fillPreferencesWindow(window) {
         window.search_enabled = true;
         window._settings = this.getSettings();
@@ -112,6 +116,11 @@ export default class AdwPrefs extends ExtensionPreferences {
         });
         buttonExecutable.connect("activated", this._onBtnClicked.bind(this, buttonExecutable, _filechooser));
         _filechooser.connect("response", this._onFileChooserResponse.bind(this));
+
+        // test mode
+        adwrow = builder.get_object("HeadsetControl_row_testmodeselect");
+        adwrow.set_selected(window._settings.get_int("test-mode"));
+        adwrow.connect("notify", this._onTestModeValuechanged.bind(this, window._settings, adwrow));
 
         const opt_oformat = builder.get_object("HeadsetControl_row_outputformat_new2");
         opt_oformat.set_text(_(this.getSettings().get_string("option-output-format")));
