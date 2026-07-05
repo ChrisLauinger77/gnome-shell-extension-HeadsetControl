@@ -411,8 +411,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             ];
             for (const item of equalizerSettingValues) {
                 if (item[1].includes(":")) {
-                    let itemarray = [];
-                    itemarray = item[1].split(":");
+                    const itemarray = item[1].split(":");
                     item[0] = itemarray[0];
                     item[1] = itemarray[1];
                 }
