@@ -17,7 +17,7 @@ jobs:
             actions: read
         steps:
             - name: Checkout
-              uses: actions/checkout@v7
+              uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
 
             - name: Install
               run: npm ci
@@ -29,7 +29,7 @@ jobs:
               continue-on-error: true
 
             - name: Report
-              uses: github/codeql-action/upload-sarif@v4
+              uses: github/codeql-action/upload-sarif@99df26d4f13ea111d4ec1a7dddef6063f76b97e9 # v4
               with:
                   sarif_file: eslint-results.sarif
                   wait-for-processing: true
