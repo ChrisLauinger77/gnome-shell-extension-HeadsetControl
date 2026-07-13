@@ -73,6 +73,8 @@ async function invokeCmd(cmd, logger, testMode = 0) {
 }
 
 const HeadsetControlMenuToggle = GObject.registerClass(
+    // The matching class name is intentional for GObject registration.
+    // eslint-disable-next-line no-shadow
     class HeadsetControlMenuToggle extends QuickSettings.QuickMenuToggle {
         constructor(extension) {
             const { _settings } = extension;
@@ -471,6 +473,8 @@ const HeadsetControlMenuToggle = GObject.registerClass(
 );
 
 const HeadsetControlIndicator = GObject.registerClass(
+    // The matching class name is intentional for GObject registration.
+    // eslint-disable-next-line no-shadow
     class HeadsetControlIndicator extends QuickSettings.SystemIndicator {
         constructor(extension) {
             const { _settings } = extension;
