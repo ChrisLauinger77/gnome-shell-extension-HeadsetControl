@@ -23,6 +23,8 @@ jobs:
               run: npm ci
 
             - name: Lint
+              env:
+                  SARIF_ESLINT_IGNORE_SUPPRESSED: "true"
               run: npx eslint .
                   --format @microsoft/eslint-formatter-sarif
                   --output-file eslint-results.sarif
