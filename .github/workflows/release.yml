@@ -20,7 +20,7 @@ jobs:
 
         steps:
             - name: Checkout code
-              uses: actions/checkout@v7
+              uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
 
             - name: Install dependencies
               run: |
@@ -41,7 +41,7 @@ jobs:
 
             - name: Upload Build Artifact (Manual Runs)
               if: github.event_name == 'workflow_dispatch'
-              uses: actions/upload-artifact@v7
+              uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
               with:
                   name: extension-build
                   path: ./HeadsetControl@lauinger-clan.de.shell-extension.zip
@@ -58,7 +58,7 @@ jobs:
 
             - name: EGO Upload
               if: env.SHOULD_UPLOAD == 'true'
-              uses: fire-man-x/gnome-shell-extension-uploader@v2
+              uses: fire-man-x/gnome-shell-extension-uploader@6e6c1e39b0eafe3269a272b92e0b04b3f7165555 # v2
               with:
                   # Using your secret names: EGO_USERNAME and EGO_PASSWORD
                   gnome_username: ${{ secrets.EGO_USERNAME }}
