@@ -54,4 +54,17 @@ jobs:
               run: pip install --no-cache-dir "tree-sitter<0.26" shexli
 
             - name: Lint
-              run: shexli "$GITHUB_WORKSPACE/HeadsetControl@lauinger-clan.de"
+              shell: bash
+              run: |
+                  set +e
+                  shexli "$GITHUB_WORKSPACE/HeadsetControl@lauinger-clan.de" 2>&1 | tee shexli-output.txt
+                  status=${PIPESTATUS[0]}
+
+                  {
+                      echo "## Shexli results"
+                      echo '```text'
+                      cat shexli-output.txt
+                      echo '```'
+                  } >> "$GITHUB_STEP_SUMMARY"
+
+                  exit "$status"
