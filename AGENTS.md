@@ -122,7 +122,7 @@ journalctl -f -o cat
 - Do not assume a headset or GNOME Shell session is available in the coding
   environment. Prefer linting and packaging checks when runtime testing is not
   possible.
-- Check `gnome-extension-review.md` when changing runtime, preferences,
+- Use `$review-gnome-shell-extension` when changing runtime, preferences,
   metadata, schema, packaging, or user-data behavior that may affect
   extensions.gnome.org review.
 - Preserve translation files unless a string/schema/UI change requires updating
