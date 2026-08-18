@@ -65,7 +65,9 @@ async function invokeCmd(cmd, logger, testMode = 0, cancellable = null, subproce
                     const [, stdoutFinish] = subprocess.communicate_utf8_finish(res);
                     resolve(stdoutFinish);
                 } catch (err) {
-                    logger.error(`Error executing command: ${err.message}`);
+                    if (!cancellable?.is_cancelled()) {
+                        logger.error(`Error executing command: ${err.message}`);
+                    }
                     reject(err);
                 }
             });
