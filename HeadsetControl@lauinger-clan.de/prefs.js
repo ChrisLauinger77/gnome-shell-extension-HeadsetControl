@@ -7,8 +7,8 @@ import GObject from "gi://GObject";
 import { ExtensionPreferences, gettext as _ } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 
 export default class AdwPrefs extends ExtensionPreferences {
-    changeOption(option, text) {
-        this.getSettings().set_string(option, text);
+    changeOption(settings, option, text) {
+        settings.set_string(option, text);
     }
 
     _onBtnClicked(btn, filechooser) {
@@ -24,64 +24,64 @@ export default class AdwPrefs extends ExtensionPreferences {
         filechooser.show();
     }
 
-    _updateExecutable(valueExecutable) {
-        valueExecutable.set_text(this.getSettings().get_string("headsetcontrol-executable"));
+    _updateExecutable(settings, valueExecutable) {
+        valueExecutable.set_text(settings.get_string("headsetcontrol-executable"));
     }
 
-    _onFileChooserResponse(native, response) {
+    _onFileChooserResponse(window, native, response) {
         if (response !== Gtk.ResponseType.ACCEPT) {
             return;
         }
         const fileURI = native.get_file().get_uri().replace("file://", "");
 
-        this.changeOption("headsetcontrol-executable", fileURI);
+        window._settings.set_string("headsetcontrol-executable", fileURI);
     }
 
-    _applyChanges(valueExecutable, options) {
-        this.changeOption("headsetcontrol-executable", valueExecutable.get_text());
-        this.changeOption("option-output-format", options.opt_oformat.get_text());
-        this.changeOption("option-capabilities", options.opt_capa.get_text());
-        this.changeOption("option-battery", options.opt_bat.get_text());
-        this.changeOption("option-chatmix", options.opt_chm.get_text());
-        this.changeOption("option-sidetone", options.opt_sto.get_text());
-        this.changeOption("option-led", options.opt_led.get_text());
-        this.changeOption("option-inactive-time", options.opt_iat.get_text());
-        this.changeOption("option-voice", options.opt_voice.get_text());
-        this.changeOption("option-rotate-mute", options.opt_rot.get_text());
-        this.changeOption("option-equalizer", options.opt_equalizer.get_text());
-        this.changeOption("option-equalizer-preset", options.opt_equalizer_preset.get_text());
+    _applyChanges(settings, valueExecutable, options) {
+        this.changeOption(settings, "headsetcontrol-executable", valueExecutable.get_text());
+        this.changeOption(settings, "option-output-format", options.opt_oformat.get_text());
+        this.changeOption(settings, "option-capabilities", options.opt_capa.get_text());
+        this.changeOption(settings, "option-battery", options.opt_bat.get_text());
+        this.changeOption(settings, "option-chatmix", options.opt_chm.get_text());
+        this.changeOption(settings, "option-sidetone", options.opt_sto.get_text());
+        this.changeOption(settings, "option-led", options.opt_led.get_text());
+        this.changeOption(settings, "option-inactive-time", options.opt_iat.get_text());
+        this.changeOption(settings, "option-voice", options.opt_voice.get_text());
+        this.changeOption(settings, "option-rotate-mute", options.opt_rot.get_text());
+        this.changeOption(settings, "option-equalizer", options.opt_equalizer.get_text());
+        this.changeOption(settings, "option-equalizer-preset", options.opt_equalizer_preset.get_text());
     }
 
-    _onColorChanged(color_setting_button, strSetting) {
-        this.getSettings().set_string(strSetting, color_setting_button.get_rgba().to_string());
+    _onColorChanged(settings, color_setting_button, strSetting) {
+        settings.set_string(strSetting, color_setting_button.get_rgba().to_string());
     }
 
-    _onEQvaluechanged(adwrow, index, option) {
-        const arrayEQsettings = this.getSettings().get_strv(option);
+    _onEQvaluechanged(settings, adwrow, index, option) {
+        const arrayEQsettings = settings.get_strv(option);
         arrayEQsettings[index] = adwrow.get_text();
-        this.getSettings().set_strv(option, arrayEQsettings);
+        settings.set_strv(option, arrayEQsettings);
     }
 
-    _onSTvaluechanged(adwrow, index) {
-        const arraySidetone = this.getSettings().get_strv("sidetone-values");
+    _onSTvaluechanged(settings, adwrow, index) {
+        const arraySidetone = settings.get_strv("sidetone-values");
         arraySidetone[index] = adwrow.get_value().toString();
-        this.getSettings().set_strv("sidetone-values", arraySidetone);
+        settings.set_strv("sidetone-values", arraySidetone);
     }
 
-    _onITvaluechanged(adwrow, index) {
-        const arrayInactiveTime = this.getSettings().get_strv("inactivetime-values");
+    _onITvaluechanged(settings, adwrow, index) {
+        const arrayInactiveTime = settings.get_strv("inactivetime-values");
         arrayInactiveTime[index] = adwrow.get_value().toString();
-        this.getSettings().set_strv("inactivetime-values", arrayInactiveTime);
+        settings.set_strv("inactivetime-values", arrayInactiveTime);
     }
 
-    _onRIvaluechanged(adwrow) {
+    _onRIvaluechanged(settings, adwrow) {
         const value = adwrow.get_value();
-        this.getSettings().set_int("refreshinterval-systemindicator", value);
+        settings.set_int("refreshinterval-systemindicator", value);
     }
 
-    _onBTvaluechanged(adwrow) {
+    _onBTvaluechanged(settings, adwrow) {
         const value = adwrow.get_value();
-        this.getSettings().set_int("low-battery-threshold", value);
+        settings.set_int("low-battery-threshold", value);
     }
 
     _onQSToggleValuechanged(_settings, cmb) {
@@ -105,7 +105,7 @@ export default class AdwPrefs extends ExtensionPreferences {
         valueExecutable.set_text(window._settings.get_string("headsetcontrol-executable"));
         window._settings.connect(
             "changed::headsetcontrol-executable",
-            this._updateExecutable.bind(this, valueExecutable)
+            this._updateExecutable.bind(this, window._settings, valueExecutable)
         );
         const buttonExecutable = builder.get_object("HeadsetControl_row_commandselect");
 
@@ -115,7 +115,7 @@ export default class AdwPrefs extends ExtensionPreferences {
             action: Gtk.FileChooserAction.OPEN,
         });
         buttonExecutable.connect("activated", this._onBtnClicked.bind(this, buttonExecutable, _filechooser));
-        _filechooser.connect("response", this._onFileChooserResponse.bind(this));
+        _filechooser.connect("response", this._onFileChooserResponse.bind(this, window));
 
         // test mode
         adwrow = builder.get_object("HeadsetControl_row_testmodeselect");
@@ -123,31 +123,31 @@ export default class AdwPrefs extends ExtensionPreferences {
         adwrow.connect("notify", this._onTestModeValuechanged.bind(this, window._settings, adwrow));
 
         const opt_oformat = builder.get_object("HeadsetControl_row_outputformat_new2");
-        opt_oformat.set_text(_(this.getSettings().get_string("option-output-format")));
+        opt_oformat.set_text(_(window._settings.get_string("option-output-format")));
         const opt_capa = builder.get_object("HeadsetControl_row_outputformat_old2");
-        opt_capa.set_text(_(this.getSettings().get_string("option-capabilities")));
+        opt_capa.set_text(_(window._settings.get_string("option-capabilities")));
         const opt_bat = builder.get_object("HeadsetControl_row_outputformat_old3");
-        opt_bat.set_text(_(this.getSettings().get_string("option-battery")));
+        opt_bat.set_text(_(window._settings.get_string("option-battery")));
         const opt_chm = builder.get_object("HeadsetControl_row_outputformat_old4");
-        opt_chm.set_text(_(this.getSettings().get_string("option-chatmix")));
+        opt_chm.set_text(_(window._settings.get_string("option-chatmix")));
         const opt_sto = builder.get_object("HeadsetControl_row_common2");
-        opt_sto.set_text(_(this.getSettings().get_string("option-sidetone")));
+        opt_sto.set_text(_(window._settings.get_string("option-sidetone")));
         const opt_led = builder.get_object("HeadsetControl_row_common3");
-        opt_led.set_text(_(this.getSettings().get_string("option-led")));
+        opt_led.set_text(_(window._settings.get_string("option-led")));
         const opt_iat = builder.get_object("HeadsetControl_row_common4");
-        opt_iat.set_text(_(this.getSettings().get_string("option-inactive-time")));
+        opt_iat.set_text(_(window._settings.get_string("option-inactive-time")));
         const opt_voice = builder.get_object("HeadsetControl_row_common5");
-        opt_voice.set_text(_(this.getSettings().get_string("option-voice")));
+        opt_voice.set_text(_(window._settings.get_string("option-voice")));
         const opt_rot = builder.get_object("HeadsetControl_row_common6");
-        opt_rot.set_text(_(this.getSettings().get_string("option-rotate-mute")));
+        opt_rot.set_text(_(window._settings.get_string("option-rotate-mute")));
         const opt_equalizer = builder.get_object("HeadsetControl_row_common7");
-        opt_equalizer.set_text(_(this.getSettings().get_string("option-equalizer")));
+        opt_equalizer.set_text(_(window._settings.get_string("option-equalizer")));
         const opt_equalizer_preset = builder.get_object("HeadsetControl_row_common8");
-        opt_equalizer_preset.set_text(_(this.getSettings().get_string("option-equalizer-preset")));
+        opt_equalizer_preset.set_text(_(window._settings.get_string("option-equalizer-preset")));
         const buttonApply = builder.get_object("HeadsetControl_row_apply");
         buttonApply.connect(
             "activated",
-            this._applyChanges.bind(this, valueExecutable, {
+            this._applyChanges.bind(this, window._settings, valueExecutable, {
                 opt_oformat,
                 opt_capa,
                 opt_bat,
@@ -190,15 +190,15 @@ export default class AdwPrefs extends ExtensionPreferences {
         window._settings.bind("hidewhendisconnected-systemindicator", adwrow, "active", Gio.SettingsBindFlags.DEFAULT);
         // refresh interval
         adwrow = builder.get_object("HeadsetControl_row_showindicator3");
-        adwrow.set_value(this.getSettings().get_int("refreshinterval-systemindicator"));
-        adwrow.connect("changed", this._onRIvaluechanged.bind(this, adwrow));
+        adwrow.set_value(window._settings.get_int("refreshinterval-systemindicator"));
+        adwrow.connect("changed", this._onRIvaluechanged.bind(this, window._settings, adwrow));
         // notification for low battery
         adwrow = builder.get_object("HeadsetControl_row_notifications");
         window._settings.bind("notification-low-battery", adwrow, "active", Gio.SettingsBindFlags.DEFAULT);
         // low battery threshold
         adwrow = builder.get_object("HeadsetControl_row_lowbatterythreshold");
-        adwrow.set_value(this.getSettings().get_int("low-battery-threshold"));
-        adwrow.connect("changed", this._onBTvaluechanged.bind(this, adwrow));
+        adwrow.set_value(window._settings.get_int("low-battery-threshold"));
+        adwrow.connect("changed", this._onBTvaluechanged.bind(this, window._settings, adwrow));
         //use logging
         adwrow = builder.get_object("HeadsetControl_row_logging");
         window._settings.bind("use-logging", adwrow, "active", Gio.SettingsBindFlags.DEFAULT);
@@ -222,7 +222,10 @@ export default class AdwPrefs extends ExtensionPreferences {
 
         mycolor.parse(window._settings.get_string("color-batteryhigh"));
         colorbatteryhigh.set_rgba(mycolor);
-        colorbatteryhigh.connect("color-set", this._onColorChanged.bind(this, colorbatteryhigh, "color-batteryhigh"));
+        colorbatteryhigh.connect(
+            "color-set",
+            this._onColorChanged.bind(this, window._settings, colorbatteryhigh, "color-batteryhigh")
+        );
         adwrow.add_suffix(colorbatteryhigh);
         adwrow.activatable_widget = colorbatteryhigh;
         // color medium charge
@@ -235,7 +238,7 @@ export default class AdwPrefs extends ExtensionPreferences {
         colorbatterymedium.set_rgba(mycolor);
         colorbatterymedium.connect(
             "color-set",
-            this._onColorChanged.bind(this, colorbatterymedium, "color-batterymedium")
+            this._onColorChanged.bind(this, window._settings, colorbatterymedium, "color-batterymedium")
         );
         adwrow.add_suffix(colorbatterymedium);
         adwrow.activatable_widget = colorbatterymedium;
@@ -247,7 +250,10 @@ export default class AdwPrefs extends ExtensionPreferences {
         });
         mycolor.parse(window._settings.get_string("color-batterylow"));
         colorbatterylow.set_rgba(mycolor);
-        colorbatterylow.connect("color-set", this._onColorChanged.bind(this, colorbatterylow, "color-batterylow"));
+        colorbatterylow.connect(
+            "color-set",
+            this._onColorChanged.bind(this, window._settings, colorbatterylow, "color-batterylow")
+        );
         adwrow.add_suffix(colorbatterylow);
         adwrow.activatable_widget = colorbatterylow;
         //equalizer
@@ -259,7 +265,7 @@ export default class AdwPrefs extends ExtensionPreferences {
             adwrowEQ.set_text(_(value));
             adwrowEQ.connect(
                 "changed",
-                this._onEQvaluechanged.bind(this, adwrowEQ, index, "option-equalizer-settings")
+                this._onEQvaluechanged.bind(this, window._settings, adwrowEQ, index, "option-equalizer-settings")
             );
         }
         //equalizer preset
@@ -274,12 +280,12 @@ export default class AdwPrefs extends ExtensionPreferences {
             _("Value for High"),
             _("Value for Maximum"),
         ];
-        const arraySidetone = this.getSettings().get_strv("sidetone-values");
+        const arraySidetone = window._settings.get_strv("sidetone-values");
         for (const [index] of sidetoneLabels.entries()) {
             adwrow = builder.get_object("HeadsetControl_row_sidetone" + (index + 1));
             if (!adwrow) continue; // Prevent TypeError
             adwrow.set_value(Number.parseInt(arraySidetone[index]) || 0);
-            adwrow.connect("changed", this._onSTvaluechanged.bind(this, adwrow, index));
+            adwrow.connect("changed", this._onSTvaluechanged.bind(this, window._settings, adwrow, index));
         }
         //inactive time
         const inactiveTimeLabels = [
@@ -295,12 +301,12 @@ export default class AdwPrefs extends ExtensionPreferences {
             _("Value 9"),
             _("Value 10"),
         ];
-        const arrayInactiveTime = this.getSettings().get_strv("inactivetime-values");
+        const arrayInactiveTime = window._settings.get_strv("inactivetime-values");
         for (const [index] of inactiveTimeLabels.entries()) {
             adwrow = builder.get_object("HeadsetControl_row_inactivetime" + (index + 1));
             if (!adwrow) continue; // Prevent TypeError
             adwrow.set_value(Number.parseInt(arrayInactiveTime[index]) || 0);
-            adwrow.connect("changed", this._onITvaluechanged.bind(this, adwrow, index));
+            adwrow.connect("changed", this._onITvaluechanged.bind(this, window._settings, adwrow, index));
         }
         window.add(page2);
     }
