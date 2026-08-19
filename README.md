@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Gnome Extensions Downloads](https://img.shields.io/gnome-extensions/dt/HeadsetControl@lauinger-clan.de) ![GNOME Shell](https://img.shields.io/badge/GNOME-42%20--%2050-blue?logo=gnome&logoColor=white) ![GitHub License](https://img.shields.io/github/license/ChrisLauinger77/gnome-shell-extension-HeadsetControl)
+![Gnome Extensions Downloads](https://img.shields.io/gnome-extensions/dt/HeadsetControl@lauinger-clan.de) ![GNOME Shell](https://img.shields.io/badge/GNOME-42%20--%2051-blue?logo=gnome&logoColor=white) ![GitHub License](https://img.shields.io/github/license/ChrisLauinger77/gnome-shell-extension-HeadsetControl)
 
 </div>
 
