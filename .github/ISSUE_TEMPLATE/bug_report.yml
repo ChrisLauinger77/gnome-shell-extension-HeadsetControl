@@ -1,0 +1,138 @@
+name: Bug report
+description: Report a reproducible problem with the HeadsetControl extension
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve the HeadsetControl extension. This project displays data provided by the HeadsetControl command-line tool, so please verify the tool first and include its output below.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched the open and closed issues and did not find a duplicate.
+          required: true
+        - label: I reproduced the problem with all other extensions disabled.
+          required: true
+        - label: The `headsetcontrol` command runs successfully in a terminal and detects my headset.
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Problem description
+      description: What happened, and what were you doing when it happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open …
+        2. Select …
+        3. Observe …
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen instead?
+    validations:
+      required: true
+
+  - type: input
+    id: extension-version
+    attributes:
+      label: Extension version
+      placeholder: "For example: 50.6"
+    validations:
+      required: true
+
+  - type: input
+    id: gnome-version
+    attributes:
+      label: GNOME Shell version
+      description: Run `gnome-shell --version`.
+      placeholder: "For example: GNOME Shell 50.0"
+    validations:
+      required: true
+
+  - type: input
+    id: distribution
+    attributes:
+      label: Linux distribution
+      placeholder: "For example: Fedora 44 or Ubuntu 26.04"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: session-type
+    attributes:
+      label: Session type
+      description: Run `echo $XDG_SESSION_TYPE` if you are unsure.
+      options:
+        - Wayland
+        - X11
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: installation-source
+    attributes:
+      label: Extension installation source
+      options:
+        - extensions.gnome.org
+        - GitHub release
+        - Source checkout
+        - Distribution package
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: headset-model
+    attributes:
+      label: Headset model
+      placeholder: Manufacturer and exact model
+    validations:
+      required: true
+
+  - type: textarea
+    id: headsetcontrol-version
+    attributes:
+      label: HeadsetControl version
+      description: Paste the output of `headsetcontrol -?`.
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: headsetcontrol-output
+    attributes:
+      label: HeadsetControl device output
+      description: Paste the complete output of `headsetcontrol -o json`. Redact serial numbers or other sensitive information.
+      render: json
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant GNOME Shell logs
+      description: Enable extension logging, reproduce the problem, and paste the relevant journal messages. Redact any sensitive information.
+      render: shell
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Add screenshots, recordings, or any other useful details.

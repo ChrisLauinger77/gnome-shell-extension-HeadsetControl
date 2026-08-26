@@ -1,1 +1,5 @@
 blank_issues_enabled: false
+contact_links:
+  - name: HeadsetControl command-line tool support
+    url: https://github.com/Sapd/HeadsetControl/issues
+    about: Report headset detection, hardware support, and command-line tool problems upstream.

@@ -1,0 +1,57 @@
+name: Feature request
+description: Suggest an improvement for the HeadsetControl extension
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement. Headset support and device capabilities come from the upstream HeadsetControl command-line tool; this repository covers their GNOME Shell integration.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched the open and closed issues and did not find an existing request.
+          required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: What problem would this feature solve, and who would benefit from it?
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Describe how you would like the feature to work in the GNOME Shell extension.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: upstream-support
+    attributes:
+      label: Is this capability supported by HeadsetControl?
+      options:
+        - "Yes"
+        - "No"
+        - Unsure
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Describe any workarounds or alternative approaches you considered.
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Add headset details, mockups, screenshots, links, or other relevant information.
