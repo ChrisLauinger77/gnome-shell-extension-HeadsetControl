@@ -11,7 +11,6 @@ import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
 import * as QuickSettings from "resource:///org/gnome/shell/ui/quickSettings.js";
 import * as MessageTray from "resource:///org/gnome/shell/ui/messageTray.js";
 import { Extension, gettext as _ } from "resource:///org/gnome/shell/extensions/extension.js";
-import { PopupAnimation } from "resource:///org/gnome/shell/ui/boxpointer.js";
 
 const QuickSettingsMenu = Main.panel.statusArea.quickSettings;
 const capabilities = {
@@ -213,7 +212,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
             const settingsItem = this.menu.addAction(_("Settings"), () => {
                 extension.openPreferences();
-                QuickSettingsMenu.menu.close(PopupAnimation.FADE);
+                QuickSettingsMenu.menu.close({ fadeOnly: true });
             });
             settingsItem.visible = Main.sessionMode.allowSettings;
             this.menu._settingsActions[extension.uuid] = settingsItem;
