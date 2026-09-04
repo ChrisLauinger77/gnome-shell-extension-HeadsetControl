@@ -1,0 +1,29 @@
+#!/bin/bash
+set -euo pipefail
+
+[[ "${1:-}" == "rebase" ]] || exit 0
+
+hook_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+repo_root=$(git -C "$hook_dir/.." rev-parse --show-toplevel)
+cd "$repo_root"
+package_changed=false
+
+while read -r old_commit new_commit _rest; do
+  [[ -n "${old_commit:-}" && -n "${new_commit:-}" ]] || continue
+  if git diff --quiet "$old_commit" "$new_commit" -- package.json; then
+    continue
+  else
+    status=$?
+  fi
+  if [[ $status -eq 1 ]]; then
+    package_changed=true
+    break
+  fi
+  echo "ERROR: Could not inspect rewritten package.json content." >&2
+  exit "$status"
+done
+
+[[ "$package_changed" == true ]] || exit 0
+
+echo "package.json changed in the rewritten rebase commits; checking version consistency ..."
+bash "$repo_root/.githooks/sync-version.sh" headsetcontrol.sh

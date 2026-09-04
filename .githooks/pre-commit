@@ -1,0 +1,54 @@
+#!/bin/bash
+set -euo pipefail
+
+hook_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+repo_root=$(git -C "$hook_dir/.." rev-parse --show-toplevel)
+cd "$repo_root"
+source "$repo_root/.githooks/version-utils.sh"
+
+metadata_path='HeadsetControl@lauinger-clan.de/metadata.json'
+helper_name='headsetcontrol.sh'
+
+if ! command -v jq >/dev/null 2>&1; then
+  echo "ERROR: jq is required to validate staged versions. Commit blocked." >&2
+  exit 1
+fi
+if ! metadata_json=$(git show ":$metadata_path"); then
+  echo "ERROR: $metadata_path is not available in the Git index. Commit blocked." >&2
+  exit 1
+fi
+if ! package_json=$(git show :package.json); then
+  echo "ERROR: package.json is not available in the Git index. Commit blocked." >&2
+  exit 1
+fi
+if ! metadata_version=$(jq -er '.["version-name"] | strings' <<<"$metadata_json"); then
+  echo "ERROR: Cannot read staged metadata.json version-name. Commit blocked." >&2
+  exit 1
+fi
+if ! package_version=$(jq -er '.version | strings' <<<"$package_json"); then
+  echo "ERROR: Cannot read staged package.json version. Commit blocked." >&2
+  exit 1
+fi
+if ! expected_version=$(normalize_version "$metadata_version"); then
+  echo "ERROR: Invalid staged metadata.json version-name: $metadata_version" >&2
+  echo "Commit blocked." >&2
+  exit 1
+fi
+
+echo "Staged metadata.json version-name: $metadata_version"
+echo "Staged package.json version:       $package_version"
+
+if [[ "$package_version" != "$expected_version" ]]; then
+  echo >&2
+  echo "ERROR: Staged version mismatch" >&2
+  echo "Expected package version:   $expected_version" >&2
+  echo >&2
+  echo "Commit blocked." >&2
+  echo "Run:" >&2
+  echo "./$helper_name update-version" >&2
+  echo >&2
+  echo "Then stage package.json and package-lock.json and commit again." >&2
+  exit 1
+fi
+
+echo "Staged version check OK."

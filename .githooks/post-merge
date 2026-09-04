@@ -1,0 +1,24 @@
+#!/bin/bash
+set -euo pipefail
+
+hook_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+repo_root=$(git -C "$hook_dir/.." rev-parse --show-toplevel)
+cd "$repo_root"
+
+if ! git rev-parse --verify 'ORIG_HEAD^{commit}' >/dev/null 2>&1; then
+  echo "ERROR: Cannot determine the pre-merge commit; version synchronization cannot continue." >&2
+  exit 2
+fi
+
+if git diff --quiet ORIG_HEAD HEAD -- package.json; then
+  exit 0
+else
+  status=$?
+fi
+if [[ $status -ne 1 ]]; then
+  echo "ERROR: Could not inspect package.json changes after merge." >&2
+  exit "$status"
+fi
+
+echo "package.json changed during merge; checking version consistency ..."
+bash "$repo_root/.githooks/sync-version.sh" headsetcontrol.sh
