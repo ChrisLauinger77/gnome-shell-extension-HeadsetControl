@@ -29,17 +29,20 @@ lives in `HeadsetControl@lauinger-clan.de/metadata.json`.
 - `.github/workflows/eslint.yml`: CI lint scan.
 - `.github/workflows/release.yml`: release packaging and EGO upload workflow.
 
-## Development Commands
+## Useful Commands
 
 Run from the repository root unless noted otherwise.
 
 ```bash
-npm install
+./headsetcontrol.sh install-dependencies
 npm run lint
 ./headsetcontrol.sh zip
 ./headsetcontrol.sh install
 ./headsetcontrol.sh translate
 ```
+
+Run `./headsetcontrol.sh install-dependencies` after pulling or rebasing remote
+changes that modify `package-lock.json`, particularly Renovate updates.
 
 Notes:
 
