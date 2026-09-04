@@ -94,6 +94,26 @@ When adding or changing a setting, update all relevant places:
 Be careful that GSettings key names in `extension.js`, `prefs.js`, and the schema
 match exactly.
 
+## Validation Checklist
+
+Before finishing changes, run the validations that match the edit:
+
+- JavaScript changes: `npm run lint`.
+- Capability detection, output parsing, or command-building changes: exercise
+  the affected JSON and legacy output paths with a real or simulated
+  `headsetcontrol` executable, or explain if local execution is not available.
+- Schema, metadata, packaging, icon, UI, or translation changes:
+  `./headsetcontrol.sh zip`.
+- User-visible strings: `./headsetcontrol.sh translate`.
+- Runtime behavior: load the extension in GNOME Shell and check the Quick
+  Settings controls, system indicator, and preferences window.
+- Submission-oriented changes: use `$review-gnome-shell-extension` to check
+  lifecycle cleanup, process boundaries, metadata, schemas, subprocesses,
+  privacy, maintainability, and packaging requirements.
+
+If a required GNOME, headset, or gettext command is unavailable in the
+environment, state that clearly in the final response.
+
 ## Packaging And Release
 
 - Release builds are produced by `./headsetcontrol.sh zip`.
