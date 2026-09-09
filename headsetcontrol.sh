@@ -81,7 +81,7 @@ update_version() {
 
 case "${1:-}" in
   install-dependencies)
-    npm ci
+    npm install
     ;;
   cleanup)
     if [[ -f "$extensionfile" ]]; then
