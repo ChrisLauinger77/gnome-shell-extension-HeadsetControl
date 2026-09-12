@@ -212,7 +212,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
             const settingsItem = this.menu.addAction(_("Settings"), () => {
                 extension.openPreferences();
-                QuickSettingsMenu.menu.close({ fadeOnly: true });
+                Main.panel.closeQuickSettings();
             });
             settingsItem.visible = Main.sessionMode.allowSettings;
             this.menu._settingsActions[extension.uuid] = settingsItem;
@@ -327,13 +327,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
 
         async _invokeCmd(cmd) {
             this._logOutput("_invokeCmd: " + cmd);
-            const retval = await invokeCmd(
-                cmd,
-                this._logger,
-                this._testMode,
-                this._cancellable,
-                this._subprocesses
-            );
+            const retval = await invokeCmd(cmd, this._logger, this._testMode, this._cancellable, this._subprocesses);
             this._logOutput("_invokeCmd retval: " + retval);
             return retval;
         }
@@ -586,13 +580,7 @@ export default class HeadsetControl extends Extension {
 
     async _invokeCmd(cmd) {
         this._logOutput("_invokeCmd: " + cmd);
-        const retval = await invokeCmd(
-            cmd,
-            this.getLogger(),
-            this._testMode,
-            this._cancellable,
-            this._subprocesses
-        );
+        const retval = await invokeCmd(cmd, this.getLogger(), this._testMode, this._cancellable, this._subprocesses);
         this._logOutput("_invokeCmd retval: " + retval);
         return retval;
     }
