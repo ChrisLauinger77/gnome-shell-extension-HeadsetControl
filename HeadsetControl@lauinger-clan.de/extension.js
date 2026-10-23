@@ -10,6 +10,7 @@ import * as Main from "resource:///org/gnome/shell/ui/main.js";
 import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
 import * as QuickSettings from "resource:///org/gnome/shell/ui/quickSettings.js";
 import * as MessageTray from "resource:///org/gnome/shell/ui/messageTray.js";
+import * as Slider from "resource:///org/gnome/shell/ui/slider.js";
 import { Extension, gettext as _ } from "resource:///org/gnome/shell/extensions/extension.js";
 
 const QuickSettingsMenu = Main.panel.statusArea.quickSettings;
@@ -32,6 +33,8 @@ const capabilities = {
     ancstartupmode: false,
     ancbuttonmodes: false,
     parametricequalizer: false,
+    headsetvolume: false,
+    btcallvolume: false,
 };
 // How the legacy capability listing names each capability, a string matches anywhere in it
 const legacyCapabilityPatterns = {
@@ -54,6 +57,8 @@ const legacyCapabilityPatterns = {
     ancstartupmode: "* anc startup mode",
     ancbuttonmodes: "* anc button modes",
     parametricequalizer: "* parametric equalizer",
+    headsetvolume: "* headset volume",
+    btcallvolume: "* bluetooth call volume",
 };
 const headsetcontrolCommands = {
     cmdCapabilities: "",
@@ -76,7 +81,11 @@ const headsetcontrolCommands = {
     cmdAncStartupMode: "",
     cmdAncButtonModes: "",
     cmdParametricEqualizer: "",
+    cmdHeadsetVolume: "",
+    cmdBtCallVolume: "",
 };
+// Scrolling and the arrow keys move a slider in small steps, apply once they pause
+const sliderApplyDelayMs = 500;
 const parametricEqualizerFilterTypes = ["lowshelf", "lowpass", "peaking", "highpass", "highshelf", "notch"];
 
 function resetRuntimeState() {
@@ -196,6 +205,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this._valueSidetone = _("Sidetone");
             this._valueMicrophone = "";
             this._sidetoneMenuItem = null;
+            this._sliders = new Map();
             this._valueHeadsetname = _("HeadsetControl");
             this._deviceId = "";
             this._jsonOutput = false;
@@ -229,6 +239,12 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this._addSettingsAction(extension);
         }
 
+        destroy() {
+            // Pending slider changes are dropped, their GLib timeouts removed
+            this.clearSliders();
+            super.destroy();
+        }
+
         updateUseLogging(value) {
             this._useLogging = value;
         }
@@ -252,6 +268,11 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                     capability: "sidetone",
                     label: _("Sidetone"),
                     method: this._addSidetoneMenu,
+                },
+                {
+                    capability: "headsetvolume",
+                    label: _("Headset Volume"),
+                    method: this._addHeadsetVolumeMenu,
                 },
                 {
                     capability: "anc",
@@ -314,6 +335,11 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                     method: this._addBtWhenPoweredOnMenu,
                 },
                 {
+                    capability: "btcallvolume",
+                    label: _("Bluetooth Call Volume"),
+                    method: this._addBtCallVolumeMenu,
+                },
+                {
                     capability: "noisefilter",
                     label: _("Microphone Noise Filter"),
                     method: this._addNoiseFilterMenu,
@@ -340,6 +366,8 @@ const HeadsetControlMenuToggle = GObject.registerClass(
         }
 
         refreshMenu(extension) {
+            // A change that waits for its timeout is dropped with its slider
+            this.clearSliders();
             this.menu.removeAll();
             this._buildMenu();
             this._addSettingsAction(extension);
@@ -512,19 +540,21 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             return retval;
         }
 
+        // Resolves to false when the action failed or was cancelled
         async _invokeAction(strAction, cmd) {
             if (!this._jsonOutput) {
+                // The legacy output does not tell whether the action worked
                 await this._invokeCmd(cmd);
-                return;
+                return !this._cancellable.is_cancelled();
             }
             // Without -d the CLI refuses to change anything while several headsets are connected
             const deviceOption = this._deviceId ? ` -d ${this._deviceId}` : "";
             const outputFormat = this._settings.get_string("option-output-format");
             const strOutput = await this._invokeCmd(`${cmd}${deviceOption} ${outputFormat}`);
             if (this._cancellable.is_cancelled()) {
-                return;
+                return false;
             }
-            this._reportActionResult(strAction, strOutput);
+            return this._reportActionResult(strAction, strOutput);
         }
 
         _reportActionResult(strAction, strOutput) {
@@ -549,10 +579,11 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             }
             if (errorMessage) {
                 this._showActionFailed(strAction, errorMessage);
-            } else {
-                removeNotification("action_failed");
-                this._logOutput(`${strAction} succeeded`);
+                return false;
             }
+            removeNotification("action_failed");
+            this._logOutput(`${strAction} succeeded`);
+            return true;
         }
 
         _showActionFailed(strAction, errorMessage) {
@@ -751,15 +782,141 @@ const HeadsetControlMenuToggle = GObject.registerClass(
         }
 
         _addMicrophoneVolumeMenu(popupMenuExpander) {
-            const arrayMicrophoneVolume = this._settings.get_strv("microphone-volume-values");
-            const microphoneVolumeValues = [
-                [_("Minimum"), arrayMicrophoneVolume[0]],
-                [_("Low"), arrayMicrophoneVolume[1]],
-                [_("Medium"), arrayMicrophoneVolume[2]],
-                [_("High"), arrayMicrophoneVolume[3]],
-                [_("Maximum"), arrayMicrophoneVolume[4]],
-            ].filter(([, value]) => value !== "-1");
-            this._addValuesMenu(popupMenuExpander, headsetcontrolCommands.cmdMicrophoneVolume, microphoneVolumeValues);
+            this._addSliderMenu(
+                popupMenuExpander,
+                headsetcontrolCommands.cmdMicrophoneVolume,
+                "microphone-volume-value",
+                128
+            );
+        }
+
+        _addHeadsetVolumeMenu(popupMenuExpander) {
+            this._addSliderMenu(
+                popupMenuExpander,
+                headsetcontrolCommands.cmdHeadsetVolume,
+                "headset-volume-value",
+                128
+            );
+        }
+
+        _addBtCallVolumeMenu(popupMenuExpander) {
+            this._addSliderMenu(popupMenuExpander, headsetcontrolCommands.cmdBtCallVolume, "bt-call-volume-value", 100);
+        }
+
+        // headsetcontrol 4.2 cannot read these values back, so the slider starts at the last value
+        // set, stored in settingKey (-1 while unknown). The submenu label shows it as a percentage.
+        _addSliderMenu(popupMenuExpander, cmd, settingKey, maxValue) {
+            const strLabel = popupMenuExpander.label.text;
+            const slider = new Slider.Slider(0);
+            slider.accessible_name = strLabel;
+            // Without focus on the row, the arrow keys reach the slider
+            const sliderItem = new PopupMenu.PopupBaseMenuItem({ activate: false, can_focus: false });
+            sliderItem.add_child(slider);
+            popupMenuExpander.menu.addMenuItem(sliderItem);
+            popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
+
+            const sliderState = {
+                strLabel,
+                cmd,
+                settingKey,
+                maxValue,
+                popupMenuExpander,
+                slider,
+                value: -1,
+                dragging: false,
+                timeoutId: 0,
+            };
+            sliderState.changedId = slider.connect("notify::value", this._onSliderChanged.bind(this, sliderState));
+            slider.connect("drag-begin", () => {
+                sliderState.dragging = true;
+            });
+            slider.connect("drag-end", () => {
+                sliderState.dragging = false;
+                this._applySlider(sliderState);
+            });
+            this._sliders.set(settingKey, sliderState);
+            this._setSliderValue(sliderState, this._settings.get_int(settingKey));
+        }
+
+        _getSliderValue(sliderState) {
+            return Math.round(sliderState.slider.value * sliderState.maxValue);
+        }
+
+        _updateSliderLabel(sliderState, value) {
+            const percent = Math.round((value / sliderState.maxValue) * 100);
+            sliderState.popupMenuExpander.label.text =
+                value < 0 ? sliderState.strLabel : `${sliderState.strLabel}: ${percent}%`;
+        }
+
+        _setSliderValue(sliderState, value) {
+            sliderState.value = value;
+            sliderState.slider.block_signal_handler(sliderState.changedId);
+            sliderState.slider.value = value < 0 ? 0.5 : value / sliderState.maxValue;
+            sliderState.slider.unblock_signal_handler(sliderState.changedId);
+            this._updateSliderLabel(sliderState, value);
+        }
+
+        _onSliderChanged(sliderState) {
+            this._updateSliderLabel(sliderState, this._getSliderValue(sliderState));
+            if (sliderState.dragging) {
+                return; // applied on drag-end
+            }
+            this._removeSliderTimeout(sliderState);
+            sliderState.timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, sliderApplyDelayMs, () => {
+                sliderState.timeoutId = 0;
+                this._applySlider(sliderState);
+                return GLib.SOURCE_REMOVE;
+            });
+        }
+
+        _removeSliderTimeout(sliderState) {
+            if (sliderState.timeoutId) {
+                GLib.Source.remove(sliderState.timeoutId);
+                sliderState.timeoutId = 0;
+            }
+        }
+
+        async _applySlider(sliderState) {
+            this._removeSliderTimeout(sliderState);
+            const value = this._getSliderValue(sliderState);
+            if (value === sliderState.value) {
+                return;
+            }
+            const succeeded = await this._invokeAction(sliderState.strLabel, `${sliderState.cmd} ${value}`);
+            if (this._cancellable.is_cancelled()) {
+                return; // the extension was disabled
+            }
+            if (succeeded) {
+                this._settings.set_int(sliderState.settingKey, value);
+            }
+            // The menu may have been rebuilt meanwhile, so update the slider shown now unless it is in use.
+            // After a failure it goes back to the value the headset still has.
+            const currentState = this._sliders.get(sliderState.settingKey);
+            if (currentState && !currentState.dragging && !currentState.timeoutId) {
+                this._setSliderValue(currentState, succeeded ? value : currentState.value);
+            }
+        }
+
+        clearSliders() {
+            for (const sliderState of this._sliders.values()) {
+                this._removeSliderTimeout(sliderState);
+            }
+            this._sliders.clear();
+        }
+
+        updateHeadsetVolume(headsetVolume) {
+            // Only reported by headsetcontrol after 4.2.0, for headsets that can read it back
+            const level = headsetVolume?.level;
+            if (!Number.isInteger(level) || level < 0) {
+                return;
+            }
+            if (this._settings.get_int("headset-volume-value") !== level) {
+                this._settings.set_int("headset-volume-value", level);
+            }
+            const sliderState = this._sliders.get("headset-volume-value");
+            if (sliderState && !sliderState.dragging && !sliderState.timeoutId) {
+                this._setSliderValue(sliderState, level);
+            }
         }
 
         _addAncMenu(popupMenuExpander) {
@@ -992,6 +1149,14 @@ export default class HeadsetControl extends Extension {
             cmdExecutable,
             this._settings.get_string("option-parametric-equalizer")
         );
+        headsetcontrolCommands.cmdHeadsetVolume = buildCommand(
+            cmdExecutable,
+            this._settings.get_string("option-headset-volume")
+        );
+        headsetcontrolCommands.cmdBtCallVolume = buildCommand(
+            cmdExecutable,
+            this._settings.get_string("option-bt-call-volume")
+        );
         if (!this._JSONoutputSupported) {
             this._updateBinaryCapabilities();
         }
@@ -1045,6 +1210,8 @@ export default class HeadsetControl extends Extension {
         capabilities.ancstartupmode = value;
         capabilities.ancbuttonmodes = value;
         capabilities.parametricequalizer = value;
+        capabilities.headsetvolume = value;
+        capabilities.btcallvolume = value;
     }
 
     _refreshCapabilitiesJSON(device) {
@@ -1069,6 +1236,8 @@ export default class HeadsetControl extends Extension {
         capabilities.ancstartupmode = device.capabilities.includes("CAP_ANC_STARTUP_MODE");
         capabilities.ancbuttonmodes = device.capabilities.includes("CAP_ANC_BUTTON_MODES");
         capabilities.parametricequalizer = device.capabilities.includes("CAP_PARAMETRIC_EQUALIZER");
+        capabilities.headsetvolume = device.capabilities.includes("CAP_HEADSET_VOLUME");
+        capabilities.btcallvolume = device.capabilities.includes("CAP_BT_CALL_VOLUME");
         for (const cap in capabilities) {
             this._logOutput(`${cap}: ${capabilities[cap]}`);
         }
@@ -1165,6 +1334,9 @@ export default class HeadsetControl extends Extension {
                 this._headsetControlIndicator.headsetControlMenuToggle.updateChatMixStatus(output.devices[0].chatmix);
                 this._headsetControlIndicator.headsetControlMenuToggle.updateSidetoneStatus(output.devices[0].sidetone);
                 this._headsetControlIndicator.headsetControlMenuToggle.updateMicrophoneStatus(output.devices[0]);
+                this._headsetControlIndicator.headsetControlMenuToggle.updateHeadsetVolume(
+                    output.devices[0].headset_volume
+                );
                 this._headsetControlIndicator.updateUIElements();
             }
             this._needCapabilitiesRefresh = false;
@@ -1611,6 +1783,14 @@ export default class HeadsetControl extends Extension {
                 key: "option-parametric-equalizer",
                 callback: this._onParamChangedCommand.bind(this),
             },
+            {
+                key: "option-headset-volume",
+                callback: this._onParamChangedCommand.bind(this),
+            },
+            {
+                key: "option-bt-call-volume",
+                callback: this._onParamChangedCommand.bind(this),
+            },
             { key: "notification-low-battery", callback: this._onParamChangedLogNot.bind(this) },
             { key: "low-battery-threshold", callback: this._onParamChangedLogNot.bind(this) },
             { key: "use-logging", callback: this._onParamChangedLogNot.bind(this) },
@@ -1628,10 +1808,6 @@ export default class HeadsetControl extends Extension {
             },
             {
                 key: "sidetone-values",
-                callback: this._onParamChangedMenu.bind(this),
-            },
-            {
-                key: "microphone-volume-values",
                 callback: this._onParamChangedMenu.bind(this),
             },
             {

@@ -186,6 +186,18 @@
                 <property name="tooltip-text" translatable="yes">Passed to headsetcontrol to set the parametric equalizer bands</property>
               </object>
             </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_common18">
+                <property name="title" translatable="yes">Headset Volume</property>
+                <property name="tooltip-text" translatable="yes">Passed to headsetcontrol to set the headset volume</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_common19">
+                <property name="title" translatable="yes">Bluetooth Call Volume</property>
+                <property name="tooltip-text" translatable="yes">Passed to headsetcontrol to set the Bluetooth call volume</property>
+              </object>
+            </child>
           </object>
         </child>
         <child>
@@ -474,99 +486,6 @@
               <object class="AdwSpinRow" id="HeadsetControl_row_sidetone5">
                 <property name="title" translatable="yes">Value for Maximum</property>
                 <property name="subtitle" translatable="yes">Input for headsetcontrol sidetone command</property>
-                <property name="tooltip-text" translatable="yes">-1 to disable</property>
-                <property name="adjustment">
-                  <object class="GtkAdjustment">
-                    <property name="lower">-1</property>
-                    <property name="upper">128</property>
-                    <property name="value">128</property>
-                    <property name="step-increment">1</property>
-                    <property name="page-increment">1</property>
-                  </object>
-                </property>
-              </object>
-            </child>
-          </object>
-        </child>
-      </object>
-    </child>
-
-    <child>
-      <object class="AdwPreferencesGroup" id="HeadsetControl_group_microphonevolume">
-        <property name="title" translatable="yes">Microphone Volume</property>
-        <child>
-          <object class="AdwExpanderRow" id="HeadsetControl_row_microphonevolume">
-            <property name="title" translatable="yes">Values for microphone volume</property>
-            <property name="subtitle" translatable="yes">Minimum Low Medium High Maximum (-1 disable)</property>
-            <property name="tooltip-text" translatable="yes">Minimum Low Medium High Maximum (-1 disable)</property>
-            <child>
-              <object class="AdwSpinRow" id="HeadsetControl_row_microphonevolume1">
-                <property name="title" translatable="yes">Value for Minimum</property>
-                <property name="subtitle" translatable="yes">Input for headsetcontrol microphone volume command</property>
-                <property name="tooltip-text" translatable="yes">-1 to disable</property>
-                <property name="adjustment">
-                  <object class="GtkAdjustment">
-                    <property name="lower">-1</property>
-                    <property name="upper">128</property>
-                    <property name="value">0</property>
-                    <property name="step-increment">1</property>
-                    <property name="page-increment">1</property>
-                  </object>
-                </property>
-              </object>
-            </child>
-            <child>
-              <object class="AdwSpinRow" id="HeadsetControl_row_microphonevolume2">
-                <property name="title" translatable="yes">Value for Low</property>
-                <property name="subtitle" translatable="yes">Input for headsetcontrol microphone volume command</property>
-                <property name="tooltip-text" translatable="yes">-1 to disable</property>
-                <property name="adjustment">
-                  <object class="GtkAdjustment">
-                    <property name="lower">-1</property>
-                    <property name="upper">128</property>
-                    <property name="value">32</property>
-                    <property name="step-increment">1</property>
-                    <property name="page-increment">1</property>
-                  </object>
-                </property>
-              </object>
-            </child>
-            <child>
-              <object class="AdwSpinRow" id="HeadsetControl_row_microphonevolume3">
-                <property name="title" translatable="yes">Value for Medium</property>
-                <property name="subtitle" translatable="yes">Input for headsetcontrol microphone volume command</property>
-                <property name="tooltip-text" translatable="yes">-1 to disable</property>
-                <property name="adjustment">
-                  <object class="GtkAdjustment">
-                    <property name="lower">-1</property>
-                    <property name="upper">128</property>
-                    <property name="value">64</property>
-                    <property name="step-increment">1</property>
-                    <property name="page-increment">1</property>
-                  </object>
-                </property>
-              </object>
-            </child>
-            <child>
-              <object class="AdwSpinRow" id="HeadsetControl_row_microphonevolume4">
-                <property name="title" translatable="yes">Value for High</property>
-                <property name="subtitle" translatable="yes">Input for headsetcontrol microphone volume command</property>
-                <property name="tooltip-text" translatable="yes">-1 to disable</property>
-                <property name="adjustment">
-                  <object class="GtkAdjustment">
-                    <property name="lower">-1</property>
-                    <property name="upper">128</property>
-                    <property name="value">96</property>
-                    <property name="step-increment">1</property>
-                    <property name="page-increment">1</property>
-                  </object>
-                </property>
-              </object>
-            </child>
-            <child>
-              <object class="AdwSpinRow" id="HeadsetControl_row_microphonevolume5">
-                <property name="title" translatable="yes">Value for Maximum</property>
-                <property name="subtitle" translatable="yes">Input for headsetcontrol microphone volume command</property>
                 <property name="tooltip-text" translatable="yes">-1 to disable</property>
                 <property name="adjustment">
                   <object class="GtkAdjustment">

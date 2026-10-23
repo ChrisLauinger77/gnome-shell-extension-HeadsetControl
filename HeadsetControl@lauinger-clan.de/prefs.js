@@ -63,6 +63,8 @@ export default class AdwPrefs extends ExtensionPreferences {
         this.changeOption(settings, "option-anc-startup-mode", options.opt_anc_startup_mode.get_text());
         this.changeOption(settings, "option-anc-button-modes", options.opt_anc_button_modes.get_text());
         this.changeOption(settings, "option-parametric-equalizer", options.opt_parametric_equalizer.get_text());
+        this.changeOption(settings, "option-headset-volume", options.opt_headset_volume.get_text());
+        this.changeOption(settings, "option-bt-call-volume", options.opt_bt_call_volume.get_text());
     }
 
     _onColorChanged(settings, color_setting_button, strSetting) {
@@ -79,12 +81,6 @@ export default class AdwPrefs extends ExtensionPreferences {
         const arraySidetone = settings.get_strv("sidetone-values");
         arraySidetone[index] = adwrow.get_value().toString();
         settings.set_strv("sidetone-values", arraySidetone);
-    }
-
-    _onMVvaluechanged(settings, adwrow, index) {
-        const arrayMicrophoneVolume = settings.get_strv("microphone-volume-values");
-        arrayMicrophoneVolume[index] = adwrow.get_value().toString();
-        settings.set_strv("microphone-volume-values", arrayMicrophoneVolume);
     }
 
     _onITvaluechanged(settings, adwrow, index) {
@@ -181,6 +177,10 @@ export default class AdwPrefs extends ExtensionPreferences {
         opt_anc_button_modes.set_text(_(window._settings.get_string("option-anc-button-modes")));
         const opt_parametric_equalizer = builder.get_object("HeadsetControl_row_common17");
         opt_parametric_equalizer.set_text(_(window._settings.get_string("option-parametric-equalizer")));
+        const opt_headset_volume = builder.get_object("HeadsetControl_row_common18");
+        opt_headset_volume.set_text(_(window._settings.get_string("option-headset-volume")));
+        const opt_bt_call_volume = builder.get_object("HeadsetControl_row_common19");
+        opt_bt_call_volume.set_text(_(window._settings.get_string("option-bt-call-volume")));
         const buttonApply = builder.get_object("HeadsetControl_row_apply");
         buttonApply.connect(
             "activated",
@@ -205,6 +205,8 @@ export default class AdwPrefs extends ExtensionPreferences {
                 opt_anc_startup_mode,
                 opt_anc_button_modes,
                 opt_parametric_equalizer,
+                opt_headset_volume,
+                opt_bt_call_volume,
             })
         );
 
@@ -349,14 +351,6 @@ export default class AdwPrefs extends ExtensionPreferences {
             if (!adwrow) continue; // Prevent TypeError
             adwrow.set_value(Number.parseInt(arraySidetone[index]) || 0);
             adwrow.connect("changed", this._onSTvaluechanged.bind(this, window._settings, adwrow, index));
-        }
-        //microphone volume
-        const arrayMicrophoneVolume = window._settings.get_strv("microphone-volume-values");
-        for (const [index, value] of arrayMicrophoneVolume.entries()) {
-            adwrow = builder.get_object("HeadsetControl_row_microphonevolume" + (index + 1));
-            if (!adwrow) continue; // Prevent TypeError
-            adwrow.set_value(Number.parseInt(value) || 0);
-            adwrow.connect("changed", this._onMVvaluechanged.bind(this, window._settings, adwrow, index));
         }
         //inactive time
         const inactiveTimeLabels = [

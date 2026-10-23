@@ -124,10 +124,30 @@
       <summary>Parameter to set the noise cancelling button modes</summary>
       <description>Passed to headsetcontrol to set the modes the noise cancelling button cycles through</description>
     </key>
-    <key name="microphone-volume-values" type="as">
-      <default>['0', '32', '64', '96', '128']</default>
-      <summary>Microphone volume values</summary>
-      <description>Used for microphone volume values minimum, low, medium, high, max (-1 disable)</description>
+    <key name="microphone-volume-value" type="i">
+      <default>-1</default>
+      <summary>Last microphone volume</summary>
+      <description>Last value set with the microphone volume slider (0-128, -1 unknown), as the headset cannot report it</description>
+    </key>
+    <key name="option-headset-volume" type="s">
+      <default>'--volume'</default>
+      <summary>Parameter to set headset volume</summary>
+      <description>Passed to headsetcontrol to set the headset volume</description>
+    </key>
+    <key name="headset-volume-value" type="i">
+      <default>-1</default>
+      <summary>Last headset volume</summary>
+      <description>Last value set with the headset volume slider or reported by the headset (0-128, -1 unknown)</description>
+    </key>
+    <key name="option-bt-call-volume" type="s">
+      <default>'--bt-call-volume'</default>
+      <summary>Parameter to set Bluetooth call volume</summary>
+      <description>Passed to headsetcontrol to set the Bluetooth call volume</description>
+    </key>
+    <key name="bt-call-volume-value" type="i">
+      <default>-1</default>
+      <summary>Last Bluetooth call volume</summary>
+      <description>Last value set with the Bluetooth call volume slider (0-100, -1 unknown), as the headset cannot report it</description>
     </key>
     <key name="notification-low-battery" type="b">
       <default>true</default>
