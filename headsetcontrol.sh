@@ -106,22 +106,23 @@ case "${1:-}" in
     ;;
   zip|pack)
     "$script_path" cleanup
-    cd "$extension"
-    gnome-extensions pack --podir=../po/ --out-dir=../ --extra-source=./ui/ --extra-source=../LICENSE --force
-    cd ..
+    if ! (cd "$extension" && gnome-extensions pack --podir=../po/ --out-dir=../ --extra-source=./ui/ --extra-source=../LICENSE --force); then
+      echo "ERROR: gnome-extensions pack failed, no extension zip created" >&2
+      exit 1
+    fi
     echo "Extension zip created ..."
     ;;
   install)
     if [[ ! -f "$extensionfile" ]]; then
-      "$script_path" zip
+      "$script_path" zip || exit
     fi
-    gnome-extensions install "$extensionfile" --force
-    gnome-extensions enable "$extension"
+    gnome-extensions install "$extensionfile" --force || exit
+    gnome-extensions enable "$extension" || exit
     echo "Extension zip installed ..."
     ;;
   upload)
     if [[ ! -f "$extensionfile" ]]; then
-      "$script_path" zip
+      "$script_path" zip || exit
     fi
     gnome-extensions upload --accept-tos --user ChrisLauinger77 --password-file /var/data/dev/ego_password "$extensionfile"
     ;;
