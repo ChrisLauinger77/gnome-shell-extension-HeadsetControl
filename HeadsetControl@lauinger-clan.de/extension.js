@@ -165,6 +165,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this._valueBatteryNum = -1;
             this._valueChatMix = "";
             this._valueSidetone = _("Sidetone");
+            this._valueMicrophone = "";
             this._sidetoneMenuItem = null;
             this._valueHeadsetname = _("HeadsetControl");
             this._deviceId = "";
@@ -382,6 +383,22 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             }
         }
 
+        updateMicrophoneStatus(device) {
+            // Only headsets with the microphone status capabilities report these, as 1 or 0
+            // in headsetcontrol 4.2. The normal state (attached, unmuted) shows nothing.
+            if (device?.mic_attached !== undefined && !device.mic_attached) {
+                this._valueMicrophone = _("Mic detached");
+            } else if (device?.mic_muted) {
+                this._valueMicrophone = _("Mic muted");
+            } else {
+                this._valueMicrophone = "";
+            }
+        }
+
+        _addMicrophoneStatus(strSubtitle) {
+            return this._valueMicrophone ? `${strSubtitle} · ${this._valueMicrophone}` : strSubtitle;
+        }
+
         setMenuTitle() {
             if (capabilities.battery && capabilities.chatmix) {
                 this.set({
@@ -435,16 +452,20 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             const iconName = this._getMenuIconName();
             this._logOutput("setMenuHeader iconName: " + iconName);
             if (capabilities.battery && capabilities.chatmix) {
-                this.menu.setHeader(iconName, this._valueHeadsetname, this._valueBattery + " " + this._valueChatMix);
+                this.menu.setHeader(
+                    iconName,
+                    this._valueHeadsetname,
+                    this._addMicrophoneStatus(this._valueBattery + " " + this._valueChatMix)
+                );
                 this._logOutput("setMenuHeader: Battery and Chatmix");
             } else if (capabilities.battery) {
-                this.menu.setHeader(iconName, this._valueHeadsetname, this._valueBattery);
+                this.menu.setHeader(iconName, this._valueHeadsetname, this._addMicrophoneStatus(this._valueBattery));
                 this._logOutput("setMenuHeader: Battery");
             } else if (capabilities.chatmix) {
-                this.menu.setHeader(iconName, this._valueHeadsetname, this._valueChatMix);
+                this.menu.setHeader(iconName, this._valueHeadsetname, this._addMicrophoneStatus(this._valueChatMix));
                 this._logOutput("setMenuHeader: Chatmix");
             } else {
-                this.menu.setHeader(iconName, _("HeadsetControl"), this._valueHeadsetname);
+                this.menu.setHeader(iconName, _("HeadsetControl"), this._addMicrophoneStatus(this._valueHeadsetname));
                 this._logOutput("setMenuHeader: Headsetname");
             }
             this._changeColor(this._valueBattery, this._valueBatteryNum);
@@ -1038,6 +1059,7 @@ export default class HeadsetControl extends Extension {
             if (!this._isDeviceStatusSuccess(output.devices[0])) {
                 this._setAllCapabilities(true); // if we cannot get the capabilities, set all to true
                 this._headsetControlIndicator.headsetControlMenuToggle.updateSidetoneStatus(null);
+                this._headsetControlIndicator.headsetControlMenuToggle.updateMicrophoneStatus(null);
                 return false;
             }
             if (this._needCapabilitiesRefresh) {
@@ -1067,12 +1089,14 @@ export default class HeadsetControl extends Extension {
                 );
                 this._headsetControlIndicator.headsetControlMenuToggle.updateChatMixStatus(output.devices[0].chatmix);
                 this._headsetControlIndicator.headsetControlMenuToggle.updateSidetoneStatus(output.devices[0].sidetone);
+                this._headsetControlIndicator.headsetControlMenuToggle.updateMicrophoneStatus(output.devices[0]);
                 this._headsetControlIndicator.updateUIElements();
             }
             this._needCapabilitiesRefresh = false;
         } else {
-            // Without a headset there is no current sidetone level
+            // Without a headset there is no current sidetone level or microphone state
             this._headsetControlIndicator.headsetControlMenuToggle.updateSidetoneStatus(null);
+            this._headsetControlIndicator.headsetControlMenuToggle.updateMicrophoneStatus(null);
         }
         return true;
     }
@@ -1099,8 +1123,9 @@ export default class HeadsetControl extends Extension {
             this._JSONoutputSupported = false;
             if (!this._isCancelled(cancellable)) {
                 this._headsetControlIndicator.headsetControlMenuToggle.jsonOutput = false;
-                // The legacy output has no sidetone level
+                // The legacy output has no sidetone level or microphone state
                 this._headsetControlIndicator.headsetControlMenuToggle.updateSidetoneStatus(null);
+                this._headsetControlIndicator.headsetControlMenuToggle.updateMicrophoneStatus(null);
             }
             // Fallback to non-JSON method
             await this._refreshCapabilities();
