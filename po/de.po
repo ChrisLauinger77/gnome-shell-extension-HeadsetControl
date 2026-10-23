@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-23 15:14+0200\n"
+"POT-Creation-Date: 2026-10-23 15:20+0200\n"
 "PO-Revision-Date: 2026-04-25 09:05+0200\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
@@ -22,7 +22,7 @@ msgstr ""
 #: HeadsetControl@lauinger-clan.de/extension.js:142
 #: HeadsetControl@lauinger-clan.de/extension.js:150
 #: HeadsetControl@lauinger-clan.de/extension.js:405
-#: HeadsetControl@lauinger-clan.de/extension.js:1345
+#: HeadsetControl@lauinger-clan.de/extension.js:1350
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:5
 msgid "HeadsetControl"
 msgstr "Headset-Steuerung"
@@ -215,20 +215,20 @@ msgstr "Einstellung 4"
 msgid "Minimum"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:1184
-#: HeadsetControl@lauinger-clan.de/extension.js:1214
+#: HeadsetControl@lauinger-clan.de/extension.js:1189
+#: HeadsetControl@lauinger-clan.de/extension.js:1219
 msgid "Refreshing..."
 msgstr "Aktualisiere..."
 
-#: HeadsetControl@lauinger-clan.de/extension.js:1206
+#: HeadsetControl@lauinger-clan.de/extension.js:1211
 msgid "Quicksettings open - refresh indicator running..."
 msgstr "Schnelleinstellungen geöffnet - Indikatoraktualisierung läuft..."
 
-#: HeadsetControl@lauinger-clan.de/extension.js:1211
+#: HeadsetControl@lauinger-clan.de/extension.js:1216
 msgid "Quicksettings not open - do nothing..."
 msgstr "Schnelleinstellungen nicht geöffnet - tue nichts..."
 
-#: HeadsetControl@lauinger-clan.de/extension.js:1346
+#: HeadsetControl@lauinger-clan.de/extension.js:1351
 msgid "Battery low! Please charge your headset."
 msgstr "Batterie schwach! Bitte laden Sie Ihr Headset auf."
 

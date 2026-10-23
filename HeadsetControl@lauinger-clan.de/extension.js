@@ -985,6 +985,9 @@ export default class HeadsetControl extends Extension {
                 this._headsetControlIndicator.updateUIElements();
             }
             this._needCapabilitiesRefresh = false;
+        } else {
+            // Without a headset there is no current sidetone level
+            this._headsetControlIndicator.headsetControlMenuToggle.updateSidetoneStatus(null);
         }
         return true;
     }
@@ -1060,6 +1063,8 @@ export default class HeadsetControl extends Extension {
             this._setAllCapabilities(true);
             return;
         }
+        // Only what this output lists, so a capability that is gone loses its submenu
+        this._setAllCapabilities(false);
         if (strOutput.includes("* sidetone")) {
             capabilities.sidetone = true;
         }
