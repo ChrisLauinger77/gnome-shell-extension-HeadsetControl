@@ -180,6 +180,12 @@
                 <property name="tooltip-text" translatable="yes">Passed to headsetcontrol to set the modes the noise cancelling button cycles through</property>
               </object>
             </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_common17">
+                <property name="title" translatable="yes">Parametric Equalizer</property>
+                <property name="tooltip-text" translatable="yes">Passed to headsetcontrol to set the parametric equalizer bands</property>
+              </object>
+            </child>
           </object>
         </child>
         <child>
@@ -341,6 +347,37 @@
               <object class="AdwEntryRow" id="HeadsetControl_row_equalizersetting4">
                 <property name="title" translatable="yes">Setting 4</property>
                 <property name="tooltip-text" translatable="yes">Passed to headsetcontrol as parameter to equalizer option (when supported)</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwExpanderRow" id="HeadsetControl_row_parametricequalizersettings">
+            <property name="title" translatable="yes">Parametric equalizer settings</property>
+            <property name="subtitle" translatable="yes">Parametric equalizer options (parametric equalizer might not be supported by your headset)</property>
+            <property name="tooltip-text" translatable="yes">The number of bands, the filter types and the ranges depend on the headset</property>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_parametricequalizersetting1">
+                <property name="title" translatable="yes">Setting 1</property>
+                <property name="tooltip-text" translatable="yes">Name:FREQ,GAIN,Q,TYPE;... with TYPE lowshelf, lowpass, peaking, highpass, highshelf or notch, 'reset' clears all bands</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_parametricequalizersetting2">
+                <property name="title" translatable="yes">Setting 2</property>
+                <property name="tooltip-text" translatable="yes">Name:FREQ,GAIN,Q,TYPE;... with TYPE lowshelf, lowpass, peaking, highpass, highshelf or notch, 'reset' clears all bands</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_parametricequalizersetting3">
+                <property name="title" translatable="yes">Setting 3</property>
+                <property name="tooltip-text" translatable="yes">Name:FREQ,GAIN,Q,TYPE;... with TYPE lowshelf, lowpass, peaking, highpass, highshelf or notch, 'reset' clears all bands</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_parametricequalizersetting4">
+                <property name="title" translatable="yes">Setting 4</property>
+                <property name="tooltip-text" translatable="yes">Name:FREQ,GAIN,Q,TYPE;... with TYPE lowshelf, lowpass, peaking, highpass, highshelf or notch, 'reset' clears all bands</property>
               </object>
             </child>
           </object>

@@ -31,6 +31,7 @@ const capabilities = {
     anc: false,
     ancstartupmode: false,
     ancbuttonmodes: false,
+    parametricequalizer: false,
 };
 // How the legacy capability listing names each capability, a string matches anywhere in it
 const legacyCapabilityPatterns = {
@@ -52,6 +53,7 @@ const legacyCapabilityPatterns = {
     anc: /^\s*\* anc$/m,
     ancstartupmode: "* anc startup mode",
     ancbuttonmodes: "* anc button modes",
+    parametricequalizer: "* parametric equalizer",
 };
 const headsetcontrolCommands = {
     cmdCapabilities: "",
@@ -73,7 +75,9 @@ const headsetcontrolCommands = {
     cmdAnc: "",
     cmdAncStartupMode: "",
     cmdAncButtonModes: "",
+    cmdParametricEqualizer: "",
 };
+const parametricEqualizerFilterTypes = ["lowshelf", "lowpass", "peaking", "highpass", "highshelf", "notch"];
 
 function resetRuntimeState() {
     for (const capability in capabilities) {
@@ -82,6 +86,31 @@ function resetRuntimeState() {
     for (const command in headsetcontrolCommands) {
         headsetcontrolCommands[command] = "";
     }
+}
+
+// headsetcontrol skips a band it cannot parse and resets the equalizer when no band is left,
+// so a typo would clear all bands. Returns the first malformed band, or null when all are fine.
+// Device ranges are left to headsetcontrol, which reports them as a failed action.
+function findInvalidParametricEqualizerBand(strBands) {
+    if (strBands === "reset") {
+        return null;
+    }
+    const bands = strBands
+        .split(";")
+        .map((band) => band.trim())
+        .filter(Boolean);
+    if (bands.length === 0) {
+        return strBands;
+    }
+    for (const band of bands) {
+        // FREQ,GAIN,Q,TYPE separated by commas or spaces
+        const fields = band.split(/[ ,]+/).filter(Boolean);
+        const numbersValid = fields.slice(0, 3).every((field) => Number.isFinite(Number(field)));
+        if (fields.length !== 4 || !numbersValid || !parametricEqualizerFilterTypes.includes(fields[3])) {
+            return band;
+        }
+    }
+    return null;
 }
 
 async function invokeCmd(cmd, logger, testMode = 0, cancellable = null, subprocesses = null) {
@@ -268,6 +297,11 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                     capability: "equalizerpreset",
                     label: _("Equalizer Preset"),
                     method: this._addEqualizerPresetMenu,
+                },
+                {
+                    capability: "parametricequalizer",
+                    label: _("Parametric Equalizer"),
+                    method: this._addParametricEqualizerMenu,
                 },
                 {
                     capability: "volumelimiter",
@@ -513,13 +547,18 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                     errorMessage = failedAction.error_message || _("Unknown error");
                 }
             }
-            removeNotification("action_failed");
             if (errorMessage) {
-                this._logOutput(`${strAction} failed: ${errorMessage}`);
-                addNotification(strAction, _("Failed") + ": " + errorMessage, true, "action_failed");
+                this._showActionFailed(strAction, errorMessage);
             } else {
+                removeNotification("action_failed");
                 this._logOutput(`${strAction} succeeded`);
             }
+        }
+
+        _showActionFailed(strAction, errorMessage) {
+            removeNotification("action_failed");
+            this._logOutput(`${strAction} failed: ${errorMessage}`);
+            addNotification(strAction, _("Failed") + ": " + errorMessage, true, "action_failed");
         }
 
         _addPopupMenuItem(popupMenuExpander, strLabel, strValue) {
@@ -639,6 +678,36 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                     item,
                     headsetcontrolCommands.cmdEqualizerPreset + " " + index.toString()
                 );
+            }
+            popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
+        }
+
+        _addParametricEqualizerMenu(popupMenuExpander) {
+            const arrayParametricEqualizer = this._settings.get_strv("option-parametric-equalizer-settings");
+            for (const setting of arrayParametricEqualizer) {
+                // "Name:bands", the bands contain no colon. An unnamed setting shows its bands.
+                const separator = setting.indexOf(":");
+                const strBands = setting.slice(separator + 1).trim();
+                const strName = setting.slice(0, Math.max(separator, 0)).trim() || strBands;
+                if (!strBands) {
+                    continue; // headsetcontrol would reset all bands
+                }
+                const invalidBand = findInvalidParametricEqualizerBand(strBands);
+                if (invalidBand === null) {
+                    this._addPopupMenuItem(
+                        popupMenuExpander,
+                        strName,
+                        `${headsetcontrolCommands.cmdParametricEqualizer} ${GLib.shell_quote(strBands)}`
+                    );
+                    continue;
+                }
+                // Keep the entry, so the user learns why it does nothing
+                const submenu = new PopupMenu.PopupMenuItem(strName);
+                const strAction = `${popupMenuExpander.label.text}: ${strName}`;
+                submenu.connect("activate", () => {
+                    this._showActionFailed(strAction, _("Invalid band") + ` "${invalidBand}"`);
+                });
+                popupMenuExpander.menu.addMenuItem(submenu);
             }
             popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
         }
@@ -919,6 +988,10 @@ export default class HeadsetControl extends Extension {
             cmdExecutable,
             this._settings.get_string("option-anc-button-modes")
         );
+        headsetcontrolCommands.cmdParametricEqualizer = buildCommand(
+            cmdExecutable,
+            this._settings.get_string("option-parametric-equalizer")
+        );
         if (!this._JSONoutputSupported) {
             this._updateBinaryCapabilities();
         }
@@ -971,6 +1044,7 @@ export default class HeadsetControl extends Extension {
         capabilities.anc = value;
         capabilities.ancstartupmode = value;
         capabilities.ancbuttonmodes = value;
+        capabilities.parametricequalizer = value;
     }
 
     _refreshCapabilitiesJSON(device) {
@@ -994,6 +1068,7 @@ export default class HeadsetControl extends Extension {
         capabilities.anc = device.capabilities.includes("CAP_ANC");
         capabilities.ancstartupmode = device.capabilities.includes("CAP_ANC_STARTUP_MODE");
         capabilities.ancbuttonmodes = device.capabilities.includes("CAP_ANC_BUTTON_MODES");
+        capabilities.parametricequalizer = device.capabilities.includes("CAP_PARAMETRIC_EQUALIZER");
         for (const cap in capabilities) {
             this._logOutput(`${cap}: ${capabilities[cap]}`);
         }
@@ -1532,6 +1607,10 @@ export default class HeadsetControl extends Extension {
                 key: "option-anc-button-modes",
                 callback: this._onParamChangedCommand.bind(this),
             },
+            {
+                key: "option-parametric-equalizer",
+                callback: this._onParamChangedCommand.bind(this),
+            },
             { key: "notification-low-battery", callback: this._onParamChangedLogNot.bind(this) },
             { key: "low-battery-threshold", callback: this._onParamChangedLogNot.bind(this) },
             { key: "use-logging", callback: this._onParamChangedLogNot.bind(this) },
@@ -1557,6 +1636,10 @@ export default class HeadsetControl extends Extension {
             },
             {
                 key: "option-equalizer-settings",
+                callback: this._onParamChangedMenu.bind(this),
+            },
+            {
+                key: "option-parametric-equalizer-settings",
                 callback: this._onParamChangedMenu.bind(this),
             },
             {

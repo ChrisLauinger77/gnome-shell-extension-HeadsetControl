@@ -74,6 +74,16 @@
         headset)</summary>
       <description>Shown in equalizer preset menu (when supported)</description>
     </key>
+    <key name="option-parametric-equalizer" type="s">
+      <default>'--parametric-equalizer'</default>
+      <summary>Parameter to set parametric equalizer</summary>
+      <description>Passed to headsetcontrol to set the parametric equalizer bands</description>
+    </key>
+    <key name="option-parametric-equalizer-settings" type="as">
+      <default>['Flat:reset', 'Bass boost:100,4,0.7,lowshelf', 'Treble boost:8000,4,0.7,highshelf', 'Voice:200,-3,0.7,lowshelf;3000,3,1,peaking']</default>
+      <summary>Parametric equalizer options (parametric equalizer might not be supported by your headset)</summary>
+      <description>Name:FREQ,GAIN,Q,TYPE;... with TYPE lowshelf, lowpass, peaking, highpass, highshelf or notch, 'reset' clears all bands</description>
+    </key>
     <key name="option-volume-limiter" type="s">
       <default>'--volume-limiter'</default>
       <summary>Parameter to set volume limiter</summary>

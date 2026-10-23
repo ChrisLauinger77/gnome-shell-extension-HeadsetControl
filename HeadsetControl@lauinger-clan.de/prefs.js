@@ -62,6 +62,7 @@ export default class AdwPrefs extends ExtensionPreferences {
         this.changeOption(settings, "option-anc", options.opt_anc.get_text());
         this.changeOption(settings, "option-anc-startup-mode", options.opt_anc_startup_mode.get_text());
         this.changeOption(settings, "option-anc-button-modes", options.opt_anc_button_modes.get_text());
+        this.changeOption(settings, "option-parametric-equalizer", options.opt_parametric_equalizer.get_text());
     }
 
     _onColorChanged(settings, color_setting_button, strSetting) {
@@ -178,6 +179,8 @@ export default class AdwPrefs extends ExtensionPreferences {
         opt_anc_startup_mode.set_text(_(window._settings.get_string("option-anc-startup-mode")));
         const opt_anc_button_modes = builder.get_object("HeadsetControl_row_common16");
         opt_anc_button_modes.set_text(_(window._settings.get_string("option-anc-button-modes")));
+        const opt_parametric_equalizer = builder.get_object("HeadsetControl_row_common17");
+        opt_parametric_equalizer.set_text(_(window._settings.get_string("option-parametric-equalizer")));
         const buttonApply = builder.get_object("HeadsetControl_row_apply");
         buttonApply.connect(
             "activated",
@@ -201,6 +204,7 @@ export default class AdwPrefs extends ExtensionPreferences {
                 opt_anc,
                 opt_anc_startup_mode,
                 opt_anc_button_modes,
+                opt_parametric_equalizer,
             })
         );
 
@@ -308,6 +312,23 @@ export default class AdwPrefs extends ExtensionPreferences {
             adwrowEQ.connect(
                 "changed",
                 this._onEQvaluechanged.bind(this, window._settings, adwrowEQ, index, "option-equalizer-settings")
+            );
+        }
+        //parametric equalizer
+        const arrayParametricEQsettings = window._settings.get_strv("option-parametric-equalizer-settings");
+        for (const [index, value] of arrayParametricEQsettings.entries()) {
+            const adwrowPEQ = builder.get_object("HeadsetControl_row_parametricequalizersetting" + (index + 1));
+            if (!adwrowPEQ) continue; // Prevent TypeError
+            adwrowPEQ.set_text(value);
+            adwrowPEQ.connect(
+                "changed",
+                this._onEQvaluechanged.bind(
+                    this,
+                    window._settings,
+                    adwrowPEQ,
+                    index,
+                    "option-parametric-equalizer-settings"
+                )
             );
         }
         //equalizer preset
