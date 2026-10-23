@@ -825,6 +825,8 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 value: -1,
                 dragging: false,
                 timeoutId: 0,
+                applying: false,
+                reapply: false,
             };
             sliderState.changedId = slider.connect("notify::value", this._onSliderChanged.bind(this, sliderState));
             slider.connect("drag-begin", () => {
@@ -876,24 +878,49 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             }
         }
 
+        _isSliderIdle(sliderState) {
+            return !sliderState.dragging && !sliderState.timeoutId && !sliderState.applying;
+        }
+
+        // One command per slider at a time. A change made while it runs is applied once it ends,
+        // so the last position wins and is compared with the value the headset actually got.
         async _applySlider(sliderState) {
             this._removeSliderTimeout(sliderState);
+            if (sliderState.applying) {
+                sliderState.reapply = true;
+                return;
+            }
+            sliderState.reapply = false;
             const value = this._getSliderValue(sliderState);
             if (value === sliderState.value) {
                 return;
             }
+            sliderState.applying = true;
             const succeeded = await this._invokeAction(sliderState.strLabel, `${sliderState.cmd} ${value}`);
+            sliderState.applying = false;
             if (this._cancellable.is_cancelled()) {
-                return; // the extension was disabled
+                return; // the extension was disabled, a waiting change is dropped
             }
             if (succeeded) {
+                sliderState.value = value;
                 this._settings.set_int(sliderState.settingKey, value);
             }
-            // The menu may have been rebuilt meanwhile, so update the slider shown now unless it is in use.
-            // After a failure it goes back to the value the headset still has.
             const currentState = this._sliders.get(sliderState.settingKey);
-            if (currentState && !currentState.dragging && !currentState.timeoutId) {
-                this._setSliderValue(currentState, succeeded ? value : currentState.value);
+            if (currentState !== sliderState) {
+                // The menu was rebuilt meanwhile, a waiting change is dropped with the old slider
+                if (succeeded && currentState && this._isSliderIdle(currentState)) {
+                    this._setSliderValue(currentState, value);
+                }
+                return;
+            }
+            if (!this._isSliderIdle(sliderState)) {
+                return; // applied on drag-end or after the timeout
+            }
+            if (sliderState.reapply) {
+                this._applySlider(sliderState);
+            } else {
+                // After a failure the slider goes back to the value the headset still has
+                this._setSliderValue(sliderState, sliderState.value);
             }
         }
 
@@ -914,7 +941,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 this._settings.set_int("headset-volume-value", level);
             }
             const sliderState = this._sliders.get("headset-volume-value");
-            if (sliderState && !sliderState.dragging && !sliderState.timeoutId) {
+            if (sliderState && this._isSliderIdle(sliderState)) {
                 this._setSliderValue(sliderState, level);
             }
         }
