@@ -543,9 +543,17 @@ const HeadsetControlMenuToggle = GObject.registerClass(
         // Resolves to false when the action failed or was cancelled
         async _invokeAction(strAction, cmd) {
             if (!this._jsonOutput) {
-                // The legacy output does not tell whether the action worked
-                await this._invokeCmd(cmd);
-                return !this._cancellable.is_cancelled();
+                // The legacy output only shows a failure when headsetcontrol did not start (null)
+                // or printed nothing on stdout (undefined), as it does for rejected arguments
+                const strOutput = await this._invokeCmd(cmd);
+                if (this._cancellable.is_cancelled()) {
+                    return false;
+                }
+                if (typeof strOutput !== "string") {
+                    this._showActionFailed(strAction, _("No valid response from headsetcontrol"));
+                    return false;
+                }
+                return true;
             }
             // Without -d the CLI refuses to change anything while several headsets are connected
             const deviceOption = this._deviceId ? ` -d ${this._deviceId}` : "";
