@@ -50,6 +50,15 @@ export default class AdwPrefs extends ExtensionPreferences {
         this.changeOption(settings, "option-rotate-mute", options.opt_rot.get_text());
         this.changeOption(settings, "option-equalizer", options.opt_equalizer.get_text());
         this.changeOption(settings, "option-equalizer-preset", options.opt_equalizer_preset.get_text());
+        this.changeOption(settings, "option-volume-limiter", options.opt_volume_limiter.get_text());
+        this.changeOption(settings, "option-bt-when-powered-on", options.opt_bt_when_powered_on.get_text());
+        this.changeOption(settings, "option-noise-filter", options.opt_noise_filter.get_text());
+        this.changeOption(
+            settings,
+            "option-microphone-mute-led-brightness",
+            options.opt_mic_mute_led_brightness.get_text()
+        );
+        this.changeOption(settings, "option-microphone-volume", options.opt_microphone_volume.get_text());
     }
 
     _onColorChanged(settings, color_setting_button, strSetting) {
@@ -66,6 +75,12 @@ export default class AdwPrefs extends ExtensionPreferences {
         const arraySidetone = settings.get_strv("sidetone-values");
         arraySidetone[index] = adwrow.get_value().toString();
         settings.set_strv("sidetone-values", arraySidetone);
+    }
+
+    _onMVvaluechanged(settings, adwrow, index) {
+        const arrayMicrophoneVolume = settings.get_strv("microphone-volume-values");
+        arrayMicrophoneVolume[index] = adwrow.get_value().toString();
+        settings.set_strv("microphone-volume-values", arrayMicrophoneVolume);
     }
 
     _onITvaluechanged(settings, adwrow, index) {
@@ -144,6 +159,16 @@ export default class AdwPrefs extends ExtensionPreferences {
         opt_equalizer.set_text(_(window._settings.get_string("option-equalizer")));
         const opt_equalizer_preset = builder.get_object("HeadsetControl_row_common8");
         opt_equalizer_preset.set_text(_(window._settings.get_string("option-equalizer-preset")));
+        const opt_volume_limiter = builder.get_object("HeadsetControl_row_common9");
+        opt_volume_limiter.set_text(_(window._settings.get_string("option-volume-limiter")));
+        const opt_bt_when_powered_on = builder.get_object("HeadsetControl_row_common10");
+        opt_bt_when_powered_on.set_text(_(window._settings.get_string("option-bt-when-powered-on")));
+        const opt_noise_filter = builder.get_object("HeadsetControl_row_common11");
+        opt_noise_filter.set_text(_(window._settings.get_string("option-noise-filter")));
+        const opt_mic_mute_led_brightness = builder.get_object("HeadsetControl_row_common12");
+        opt_mic_mute_led_brightness.set_text(_(window._settings.get_string("option-microphone-mute-led-brightness")));
+        const opt_microphone_volume = builder.get_object("HeadsetControl_row_common13");
+        opt_microphone_volume.set_text(_(window._settings.get_string("option-microphone-volume")));
         const buttonApply = builder.get_object("HeadsetControl_row_apply");
         buttonApply.connect(
             "activated",
@@ -159,6 +184,11 @@ export default class AdwPrefs extends ExtensionPreferences {
                 opt_rot,
                 opt_equalizer,
                 opt_equalizer_preset,
+                opt_volume_limiter,
+                opt_bt_when_powered_on,
+                opt_noise_filter,
+                opt_mic_mute_led_brightness,
+                opt_microphone_volume,
             })
         );
 
@@ -286,6 +316,14 @@ export default class AdwPrefs extends ExtensionPreferences {
             if (!adwrow) continue; // Prevent TypeError
             adwrow.set_value(Number.parseInt(arraySidetone[index]) || 0);
             adwrow.connect("changed", this._onSTvaluechanged.bind(this, window._settings, adwrow, index));
+        }
+        //microphone volume
+        const arrayMicrophoneVolume = window._settings.get_strv("microphone-volume-values");
+        for (const [index, value] of arrayMicrophoneVolume.entries()) {
+            adwrow = builder.get_object("HeadsetControl_row_microphonevolume" + (index + 1));
+            if (!adwrow) continue; // Prevent TypeError
+            adwrow.set_value(Number.parseInt(value) || 0);
+            adwrow.connect("changed", this._onMVvaluechanged.bind(this, window._settings, adwrow, index));
         }
         //inactive time
         const inactiveTimeLabels = [

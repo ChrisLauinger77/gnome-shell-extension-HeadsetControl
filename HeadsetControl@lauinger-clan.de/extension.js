@@ -23,6 +23,11 @@ const capabilities = {
     rotatemute: false,
     equalizer: false,
     equalizerpreset: false,
+    volumelimiter: false,
+    btwhenpoweredon: false,
+    noisefilter: false,
+    micmuteledbrightness: false,
+    microphonevolume: false,
 };
 const headsetcontrolCommands = {
     cmdCapabilities: "",
@@ -36,6 +41,11 @@ const headsetcontrolCommands = {
     cmdOutputFormat: "",
     cmdEqualizer: "",
     cmdEqualizerPreset: "",
+    cmdVolumeLimiter: "",
+    cmdBtWhenPoweredOn: "",
+    cmdNoiseFilter: "",
+    cmdMicMuteLedBrightness: "",
+    cmdMicrophoneVolume: "",
 };
 
 function resetRuntimeState() {
@@ -127,6 +137,8 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this._valueBattery = "";
             this._valueBatteryNum = -1;
             this._valueChatMix = "";
+            this._valueSidetone = _("Sidetone");
+            this._sidetoneMenuItem = null;
             this._valueHeadsetname = _("HeadsetControl");
             this._deviceId = "";
             this._jsonOutput = false;
@@ -171,6 +183,7 @@ const HeadsetControlMenuToggle = GObject.registerClass(
         }
 
         _buildMenu() {
+            this._sidetoneMenuItem = null;
             if (capabilities.battery) {
                 this._valueBattery = _("Charge") + ": ???";
             }
@@ -212,6 +225,31 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                     capability: "equalizerpreset",
                     label: _("Equalizer Preset"),
                     method: this._addEqualizerPresetMenu,
+                },
+                {
+                    capability: "volumelimiter",
+                    label: _("Volume Limiter"),
+                    method: this._addVolumeLimiterMenu,
+                },
+                {
+                    capability: "btwhenpoweredon",
+                    label: _("Bluetooth When Powered On"),
+                    method: this._addBtWhenPoweredOnMenu,
+                },
+                {
+                    capability: "noisefilter",
+                    label: _("Microphone Noise Filter"),
+                    method: this._addNoiseFilterMenu,
+                },
+                {
+                    capability: "micmuteledbrightness",
+                    label: _("Mic Mute LED Brightness"),
+                    method: this._addMicMuteLedBrightnessMenu,
+                },
+                {
+                    capability: "microphonevolume",
+                    label: _("Microphone Volume"),
+                    method: this._addMicrophoneVolumeMenu,
                 },
             ];
 
@@ -284,6 +322,21 @@ const HeadsetControlMenuToggle = GObject.registerClass(
         updateChatMixStatus(strChatMix) {
             if (capabilities.chatmix) {
                 this._valueChatMix = _("Chat-Mix") + ": " + strChatMix;
+            }
+        }
+
+        updateSidetoneStatus(sidetone) {
+            // Only headsets with CAP_SIDETONE_STATUS report it, and the name is optional.
+            // Names like "Low" or "Medium" reuse the menu translations.
+            let strSidetone = "";
+            if (sidetone?.name) {
+                strSidetone = _(sidetone.name);
+            } else if (Number.isFinite(sidetone?.level)) {
+                strSidetone = sidetone.level.toString();
+            }
+            this._valueSidetone = strSidetone ? _("Sidetone") + ": " + strSidetone : _("Sidetone");
+            if (this._sidetoneMenuItem) {
+                this._sidetoneMenuItem.label.text = this._valueSidetone;
             }
         }
 
@@ -425,6 +478,9 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             for (const item of sidetoneValues) {
                 this._addPopupMenuItem(popupMenuExpander, item[0], headsetcontrolCommands.cmdSidetone + " " + item[1]);
             }
+            // Show the status only now, the action names above use the plain label
+            this._sidetoneMenuItem = popupMenuExpander;
+            this._sidetoneMenuItem.label.text = this._valueSidetone;
             this.menu.addMenuItem(popupMenuExpander);
             popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
         }
@@ -529,6 +585,56 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             }
             popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
             this.menu.addMenuItem(popupMenuExpander);
+        }
+
+        _addValuesMenu(popupMenuExpander, cmd, values) {
+            for (const item of values) {
+                this._addPopupMenuItem(popupMenuExpander, item[0], cmd + " " + item[1]);
+            }
+            popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
+        }
+
+        _addVolumeLimiterMenu(popupMenuExpander) {
+            this._addValuesMenu(popupMenuExpander, headsetcontrolCommands.cmdVolumeLimiter, [
+                [_("Off"), "0"],
+                [_("On"), "1"],
+            ]);
+        }
+
+        _addBtWhenPoweredOnMenu(popupMenuExpander) {
+            this._addValuesMenu(popupMenuExpander, headsetcontrolCommands.cmdBtWhenPoweredOn, [
+                [_("Off"), "0"],
+                [_("On"), "1"],
+            ]);
+        }
+
+        _addNoiseFilterMenu(popupMenuExpander) {
+            this._addValuesMenu(popupMenuExpander, headsetcontrolCommands.cmdNoiseFilter, [
+                [_("Off"), "0"],
+                [_("Low"), "1"],
+                [_("High"), "2"],
+            ]);
+        }
+
+        _addMicMuteLedBrightnessMenu(popupMenuExpander) {
+            this._addValuesMenu(popupMenuExpander, headsetcontrolCommands.cmdMicMuteLedBrightness, [
+                [_("Off"), "0"],
+                [_("Low"), "1"],
+                [_("Medium"), "2"],
+                [_("High"), "3"],
+            ]);
+        }
+
+        _addMicrophoneVolumeMenu(popupMenuExpander) {
+            const arrayMicrophoneVolume = this._settings.get_strv("microphone-volume-values");
+            const microphoneVolumeValues = [
+                [_("Minimum"), arrayMicrophoneVolume[0]],
+                [_("Low"), arrayMicrophoneVolume[1]],
+                [_("Medium"), arrayMicrophoneVolume[2]],
+                [_("High"), arrayMicrophoneVolume[3]],
+                [_("Maximum"), arrayMicrophoneVolume[4]],
+            ].filter(([, value]) => value !== "-1");
+            this._addValuesMenu(popupMenuExpander, headsetcontrolCommands.cmdMicrophoneVolume, microphoneVolumeValues);
         }
 
         get menuButtonStyle() {
@@ -701,6 +807,26 @@ export default class HeadsetControl extends Extension {
             cmdExecutable,
             this._settings.get_string("option-equalizer-preset")
         );
+        headsetcontrolCommands.cmdVolumeLimiter = buildCommand(
+            cmdExecutable,
+            this._settings.get_string("option-volume-limiter")
+        );
+        headsetcontrolCommands.cmdBtWhenPoweredOn = buildCommand(
+            cmdExecutable,
+            this._settings.get_string("option-bt-when-powered-on")
+        );
+        headsetcontrolCommands.cmdNoiseFilter = buildCommand(
+            cmdExecutable,
+            this._settings.get_string("option-noise-filter")
+        );
+        headsetcontrolCommands.cmdMicMuteLedBrightness = buildCommand(
+            cmdExecutable,
+            this._settings.get_string("option-microphone-mute-led-brightness")
+        );
+        headsetcontrolCommands.cmdMicrophoneVolume = buildCommand(
+            cmdExecutable,
+            this._settings.get_string("option-microphone-volume")
+        );
         if (!this._JSONoutputSupported) {
             this._updateBinaryCapabilities();
         }
@@ -745,6 +871,11 @@ export default class HeadsetControl extends Extension {
         capabilities.rotatemute = value;
         capabilities.equalizer = value;
         capabilities.equalizerpreset = value;
+        capabilities.volumelimiter = value;
+        capabilities.btwhenpoweredon = value;
+        capabilities.noisefilter = value;
+        capabilities.micmuteledbrightness = value;
+        capabilities.microphonevolume = value;
     }
 
     _refreshCapabilitiesJSON(device) {
@@ -760,6 +891,11 @@ export default class HeadsetControl extends Extension {
         capabilities.rotatemute = device.capabilities.includes("CAP_ROTATE_TO_MUTE");
         capabilities.equalizer = device.capabilities.includes("CAP_EQUALIZER");
         capabilities.equalizerpreset = device.capabilities.includes("CAP_EQUALIZER_PRESET");
+        capabilities.volumelimiter = device.capabilities.includes("CAP_VOLUME_LIMITER");
+        capabilities.btwhenpoweredon = device.capabilities.includes("CAP_BT_WHEN_POWERED_ON");
+        capabilities.noisefilter = device.capabilities.includes("CAP_NOISE_FILTER");
+        capabilities.micmuteledbrightness = device.capabilities.includes("CAP_MICROPHONE_MUTE_LED_BRIGHTNESS");
+        capabilities.microphonevolume = device.capabilities.includes("CAP_MICROPHONE_VOLUME");
         for (const cap in capabilities) {
             this._logOutput(`${cap}: ${capabilities[cap]}`);
         }
@@ -852,6 +988,7 @@ export default class HeadsetControl extends Extension {
                     timeToEmptyHours
                 );
                 this._headsetControlIndicator.headsetControlMenuToggle.updateChatMixStatus(output.devices[0].chatmix);
+                this._headsetControlIndicator.headsetControlMenuToggle.updateSidetoneStatus(output.devices[0].sidetone);
                 this._headsetControlIndicator.updateUIElements();
             }
             this._needCapabilitiesRefresh = false;
@@ -969,6 +1106,26 @@ export default class HeadsetControl extends Extension {
             capabilities.equalizerpreset = true;
         }
         this._logOutput("capabilities.equalizerpreset: " + capabilities.equalizerpreset);
+        if (strOutput.includes("* volume limiter")) {
+            capabilities.volumelimiter = true;
+        }
+        this._logOutput("capabilities.volumelimiter: " + capabilities.volumelimiter);
+        if (strOutput.includes("* bluetooth when powered on")) {
+            capabilities.btwhenpoweredon = true;
+        }
+        this._logOutput("capabilities.btwhenpoweredon: " + capabilities.btwhenpoweredon);
+        if (strOutput.includes("* microphone noise filter")) {
+            capabilities.noisefilter = true;
+        }
+        this._logOutput("capabilities.noisefilter: " + capabilities.noisefilter);
+        if (strOutput.includes("* microphone mute led brightness")) {
+            capabilities.micmuteledbrightness = true;
+        }
+        this._logOutput("capabilities.micmuteledbrightness: " + capabilities.micmuteledbrightness);
+        if (strOutput.includes("* microphone volume")) {
+            capabilities.microphonevolume = true;
+        }
+        this._logOutput("capabilities.microphonevolume: " + capabilities.microphonevolume);
         this._needCapabilitiesRefresh = false; // when headset was connected
         this._headsetControlIndicator.headsetControlMenuToggle.refreshMenu(this);
     }
@@ -1106,9 +1263,7 @@ export default class HeadsetControl extends Extension {
     }
 
     _onParamChangedMenu() {
-        if (capabilities.sidetone) {
-            this._headsetControlIndicator.headsetControlMenuToggle.refreshMenu(this);
-        }
+        this._headsetControlIndicator.headsetControlMenuToggle.refreshMenu(this);
     }
 
     _onParamChangedIndicator() {
@@ -1134,6 +1289,8 @@ export default class HeadsetControl extends Extension {
     _onParamChangedTestMode() {
         this._testMode = this._settings.get_int("test-mode");
         this._headsetControlIndicator.headsetControlMenuToggle.testMode = this._testMode;
+        // Test profiles share one device id but differ in capabilities
+        this._needCapabilitiesRefresh = true;
     }
 
     _calculateRefreshInterval(refreshIntervalmin) {
@@ -1281,6 +1438,26 @@ export default class HeadsetControl extends Extension {
                 key: "option-equalizer-preset",
                 callback: this._initCmd.bind(this),
             },
+            {
+                key: "option-volume-limiter",
+                callback: this._initCmd.bind(this),
+            },
+            {
+                key: "option-bt-when-powered-on",
+                callback: this._initCmd.bind(this),
+            },
+            {
+                key: "option-noise-filter",
+                callback: this._initCmd.bind(this),
+            },
+            {
+                key: "option-microphone-mute-led-brightness",
+                callback: this._initCmd.bind(this),
+            },
+            {
+                key: "option-microphone-volume",
+                callback: this._initCmd.bind(this),
+            },
             { key: "notification-low-battery", callback: this._onParamChangedLogNot.bind(this) },
             { key: "low-battery-threshold", callback: this._onParamChangedLogNot.bind(this) },
             { key: "use-logging", callback: this._onParamChangedLogNot.bind(this) },
@@ -1298,6 +1475,10 @@ export default class HeadsetControl extends Extension {
             },
             {
                 key: "sidetone-values",
+                callback: this._onParamChangedMenu.bind(this),
+            },
+            {
+                key: "microphone-volume-values",
                 callback: this._onParamChangedMenu.bind(this),
             },
             {
