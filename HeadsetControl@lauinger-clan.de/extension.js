@@ -1264,6 +1264,12 @@ export default class HeadsetControl extends Extension {
         this._headsetControlIndicator.headsetControlMenuToggle.refreshMenu(this);
     }
 
+    _onParamChangedCommand() {
+        this._initCmd();
+        // Menu items keep the command they were built with
+        this._headsetControlIndicator.headsetControlMenuToggle.refreshMenu(this);
+    }
+
     _onParamChangedIndicator() {
         this._showIndicator = this._settings.get_boolean("show-systemindicator");
         this._hideWhenDisconnectedSystemindicator = this._settings.get_boolean("hidewhendisconnected-systemindicator");
@@ -1393,7 +1399,7 @@ export default class HeadsetControl extends Extension {
         const settingsToMonitor = [
             {
                 key: "headsetcontrol-executable",
-                callback: this._initCmd.bind(this),
+                callback: this._onParamChangedCommand.bind(this),
             },
             {
                 key: "option-capabilities",
@@ -1407,22 +1413,22 @@ export default class HeadsetControl extends Extension {
                 key: "option-chatmix",
                 callback: this._initCmd.bind(this),
             },
-            { key: "option-sidetone", callback: this._initCmd.bind(this) },
+            { key: "option-sidetone", callback: this._onParamChangedCommand.bind(this) },
             {
                 key: "option-led",
-                callback: this._initCmd.bind(this),
+                callback: this._onParamChangedCommand.bind(this),
             },
             {
                 key: "option-inactive-time",
-                callback: this._initCmd.bind(this),
+                callback: this._onParamChangedCommand.bind(this),
             },
             {
                 key: "option-voice",
-                callback: this._initCmd.bind(this),
+                callback: this._onParamChangedCommand.bind(this),
             },
             {
                 key: "option-rotate-mute",
-                callback: this._initCmd.bind(this),
+                callback: this._onParamChangedCommand.bind(this),
             },
             {
                 key: "option-output-format",
@@ -1430,31 +1436,31 @@ export default class HeadsetControl extends Extension {
             },
             {
                 key: "option-equalizer",
-                callback: this._initCmd.bind(this),
+                callback: this._onParamChangedCommand.bind(this),
             },
             {
                 key: "option-equalizer-preset",
-                callback: this._initCmd.bind(this),
+                callback: this._onParamChangedCommand.bind(this),
             },
             {
                 key: "option-volume-limiter",
-                callback: this._initCmd.bind(this),
+                callback: this._onParamChangedCommand.bind(this),
             },
             {
                 key: "option-bt-when-powered-on",
-                callback: this._initCmd.bind(this),
+                callback: this._onParamChangedCommand.bind(this),
             },
             {
                 key: "option-noise-filter",
-                callback: this._initCmd.bind(this),
+                callback: this._onParamChangedCommand.bind(this),
             },
             {
                 key: "option-microphone-mute-led-brightness",
-                callback: this._initCmd.bind(this),
+                callback: this._onParamChangedCommand.bind(this),
             },
             {
                 key: "option-microphone-volume",
-                callback: this._initCmd.bind(this),
+                callback: this._onParamChangedCommand.bind(this),
             },
             { key: "notification-low-battery", callback: this._onParamChangedLogNot.bind(this) },
             { key: "low-battery-threshold", callback: this._onParamChangedLogNot.bind(this) },
@@ -1481,10 +1487,6 @@ export default class HeadsetControl extends Extension {
             },
             {
                 key: "option-equalizer-settings",
-                callback: this._onParamChangedMenu.bind(this),
-            },
-            {
-                key: "option-equalizer-preset",
                 callback: this._onParamChangedMenu.bind(this),
             },
             {
