@@ -953,6 +953,7 @@ export default class HeadsetControl extends Extension {
             this._updateDevice(output);
             if (!this._isDeviceStatusSuccess(output.devices[0])) {
                 this._setAllCapabilities(true); // if we cannot get the capabilities, set all to true
+                this._headsetControlIndicator.headsetControlMenuToggle.updateSidetoneStatus(null);
                 return false;
             }
             if (this._needCapabilitiesRefresh) {
@@ -1014,6 +1015,8 @@ export default class HeadsetControl extends Extension {
             this._JSONoutputSupported = false;
             if (!this._isCancelled(cancellable)) {
                 this._headsetControlIndicator.headsetControlMenuToggle.jsonOutput = false;
+                // The legacy output has no sidetone level
+                this._headsetControlIndicator.headsetControlMenuToggle.updateSidetoneStatus(null);
             }
             // Fallback to non-JSON method
             await this._refreshCapabilities();
