@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-23 15:12+0200\n"
+"POT-Creation-Date: 2026-10-23 15:14+0200\n"
 "PO-Revision-Date: 2026-01-29 21:56+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
@@ -22,7 +22,7 @@ msgstr ""
 #: HeadsetControl@lauinger-clan.de/extension.js:142
 #: HeadsetControl@lauinger-clan.de/extension.js:150
 #: HeadsetControl@lauinger-clan.de/extension.js:405
-#: HeadsetControl@lauinger-clan.de/extension.js:1352
+#: HeadsetControl@lauinger-clan.de/extension.js:1345
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:5
 msgid "HeadsetControl"
 msgstr "Contrôle du casque"
@@ -130,106 +130,106 @@ msgid "Failed"
 msgstr ""
 
 #: HeadsetControl@lauinger-clan.de/extension.js:472
-#: HeadsetControl@lauinger-clan.de/extension.js:490
-#: HeadsetControl@lauinger-clan.de/extension.js:502
-#: HeadsetControl@lauinger-clan.de/extension.js:514
-#: HeadsetControl@lauinger-clan.de/extension.js:531
+#: HeadsetControl@lauinger-clan.de/extension.js:489
+#: HeadsetControl@lauinger-clan.de/extension.js:500
+#: HeadsetControl@lauinger-clan.de/extension.js:511
+#: HeadsetControl@lauinger-clan.de/extension.js:527
+#: HeadsetControl@lauinger-clan.de/extension.js:592
 #: HeadsetControl@lauinger-clan.de/extension.js:599
 #: HeadsetControl@lauinger-clan.de/extension.js:606
-#: HeadsetControl@lauinger-clan.de/extension.js:613
-#: HeadsetControl@lauinger-clan.de/extension.js:621
+#: HeadsetControl@lauinger-clan.de/extension.js:614
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:33
 msgid "Off"
 msgstr "Désactivé"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:473
-#: HeadsetControl@lauinger-clan.de/extension.js:614
-#: HeadsetControl@lauinger-clan.de/extension.js:622
-#: HeadsetControl@lauinger-clan.de/extension.js:632
+#: HeadsetControl@lauinger-clan.de/extension.js:607
+#: HeadsetControl@lauinger-clan.de/extension.js:615
+#: HeadsetControl@lauinger-clan.de/extension.js:625
 msgid "Low"
 msgstr "Bas"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:474
-#: HeadsetControl@lauinger-clan.de/extension.js:623
-#: HeadsetControl@lauinger-clan.de/extension.js:633
+#: HeadsetControl@lauinger-clan.de/extension.js:616
+#: HeadsetControl@lauinger-clan.de/extension.js:626
 msgid "Medium"
 msgstr "Moyen"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:475
-#: HeadsetControl@lauinger-clan.de/extension.js:615
-#: HeadsetControl@lauinger-clan.de/extension.js:624
-#: HeadsetControl@lauinger-clan.de/extension.js:634
+#: HeadsetControl@lauinger-clan.de/extension.js:608
+#: HeadsetControl@lauinger-clan.de/extension.js:617
+#: HeadsetControl@lauinger-clan.de/extension.js:627
 msgid "High"
 msgstr "Haut"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:476
-#: HeadsetControl@lauinger-clan.de/extension.js:635
+#: HeadsetControl@lauinger-clan.de/extension.js:628
 msgid "Maximum"
 msgstr "Maximum"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:491
-#: HeadsetControl@lauinger-clan.de/extension.js:503
-#: HeadsetControl@lauinger-clan.de/extension.js:515
+#: HeadsetControl@lauinger-clan.de/extension.js:490
+#: HeadsetControl@lauinger-clan.de/extension.js:501
+#: HeadsetControl@lauinger-clan.de/extension.js:512
+#: HeadsetControl@lauinger-clan.de/extension.js:593
 #: HeadsetControl@lauinger-clan.de/extension.js:600
-#: HeadsetControl@lauinger-clan.de/extension.js:607
 msgid "On"
 msgstr "Activé"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:532
+#: HeadsetControl@lauinger-clan.de/extension.js:528
 msgid " Minute"
 msgstr " minute"
 
+#: HeadsetControl@lauinger-clan.de/extension.js:529
+#: HeadsetControl@lauinger-clan.de/extension.js:530
+#: HeadsetControl@lauinger-clan.de/extension.js:531
+#: HeadsetControl@lauinger-clan.de/extension.js:532
 #: HeadsetControl@lauinger-clan.de/extension.js:533
 #: HeadsetControl@lauinger-clan.de/extension.js:534
 #: HeadsetControl@lauinger-clan.de/extension.js:535
 #: HeadsetControl@lauinger-clan.de/extension.js:536
 #: HeadsetControl@lauinger-clan.de/extension.js:537
-#: HeadsetControl@lauinger-clan.de/extension.js:538
-#: HeadsetControl@lauinger-clan.de/extension.js:539
-#: HeadsetControl@lauinger-clan.de/extension.js:540
-#: HeadsetControl@lauinger-clan.de/extension.js:541
 msgid " Minutes"
 msgstr " minutes"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:559
+#: HeadsetControl@lauinger-clan.de/extension.js:554
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:306
 msgid "Setting 1"
 msgstr "Paramètre 1"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:560
+#: HeadsetControl@lauinger-clan.de/extension.js:555
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:312
 msgid "Setting 2"
 msgstr "Paramètre 2"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:561
+#: HeadsetControl@lauinger-clan.de/extension.js:556
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:318
 msgid "Setting 3"
 msgstr "Paramètre 3"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:562
+#: HeadsetControl@lauinger-clan.de/extension.js:557
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:324
 msgid "Setting 4"
 msgstr "Paramètre 4"
 
-#: HeadsetControl@lauinger-clan.de/extension.js:631
+#: HeadsetControl@lauinger-clan.de/extension.js:624
 msgid "Minimum"
 msgstr ""
 
-#: HeadsetControl@lauinger-clan.de/extension.js:1191
-#: HeadsetControl@lauinger-clan.de/extension.js:1221
+#: HeadsetControl@lauinger-clan.de/extension.js:1184
+#: HeadsetControl@lauinger-clan.de/extension.js:1214
 msgid "Refreshing..."
 msgstr "Actualisation..."
 
-#: HeadsetControl@lauinger-clan.de/extension.js:1213
+#: HeadsetControl@lauinger-clan.de/extension.js:1206
 msgid "Quicksettings open - refresh indicator running..."
 msgstr ""
 "Paramètres rapides ouverts - indicateur de rafraîchissement en cours..."
 
-#: HeadsetControl@lauinger-clan.de/extension.js:1218
+#: HeadsetControl@lauinger-clan.de/extension.js:1211
 msgid "Quicksettings not open - do nothing..."
 msgstr "Quicksettings ne s'ouvre pas - ne fait rien..."
 
-#: HeadsetControl@lauinger-clan.de/extension.js:1353
+#: HeadsetControl@lauinger-clan.de/extension.js:1346
 msgid "Battery low! Please charge your headset."
 msgstr "Batterie faible ! Veuillez recharger votre casque."
 

@@ -481,7 +481,6 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             // Show the status only now, the action names above use the plain label
             this._sidetoneMenuItem = popupMenuExpander;
             this._sidetoneMenuItem.label.text = this._valueSidetone;
-            this.menu.addMenuItem(popupMenuExpander);
             popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
         }
 
@@ -494,7 +493,6 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 this._addPopupMenuItem(popupMenuExpander, item[0], headsetcontrolCommands.cmdLED + " " + item[1]);
             }
             popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
-            this.menu.addMenuItem(popupMenuExpander);
         }
 
         _addVoiceMenu(popupMenuExpander) {
@@ -506,7 +504,6 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 this._addPopupMenuItem(popupMenuExpander, item[0], headsetcontrolCommands.cmdVoice + " " + item[1]);
             }
             popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
-            this.menu.addMenuItem(popupMenuExpander);
         }
 
         _addRotateMuteMenu(popupMenuExpander) {
@@ -522,7 +519,6 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 );
             }
             popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
-            this.menu.addMenuItem(popupMenuExpander);
         }
 
         _addInactivetimeMenu(popupMenuExpander) {
@@ -549,7 +545,6 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 );
             }
             popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
-            this.menu.addMenuItem(popupMenuExpander);
         }
 
         _addEqualizerSettingMenu(popupMenuExpander) {
@@ -570,7 +565,6 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 this._addPopupMenuItem(popupMenuExpander, item[0], headsetcontrolCommands.cmdEqualizer + " " + item[1]);
             }
             popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
-            this.menu.addMenuItem(popupMenuExpander);
         }
 
         _addEqualizerPresetMenu(popupMenuExpander) {
@@ -584,7 +578,6 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                 );
             }
             popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
-            this.menu.addMenuItem(popupMenuExpander);
         }
 
         _addValuesMenu(popupMenuExpander, cmd, values) {
