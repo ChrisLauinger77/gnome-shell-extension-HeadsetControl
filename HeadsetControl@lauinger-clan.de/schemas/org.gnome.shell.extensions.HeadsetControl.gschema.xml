@@ -74,6 +74,36 @@
         headset)</summary>
       <description>Shown in equalizer preset menu (when supported)</description>
     </key>
+    <key name="option-volume-limiter" type="s">
+      <default>'--volume-limiter'</default>
+      <summary>Parameter to set volume limiter</summary>
+      <description>Passed to headsetcontrol to set the volume limiter</description>
+    </key>
+    <key name="option-bt-when-powered-on" type="s">
+      <default>'--bt-when-powered-on'</default>
+      <summary>Parameter to set Bluetooth when powered on</summary>
+      <description>Passed to headsetcontrol to set Bluetooth when powered on</description>
+    </key>
+    <key name="option-noise-filter" type="s">
+      <default>'--noise-filter'</default>
+      <summary>Parameter to set microphone noise filter</summary>
+      <description>Passed to headsetcontrol to set the microphone noise filter</description>
+    </key>
+    <key name="option-microphone-mute-led-brightness" type="s">
+      <default>'--microphone-mute-led-brightness'</default>
+      <summary>Parameter to set microphone mute LED brightness</summary>
+      <description>Passed to headsetcontrol to set the microphone mute LED brightness</description>
+    </key>
+    <key name="option-microphone-volume" type="s">
+      <default>'--microphone-volume'</default>
+      <summary>Parameter to set microphone volume</summary>
+      <description>Passed to headsetcontrol to set the microphone volume</description>
+    </key>
+    <key name="microphone-volume-values" type="as">
+      <default>['0', '32', '64', '96', '128']</default>
+      <summary>Microphone volume values</summary>
+      <description>Used for microphone volume values minimum, low, medium, high, max (-1 disable)</description>
+    </key>
     <key name="notification-low-battery" type="b">
       <default>true</default>
       <summary>Parameter to enable notification when battery is low</summary>
