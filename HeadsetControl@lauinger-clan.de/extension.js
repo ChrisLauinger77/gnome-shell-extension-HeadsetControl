@@ -89,6 +89,26 @@ async function invokeCmd(cmd, logger, testMode = 0, cancellable = null, subproce
     }
 }
 
+function addNotification(title, body, isTransient, id = "battery_low") {
+    const source = MessageTray.getSystemSource();
+    const notification = new MessageTray.Notification({
+        source,
+        title: title,
+        body: body,
+        isTransient: isTransient,
+    });
+    notification.iconName = "audio-headset-symbolic";
+    notification.urgency = MessageTray.Urgency.HIGH;
+    notification.headset_warning_id = id;
+    source.addNotification(notification);
+}
+
+function removeNotification(id = "battery_low") {
+    const source = MessageTray.getSystemSource();
+    const targets = source.notifications.filter((notification) => notification.headset_warning_id === id);
+    targets.forEach((notification) => notification.destroy());
+}
+
 const HeadsetControlMenuToggle = GObject.registerClass(
     // The matching class name is intentional for GObject registration.
     // eslint-disable-next-line no-shadow
@@ -108,6 +128,8 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this._valueBatteryNum = -1;
             this._valueChatMix = "";
             this._valueHeadsetname = _("HeadsetControl");
+            this._deviceId = "";
+            this._jsonOutput = false;
             this._testMode = extension._testMode;
             this._cancellable = extension._cancellable;
             this._subprocesses = extension._subprocesses;
@@ -243,6 +265,14 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this._testMode = value;
         }
 
+        set deviceId(value) {
+            this._deviceId = value;
+        }
+
+        set jsonOutput(value) {
+            this._jsonOutput = value;
+        }
+
         get valueBatteryNum() {
             return this._valueBatteryNum;
         }
@@ -332,9 +362,54 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             return retval;
         }
 
+        async _invokeAction(strAction, cmd) {
+            if (!this._jsonOutput) {
+                await this._invokeCmd(cmd);
+                return;
+            }
+            // Without -d the CLI refuses to change anything while several headsets are connected
+            const deviceOption = this._deviceId ? ` -d ${this._deviceId}` : "";
+            const outputFormat = this._settings.get_string("option-output-format");
+            const strOutput = await this._invokeCmd(`${cmd}${deviceOption} ${outputFormat}`);
+            if (this._cancellable.is_cancelled()) {
+                return;
+            }
+            this._reportActionResult(strAction, strOutput);
+        }
+
+        _reportActionResult(strAction, strOutput) {
+            let output = null;
+            try {
+                output = JSON.parse(strOutput);
+            } catch (err) {
+                this._logger.error(`Could not parse action result: ${err.message}`);
+            }
+            let errorMessage = null;
+            if (!output) {
+                errorMessage = _("No valid response from headsetcontrol");
+            } else {
+                // The CLI reports no actions when the selected headset is not connected
+                const actions = output.actions ?? [];
+                const failedAction = actions.find((action) => action.status !== "success");
+                if (actions.length === 0) {
+                    errorMessage = _("No supported headset found");
+                } else if (failedAction) {
+                    errorMessage = failedAction.error_message || _("Unknown error");
+                }
+            }
+            removeNotification("action_failed");
+            if (errorMessage) {
+                this._logOutput(`${strAction} failed: ${errorMessage}`);
+                addNotification(strAction, _("Failed") + ": " + errorMessage, true, "action_failed");
+            } else {
+                this._logOutput(`${strAction} succeeded`);
+            }
+        }
+
         _addPopupMenuItem(popupMenuExpander, strLabel, strValue) {
             const submenu = new PopupMenu.PopupMenuItem(_(strLabel));
-            submenu.connect("activate", this._invokeCmd.bind(this, strValue));
+            const strAction = `${popupMenuExpander.label.text}: ${submenu.label.text}`;
+            submenu.connect("activate", this._invokeAction.bind(this, strAction, strValue));
             popupMenuExpander.menu.addMenuItem(submenu);
         }
 
@@ -712,12 +787,32 @@ export default class HeadsetControl extends Extension {
         }
     }
 
+    _supportsDeviceSelection(apiVersion) {
+        // -d is available since API 1.3 (HeadsetControl 3.1)
+        const [major, minor] = String(apiVersion).split(".").map(Number);
+        return major > 1 || (major === 1 && minor >= 3);
+    }
+
+    _updateDevice(output) {
+        const device = output.devices[0];
+        const deviceId = `${device.id_vendor}:${device.id_product}`;
+        if (this._deviceId !== deviceId) {
+            this._deviceId = deviceId;
+            this._logOutput("device changed: " + deviceId);
+            this._needCapabilitiesRefresh = true;
+        }
+        const isValidId = /^0x[0-9a-f]{1,4}:0x[0-9a-f]{1,4}$/i.test(deviceId);
+        this._headsetControlIndicator.headsetControlMenuToggle.deviceId =
+            isValidId && this._supportsDeviceSelection(output.api_version) ? deviceId : "";
+    }
+
     _processOutput(output, updateIndicator) {
         if (!output) {
             this._devicecount = 0;
             return false;
         }
         this._JSONoutputSupported = true;
+        this._headsetControlIndicator.headsetControlMenuToggle.jsonOutput = true;
         const device_count = output.device_count;
         this._logOutput("device_count:" + " " + device_count);
         if (this._devicecount !== device_count) {
@@ -726,6 +821,7 @@ export default class HeadsetControl extends Extension {
             this._needCapabilitiesRefresh = true;
         }
         if (device_count > 0) {
+            this._updateDevice(output);
             if (!this._isDeviceStatusSuccess(output.devices[0])) {
                 this._setAllCapabilities(true); // if we cannot get the capabilities, set all to true
                 return false;
@@ -736,20 +832,23 @@ export default class HeadsetControl extends Extension {
             const headsetname = output.devices[0].device;
             this._logOutput(headsetname);
             this._hasEqualizerPresetSupport(output.devices[0]);
+            // The Quick Settings menu exists even when the indicator is hidden
+            if (this._needCapabilitiesRefresh) {
+                this._headsetControlIndicator.headsetControlMenuToggle.refreshMenu(this);
+            }
             if (updateIndicator) {
-                if (this._needCapabilitiesRefresh) {
-                    this._headsetControlIndicator.headsetControlMenuToggle.refreshMenu(this);
-                }
                 this._headsetControlIndicator.headsetControlMenuToggle.updateHeadsetName(headsetname);
+                // battery is missing for headsets without battery capability
+                const battery = output.devices[0].battery ?? {};
                 let timeToEmptyHours = null;
-                if ("time_to_empty_min" in output.devices[0].battery) {
+                if ("time_to_empty_min" in battery) {
                     // input is minutes; convert to whole hours
-                    timeToEmptyHours = Math.floor(output.devices[0].battery.time_to_empty_min / 60);
+                    timeToEmptyHours = Math.floor(battery.time_to_empty_min / 60);
                 }
                 this._headsetControlIndicator.headsetControlMenuToggle.updateBatteryStatus(
-                    output.devices[0].battery.status,
-                    output.devices[0].battery.level + "%",
-                    output.devices[0].battery.level,
+                    battery.status,
+                    battery.level + "%",
+                    battery.level,
                     timeToEmptyHours
                 );
                 this._headsetControlIndicator.headsetControlMenuToggle.updateChatMixStatus(output.devices[0].chatmix);
@@ -780,6 +879,9 @@ export default class HeadsetControl extends Extension {
             this.getLogger().error("_refreshJSON error:", error);
             this._logOutput(`JSON refresh failed: ${error.message}`);
             this._JSONoutputSupported = false;
+            if (!this._isCancelled(cancellable)) {
+                this._headsetControlIndicator.headsetControlMenuToggle.jsonOutput = false;
+            }
             // Fallback to non-JSON method
             await this._refreshCapabilities();
             if (this._isCancelled(cancellable)) {
@@ -868,6 +970,7 @@ export default class HeadsetControl extends Extension {
         }
         this._logOutput("capabilities.equalizerpreset: " + capabilities.equalizerpreset);
         this._needCapabilitiesRefresh = false; // when headset was connected
+        this._headsetControlIndicator.headsetControlMenuToggle.refreshMenu(this);
     }
 
     async _refreshBatteryStatus() {
@@ -1080,26 +1183,6 @@ export default class HeadsetControl extends Extension {
         await this._refreshIndicator();
     }
 
-    _addNotification(title, body, isTransient, id = "battery_low") {
-        const source = MessageTray.getSystemSource();
-        const notification = new MessageTray.Notification({
-            source,
-            title: title,
-            body: body,
-            isTransient: isTransient,
-        });
-        notification.iconName = "audio-headset-symbolic";
-        notification.urgency = MessageTray.Urgency.HIGH;
-        notification.headset_warning_id = id;
-        source.addNotification(notification);
-    }
-
-    _removeNotification(id = "battery_low") {
-        const source = MessageTray.getSystemSource();
-        const targets = source.notifications.filter((notification) => notification.headset_warning_id === id);
-        targets.forEach((notification) => notification.destroy());
-    }
-
     _notifyLowBattery(strStatus, valueBatteryNum) {
         if (!this._notificationLowBattery) {
             return;
@@ -1108,7 +1191,7 @@ export default class HeadsetControl extends Extension {
         if (strStatus === "BATTERY_AVAILABLE" && valueBatteryNum <= this._lowBatteryThreshold) {
             if (!this._batteryLowNotified) {
                 this._batteryLowNotified = true;
-                this._addNotification(
+                addNotification(
                     _("HeadsetControl"),
                     _("Battery low! Please charge your headset."),
                     false,
@@ -1117,13 +1200,14 @@ export default class HeadsetControl extends Extension {
             }
         } else if (strStatus === "BATTERY_CHARGING" || valueBatteryNum > this._lowBatteryThreshold) {
             this._batteryLowNotified = false;
-            this._removeNotification("battery_low");
+            removeNotification("battery_low");
         }
     }
 
     enable() {
         resetRuntimeState();
         this._devicecount = 0;
+        this._deviceId = "";
         this._visible = false;
         this._refreshIndicatorRunning = false;
         this._batteryLowNotified = false;
@@ -1267,6 +1351,7 @@ export default class HeadsetControl extends Extension {
         this._headsetControlIndicator = null;
         this._visible = null;
         this._devicecount = null;
+        this._deviceId = null;
         this._showIndicator = null;
         this._hideWhenDisconnectedSystemindicator = null;
         this._refreshIndicatorRunning = null;
