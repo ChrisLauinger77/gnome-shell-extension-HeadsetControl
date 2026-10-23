@@ -59,6 +59,9 @@ export default class AdwPrefs extends ExtensionPreferences {
             options.opt_mic_mute_led_brightness.get_text()
         );
         this.changeOption(settings, "option-microphone-volume", options.opt_microphone_volume.get_text());
+        this.changeOption(settings, "option-anc", options.opt_anc.get_text());
+        this.changeOption(settings, "option-anc-startup-mode", options.opt_anc_startup_mode.get_text());
+        this.changeOption(settings, "option-anc-button-modes", options.opt_anc_button_modes.get_text());
     }
 
     _onColorChanged(settings, color_setting_button, strSetting) {
@@ -169,6 +172,12 @@ export default class AdwPrefs extends ExtensionPreferences {
         opt_mic_mute_led_brightness.set_text(_(window._settings.get_string("option-microphone-mute-led-brightness")));
         const opt_microphone_volume = builder.get_object("HeadsetControl_row_common13");
         opt_microphone_volume.set_text(_(window._settings.get_string("option-microphone-volume")));
+        const opt_anc = builder.get_object("HeadsetControl_row_common14");
+        opt_anc.set_text(_(window._settings.get_string("option-anc")));
+        const opt_anc_startup_mode = builder.get_object("HeadsetControl_row_common15");
+        opt_anc_startup_mode.set_text(_(window._settings.get_string("option-anc-startup-mode")));
+        const opt_anc_button_modes = builder.get_object("HeadsetControl_row_common16");
+        opt_anc_button_modes.set_text(_(window._settings.get_string("option-anc-button-modes")));
         const buttonApply = builder.get_object("HeadsetControl_row_apply");
         buttonApply.connect(
             "activated",
@@ -189,6 +198,9 @@ export default class AdwPrefs extends ExtensionPreferences {
                 opt_noise_filter,
                 opt_mic_mute_led_brightness,
                 opt_microphone_volume,
+                opt_anc,
+                opt_anc_startup_mode,
+                opt_anc_button_modes,
             })
         );
 

@@ -28,6 +28,30 @@ const capabilities = {
     noisefilter: false,
     micmuteledbrightness: false,
     microphonevolume: false,
+    anc: false,
+    ancstartupmode: false,
+    ancbuttonmodes: false,
+};
+// How the legacy capability listing names each capability, a string matches anywhere in it
+const legacyCapabilityPatterns = {
+    sidetone: "* sidetone",
+    battery: "* battery",
+    led: "* lights",
+    inactivetime: "* inactive time",
+    chatmix: "* chatmix",
+    voice: "* voice prompts",
+    rotatemute: "* rotate to mute",
+    equalizer: "* equalizer",
+    equalizerpreset: "* equalizer preset",
+    volumelimiter: "* volume limiter",
+    btwhenpoweredon: "* bluetooth when powered on",
+    noisefilter: "* microphone noise filter",
+    micmuteledbrightness: "* microphone mute led brightness",
+    microphonevolume: "* microphone volume",
+    // The other ANC capabilities start with "* anc" too
+    anc: /^\s*\* anc$/m,
+    ancstartupmode: "* anc startup mode",
+    ancbuttonmodes: "* anc button modes",
 };
 const headsetcontrolCommands = {
     cmdCapabilities: "",
@@ -46,6 +70,9 @@ const headsetcontrolCommands = {
     cmdNoiseFilter: "",
     cmdMicMuteLedBrightness: "",
     cmdMicrophoneVolume: "",
+    cmdAnc: "",
+    cmdAncStartupMode: "",
+    cmdAncButtonModes: "",
 };
 
 function resetRuntimeState() {
@@ -195,6 +222,21 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                     capability: "sidetone",
                     label: _("Sidetone"),
                     method: this._addSidetoneMenu,
+                },
+                {
+                    capability: "anc",
+                    label: _("Noise Cancelling"),
+                    method: this._addAncMenu,
+                },
+                {
+                    capability: "ancstartupmode",
+                    label: _("Noise Cancelling at Power On"),
+                    method: this._addAncStartupModeMenu,
+                },
+                {
+                    capability: "ancbuttonmodes",
+                    label: _("Noise Cancelling Button"),
+                    method: this._addAncButtonModesMenu,
                 },
                 {
                     capability: "led",
@@ -630,6 +672,33 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             this._addValuesMenu(popupMenuExpander, headsetcontrolCommands.cmdMicrophoneVolume, microphoneVolumeValues);
         }
 
+        _addAncMenu(popupMenuExpander) {
+            this._addValuesMenu(popupMenuExpander, headsetcontrolCommands.cmdAnc, [
+                [_("Off"), "0"],
+                [_("Noise cancelling"), "1"],
+                [_("Ambient sound"), "2"],
+            ]);
+        }
+
+        _addAncStartupModeMenu(popupMenuExpander) {
+            this._addValuesMenu(popupMenuExpander, headsetcontrolCommands.cmdAncStartupMode, [
+                [_("Off"), "0"],
+                [_("Noise cancelling"), "1"],
+                [_("Ambient sound"), "2"],
+                [_("Same as at power off"), "3"],
+            ]);
+        }
+
+        _addAncButtonModesMenu(popupMenuExpander) {
+            // The button cycles through the chosen modes, so a single mode is left out
+            this._addValuesMenu(popupMenuExpander, headsetcontrolCommands.cmdAncButtonModes, [
+                [_("Off / Noise cancelling"), "off,anc"],
+                [_("Off / Ambient sound"), "off,ambient"],
+                [_("Noise cancelling / Ambient sound"), "anc,ambient"],
+                [_("Off / Noise cancelling / Ambient sound"), "off,anc,ambient"],
+            ]);
+        }
+
         get menuButtonStyle() {
             return this._menuButton.get_style();
         }
@@ -820,6 +889,15 @@ export default class HeadsetControl extends Extension {
             cmdExecutable,
             this._settings.get_string("option-microphone-volume")
         );
+        headsetcontrolCommands.cmdAnc = buildCommand(cmdExecutable, this._settings.get_string("option-anc"));
+        headsetcontrolCommands.cmdAncStartupMode = buildCommand(
+            cmdExecutable,
+            this._settings.get_string("option-anc-startup-mode")
+        );
+        headsetcontrolCommands.cmdAncButtonModes = buildCommand(
+            cmdExecutable,
+            this._settings.get_string("option-anc-button-modes")
+        );
         if (!this._JSONoutputSupported) {
             this._updateBinaryCapabilities();
         }
@@ -869,6 +947,9 @@ export default class HeadsetControl extends Extension {
         capabilities.noisefilter = value;
         capabilities.micmuteledbrightness = value;
         capabilities.microphonevolume = value;
+        capabilities.anc = value;
+        capabilities.ancstartupmode = value;
+        capabilities.ancbuttonmodes = value;
     }
 
     _refreshCapabilitiesJSON(device) {
@@ -889,6 +970,9 @@ export default class HeadsetControl extends Extension {
         capabilities.noisefilter = device.capabilities.includes("CAP_NOISE_FILTER");
         capabilities.micmuteledbrightness = device.capabilities.includes("CAP_MICROPHONE_MUTE_LED_BRIGHTNESS");
         capabilities.microphonevolume = device.capabilities.includes("CAP_MICROPHONE_VOLUME");
+        capabilities.anc = device.capabilities.includes("CAP_ANC");
+        capabilities.ancstartupmode = device.capabilities.includes("CAP_ANC_STARTUP_MODE");
+        capabilities.ancbuttonmodes = device.capabilities.includes("CAP_ANC_BUTTON_MODES");
         for (const cap in capabilities) {
             this._logOutput(`${cap}: ${capabilities[cap]}`);
         }
@@ -1068,65 +1152,14 @@ export default class HeadsetControl extends Extension {
         }
         // Only what this output lists, so a capability that is gone loses its submenu
         this._setAllCapabilities(false);
-        if (strOutput.includes("* sidetone")) {
-            capabilities.sidetone = true;
+        for (const [capability, pattern] of Object.entries(legacyCapabilityPatterns)) {
+            capabilities[capability] =
+                pattern instanceof RegExp ? pattern.test(strOutput) : strOutput.includes(pattern);
+            this._logOutput(`capabilities.${capability}: ${capabilities[capability]}`);
         }
-        this._logOutput("capabilities.sidetone: " + capabilities.sidetone);
-        if (strOutput.includes("* battery")) {
-            capabilities.battery = true;
-            if (this._showIndicator) {
-                this._headsetControlIndicator.setLabelVisible(capabilities.battery);
-            }
+        if (capabilities.battery && this._showIndicator) {
+            this._headsetControlIndicator.setLabelVisible(capabilities.battery);
         }
-        this._logOutput("capabilities.battery: " + capabilities.battery);
-        if (strOutput.includes("* lights")) {
-            capabilities.led = true;
-        }
-        this._logOutput("capabilities.led: " + capabilities.led);
-        if (strOutput.includes("* inactive time")) {
-            capabilities.inactivetime = true;
-        }
-        this._logOutput("capabilities.inactivetime: " + capabilities.inactivetime);
-        if (strOutput.includes("* chatmix")) {
-            capabilities.chatmix = true;
-        }
-        this._logOutput("capabilities.chatmix: " + capabilities.chatmix);
-        if (strOutput.includes("* voice prompts")) {
-            capabilities.voice = true;
-        }
-        this._logOutput("capabilities.voice: " + capabilities.voice);
-        if (strOutput.includes("* rotate to mute")) {
-            capabilities.rotatemute = true;
-        }
-        this._logOutput("capabilities.rotatemute: " + capabilities.rotatemute);
-        if (strOutput.includes("* equalizer")) {
-            capabilities.equalizer = true;
-        }
-        this._logOutput("capabilities.equalizer: " + capabilities.equalizer);
-        if (strOutput.includes("* equalizer preset")) {
-            capabilities.equalizerpreset = true;
-        }
-        this._logOutput("capabilities.equalizerpreset: " + capabilities.equalizerpreset);
-        if (strOutput.includes("* volume limiter")) {
-            capabilities.volumelimiter = true;
-        }
-        this._logOutput("capabilities.volumelimiter: " + capabilities.volumelimiter);
-        if (strOutput.includes("* bluetooth when powered on")) {
-            capabilities.btwhenpoweredon = true;
-        }
-        this._logOutput("capabilities.btwhenpoweredon: " + capabilities.btwhenpoweredon);
-        if (strOutput.includes("* microphone noise filter")) {
-            capabilities.noisefilter = true;
-        }
-        this._logOutput("capabilities.noisefilter: " + capabilities.noisefilter);
-        if (strOutput.includes("* microphone mute led brightness")) {
-            capabilities.micmuteledbrightness = true;
-        }
-        this._logOutput("capabilities.micmuteledbrightness: " + capabilities.micmuteledbrightness);
-        if (strOutput.includes("* microphone volume")) {
-            capabilities.microphonevolume = true;
-        }
-        this._logOutput("capabilities.microphonevolume: " + capabilities.microphonevolume);
         this._needCapabilitiesRefresh = false; // when headset was connected
         this._headsetControlIndicator.headsetControlMenuToggle.refreshMenu(this);
     }
@@ -1463,6 +1496,15 @@ export default class HeadsetControl extends Extension {
             },
             {
                 key: "option-microphone-volume",
+                callback: this._onParamChangedCommand.bind(this),
+            },
+            { key: "option-anc", callback: this._onParamChangedCommand.bind(this) },
+            {
+                key: "option-anc-startup-mode",
+                callback: this._onParamChangedCommand.bind(this),
+            },
+            {
+                key: "option-anc-button-modes",
                 callback: this._onParamChangedCommand.bind(this),
             },
             { key: "notification-low-battery", callback: this._onParamChangedLogNot.bind(this) },

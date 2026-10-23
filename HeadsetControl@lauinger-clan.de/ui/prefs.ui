@@ -162,6 +162,24 @@
                 <property name="tooltip-text" translatable="yes">Passed to headsetcontrol to set the microphone volume</property>
               </object>
             </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_common14">
+                <property name="title" translatable="yes">Noise Cancelling</property>
+                <property name="tooltip-text" translatable="yes">Passed to headsetcontrol to set the noise cancelling mode</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_common15">
+                <property name="title" translatable="yes">Noise Cancelling at Power On</property>
+                <property name="tooltip-text" translatable="yes">Passed to headsetcontrol to set the noise cancelling mode at power on</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_common16">
+                <property name="title" translatable="yes">Noise Cancelling Button</property>
+                <property name="tooltip-text" translatable="yes">Passed to headsetcontrol to set the modes the noise cancelling button cycles through</property>
+              </object>
+            </child>
           </object>
         </child>
         <child>

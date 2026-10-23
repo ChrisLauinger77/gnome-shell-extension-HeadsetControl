@@ -99,6 +99,21 @@
       <summary>Parameter to set microphone volume</summary>
       <description>Passed to headsetcontrol to set the microphone volume</description>
     </key>
+    <key name="option-anc" type="s">
+      <default>'--anc'</default>
+      <summary>Parameter to set noise cancelling</summary>
+      <description>Passed to headsetcontrol to set the noise cancelling mode</description>
+    </key>
+    <key name="option-anc-startup-mode" type="s">
+      <default>'--anc-startup-mode'</default>
+      <summary>Parameter to set noise cancelling at power on</summary>
+      <description>Passed to headsetcontrol to set the noise cancelling mode at power on</description>
+    </key>
+    <key name="option-anc-button-modes" type="s">
+      <default>'--anc-button-modes'</default>
+      <summary>Parameter to set the noise cancelling button modes</summary>
+      <description>Passed to headsetcontrol to set the modes the noise cancelling button cycles through</description>
+    </key>
     <key name="microphone-volume-values" type="as">
       <default>['0', '32', '64', '96', '128']</default>
       <summary>Microphone volume values</summary>
