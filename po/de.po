@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-23 20:28+0200\n"
-"PO-Revision-Date: 2026-04-25 09:05+0200\n"
+"PO-Revision-Date: 2026-10-24 08:57+0200\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -49,22 +49,22 @@ msgstr "Chat-Mix"
 #: HeadsetControl@lauinger-clan.de/extension.js:268
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:191
 msgid "Headset Volume"
-msgstr ""
+msgstr "Headset-Lautstärke"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:273
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:167
 msgid "Noise Cancelling"
-msgstr ""
+msgstr "Geräuschunterdrückung"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:278
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:173
 msgid "Noise Cancelling at Power On"
-msgstr ""
+msgstr "Geräuschunterdrückung beim Start"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:283
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:179
 msgid "Noise Cancelling Button"
-msgstr ""
+msgstr "Taste für Geräuschunterdrückung"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:288
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:101
@@ -98,37 +98,37 @@ msgstr "Equalizer-Voreinstellung"
 #: HeadsetControl@lauinger-clan.de/extension.js:318
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:185
 msgid "Parametric Equalizer"
-msgstr ""
+msgstr "Parametrischer Equalizer"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:323
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:137
 msgid "Volume Limiter"
-msgstr ""
+msgstr "Lautstärkebegrenzer"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:328
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:143
 msgid "Bluetooth When Powered On"
-msgstr ""
+msgstr "Bluetooth beim Einschalten"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:333
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:197
 msgid "Bluetooth Call Volume"
-msgstr ""
+msgstr "Bluetooth-Anruflautstärke"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:338
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:149
 msgid "Microphone Noise Filter"
-msgstr ""
+msgstr "Mikrofon-Rauschfilter"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:343
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:155
 msgid "Mic Mute LED Brightness"
-msgstr ""
+msgstr "Helligkeit der Mikrofon-Stumm-LED"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:348
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:161
 msgid "Microphone Volume"
-msgstr ""
+msgstr "Mikrofonlautstärke"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:372
 msgid "Settings"
@@ -144,27 +144,27 @@ msgstr "Lade..."
 
 #: HeadsetControl@lauinger-clan.de/extension.js:446
 msgid "Mic detached"
-msgstr ""
+msgstr "Mikro getrennt"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:448
 msgid "Mic muted"
-msgstr ""
+msgstr "Mikro stumm"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:563
 msgid "No valid response from headsetcontrol"
-msgstr ""
+msgstr "Keine gültige Antwort von headsetcontrol"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:569
 msgid "No supported headset found"
-msgstr ""
+msgstr "Kein unterstütztes Headset gefunden"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:571
 msgid "Unknown error"
-msgstr ""
+msgstr "Unbekannter Fehler"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:586
 msgid "Failed"
-msgstr ""
+msgstr "Fehlgeschlagen"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:599
 #: HeadsetControl@lauinger-clan.de/extension.js:616
@@ -252,37 +252,37 @@ msgstr "Einstellung 4"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:733
 msgid "Invalid band"
-msgstr ""
+msgstr "Ungültiges Band"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:919
 #: HeadsetControl@lauinger-clan.de/extension.js:927
 msgid "Noise cancelling"
-msgstr ""
+msgstr "Geräuschunterdrückung"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:920
 #: HeadsetControl@lauinger-clan.de/extension.js:928
 msgid "Ambient sound"
-msgstr ""
+msgstr "Umgebungsgeräusche"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:929
 msgid "Same as at power off"
-msgstr ""
+msgstr "Wie beim Ausschalten"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:936
 msgid "Off / Noise cancelling"
-msgstr ""
+msgstr "Aus / Geräuschunterdrückung"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:937
 msgid "Off / Ambient sound"
-msgstr ""
+msgstr "Aus / Umgebung"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:938
 msgid "Noise cancelling / Ambient sound"
-msgstr ""
+msgstr "Geräuschunterdrückung / Umgebung"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:939
 msgid "Off / Noise cancelling / Ambient sound"
-msgstr ""
+msgstr "Aus / Geräuschunterdrückung / Umgebung"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:1491
 #: HeadsetControl@lauinger-clan.de/extension.js:1521
@@ -528,12 +528,14 @@ msgstr "Werden im Equalizer-Voreinstellungsmenü angezeigt (wenn unterstützt)"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:79
 msgid "Parameter to set parametric equalizer"
-msgstr ""
+msgstr "Parameter zum Setzen des parametrischen Equalizers"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:80
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:186
 msgid "Passed to headsetcontrol to set the parametric equalizer bands"
 msgstr ""
+"Übergabe an headsetcontrol zum Setzen der Bänder des parametrischen "
+"Equalizers"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:84
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:369
@@ -541,6 +543,8 @@ msgid ""
 "Parametric equalizer options (parametric equalizer might not be supported by "
 "your headset)"
 msgstr ""
+"Optionen des parametrischen Equalizers (parametrischer Equalizer könnte von "
+"Ihrem Headset nicht unterstützt sein)"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:85
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:374
@@ -551,73 +555,79 @@ msgid ""
 "Name:FREQ,GAIN,Q,TYPE;... with TYPE lowshelf, lowpass, peaking, highpass, "
 "highshelf or notch, 'reset' clears all bands"
 msgstr ""
+"Name:FREQ,GAIN,Q,TYPE;... mit TYPE lowshelf, lowpass, peaking, highpass, "
+"highshelf oder notch, 'reset' löscht alle Bänder"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:89
 msgid "Parameter to set volume limiter"
-msgstr ""
+msgstr "Parameter zum Setzen des Lautstärkebegrenzers"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:90
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:138
 msgid "Passed to headsetcontrol to set the volume limiter"
-msgstr ""
+msgstr "Übergabe an headsetcontrol zum Setzen des Lautstärkebegrenzers"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:94
 msgid "Parameter to set Bluetooth when powered on"
-msgstr ""
+msgstr "Parameter zum Setzen von Bluetooth beim Einschalten"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:95
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:144
 msgid "Passed to headsetcontrol to set Bluetooth when powered on"
-msgstr ""
+msgstr "Übergabe an headsetcontrol zum Setzen von Bluetooth beim Einschalten"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:99
 msgid "Parameter to set microphone noise filter"
-msgstr ""
+msgstr "Parameter zum Setzen des Mikrofon-Rauschfilters"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:100
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:150
 msgid "Passed to headsetcontrol to set the microphone noise filter"
-msgstr ""
+msgstr "Übergabe an headsetcontrol zum Setzen des Mikrofon-Rauschfilters"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:104
 msgid "Parameter to set microphone mute LED brightness"
-msgstr ""
+msgstr "Parameter zum Setzen der Helligkeit der Mikrofon-Stumm-LED"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:105
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:156
 msgid "Passed to headsetcontrol to set the microphone mute LED brightness"
 msgstr ""
+"Übergabe an headsetcontrol zum Setzen der Helligkeit der Mikrofon-Stumm-LED"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:109
 msgid "Parameter to set microphone volume"
-msgstr ""
+msgstr "Parameter zum Setzen der Mikrofonlautstärke"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:110
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:162
 msgid "Passed to headsetcontrol to set the microphone volume"
-msgstr ""
+msgstr "Übergabe an headsetcontrol zum Setzen der Mikrofonlautstärke"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:114
 msgid "Parameter to set noise cancelling"
-msgstr ""
+msgstr "Parameter zum Setzen der Geräuschunterdrückung"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:115
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:168
 msgid "Passed to headsetcontrol to set the noise cancelling mode"
 msgstr ""
+"Übergabe an headsetcontrol zum Setzen des Modus der Geräuschunterdrückung"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:119
 msgid "Parameter to set noise cancelling at power on"
-msgstr ""
+msgstr "Parameter zum Setzen der Geräuschunterdrückung beim Einschalten"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:120
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:174
 msgid "Passed to headsetcontrol to set the noise cancelling mode at power on"
 msgstr ""
+"Übergabe an headsetcontrol zum Setzen des Modus der Geräuschunterdrückung "
+"beim Einschalten"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:124
 msgid "Parameter to set the noise cancelling button modes"
-msgstr ""
+msgstr "Parameter zum Setzen der Modi der Taste für Geräuschunterdrückung"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:125
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:180
@@ -625,54 +635,62 @@ msgid ""
 "Passed to headsetcontrol to set the modes the noise cancelling button cycles "
 "through"
 msgstr ""
+"Übergabe an headsetcontrol zum Setzen der Modi, durch die die Taste für "
+"Geräuschunterdrückung schaltet"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:129
 msgid "Last microphone volume"
-msgstr ""
+msgstr "Letzte Mikrofonlautstärke"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:130
 msgid ""
 "Last value set with the microphone volume slider (0-128, -1 unknown), as the "
 "headset cannot report it"
 msgstr ""
+"Letzter mit dem Mikrofonlautstärke-Schieberegler gesetzter Wert (0-128, -1 "
+"unbekannt), da das Headset ihn nicht melden kann"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:134
 msgid "Parameter to set headset volume"
-msgstr ""
+msgstr "Parameter zum Setzen der Headset-Lautstärke"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:135
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:192
 msgid "Passed to headsetcontrol to set the headset volume"
-msgstr ""
+msgstr "Übergabe an headsetcontrol zum Setzen der Headset-Lautstärke"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:139
 msgid "Last headset volume"
-msgstr ""
+msgstr "Letzte Headset-Lautstärke"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:140
 msgid ""
 "Last value set with the headset volume slider or reported by the headset "
 "(0-128, -1 unknown)"
 msgstr ""
+"Letzter mit dem Headset-Lautstärke-Schieberegler gesetzter oder vom Headset "
+"gemeldeter Wert (0-128, -1 unbekannt)"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:144
 msgid "Parameter to set Bluetooth call volume"
-msgstr ""
+msgstr "Parameter zum Setzen der Bluetooth-Anruflautstärke"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:145
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:198
 msgid "Passed to headsetcontrol to set the Bluetooth call volume"
-msgstr ""
+msgstr "Übergabe an headsetcontrol zum Setzen der Bluetooth-Anruflautstärke"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:149
 msgid "Last Bluetooth call volume"
-msgstr ""
+msgstr "Letzte Bluetooth-Anruflautstärke"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:150
 msgid ""
 "Last value set with the Bluetooth call volume slider (0-100, -1 unknown), as "
 "the headset cannot report it"
 msgstr ""
+"Letzter mit dem Bluetooth-Anruflautstärke-Schieberegler gesetzter Wert "
+"(0-100, -1 unbekannt), da das Headset ihn nicht melden kann"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:154
 msgid "Parameter to enable notification when battery is low"
@@ -995,12 +1013,12 @@ msgstr "Equalizer-Einstellungen"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:368
 msgid "Parametric equalizer settings"
-msgstr ""
+msgstr "Einstellungen des parametrischen Equalizers"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:370
 msgid ""
 "The number of bands, the filter types and the ranges depend on the headset"
-msgstr ""
+msgstr "Anzahl der Bänder, Filtertypen und Wertebereiche hängen vom Headset ab"
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:399
 msgid "Equalizer presets"
