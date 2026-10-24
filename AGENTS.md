@@ -8,8 +8,9 @@ This repository contains the GNOME Shell extension `HeadsetControl@lauinger-clan
 It visualizes and controls headset state by calling the external
 [`headsetcontrol`](https://github.com/Sapd/HeadsetControl) command-line tool.
 
-The extension targets GNOME Shell 48, 49, and 50. The public extension metadata
-lives in `HeadsetControl@lauinger-clan.de/metadata.json`.
+The supported GNOME Shell versions are the `shell-version` entries in
+`HeadsetControl@lauinger-clan.de/metadata.json`, which holds the public
+extension metadata.
 
 ## Important Files
 

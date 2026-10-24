@@ -426,7 +426,8 @@ const HeadsetControlMenuToggle = GObject.registerClass(
 
         updateChatMixStatus(strChatMix) {
             if (capabilities.chatmix) {
-                this._valueChatMix = _("Chat-Mix") + ": " + strChatMix;
+                // The JSON status has no chatmix when reading it failed
+                this._valueChatMix = _("Chat-Mix") + ": " + (strChatMix ?? "???");
             }
         }
 
