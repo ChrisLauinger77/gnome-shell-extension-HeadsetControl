@@ -1,6 +1,7 @@
 "use strict";
 
 import Gdk from "gi://Gdk";
+import Adw from "gi://Adw";
 import Gtk from "gi://Gtk";
 import Gio from "gi://Gio";
 import GObject from "gi://GObject";
@@ -45,6 +46,7 @@ export default class AdwPrefs extends ExtensionPreferences {
         this.changeOption(settings, "option-chatmix", options.opt_chm.get_text());
         this.changeOption(settings, "option-sidetone", options.opt_sto.get_text());
         this.changeOption(settings, "option-led", options.opt_led.get_text());
+        this.changeOption(settings, "option-light-color", options.opt_light_color.get_text());
         this.changeOption(settings, "option-inactive-time", options.opt_iat.get_text());
         this.changeOption(settings, "option-voice", options.opt_voice.get_text());
         this.changeOption(settings, "option-rotate-mute", options.opt_rot.get_text());
@@ -69,6 +71,17 @@ export default class AdwPrefs extends ExtensionPreferences {
 
     _onColorChanged(settings, color_setting_button, strSetting) {
         settings.set_string(strSetting, color_setting_button.get_rgba().to_string());
+    }
+
+    _onLightColorChanged(settings, button, index) {
+        const rgba = button.get_rgba();
+        const color = [rgba.red, rgba.green, rgba.blue]
+            .map((channel) => Math.round(channel * 255).toString(16).padStart(2, "0"))
+            .join("")
+            .toUpperCase();
+        const presets = settings.get_strv("light-color-presets");
+        presets[index] = color;
+        settings.set_strv("light-color-presets", presets);
     }
 
     _onEQvaluechanged(settings, adwrow, index, option) {
@@ -149,6 +162,8 @@ export default class AdwPrefs extends ExtensionPreferences {
         opt_sto.set_text(_(window._settings.get_string("option-sidetone")));
         const opt_led = builder.get_object("HeadsetControl_row_common3");
         opt_led.set_text(_(window._settings.get_string("option-led")));
+        const opt_light_color = builder.get_object("HeadsetControl_row_lightcoloroption");
+        opt_light_color.set_text(window._settings.get_string("option-light-color"));
         const opt_iat = builder.get_object("HeadsetControl_row_common4");
         opt_iat.set_text(_(window._settings.get_string("option-inactive-time")));
         const opt_voice = builder.get_object("HeadsetControl_row_common5");
@@ -191,6 +206,7 @@ export default class AdwPrefs extends ExtensionPreferences {
                 opt_chm,
                 opt_sto,
                 opt_led,
+                opt_light_color,
                 opt_iat,
                 opt_voice,
                 opt_rot,
@@ -304,6 +320,23 @@ export default class AdwPrefs extends ExtensionPreferences {
         );
         adwrow.add_suffix(colorbatterylow);
         adwrow.activatable_widget = colorbatterylow;
+        // LED colors are set-only; editing a preset does not send it to the headset.
+        const lightColorGroup = builder.get_object("HeadsetControl_group_lightcolors");
+        for (const [index, preset] of window._settings.get_strv("light-color-presets").entries()) {
+            const row = new Adw.ActionRow({ title: _("Preset %d").format(index + 1) });
+            const color = preset.replace(/^#/, "").toUpperCase();
+            const rgba = new Gdk.RGBA();
+            rgba.parse(/^[0-9a-fA-F]{6}$/.test(color) ? `#${color}` : "#FFFFFF");
+            const button = new Gtk.ColorDialogButton({
+                dialog: new Gtk.ColorDialog({ with_alpha: false }),
+                rgba,
+                valign: Gtk.Align.CENTER,
+            });
+            button.connect("notify::rgba", this._onLightColorChanged.bind(this, window._settings, button, index));
+            row.add_suffix(button);
+            row.activatable_widget = button;
+            lightColorGroup.add(row);
+        }
         //equalizer
         const arrayEQsettings = window._settings.get_strv("option-equalizer-settings");
         for (const [index, value] of arrayEQsettings.entries()) {

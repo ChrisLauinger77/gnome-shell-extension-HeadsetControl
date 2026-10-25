@@ -31,6 +31,16 @@
       <summary>Parameter to ask for led</summary>
       <description>Passed to headsetcontrol to set led</description>
     </key>
+    <key name="option-light-color" type="s">
+      <default>'--light-color'</default>
+      <summary>Parameter to set LED color</summary>
+      <description>Passed to headsetcontrol to set the LED color</description>
+    </key>
+    <key name="light-color-presets" type="as">
+      <default>['FFFFFF', 'FF0000', '00FF00', '0000FF']</default>
+      <summary>LED color presets</summary>
+      <description>Colors shown in the LED Color menu as six hexadecimal digits (RRGGBB). Selecting a color turns the lights on.</description>
+    </key>
     <key name="option-inactive-time" type="s">
       <default>'-i'</default>
       <summary>Parameter to ask for inactive time</summary>
