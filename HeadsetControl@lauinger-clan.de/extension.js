@@ -19,6 +19,7 @@ const capabilities = {
     chatmix: false,
     sidetone: false,
     led: false,
+    lightcolor: false,
     inactivetime: false,
     voice: false,
     rotatemute: false,
@@ -41,6 +42,7 @@ const legacyCapabilityPatterns = {
     sidetone: "* sidetone",
     battery: "* battery",
     led: "* lights",
+    lightcolor: "* light color",
     inactivetime: "* inactive time",
     chatmix: "* chatmix",
     voice: "* voice prompts",
@@ -66,6 +68,7 @@ const headsetcontrolCommands = {
     cmdChatMix: "",
     cmdSidetone: "",
     cmdLED: "",
+    cmdLightColor: "",
     cmdInacitetime: "",
     cmdVoice: "",
     cmdRotateMute: "",
@@ -293,6 +296,11 @@ const HeadsetControlMenuToggle = GObject.registerClass(
                     capability: "led",
                     label: _("LED"),
                     method: this._addLEDMenu,
+                },
+                {
+                    capability: "lightcolor",
+                    label: _("LED Color"),
+                    method: this._addLightColorMenu,
                 },
                 {
                     capability: "inactivetime",
@@ -633,6 +641,32 @@ const HeadsetControlMenuToggle = GObject.registerClass(
             ];
             for (const item of LEDvalues) {
                 this._addPopupMenuItem(popupMenuExpander, item[0], headsetcontrolCommands.cmdLED + " " + item[1]);
+            }
+            popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
+        }
+
+        _addLightColorMenu(popupMenuExpander) {
+            for (const preset of this._settings.get_strv("light-color-presets")) {
+                const color = preset.replace(/^#/, "").toUpperCase();
+                const valid = /^[0-9a-fA-F]{6}$/.test(color);
+                const label = valid ? `#${color}` : preset;
+                const submenu = new PopupMenu.PopupMenuItem(label);
+                const strAction = `${popupMenuExpander.label.text}: ${label}`;
+                if (valid) {
+                    submenu.add_child(new St.Widget({
+                        style: `background-color: #${color}; width: 16px; height: 16px; border-radius: 3px; border: 1px solid gray;`,
+                        y_align: Clutter.ActorAlign.CENTER,
+                    }));
+                    // A leading # would be treated as a comment by GLib.shell_parse_argv.
+                    submenu.connect("activate", this._invokeAction.bind(
+                        this, strAction, `${headsetcontrolCommands.cmdLightColor} ${color}`
+                    ));
+                } else {
+                    submenu.connect("activate", () => {
+                        this._showActionFailed(strAction, _("Invalid color (expected RRGGBB)") + ` "${preset}"`);
+                    });
+                }
+                popupMenuExpander.menu.addMenuItem(submenu);
             }
             popupMenuExpander.menu.box.style_class = "PopupSubMenuMenuItemStyle";
         }
@@ -1131,6 +1165,7 @@ export default class HeadsetControl extends Extension {
         headsetcontrolCommands.cmdChatMix = buildCommand(cmdExecutable, this._settings.get_string("option-chatmix"));
         headsetcontrolCommands.cmdSidetone = buildCommand(cmdExecutable, this._settings.get_string("option-sidetone"));
         headsetcontrolCommands.cmdLED = buildCommand(cmdExecutable, this._settings.get_string("option-led"));
+        headsetcontrolCommands.cmdLightColor = buildCommand(cmdExecutable, this._settings.get_string("option-light-color"));
         headsetcontrolCommands.cmdVoice = buildCommand(cmdExecutable, this._settings.get_string("option-voice"));
         headsetcontrolCommands.cmdRotateMute = buildCommand(
             cmdExecutable,
@@ -1231,6 +1266,8 @@ export default class HeadsetControl extends Extension {
         capabilities.sidetone = value;
         capabilities.battery = value;
         capabilities.led = value;
+        // This set-only capability must be explicitly reported, even when others fall back to true.
+        capabilities.lightcolor = false;
         capabilities.inactivetime = value;
         capabilities.chatmix = value;
         capabilities.voice = value;
@@ -1257,6 +1294,7 @@ export default class HeadsetControl extends Extension {
             this._headsetControlIndicator.setLabelVisible(capabilities.battery);
         }
         capabilities.led = device.capabilities.includes("CAP_LIGHTS");
+        capabilities.lightcolor = device.capabilities.includes("CAP_LIGHT_COLOR");
         capabilities.inactivetime = device.capabilities.includes("CAP_INACTIVE_TIME");
         capabilities.chatmix = device.capabilities.includes("CAP_CHATMIX_STATUS");
         capabilities.voice = device.capabilities.includes("CAP_VOICE_PROMPTS");
@@ -1337,7 +1375,12 @@ export default class HeadsetControl extends Extension {
         if (device_count > 0) {
             this._updateDevice(output);
             if (!this._isDeviceStatusSuccess(output.devices[0])) {
-                this._setAllCapabilities(true); // if we cannot get the capabilities, set all to true
+                const hadLightColor = capabilities.lightcolor;
+                this._setAllCapabilities(true); // Keep the existing fallback for controls with unknown capabilities
+                this._needCapabilitiesRefresh = true;
+                if (hadLightColor) {
+                    this._headsetControlIndicator.headsetControlMenuToggle.refreshMenu(this);
+                }
                 this._headsetControlIndicator.headsetControlMenuToggle.updateSidetoneStatus(null);
                 this._headsetControlIndicator.headsetControlMenuToggle.updateMicrophoneStatus(null);
                 return false;
@@ -1377,6 +1420,10 @@ export default class HeadsetControl extends Extension {
             }
             this._needCapabilitiesRefresh = false;
         } else {
+            if (capabilities.lightcolor) {
+                capabilities.lightcolor = false;
+                this._headsetControlIndicator.headsetControlMenuToggle.refreshMenu(this);
+            }
             // Without a headset there is no current sidetone level or microphone state
             this._headsetControlIndicator.headsetControlMenuToggle.updateSidetoneStatus(null);
             this._headsetControlIndicator.headsetControlMenuToggle.updateMicrophoneStatus(null);
@@ -1453,9 +1500,13 @@ export default class HeadsetControl extends Extension {
             return;
         }
 
-        // if we cannot get the capabilities, set all to true
+        // Keep the existing fallback for controls with unknown capabilities
         if (!strOutput || strOutput.includes("No supported headset found")) {
+            const hadLightColor = capabilities.lightcolor;
             this._setAllCapabilities(true);
+            if (hadLightColor) {
+                this._headsetControlIndicator.headsetControlMenuToggle.refreshMenu(this);
+            }
             return;
         }
         // Only what this output lists, so a capability that is gone loses its submenu
@@ -1763,6 +1814,10 @@ export default class HeadsetControl extends Extension {
                 callback: this._onParamChangedCommand.bind(this),
             },
             {
+                key: "option-light-color",
+                callback: this._onParamChangedCommand.bind(this),
+            },
+            {
                 key: "option-inactive-time",
                 callback: this._onParamChangedCommand.bind(this),
             },
@@ -1844,6 +1899,10 @@ export default class HeadsetControl extends Extension {
             },
             {
                 key: "sidetone-values",
+                callback: this._onParamChangedMenu.bind(this),
+            },
+            {
+                key: "light-color-presets",
                 callback: this._onParamChangedMenu.bind(this),
             },
             {

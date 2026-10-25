@@ -103,6 +103,12 @@
               </object>
             </child>
             <child>
+              <object class="AdwEntryRow" id="HeadsetControl_row_lightcoloroption">
+                <property name="title" translatable="yes">LED Color</property>
+                <property name="tooltip-text" translatable="yes">Passed to headsetcontrol to set the LED color</property>
+              </object>
+            </child>
+            <child>
               <object class="AdwEntryRow" id="HeadsetControl_row_common4">
                 <property name="title" translatable="yes">Inactive time</property>
                 <property name="tooltip-text" translatable="yes">Parameter to ask for inactive time</property>
@@ -327,6 +333,12 @@
             </child>
           </object>
         </child>
+      </object>
+    </child>
+    <child>
+      <object class="AdwPreferencesGroup" id="HeadsetControl_group_lightcolors">
+        <property name="title" translatable="yes">LED color presets</property>
+        <property name="description" translatable="yes">Shown when the headset supports LED color. Selecting a color turns the lights on.</property>
       </object>
     </child>
     <child>
