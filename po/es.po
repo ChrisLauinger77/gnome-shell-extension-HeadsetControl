@@ -73,7 +73,7 @@ msgstr "LED"
 #: HeadsetControl@lauinger-clan.de/extension.js:302
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:107
 msgid "LED Color"
-msgstr ""
+msgstr "Color del LED"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:307
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:113
@@ -217,7 +217,7 @@ msgstr "Encendido"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:666
 msgid "Invalid color (expected RRGGBB)"
-msgstr ""
+msgstr "Color no válido (se esperaba RRGGBB)"
 
 #: HeadsetControl@lauinger-clan.de/extension.js:704
 msgid " Minute"
@@ -319,7 +319,7 @@ msgstr "Seleccione el ejecutable de control de auriculares"
 #: HeadsetControl@lauinger-clan.de/prefs.js:326
 #, javascript-format
 msgid "Preset %d"
-msgstr ""
+msgstr "Preajuste %d"
 
 #: HeadsetControl@lauinger-clan.de/prefs.js:375
 #: HeadsetControl@lauinger-clan.de/prefs.js:390
@@ -452,23 +452,25 @@ msgstr "Pasado a headsetcontrol para configurar led"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:36
 msgid "Parameter to set LED color"
-msgstr ""
+msgstr "Parámetro para establecer el color del LED"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:37
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:108
 msgid "Passed to headsetcontrol to set the LED color"
-msgstr ""
+msgstr "Se pasa a headsetcontrol para establecer el color del LED"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:41
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:340
 msgid "LED color presets"
-msgstr ""
+msgstr "Preajustes de color del LED"
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:42
 msgid ""
 "Colors shown in the LED Color menu as six hexadecimal digits (RRGGBB). "
 "Selecting a color turns the lights on."
 msgstr ""
+"Colores mostrados en el menú Color del LED como seis dígitos hexadecimales "
+"(RRGGBB). Al seleccionar un color se encienden las luces."
 
 #: HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml:46
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:114
@@ -1052,6 +1054,8 @@ msgid ""
 "Shown when the headset supports LED color. Selecting a color turns the "
 "lights on."
 msgstr ""
+"Se muestra cuando los auriculares permiten configurar el color del LED. Al "
+"seleccionar un color se encienden las luces."
 
 #: HeadsetControl@lauinger-clan.de/ui/prefs.ui:349
 msgid "Equalizer settings"
