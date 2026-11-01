@@ -38,6 +38,9 @@
                   <item translatable="yes">Timeout</item>
                   <item translatable="yes">Full battery</item>
                   <item translatable="yes">Low battery</item>
+                  <item translatable="yes">Charging, level not yet reported</item>
+                  <item translatable="yes">Reserved</item>
+                  <item translatable="yes">Limited capabilities</item>
                 </items>
               </object>
             </property>
