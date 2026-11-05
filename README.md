@@ -13,10 +13,14 @@ Depending on what your headset supports, the extension can show and control seve
 
 - Show battery level and charging state in the panel and Quick Settings.
 - Show ChatMix status when supported by the headset.
+- Show whether the microphone is muted or detached.
 - Control Sidetone levels from off to maximum.
-- Toggle headset LEDs/lights, voice prompts, and rotate-to-mute.
-- Change equalizer settings and equalizer presets.
-- Send a configurable low-battery notification.
+- Toggle headset LEDs/lights, voice prompts, and rotate-to-mute, and set the LED color.
+- Set the inactive time, volume limiter, Bluetooth when powered on, microphone noise filter, and mic mute LED brightness.
+- Change headset, Bluetooth call, and microphone volume with sliders.
+- Change noise cancelling modes.
+- Change equalizer settings, equalizer presets, and parametric equalizer settings.
+- Send a configurable low-battery notification and a notification when a headset action fails.
 - Customize the battery percentage text color for high, medium, and low charge levels.
 
 Only capabilities reported by HeadsetControl for the connected headset are shown. If a feature is missing, check whether your headset and installed HeadsetControl version support it.
@@ -50,8 +54,8 @@ Make sure you have gnome-icon-theme package installed.
 ### Download latest release
 
 1. Download the zip file from the [release page](https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl/releases)
-2. The md5 and sig files can be used to verify the integrity of the zip file
-3. Unzip and run headsetcontrol.sh from the zip
+2. Install it with `gnome-extensions install --force HeadsetControl@lauinger-clan.de.shell-extension.zip`
+3. Enable it with `gnome-extensions enable HeadsetControl@lauinger-clan.de`
 
 ### Install from source
 
@@ -59,7 +63,7 @@ Use the `main` branch.
 
 ```bash
 git clone https://github.com/ChrisLauinger77/gnome-shell-extension-HeadsetControl.git
-cd gnome-shell-extension-HeadsetControl.git
+cd gnome-shell-extension-HeadsetControl
 ./headsetcontrol.sh install
 ```
 

@@ -24,10 +24,13 @@ extension metadata.
 - `HeadsetControl@lauinger-clan.de/schemas/org.gnome.shell.extensions.HeadsetControl.gschema.xml`:
   GSettings schema and defaults.
 - `po/*.po` and `po/HeadsetControl.pot`: gettext translation files.
-- `headsetcontrol.sh`: helper script for packaging, installing, uploading, and
-  refreshing translations.
-- `eslint.config.js`: ESLint 9 flat config for GJS/GNOME Shell globals.
-- `.github/workflows/eslint.yml`: CI lint scan.
+- `headsetcontrol.sh`: helper script for packaging, installing, uploading,
+  refreshing translations, and keeping versions in sync.
+- `.githooks/`: optional Git hooks that check or sync the `package.json`
+  version against `metadata.json`.
+- `eslint.config.js`: ESLint flat config for GJS/GNOME Shell globals.
+- `.github/workflows/eslint.yml`: CI version consistency check, ESLint scan,
+  and Shexli scan.
 - `.github/workflows/release.yml`: release packaging and EGO upload workflow.
 
 ## Useful Commands
@@ -40,6 +43,10 @@ npm run lint
 ./headsetcontrol.sh zip
 ./headsetcontrol.sh install
 ./headsetcontrol.sh translate
+./headsetcontrol.sh check-version
+./headsetcontrol.sh update-version
+./headsetcontrol.sh setup-hooks
+./headsetcontrol.sh cleanup
 ```
 
 Run `./headsetcontrol.sh install-dependencies` after pulling or rebasing remote
@@ -54,6 +61,14 @@ Notes:
   `gnome-extensions install --force`, and enables the extension.
 - `./headsetcontrol.sh translate` updates `po/HeadsetControl.pot` and merges
   existing `po/*.po` files. Run it after changing translatable strings.
+- `./headsetcontrol.sh check-version` verifies that the `package.json` version
+  matches `version-name` in `metadata.json` (normalized to `x.y.z`).
+  `update-version` updates `package.json` and `package-lock.json` to match.
+  CI runs `check-version`, and the pre-commit hook enabled by `setup-hooks`
+  blocks commits with mismatched staged versions. Requires `jq`.
+- `./headsetcontrol.sh cleanup` removes the generated extension zip.
+- `./headsetcontrol.sh upload` uploads to extensions.gnome.org with the
+  maintainer's local credentials. Do not run it from an agent.
 - There is currently no real test suite. `npm test` intentionally exits with an
   error.
 
@@ -80,8 +95,11 @@ Notes:
 - JSON output via the configured `option-output-format` is preferred. If JSON
   parsing or invocation fails, the extension falls back to legacy capability,
   battery, and ChatMix commands.
-- The Quick Settings menu is rebuilt when relevant capabilities or configurable
-  menu values change.
+- In JSON mode, menu actions run with the JSON output option and append
+  `-d <vid:pid>` when headsetcontrol supports device selection. Failed actions
+  show a notification in both JSON and legacy mode.
+- The Quick Settings menu is rebuilt when relevant capabilities, command
+  options, or configurable menu values change.
 - The system indicator label is only useful when battery capability is present.
 
 ## Settings And UI Changes
@@ -121,8 +139,12 @@ environment, state that clearly in the final response.
 ## Packaging And Release
 
 - Release builds are produced by `./headsetcontrol.sh zip`.
+- Bump `version-name` in `metadata.json` and run
+  `./headsetcontrol.sh update-version` so `package.json` stays in sync.
 - GitHub releases run on `v*` tags, build the extension zip, create a GitHub
-  release, and upload to extensions.gnome.org using repository secrets.
+  release, and upload to extensions.gnome.org using repository secrets. A
+  manual `workflow_dispatch` run builds the zip as an artifact and uploads to
+  EGO only when requested.
 - Do not commit generated `.zip`, `.mo`, `*.po~`, or
   `schemas/gschemas.compiled` files. They are ignored.
 
@@ -138,6 +160,9 @@ journalctl -f -o cat
 - A real or simulated `headsetcontrol` executable is needed to fully exercise
   capability detection, battery state, ChatMix, equalizer, and notification
   behavior.
+- The Test Mode preference (`test-mode` key) appends `--test-device <n>` to
+  every headsetcontrol call so its built-in test device profiles can be used
+  without a headset. It is reset to off when the extension is enabled.
 - The default executable path is `/usr/local/bin/headsetcontrol`, configurable in
   preferences.
 
