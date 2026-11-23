@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "allowJs": true,
+        "checkJs": false,
+        "noEmit": true,
+        "skipLibCheck": true
+    },
+    "include": [
+        "ambient.d.ts",
+        "*@*/**/*.js"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
